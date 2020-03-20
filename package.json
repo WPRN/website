@@ -1,0 +1,22 @@
+{
+  "name": "WPRN",
+  "version": "1.0.0",
+  "description": "Public initiative to publish and share in one single place the list of all research initiatives and surveys about the current pandemic of Covid-19 coronavirus.",
+  "author": "Antoine Cordelois",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
+    "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "push-dir": "^0.4.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}
