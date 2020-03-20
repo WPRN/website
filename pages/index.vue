@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app color="white" height="100" inverted-scroll>
       <v-avatar class="mr-3" tile color="grey lighten-5" size="90">
-        <v-img contain max-height="100%" src="/logo.png"></v-img>
+        <v-img contain max-height="100%" src="/website/logo.png"></v-img>
       </v-avatar>
 
       <v-toolbar-title class="font-weight-black headline">WPRN</v-toolbar-title>
@@ -13,7 +13,7 @@
         <v-row no-gutters>
           <v-img
             :max-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
-            src="/splash_xl.jpg"
+            src="/website/splash_xl.jpg"
           >
             <v-container fill-height>
               <v-row align="center" class="white--text mx-auto" justify="center">
@@ -28,7 +28,7 @@
                       color="grey lighten-5"
                       :size="$vuetify.breakpoint.smAndDown ? 'calc(15vh - ' + $vuetify.application.top + 'px)': 'calc(30vh - ' + $vuetify.application.top + 'px)'"
                     >
-                      <v-img contain src="/logo.png"></v-img>
+                      <v-img contain src="/website/logo.png"></v-img>
                     </v-avatar>
                   </span>
                 </v-col>
@@ -140,7 +140,10 @@
       </section>
 
       <section id="stats">
-        <v-parallax :height="$vuetify.breakpoint.smAndDown ? 700 : 500" src="/parralax_lg.jpg">
+        <v-parallax
+          :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
+          src="/website/parralax_lg.jpg"
+        >
           <v-container fill-height>
             <v-row class="mx-auto">
               <v-col v-for="[value, title] of stats" :key="title" cols="12" md="3">
@@ -171,7 +174,7 @@
 
           <v-row>
             <v-col cols="12">
-              <v-img src="/map.svg" class="mb-4" height="275" max-width="100%"></v-img>
+              <v-img src="/website/map.svg" class="mb-4" height="275" max-width="100%"></v-img>
             </v-col>
           </v-row>
         </v-container>

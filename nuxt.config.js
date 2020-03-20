@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
-    base: 'website'
+    base: '/website/'
   }
 } : {}
 export default {
@@ -10,7 +10,7 @@ export default {
     port: 3000, // par défaut: 3000
     host: '0.0.0.0', // par défaut: localhost
   },
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
