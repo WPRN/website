@@ -1,8 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
+import awsmobile from './assets/aws-exports.js'
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
     base: '/website/'
   }
+
 } : {}
 export default {
   ...routerBase,
@@ -82,7 +84,7 @@ export default {
   },
   // Give apollo module options
   apollo: {
-    tokenName: 'bearer', // optional, default: apollo-token
+    tokenName: 'x-api-key', // optional, default: apollo-token
     cookieAttributes: {
       /**
         * Define when the cookie will be removed. Value can be a Number
@@ -109,7 +111,7 @@ export default {
     // secure: false,
     // },
     //includeNodeModules: true, // optional, default: false (this includes graphql-tag for node_modules folder)
-    //authenticationType: 'ASTR', // optional, default: 'Bearer'
+    authenticationType: 'x-api-key', // optional, default: 'Bearer'
     // (Optional) Default 'apollo' definition
     defaultOptions: {
       // See 'apollo' definition
@@ -125,11 +127,14 @@ export default {
     // optional
     // errorHandler: '~/apollo/customErrorHandler.js',
     // required
-
+    auth: {
+      type: 'API_KEY',
+      apiKey: awsmobile.aws_appsync_apiKey
+    },
     clientConfigs: {
       default: {
         // required
-        httpEndpoint: process.env.BACKEND_URL || "http://192.168.0.17:4000/graphql"
+        httpEndpoint: awsmobile.aws_appsync_graphqlEndpoint || "http://192.168.0.17:4000/graphql"
         // optional
         // override HTTP endpoint in browser only
         //browserHttpEndpoint: '/graphql',

@@ -23,6 +23,8 @@
     "vue-timeago": "^5.1.2"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.0.0"
+    "@nuxtjs/vuetify": "^1.0.0",
+    "@types/graphql": "latest",
+    "graphql-tag": "^2.10.3"
   }
 }

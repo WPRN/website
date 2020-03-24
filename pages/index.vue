@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-app-bar app color="white" height="100" inverted-scroll elevate-on-scroll elevation-3>
       <v-btn text @click="$vuetify.goTo('#hero')">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
@@ -136,7 +136,10 @@
                 >Gather information</v-card-title>
                 <v-card-text class="subtitle-1" color="black">
                   We want to consolidate information on existing research initiatives and projects in a single place and be able to orient actors directly
-                  to the project contact points to inform, mutualize and share their discoveries.
+                  to the project contact points to inform, mutualize and share their discoveries. Please
+                  <a
+                    href
+                  >register your project</a> if you feel that you can contribute.
                 </v-card-text>
               </v-card>
             </v-col>
@@ -163,6 +166,20 @@
         <div class="py-12"></div>
       </section>
 
+      <section id="branches">
+        <v-sheet color="#333333" tag="section" tile>
+          <div class="py-12"></div>
+          <v-container>
+            <h2
+              class="display-2 font-weight-bold mb-3 text-uppercase text-center"
+            >CONTINENTAL BRANCHES</h2>
+            <WorldMap />
+          </v-container>
+
+          <div class="py-12"></div>
+        </v-sheet>
+      </section>
+
       <section id="stats">
         <v-parallax
           :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
@@ -180,20 +197,6 @@
             </v-row>
           </v-container>
         </v-parallax>
-      </section>
-
-      <section id="branches">
-        <v-sheet color="#333333" tag="section" tile>
-          <div class="py-12"></div>
-          <v-container>
-            <h2
-              class="display-2 font-weight-bold mb-3 text-uppercase text-center"
-            >CONTINENTAL BRANCHES</h2>
-            <WorldMap :zones="zones" />
-          </v-container>
-
-          <div class="py-12"></div>
-        </v-sheet>
       </section>
       <section id="meetings" class="grey lighten-3">
         <div class="py-12"></div>
@@ -286,29 +289,31 @@
           <v-container>
             <h2
               class="display-2 font-weight-bold mb-3 text-uppercase text-center"
-            >{{contactOnly?'CONTACT US':'REGISTER YOUR PROJECT'}}</h2>
+            >{{['CONTACT US','REGISTER YOUR PROJECT','THANK YOU!'][step]}}</h2>
 
             <v-responsive class="mx-auto mb-12" width="56">
               <v-divider class="mb-1"></v-divider>
 
               <v-divider></v-divider>
             </v-responsive>
-            <v-col cols="12" md="8" lg="6" class="py-0">
-              <v-checkbox
-                class="pl-6"
-                v-model="contactOnly"
-                label="I just want to contact WPRN"
-                dark
-                hide-details
-                @change="contactOnly?step=0:step=1"
-              ></v-checkbox>
-            </v-col>
+            <v-row no-gutters justify="center" v-if="step<2">
+              <v-col cols="12" md="10" lg="8">
+                <v-checkbox
+                  class="pl-6 mt-0"
+                  v-model="contactOnly"
+                  label="I just want to contact WPRN"
+                  dark
+                  hide-details
+                  @change="contactOnly?step=0:step=1"
+                ></v-checkbox>
+              </v-col>
+            </v-row>
             <v-window v-model="step">
               <v-window-item :value="0">
                 <v-card-text class="pb-0">
                   <v-theme-provider light>
-                    <v-row no-gutters>
-                      <v-col cols="12" align="center">
+                    <v-row no-gutters justify="center">
+                      <v-col cols="12" md="10" lg="8" no-gutters align="center">
                         <ContactForm @complete="valid=true" />
                       </v-col>
                     </v-row>
@@ -318,89 +323,54 @@
               <v-window-item :value="1">
                 <v-card-text class="pb-0">
                   <v-theme-provider light>
-                    <v-row no-gutters>
-                      <v-col cols="12" no-gutters align="center">
-                        <ProjectForm @complete="valid=true" :zones="zones" />
+                    <v-row no-gutters justify="center">
+                      <v-col cols="12" md="10" lg="8" no-gutters align="center">
+                        <ProjectForm @complete="step=2" />
                       </v-col>
                     </v-row>
                   </v-theme-provider>
                 </v-card-text>
               </v-window-item>
               <v-window-item :value="2">
-                <v-row no-gutters>
-                  <v-col cols="12" md="8" lg="6">
+                <v-row no-gutters justify="center">
+                  <v-col cols="12" md="10" lg="8">
                     <template v-if="contactOnly">
-                      <ContactPostedWindow />
+                      <ContactPostedWindow @reset="step=0; contactOnly=true" />
                     </template>
                     <template v-else>
-                      <ProjectPostedWindow />
+                      <ProjectPostedWindow @reset="step=1" />
                     </template>
                   </v-col>
                 </v-row>
               </v-window-item>
             </v-window>
           </v-container>
-          <div class="text-center" v-if="contactOnly">
-            <div class="mb-8">
-              <small>
-                This site is protected by reCAPTCHA and the Google
-                <a
-                  href="https://policies.google.com/privacy"
-                >Privacy Policy</a> and
-                <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-              </small>
-            </div>
-            <v-btn color="accent" x-large @click="onSubmit()" :disabled="!valid">
-              Submit&nbsp;
-              <v-icon>mdi-send</v-icon>
-            </v-btn>
-          </div>
+
           <div class="py-12"></div>
         </v-sheet>
       </section>
     </v-content>
-    <v-footer class="justify-center" color="#292929" height="100">
-      <div class="title font-weight-light grey--text text--lighten-1 text-center">
-        <v-icon>mdi-creative-commons</v-icon>
-        {{ new Date().getFullYear() }} - This website is maintained by
-        <a
-          href="https://www.paris-iea.fr"
-          target="_blank"
-          rel="noopener noreferrer"
-        >IAS Paris</a>.
-        <a style="text-decoration:underline;" @click="showCredits=true">See full credits</a>
-        <Credits :credits="showCredits" @closeCredits="showCredits=false" />
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn text icon v-on="on">
-              <v-icon>mdi-github</v-icon>
-            </v-btn>
-          </template>
-          <span>See this website source code and contribute</span>
-        </v-tooltip>
-      </div>
-    </v-footer>
-  </v-app>
+  </div>
 </template>
 
 <script>
-import Credits from "~/components/Credits";
-import ContactForm from "~/components/ContactForm";
-import ProjectForm from "~/components/ProjectForm";
-import FeaturedItem from "~/components/FeaturedItem";
-import MeetingList from "~/components/MeetingList";
-import WorldMap from "~/components/WorldMap";
-import ProjectPostedWindow from "~/components/ProjectPostedWindow";
-import ContactPostedWindow from "~/components/ContactPostedWindow";
-import NavigationDrawer from "~/components/NavigationDrawer";
+import ContactForm from "~/components/contact/ContactForm";
+import ProjectForm from "~/components/projectForm/ProjectForm";
+import FeaturedItem from "~/components/mainPage/FeaturedItem";
+import MeetingList from "~/components/mainPage/MeetingList";
+import WorldMap from "~/components/mainPage/WorldMap";
+import ProjectPostedWindow from "~/components/projectForm/ProjectPostedWindow";
+import ContactPostedWindow from "~/components/contact/ContactPostedWindow";
+import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import { zones } from "~/assets/data";
 export default {
   data() {
     return {
-      showCredits: false,
+      zones,
       drawer: false,
       contactOnly: false,
       valid: false,
-      step: 1,
+      step: 2,
       stats: [
         ["45", "Contributors"],
         ["330+", "Projects"],
@@ -428,36 +398,6 @@ export default {
           date: "05/07/2020",
           name: "Weekly Meeting"
         }
-      ],
-      zones: [
-        {
-          text: "Asia",
-          value: "asia"
-        },
-        {
-          text: "Europe",
-          value: "europe"
-        },
-        {
-          text: "North Africa",
-          value: "nAfrica"
-        },
-        {
-          text: "North America",
-          value: "nAmerica"
-        },
-        {
-          text: "South America",
-          value: "sAmerica"
-        },
-        {
-          text: "Sub-Saharian Africa",
-          value: "sAfrica"
-        },
-        {
-          text: "Oceania",
-          value: "oceania"
-        }
       ]
     };
   },
@@ -469,8 +409,7 @@ export default {
     WorldMap,
     NavigationDrawer,
     ContactPostedWindow,
-    ProjectPostedWindow,
-    Credits
+    ProjectPostedWindow
   },
 
   async mounted() {

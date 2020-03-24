@@ -1,0 +1,23 @@
+query list {
+  listProjects {
+    items {
+      id
+      name
+      description
+      status
+      type
+      field
+      url
+      contact_firstname
+      contact_lastname
+      contact_entity
+      zone
+      country
+      city
+      date
+      time
+      createdAt
+      views
+    }
+  }
+}

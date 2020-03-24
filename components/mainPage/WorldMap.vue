@@ -9,7 +9,7 @@
         xmlns="http://www.w3.org/2000/svg"
         id="svg106"
         preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 468 239"
+        viewBox="0 0 468 210"
         width="100%"
         version="1.0"
       >
@@ -332,16 +332,21 @@
   </v-row>
 </template>
 <script>
+import { zones } from "~/assets/data";
 export default {
-  props: {
-    zones: Array
+  data() {
+    return {
+      zones
+    };
   },
+  props: {},
   methods: {
     logThis() {
       console.log("THIS");
     },
     highlightZone(zone) {
       console.log(zone.value);
+      if (zone.value === "worldwide") return;
       let thisZone = zone.value || zone;
 
       if (["nAfrica", "sAfrica"].includes(thisZone)) {
@@ -352,6 +357,7 @@ export default {
       });
     },
     unHighlightZone(zone) {
+      if (zone.value === "worldwide") return;
       console.log(zone);
       let thisZone = zone.value || zone;
       if (["nAfrica", "sAfrica"].includes(zone.value)) {

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="credits" scrollable max-width="600px" light>
+  <v-dialog v-model="credits" scrollable max-width="700px" light persistent>
     <v-card>
       <v-card-title>
         <v-avatar small class="mr-3" tile color="grey lighten-5" size="72">
@@ -8,16 +8,20 @@
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text class="pt-6 px-6 subtitle-1">
-        WPRN is a collective effort that originated from
+        WPRN (Word Pandemic Research Network) is a collective effort that originated from
         <a
           href="https://www.paris-iea.fr"
           target="_blank"
           rel="noopener noreferrer"
         >IAS Paris - IEA de Paris</a>.
       </v-card-text>
-      <v-card-text class="subtitle-1 px-6">
-        <b>Institutional supports</b>
-        <br />This project is supported by :
+      <v-card-text class="subtitle-1">
+        <b>Most of all</b>
+        , we want to credit and thank all the contributors who reported their research and allowed the community to grow stronger.
+      </v-card-text>
+      <v-card-subtitle class="subtitle-2 px-6">Institutional supports</v-card-subtitle>
+      <v-card-text class="subtitle-1 px-6 mb-3" style="max-height:250px">
+        This project is supported by :
         <ul>
           <li>
             <a
@@ -32,9 +36,9 @@
           <li></li>
         </ul>
       </v-card-text>
-      <v-card-text class="subtitle-1 px-6">
-        <b>Technical supports</b>
-        <br />This website and logo have been designed by
+      <v-card-subtitle class="subtitle-2 px-6">Technical supports</v-card-subtitle>
+      <v-card-text class="subtitle-1 px-6 mb-3" style="max-height:250px">
+        This website and logo have been designed by
         <a
           href="https://github.com/Billybobbonnet"
           target="_blank"
@@ -69,16 +73,36 @@
           target="_blank"
           rel="noopener noreferrer"
         >AWS Amplify</a>. Its source code will not be released as it is a private service, but the API will be made public in the upcoming weeks.
-        <br />All the images used are pictures free of rights (or distributed as such).
-        <br />This frontend is licenced under Creative Commons
-        <v-icon small>mdi-creative-commons</v-icon>&nbsp;and its source code is available
-        <a
-          href="http://"
-          target="_blank"
-          rel="noopener noreferrer"
-        >here</a>
-        .
+        <br />All the images used are free of rights (or distributed as such).
       </v-card-text>
+      <v-card-text class="font-weight-light caption px-6 mb-3" style="max-height:250px">
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+          <img
+            alt="Creative Commons License"
+            style="border-width:0"
+            src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
+          />
+        </a>
+        <br />
+        <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">WPRN</span> by
+        <a
+          xmlns:cc="http://creativecommons.org/ns#"
+          href="https://wprn.org"
+          property="cc:attributionName"
+          rel="cc:attributionURL"
+        >World Pandemic Research Network</a> is licensed under a
+        <a
+          rel="license"
+          href="http://creativecommons.org/licenses/by-sa/4.0/"
+        >Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        <br />Based on a work at
+        <a
+          xmlns:dct="http://purl.org/dc/terms/"
+          href="https://github.com/WPRN/website"
+          rel="dct:source"
+        >https://github.com/WPRN/website</a>.
+      </v-card-text>
+
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>

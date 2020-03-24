@@ -17,10 +17,13 @@
    sodipodi:docname="logo2.svg"
    width="98.376991"
    height="88.489487"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"><metadata
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:export-filename="/home/bob/Projects/WPRN/wprn-frontend/static/logo2.svg.png"
+   inkscape:export-xdpi="390.33517"
+   inkscape:export-ydpi="390.33517"><metadata
      id="metadata14"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs12" /><sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -30,7 +33,7 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2493"
+     inkscape:window-width="2560"
      inkscape:window-height="1376"
      id="namedview10"
      showgrid="false"
@@ -39,7 +42,7 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="6.675088"
-     inkscape:cx="38.363925"
+     inkscape:cx="2.7089643"
      inkscape:cy="65.011148"
      inkscape:window-x="0"
      inkscape:window-y="27"
@@ -75,6 +78,7 @@
      id="tspan821"
      sodipodi:role="line">WPRN</tspan></text>
 
+
 <text
    id="text827"
    y="70.351814"
@@ -86,6 +90,7 @@
      x="-17.973419"
      id="tspan825"
      sodipodi:role="line">World Pandemic Research Network</tspan></text>
+
 
 <path
    style="fill:#333333;fill-opacity:1;stroke-width:0.79724228"
