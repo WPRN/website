@@ -1,31 +1,35 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app bottom right temporary>
-    <v-list nav class="mt-6">
+  <v-navigation-drawer v-model="drawer" app bottom right>
+    <div class="d-flex flex-row-reverse">
+      <v-tooltip left>
+        <template v-slot:activator="{ on }">
+          <v-btn class="ma-3" large icon @click="$emit('close')" v-on="on">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </template>
+        <span>Close the menu</span>
+      </v-tooltip>
+    </div>
+    <v-divider></v-divider>
+    <v-list nav>
       <v-list-item-group active-class="text--accent-4">
-        <v-list-item @click="$vuetify.goTo('#about-us', {offset:100});$emit('closed')">
+        <v-list-item @click="$emit('about')">
           <v-list-item-title>About us</v-list-item-title>
         </v-list-item>
-
-        <v-list-item @click="$vuetify.goTo('#missions', {offset:100});$emit('closed')">
-          <v-list-item-title>Our missions</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item @click="$vuetify.goTo('#branches', {offset:100});$emit('closed')">
-          <v-list-item-title>Continental branches</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item @click="$vuetify.goTo('#meetings', {offset:100});$emit('closed')">
-          <v-list-item-title>Next meetings</v-list-item-title>
-        </v-list-item>
-
-        <v-list-item @click="$vuetify.goTo('#featured', {offset:100});$emit('closed')">
+        <v-list-item @click="$emit('featured')">
           <v-list-item-title>Featured projects</v-list-item-title>
         </v-list-item>
-        <v-list-item @click="$vuetify.goTo('#contact', {offset:100});$emit('contact', false)">
+        <v-list-item @click="$emit('register')">
           <v-list-item-title>Register your project</v-list-item-title>
         </v-list-item>
-        <v-list-item @click="$vuetify.goTo('#contact', {offset:100});$emit('contact', true)">
+        <v-list-item @click="$emit('contact')">
           <v-list-item-title>Contact us</v-list-item-title>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item class="mt-3 px-0">
+          <v-list-item-title>
+            <v-btn color="success" @click="$emit('list')" block large>Browse projects</v-btn>
+          </v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-app-bar app color="white" height="100" inverted-scroll elevate-on-scroll elevation-3>
-      <v-btn text @click="$vuetify.goTo('#hero')">
+      <v-btn text @click="$vuetify.goTo('#hero')" class="ml-0 pl-0">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/website/logo.png"></v-img>
+          <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>
       </v-btn>
 
@@ -17,7 +17,7 @@
           tile
           fab
           outlined
-          class="mr-2 mt-12"
+          class="mt-12 mr-0"
           x-large
           @click.stop="drawer = !drawer"
           v-show="!drawer"
@@ -28,10 +28,14 @@
     </v-app-bar>
     <NavigationDrawer
       @close="drawer=false"
-      @contact="contactOnly=$event;drawer=false;$event?step=0:step=1"
+      @contact="$vuetify.goTo('#contact', {offset:100});contactOnly=true;drawer=false;step=0"
+      @register="$vuetify.goTo('#contact', {offset:100});contactOnly=false;drawer=false;step=1"
+      @about="$vuetify.goTo('#about-us', {offset:100});drawer=false"
+      @featured="$vuetify.goTo('#featured', {offset:100});drawer=false"
+      @list="$router.push({path:'/worldwide'})"
       :drawer="drawer"
     />
-    <v-content>
+    <v-content v-scroll="onScroll">
       <section id="hero">
         <v-fab-transition>
           <v-btn
@@ -42,7 +46,7 @@
             tile
             fab
             outlined
-            class="mt-12 mr-2"
+            class="mt-12 mr-0"
             size="90"
             @click.stop="drawer = !drawer"
             v-show="!drawer"
@@ -56,7 +60,7 @@
           <v-img
             :height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
             srcset="splash_sm.jpg 480w, splash_lg.jpg 600w, splash_xl 800w.jpg"
-            src="/website/splash_xl.jpg"
+            src="/splash_xl.jpg"
             lazy-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgAB8DASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABwYIBf/EACkQAAIBAwIFBAIDAAAAAAAAAAECAwQFEQAGEhMhMUEHIlFhFDIjQvD/xAAWAQEBAQAAAAAAAAAAAAAAAAADAQX/xAAiEQABBAEDBQEAAAAAAAAAAAABAAIDERIEITETQVFhcfD/2gAMAwEAAhEDEQA/AMlWW2Vt4uUVvoITLPJkgDwAMkn6A/2dOFj9Kdo2qzULbjFdWXKrLGUyymCmgVRklVX3sfHUgE57Y1EejFRR2msa7VqQFHl5QMgLZCqWMeFIYcZKrxeM+caUp6KPcV5kittytkNXVUytb+VV+2Bf25TKTlT1ZeED40x0krg1zTTd72v977oXycgcqL3RtX0uuFJcH27cqi0VVLHxQxVErSfkEY4hwni8k44XPRScHRDWU8lLUNDIVJHZlOQw8EfWk/d21a21yvDw86QJluBWGMDJAB+B8fGoa+yRTWul9kCzQSMhKKQ7K3X3dMHBB+9JKyEszhdYUikJNFdn0vojequayQ1FJHXSfyUkdQxTnNjBRX/UOcDAbAPbIPe12lfJNvXeOWqRoY6WrAlR4CJ42XIJVsFkdcYPbv8AZ0MQSyQTJNC7RyIcqynqDpg2t61wwWdbXujatHdf1V6tAvMkReg4lcEFsYHFkdABjoMJDrMY+k4WFXRW7IK+v1wtwNXemhqK2kg5c0siqHlCSgdTGWz5Iz2B7kaz1vKsoay8zzW4VAp5HMiioVRKmf6sV9rY+QBnVnvr1Sp7mlVT7atVZa4qs5qGqasSlugGFUKAq4AwMkDRiSSck5OsyCEQtPkpfgX/2Q=="
           >
             <v-container fill-height>
@@ -66,21 +70,16 @@
                     :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
                     class="font-weight-black"
                   >
-                    <v-avatar
-                      class="mr-3"
-                      tile
-                      :size="$vuetify.breakpoint.smAndDown ? 'calc(20vh - ' + $vuetify.application.top + 'px)': 'calc(40vh - ' + $vuetify.application.top + 'px)'"
-                    >
-                      <v-img
-                        contain
-                        src="/website/logo.svg"
-                        lazy-loading="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAANX8AADV/AWBNYQcAAAAHdElNRQfkAxMOMxc5K7xoAAABq0lEQVQ4y5XUy05TURQG4G+fntP2AHIrQYxAMDGg8ZIw1gmJceBTOHDq0/g0TpwY48gYI1ETAzZSIBpLQShSWrqdVAhguKzhyvr3f1k7KzxtzReDi1X0fj+dLz6/4Di8KKYBF2cIkks8D9LTrbaamuiaaaXzATteWlTyUZ8FTwyfDeh6641d+5akckMey45NnPBQ986IRE3bTTWv/DibYcsXbQXjrmsbtGHD5FkMqZLvEjVF64KpUyZPAMbM6Qru+GZb2YiJsyUNeKSmIaobMOmB0fNiveuZ16oWzHjo3v/2EHRFBR2pA4lbptXl+hQkuoKAbk9/AnuWRVVNq7rqfvpl16ZPVqxaBJvq/0xHuT1N/ZYk2FY07sCGKS1NG1bQ0TlKKRi3bsy6IQ39Mh0HMh1RZlZd/fBH92Kt2LWtpOm3EV1rKjIfjMllZlXtHAekhn02p6qgKJhUkckdIOpzw9eepMNYr2qZsKuCXBFX3NdUVsao2/KjWNvWBGVVZQ0NiWBZLgr2NW3KBINHDEHUQu6PjkQq07ElKsrtiwq9TZBGUcGMi1QUhcuemb9RO4sbSkOhDAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wMy0xOVQxNDo1MToyMyswMTowMP1FE98AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDMtMTlUMTQ6NTE6MjMrMDE6MDCMGKtjAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAABJRU5ErkJggg=="
-                      ></v-img>
-                    </v-avatar>
+                    <Logo />
                   </span>
                 </v-col>
-                <v-btn class="align-self-end" fab @click="$vuetify.goTo('#about-us', {offset:100})">
-                  <v-icon>mdi-chevron-double-down</v-icon>
+                <v-btn
+                  large
+                  class="align-self-end"
+                  fab
+                  @click="$vuetify.goTo('#about-us', {offset:100})"
+                >
+                  <v-icon large>mdi-arrow-down</v-icon>
                 </v-btn>
               </v-row>
             </v-container>
@@ -97,34 +96,24 @@
             <v-divider class="mb-1"></v-divider>
             <v-divider></v-divider>
           </v-responsive>
-
-          <v-responsive class="mx-auto title font-weight-light mb-8" max-width="720">
-            The World Pandemic Research Network (WPRN) has been created to publish and share in one single
-            place the list of all research initiatives and surveys about the current pandemic of Covid-19 coronavirus.
-            <br />This is a non-profit academic resource that does not substitute to any ongoing research but enables
-            each researcher or stakeholder to be aware of what initiatives are taken, and get in touch directly with
-            those in charge.
-            <br />There is
-            no dependence, no legal nor economic binding. Each participant remains completely independent for
-            action and publication.
-          </v-responsive>
-        </v-container>
-
-        <div class="py-12"></div>
-      </section>
-
-      <section id="missions" class="grey lighten-3">
-        <div class="py-12"></div>
-        <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3 black--text">OUR MISSIONS</h2>
-          <v-responsive class="mx-auto mb-8" width="56">
-            <v-divider class="mb-1" dark></v-divider>
-            <v-divider dark></v-divider>
-          </v-responsive>
-
           <v-row>
-            <v-col cols="12" md="6">
-              <v-card class="py-12 px-4" color="grey lighten-5" light flat>
+            <v-col sm="12" md="6" lg="5" offset-lg="1">
+              <v-responsive
+                :class="{ 'text-right' : $vuetify.breakpoint.mdAndUp } "
+                class="d-flex align-center mx-auto title font-weight-light mb-8"
+                max-width="720"
+                height="100%"
+              >
+                <b>The World Pandemic Research Network (WPRN)</b> publishes the list of all research initiatives, projects and surveys about the social and economic impacts of the Covid-19 pandemic.
+                <br />WPRN is a non-profit academic resource that does not substitute to any ongoing research. It enables each researcher or stakeholder to be aware of what initiatives are taken and get in touch with their contact-points.
+                <br />There is no dependence, no legal nor economic binding. Each participant remains completely independent for action and publication.
+                <br />WPRN is RGDP compliant and will not publish, give or sell your email address.
+                <br />
+                <nuxt-link to="/board_and_contributors">Board and contributors</nuxt-link>
+              </v-responsive>
+            </v-col>
+            <v-col sm="12" md="6" lg="5">
+              <v-card class="pa-6 mb-6" flat>
                 <div>
                   <v-avatar color="primary" size="88">
                     <v-icon dark large>mdi-information-outline</v-icon>
@@ -132,32 +121,37 @@
                 </div>
                 <v-card-title
                   class="justify-center font-weight-black text-uppercase"
-                  color="black"
-                >Gather information</v-card-title>
+                >Directory of projects</v-card-title>
                 <v-card-text class="subtitle-1" color="black">
-                  We want to consolidate information on existing research initiatives and projects in a single place and be able to orient actors directly
-                  to the project contact points to inform, mutualize and share their discoveries. Please
-                  <a
-                    href
-                  >register your project</a> if you feel that you can contribute.
+                  We host and publish a
+                  <nuxt-link
+                    to="/worldwide"
+                    class="blue--text"
+                  >searchable directory of projects, calls and resources worldwide</nuxt-link>. Please
+                  <span
+                    @click="$vuetify.goTo('#contact'); contactOnly=false; step=1"
+                    class="blue--text"
+                    style="cursor:pointer;text-decoration:underline"
+                  >register your project</span>
+                  if you feel that you can contribute.
                 </v-card-text>
               </v-card>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-card class="py-12 px-4" color="grey lighten-5" light flat>
+              <v-card class="pa-6" flat>
                 <div>
                   <v-avatar color="primary" size="88">
-                    <v-icon dark large>mdi-head-cog-outline</v-icon>
+                    <v-icon dark large>mdi-share-variant</v-icon>
                   </v-avatar>
                 </div>
                 <v-card-title
                   class="justify-center font-weight-black text-uppercase"
-                  color="black"
-                >Distribute knowledge</v-card-title>
+                >Hub for collaboration</v-card-title>
                 <v-card-text class="subtitle-1" color="black">
-                  Our second mission is to serve as an entry point for the evaluation of the impacts of Covid-19 (with open access to
-                  methodologies, questionnaires) and as aggregator of locally cropped data made available to all
-                  participants for analysis.
+                  <nuxt-link to="/worldwide" class="blue--text">Our project list</nuxt-link>&nbsp;serves as an hub for collaboration and resource sharing. Use the “contact” button for initial get-in-touch with project contact-points. WPRN also houses
+                  <span
+                    @click="$vuetify.goTo('#featured', {offset:100})"
+                    class="blue--text"
+                    style="cursor:pointer;text-decoration:underline"
+                  >multicentric projects</span>.
                 </v-card-text>
               </v-card>
             </v-col>
@@ -165,27 +159,14 @@
         </v-container>
         <div class="py-12"></div>
       </section>
-
-      <section id="branches">
-        <v-sheet color="#333333" tag="section" tile>
-          <div class="py-12"></div>
-          <v-container>
-            <h2
-              class="display-2 font-weight-bold mb-3 text-uppercase text-center"
-            >CONTINENTAL BRANCHES</h2>
-            <WorldMap />
-          </v-container>
-
-          <div class="py-12"></div>
-        </v-sheet>
-      </section>
-
       <section id="stats">
         <v-parallax
           :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
-          src="/website/parralax_lg.jpg"
+          src="/parallax_lg.jpg"
+          srcset="parallax_sm.jpg 480w, parallax_md.jpg 600w, parallax_lg 800w.jpg"
         >
-          <v-container fill-height>
+          <v-overlay absolute z-index="0" opacity="0.6"></v-overlay>
+          <v-container fill-height style="z-index:2;">
             <v-row class="mx-auto">
               <v-col v-for="[value, title] of stats" :key="title" cols="12" md="3">
                 <div class="text-center">
@@ -198,18 +179,7 @@
           </v-container>
         </v-parallax>
       </section>
-      <section id="meetings" class="grey lighten-3">
-        <div class="py-12"></div>
-        <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3 black--text">NEXT MEETINGS</h2>
-          <v-responsive class="mx-auto mb-8" width="56">
-            <v-divider class="mb-1" dark></v-divider>
-            <v-divider dark></v-divider>
-          </v-responsive>
-          <MeetingList :events="events" />
-        </v-container>
-        <div class="py-12"></div>
-      </section>
+
       <section id="featured">
         <div class="py-12"></div>
 
@@ -224,7 +194,7 @@
 
           <v-row>
             <v-col cols="12" md="4">
-              <v-img src="/website/economics.jpg" class="mb-4" height="275" max-width="100%"></v-img>
+              <v-img src="/economics.jpg" class="mb-4" height="275" max-width="100%"></v-img>
 
               <h3 class="font-weight-black mb-4 text-uppercase">Economic impact of Covid-19.</h3>
 
@@ -232,50 +202,60 @@
                 This stems from the pioneer research led by Professor Xiaobo Zhang on the economic impact of the
                 epidemic on Chinese SMEs. Their team has agreed to share their questionnaire, which is currently
                 translated and surveys launched around the world. Here are the specifications to participate. Please
-                <a
-                  href
-                >check here</a>
-                with WPRN-W if someone is already involved in your geographic zone, to collaborate
-                and share the work.
+                <span
+                  @click="$vuetify.goTo('#contact', {offset:100})"
+                  class="blue--text"
+                  style="cursor:pointer;text-decoration:underline"
+                >click here</span>
+                if you are interested in
+                contributing.”
               </div>
 
-              <v-btn class="ml-n4 font-weight-black" text>Continue Reading</v-btn>
+              <v-btn class="ml-n4 font-weight-black" text>More info</v-btn>
             </v-col>
             <v-col cols="12" md="4">
-              <v-img src="/website/future.jpg" class="mb-4" height="275" max-width="100%"></v-img>
+              <v-img src="/future.jpg" class="mb-4" height="275" max-width="100%"></v-img>
 
               <h3
                 class="font-weight-black mb-4 text-uppercase"
               >Resource Directory of Positive Future Programmes.</h3>
 
               <div class="title font-weight-light mb-5">
-                This initiative aims at creating and disseminating visions of a positive, liveable and possible future, to
-                show that another world is possible and counteract mainstream dystopic visions. We will create a data
-                repository of positive cases, reports and discoveries that could contribute to make the world better, in
-                collaboration with major forecast and scientific institutes.
-                This will include cases of positive initiatives taken by governments, organizations, or citizens to address
-                the consequences of the current pandemic.
+                Positive Futures aims, in collaboration with major forecast and scientific institutes, at creating and
+                disseminating visions of positive, liveable futures, to show that another world is possible and counteract
+                mainstream dystopic visions. It includes a data repository of inspiring positive cases, reports and
+                discoveries that could contribute to make the world better. This will include cases of positive initiatives
+                taken by governments, organizations, or citizens to address the consequences of the current pandemic.
+                <span
+                  @click="$vuetify.goTo('#contact', {offset:100})"
+                  class="blue--text"
+                  style="cursor:pointer;text-decoration:underline"
+                >Write here</span> if you have a pointer to an inspiring resource.”
               </div>
 
-              <v-btn class="ml-n4 font-weight-black" text>Continue Reading</v-btn>
+              <v-btn class="ml-n4 font-weight-black" text>More info</v-btn>
             </v-col>
             <v-col cols="12" md="4">
-              <v-img src="/website/social.jpg" class="mb-4" height="275" max-width="100%"></v-img>
+              <v-img src="/social.jpg" class="mb-4" height="275" max-width="100%"></v-img>
 
-              <h3 class="font-weight-black mb-4 text-uppercase">Social impact of Covid-19.</h3>
+              <h3
+                class="font-weight-black mb-4 text-uppercase"
+              >Psychological and Social impact of Covid-19.</h3>
 
               <div class="title font-weight-light mb-5">
-                This stems from the pioneer research led by Professor Xiaobo Zhang on the economic impact of the
-                epidemic on Chinese SMEs. Their team has agreed to share their questionnaire, which is currently
-                translated and surveys launched around the world. Here are the specifications to participate. Please
-                <a
-                  href
-                >check here</a>
-                with WPRN-W if someone is already involved in your geographic zone, to collaborate
-                and share the work.
+                Confinement has direct impacts on the morale and behaviour (domestic violence, suicides, divorces,
+                etc.) which in turn impact social services, courts, etc. How do people cope, positively or not, with the
+                stressful situation of lockdown? This survey intends to monitor these effects in various countries and
+                collect the factors that can help mitigating the damage. Please
+                <span
+                  @click="$vuetify.goTo('#contact', {offset:100})"
+                  class="blue--text"
+                  style="cursor:pointer;text-decoration:underline"
+                >click here</span> if you are interested in
+                contributing.
               </div>
 
-              <v-btn class="ml-n4 font-weight-black" text>Continue Reading</v-btn>
+              <v-btn class="ml-n4 font-weight-black" text>More info</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -314,7 +294,10 @@
                   <v-theme-provider light>
                     <v-row no-gutters justify="center">
                       <v-col cols="12" md="10" lg="8" no-gutters align="center">
-                        <ContactForm @complete="valid=true" />
+                        <ContactForm
+                          @complete="valid=true"
+                          @WorkInProgressDialogToggle="WorkInProgressDialogToggle=true"
+                        />
                       </v-col>
                     </v-row>
                   </v-theme-provider>
@@ -325,7 +308,10 @@
                   <v-theme-provider light>
                     <v-row no-gutters justify="center">
                       <v-col cols="12" md="10" lg="8" no-gutters align="center">
-                        <ProjectForm @complete="step=2" />
+                        <ProjectForm
+                          @complete="step=2"
+                          @WorkInProgressDialogToggle="WorkInProgressDialogToggle=true"
+                        />
                       </v-col>
                     </v-row>
                   </v-theme-provider>
@@ -349,7 +335,27 @@
           <div class="py-12"></div>
         </v-sheet>
       </section>
+      <v-fab-transition>
+        <v-btn
+          v-if="$vuetify.breakpoint.mdAndUp"
+          color="accent"
+          dark
+          fixed
+          bottom
+          right
+          contained
+          fab
+          v-show="offsetTop>600"
+          @click="$vuetify.goTo('#hero')"
+        >
+          <v-icon>mdi-arrow-up</v-icon>
+        </v-btn>
+      </v-fab-transition>
     </v-content>
+    <WorkInProgressDialog
+      :dialog="WorkInProgressDialogToggle"
+      @close="WorkInProgressDialogToggle=false"
+    />
   </div>
 </template>
 
@@ -357,11 +363,13 @@
 import ContactForm from "~/components/contact/ContactForm";
 import ProjectForm from "~/components/projectForm/ProjectForm";
 import FeaturedItem from "~/components/mainPage/FeaturedItem";
-import MeetingList from "~/components/mainPage/MeetingList";
-import WorldMap from "~/components/mainPage/WorldMap";
+/* import MeetingList from "~/components/mainPage/MeetingList";
+import WorldMap from "~/components/mainPage/WorldMap"; */
 import ProjectPostedWindow from "~/components/projectForm/ProjectPostedWindow";
 import ContactPostedWindow from "~/components/contact/ContactPostedWindow";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import WorkInProgressDialog from "~/components/navigation/WorkInProgressDialog";
+import Logo from "~/components/navigation/Logo";
 import { zones } from "~/assets/data";
 export default {
   data() {
@@ -369,13 +377,15 @@ export default {
       zones,
       drawer: false,
       contactOnly: false,
+      WorkInProgressDialogToggle: true,
       valid: false,
-      step: 2,
+      step: 1,
+      offsetTop: 0,
       stats: [
-        ["45", "Contributors"],
-        ["330+", "Projects"],
+        ["XX", "Contributors"],
+        ["XXX+", "Projects"],
         ["7", "Continental Zones"],
-        ["12", "reports"]
+        ["XX", "reports"]
       ],
       events: [
         {
@@ -405,21 +415,38 @@ export default {
     ContactForm,
     ProjectForm,
     FeaturedItem,
-    MeetingList,
-    WorldMap,
+    /*   MeetingList, */
     NavigationDrawer,
     ContactPostedWindow,
-    ProjectPostedWindow
+    ProjectPostedWindow,
+    WorkInProgressDialog,
+    Logo
   },
 
   async mounted() {
+    if (this.$route.hash) {
+      console.log("HASH", this.$route.hash);
+
+      if (this.$route.hash === "#register") {
+        this.contactOnly = false;
+        this.step = 1;
+        setTimeout(() => {
+          this.$vuetify.goTo("#contact");
+        }, 1);
+      } else {
+        this.contactOnly = true;
+        this.step = 0;
+        setTimeout(() => {
+          console.log("goto");
+          this.$vuetify.goTo(this.$route.hash, { offset: 100 });
+        }, 1);
+      }
+    }
     await this.$recaptcha.init();
   },
   methods: {
-    async onSubmit() {
-      try {
-        const token = await this.$recaptcha.execute("login");
-      } catch (error) {}
+    onScroll(e) {
+      this.offsetTop = e.target.scrollingElement.scrollTop;
     }
   }
 };

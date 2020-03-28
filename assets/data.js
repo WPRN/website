@@ -1,4 +1,126 @@
-export const types = ["Study", "Seminar", "Survey", "Design", "Organisation", "Other"]
+export const types = [
+  "Ongoing research project",
+  "Survey",
+  "Action Research",
+  "Call for Research Proposals",
+  "Call for collaboration",
+  { divider: true },
+  "Grassroot action",
+  "Case study",
+  "Questionnaire",
+  "Data set",
+  { divider: true },
+  "Conference / Webinar",
+  "Report",
+  "Scientific paper",
+  "Policy document",
+  "Regulation",
+  { divider: true },
+  "Video",
+  "Blog",
+  "Press article",
+  { divider: true },
+  "Other resource"]
+
+export const contributors = [
+  /*   "Simon Luck",
+    "Claire Jeandel",
+    "Bertrand Pouvesle",
+    "Cécile Durand",
+    "Solène de Bonis", */
+  "Antoine Cordelois"
+]
+export const board = [
+  /*   {
+      name: "Professor Xiaobo Zhang",
+      org: "Beijing University and IFPRI",
+      role: "Asia",
+      picture: "",
+      id: ""
+    }, */
+  {
+    name: "Professor Saadi Lahlou",
+    org: "Paris Institute for Advanced Study and LSE",
+    role: "Global",
+    picture: "https://www.paris-iea.fr/images/equipe/1569/lahlousaadi.jpg",
+    id: ""
+  },
+  /*   {
+      name: "Professor Raouf Boucekkine",
+      org: "Aix Marseille University",
+      role: "North-Africa",
+      picture: "",
+      id: ""
+    },
+    {
+      name: "Professor Ama de Graft-Aikins",
+      org: "University of Ghana and UCL",
+      role: "Sub-Saharian Africa",
+      picture: "",
+      id: ""
+    },
+    {
+      name: "Paolo Saldiva",
+      org: "Universidade de São Paulo",
+      role: "South America",
+      picture: "",
+      id: ""
+    }, */
+  {
+    name: "XXX",
+    org: "",
+    role: "North America",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "XXX",
+    org: "",
+    role: "Oceania",
+    picture: "",
+    id: ""
+  },
+  /*   {
+      name: "Olivier Bouin, Director",
+      org: "Network of European Institutes for Advanced Study. Coordinator, International Panel on Social Progress",
+      role: "",
+      picture: "",
+      id: ""
+    },
+    {
+      name: "Professor Pascale Allotey",
+      org: "United Nations University International Institute for Global Health (UNU-IIGH)",
+      role: "",
+      picture: "",
+      id: ""
+    },
+    {
+      name: "Professor Vinh-kim Nguyen",
+      org: "Université de Montréal & Max-Planck Institute for Social Anthropology, Germany.",
+      role: "",
+      picture: "",
+      id: ""
+    },
+    {
+      name: "Professor Patrice Duran",
+      org: "Institut des sciences sociales du politique (CNRS/ENS Paris-Saclay)",
+      role: "",
+      picture: "",
+      id: ""
+    }, {
+      name: "Professor Marc Fleurbaey",
+      org: "Princeton University",
+      role: "",
+      picture: "",
+      id: ""
+    }, {
+      name: "Professor Jerôme Adda",
+      org: "Bocconi University",
+      role: "",
+      picture: "",
+  id: ""
+  }*/
+]
 export const zones = [
   {
     text: "Asia",
@@ -29,32 +151,51 @@ export const zones = [
     value: "oceania"
   },
   {
-    text: "Worldwide",
+    text: "Worldwide / Intercontinental",
     value: "worldwide"
   }
 ]
 export const fields = [
-  "Agricultural and Veterinary Science",
-  "Astronomy, Astrophysics, Space",
-  "Biological Sciences",
-  "Built Environment and Design",
-  "Chemistry",
-  "Commerce, Management, Tourism and Marketing",
-  "Earth and Environmental Science",
-  "Engineering",
-  "Health Sciences",
-  "Humanities",
-  "Information and Computing Sciences",
-  "Language, Communication and Culture",
+  { header: ' Social Sciences and Humanities' },
+  { divider: true },
+  "Anthropology",
+  "Art & Museology",
+  "Communication and Media studies",
+  "Demography",
+  "Design",
+  "Economics & Statistics",
+  "Education Sciences",
+  "Equality & Diversity studies",
+  "Geography",
+  "History",
+  "Literature & Digital Humanities",
+  "International Relations",
+  "Law",
+  "Literature Linguistics and Semiotics",
+  "Management and Public Administration",
+  "Methodology",
+  "Philosophy incl.Ethics",
+  "Political Science",
+  "Psychology, Behavioural and Cognitive Sciences",
+  "Religion and Theology",
+  "Sociology",
+  "Systems Science incl.Simulation",
+  "Urban Planning and Architecture",
+  "Other social sciences and humanities",
+  { header: ' Other disciplines' },
+  { divider: true },
+  "Biology",
+  "Chemistry & Physics",
+  "Computer Sciences",
+  "Earth Sciences",
+  "Ecology & Environmental Sciences",
+  "Engineering and Technology",
+  "Epidemiology",
+  "Information Technology",
   "Mathematics",
-  "Meta Science",
-  "Psychology",
-  "Physics",
-  "Studies in Creative Arts and Design",
-  "Studies in Human Society",
-  "Technology",
-  "Other"
+  "Medicine"
 ]
+
 export const countries = {
   asia: [
     "Afghanistan",

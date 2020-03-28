@@ -1,5 +1,5 @@
 <template>
-  <v-form lazy-validation>
+  <v-form lazy-validation color="#333333">
     <v-col cols="12">
       <v-text-field
         v-model="contact.name"
@@ -118,6 +118,7 @@ export default {
     },
     onSubmit() {
       this.sending = true;
+      this.$emit("WorkInProgressDialogToggle");
     }
   }
 };

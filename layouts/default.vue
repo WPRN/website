@@ -6,7 +6,13 @@
         <v-tooltip top>
           <template v-slot:activator="{ on }">
             <v-btn text icon v-on="on">
-              <v-icon>mdi-creative-commons</v-icon>
+              <a
+                href="http://creativecommons.org/licenses/by-sa/4.0/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <v-icon color="white">mdi-creative-commons</v-icon>
+              </a>
             </v-btn>
           </template>
           <span>This website is licenced under Creative Commons</span>

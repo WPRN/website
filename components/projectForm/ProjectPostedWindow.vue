@@ -4,7 +4,7 @@
     <h3 class="headline font-weight-heavy mb-2">YOUR PROJECT HAS BEEN SUCCESSFULLY REGISTERED!</h3>
     <div class="subtitle-1">
       You should receive an email confirming your project registering shortly. It will be displayed in the
-      <nuxt-link to>project list</nuxt-link>&nbsp;as "not validated" until it is validated by a WPRN moderator.
+      <nuxt-link to="/worldwide">project list</nuxt-link>&nbsp;as "not validated" until it is validated by a WPRN moderator.
       <br />You might be contacted by the moderator to correct some of your project information.
     </div>
     <br />

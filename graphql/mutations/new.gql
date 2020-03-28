@@ -13,7 +13,6 @@ mutation createProject(
   $city: String
   $date: String
   $time: String
-
 ) {
   createProject(
     input: {

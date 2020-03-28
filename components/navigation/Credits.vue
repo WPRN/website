@@ -3,8 +3,12 @@
     <v-card>
       <v-card-title>
         <v-avatar small class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/website/logo.png"></v-img>
+          <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>Credits
+        <v-spacer></v-spacer>
+        <v-btn icon @click="$emit('closeCredits')">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text class="pt-6 px-6 subtitle-1">
@@ -16,12 +20,13 @@
         >IAS Paris - IEA de Paris</a>.
       </v-card-text>
       <v-card-text class="subtitle-1">
-        <b>Most of all</b>
-        , we want to credit and thank all the contributors who reported their research and allowed the community to grow stronger.
+        <b>Thanks</b> to all the contributors whose contribution and collective intelligence provides us all with this
+        shared resource.
       </v-card-text>
+      <v-card-text class="subtitle-1">This is a non-profit initiative. We welcome donations.</v-card-text>
       <v-card-subtitle class="subtitle-2 px-6">Institutional supports</v-card-subtitle>
       <v-card-text class="subtitle-1 px-6 mb-3" style="max-height:250px">
-        This project is supported by :
+        This project is sponsored by :
         <ul>
           <li>
             <a

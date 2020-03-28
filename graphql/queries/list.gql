@@ -1,5 +1,9 @@
-query list {
-  listProjects {
+query list (
+  $filter: ModelProjectFilterInput
+  $limit: Int
+  $nextToken: String)
+  {
+  listProjects (filter: $filter, limit: $limit, nextToken: $nextToken){
     items {
       id
       name
@@ -19,5 +23,6 @@ query list {
       createdAt
       views
     }
+    nextToken
   }
 }

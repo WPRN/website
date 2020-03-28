@@ -11,7 +11,8 @@
     "generate": "nuxt generate",
     "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
     "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "deploy-prod": " aws s3 cp dist s3://wprn.org --recursive"
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.0-rc19",
@@ -25,6 +26,10 @@
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",
     "@types/graphql": "latest",
-    "graphql-tag": "^2.10.3"
+    "graphql-tag": "^2.10.3",
+    "concurrent-transform": "^1.0.0",
+    "gulp": "^4.0.2",
+    "gulp-awspublish": "^4.1.1",
+    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0"
   }
 }

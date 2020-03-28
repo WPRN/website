@@ -341,12 +341,18 @@ export default {
   },
   props: {},
   methods: {
-    logThis() {
-      console.log("THIS");
-    },
+    logThis() {},
     highlightZone(zone) {
-      console.log(zone.value);
-      if (zone.value === "worldwide") return;
+      if (zone.value === "worldwide") {
+        ["africa", "asia", "europe", "sAmerica", "nAmerica", "oceania"].forEach(
+          element => {
+            [...this.$refs[element].children].forEach(element => {
+              element.style.fill = this.$vuetify.theme.themes.light.primary;
+            });
+          }
+        );
+        return;
+      }
       let thisZone = zone.value || zone;
 
       if (["nAfrica", "sAfrica"].includes(thisZone)) {
@@ -357,8 +363,16 @@ export default {
       });
     },
     unHighlightZone(zone) {
-      if (zone.value === "worldwide") return;
-      console.log(zone);
+      if (zone.value === "worldwide") {
+        ["africa", "asia", "europe", "sAmerica", "nAmerica", "oceania"].forEach(
+          element => {
+            [...this.$refs[element].children].forEach(element => {
+              element.style.fill = "#FFFFFF";
+            });
+          }
+        );
+        return;
+      }
       let thisZone = zone.value || zone;
       if (["nAfrica", "sAfrica"].includes(zone.value)) {
         thisZone = "africa";
@@ -368,15 +382,13 @@ export default {
       });
     },
     clickZone(zone) {
-      console.log("click", zone);
       let thisZone = zone.value || zone;
+      if (thisZone === "africa") thisZone = "nAfrica";
       this.$router.push({
         path: "/" + thisZone
       });
     }
   },
-  mounted() {
-    console.log(this.$vuetify.theme.themes.light.primary);
-  }
+  mounted() {}
 };
 </script>

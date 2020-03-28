@@ -5,35 +5,177 @@
       :expanded.sync="expanded"
       :headers="headers"
       :items="projects"
+      :loading="loading"
       item-key="id"
       :server-items-length="projects&&projects['total']"
-      class="elevation-1"
+      :class="$vuetify.breakpoint.mdAndUp?' elevation-1 px-6':'elevation-1'"
       :options.sync="options"
       :footer-props="{itemsPerPageOptions: [5,10,20,50,100]}"
     >
+      <template v-slot:top>
+        <v-card flat>
+          <v-row no-gutters>
+            <v-col cols="12" class="mt-6">
+              <v-card-title :class="{'pl-0':$vuetify.breakpoint.smAndDown}">
+                <span class="overline">
+                  <v-icon>mdi-filter-variant</v-icon>Filters
+                </span>
+                <v-btn
+                  outlined
+                  small
+                  v-if="search&&search.length||filters.field&&filters.field.length||filters.type&&filters.type.length||filters.zone&&filters.zone.length"
+                  color="white"
+                  @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false};refreshQuery();$router.push({path: '/worldwide'})"
+                  class="ml-3"
+                >
+                  <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-checkbox
+                  v-model="filters.verified"
+                  label="Show verified projects only"
+                  class="mr-3"
+                  @change="refreshQuery()"
+                ></v-checkbox>
+                <v-text-field
+                  class="pt-0 mr-4"
+                  v-model.trim="filters.search"
+                  label="Search"
+                  placeholder="Search a project"
+                  prepend-inner-icon="mdi-magnify"
+                  single-line
+                  hide-details
+                  clearable
+                  solo
+                  dense
+                  dark
+                  outlined
+                  max-width="400px;"
+                  @click:clear="refreshQuery()"
+                  @change="refreshQuery()"
+                  ref="search_field"
+                ></v-text-field>
+              </v-card-title>
+            </v-col>
+          </v-row>
+          <v-row :class="{'pr-8':$vuetify.breakpoint.mdAndUp}">
+            <v-col cols="12" sm="6" md="4" lg="3">
+              <v-select
+                :items="zones"
+                label="Continent"
+                outlined
+                v-model="filters.zone"
+                :clearable="filters.zone!=='worldwide'"
+                ref="zone"
+                :disabled="loading"
+                hide-details
+                dense
+                @click:clear="filters.zone='worlwide';refreshQuery()"
+                @change="refreshQuery()"
+              ></v-select>
+            </v-col>
+            <v-col cols="12" sm="6" md="4" lg="3">
+              <v-combobox
+                :disabled="!filters.zone|| loading"
+                :items="filters.zone!=='worldwide'?countries[filters.zone]:Object.keys(countries).map(countryKey=>countries[countryKey]).flat().sort()"
+                no-data-text="No country matching your search"
+                @change="refreshQuery()"
+                label="Country"
+                outlined
+                multiple
+                v-model="filters.country"
+                clearable
+                hide-details
+                dense
+              ></v-combobox>
+            </v-col>
+            <v-col cols="12" sm="6" md="4" lg="3">
+              <v-combobox
+                :items="fields"
+                label="Project discipline(s)"
+                outlined
+                v-model="filters.field"
+                clearable
+                multiple
+                ref="field"
+                :disabled="loading"
+                hide-details
+                dense
+                @change="refreshQuery()"
+              ></v-combobox>
+            </v-col>
+            <v-col cols="12" sm="6" md="4" lg="3">
+              <v-select
+                :items="types"
+                label="Project type"
+                outlined
+                v-model="filters.type"
+                ref="type"
+                hide-details
+                dense
+                @change="refreshQuery()"
+                clearable
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-card>
+      </template>
+      <template v-slot:loading>
+        <v-skeleton-loader transition="scale-transition" type="table-tbody"></v-skeleton-loader>
+      </template>
       <template v-slot:no-data>
         <template v-if="!filters.length&&!search.length">
           <div class="my-3"></div>There are no projects to display
+          <br />
+          <v-btn
+            outlined
+            small
+            v-if="search&&search.length||filters.field&&filters.field.length||filters.type&&filters.type.length||((filters.zone&&filters.zone.length)||filters.zone!=='worldwide')"
+            color="white"
+            @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false};refreshQuery();$router.push({path: '/worldwide', query:undefined})"
+            class="ma-3"
+          >
+            <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
+          </v-btn>
         </template>
         <template v-else>No projects match your search.</template>
       </template>
       <template v-slot:item="{ item }">
-        <!--  TODO fix this damn toggle to handle when dark mode is activated, the row bg color should adapt if item has been viewed before -->
         <tr
           :class="$vuetify.theme.dark?{'grey darken-3':item.hasViewed}:{'grey lighten-4':item.hasViewed}"
-          @click="$router.push({ path: 'projects/'+item.id, params: { id: item.id }})"
+          @click="expanded.includes(item)?expanded=[]:expanded=[item]"
         >
           <td>{{item.name}}</td>
           <td>
             <ProjectStatusBadge :status="item.status" />
           </td>
           <td>
-            <v-chip small v-for="(field, index) in item.field" :key="index">{{field}}</v-chip>
+            <v-chip
+              class="ma-1"
+              small
+              light
+              v-for="(field, index) in item.field"
+              :key="index"
+            >{{field}}</v-chip>
           </td>
           <td>{{item.type}}</td>
-          <td>{{item.zone}}</td>
           <td>
-            <v-chip small v-for="(country, index) in item.country" :key="index">{{country}}</v-chip>
+            <v-chip
+              small
+              label
+              light
+              v-for="(field, index) in item.field"
+              :key="index"
+              class="ma-1"
+            >{{zones.find(zone => item.zone === zone.value).text }}</v-chip>
+          </td>
+          <td>
+            <v-chip
+              small
+              class="ma-1"
+              v-for="(country, index) in item.country"
+              :key="index"
+            >{{country}}</v-chip>
           </td>
           <td class="pr-0">
             <v-tooltip bottom>
@@ -47,7 +189,7 @@
                   <v-icon>{{expanded.includes(item)?'mdi-chevron-up':'mdi-chevron-down'}}</v-icon>
                 </v-btn>
               </template>
-              <span>{{expanded.includes(item)?'Collapse this row':'Expand this row'}}</span>
+              <span>{{expanded.includes(item)?'Hide details':'See this project details'}}</span>
             </v-tooltip>
           </td>
         </tr>
@@ -56,16 +198,35 @@
         <v-expand-transition>
           <td colspan="8">
             <v-card class="ml-3 mt-3 pb-3" flat>
-              <span class="overline">CONTACT :</span>
-              {{item.contact_firstname + ' ' + item.contact_lastname}}
-              <template
-                v-if="item.contact_entity"
-              >({{item.contact_entity}})</template>
-              <span class="overline">Descripion</span>
-              <v-card-text>{{item.description}}</v-card-text>
+              <v-card-text class="pb-0">
+                <span>
+                  Created
+                  <timeago :datetime="+item.createdAt" :auto-update="60"></timeago>
+                </span>
+              </v-card-text>
+              <v-card-text class="pb-0">
+                <span class="overline">CONTACT :</span>
+                <br />
+                {{item.contact_firstname + ' ' + item.contact_lastname}}
+                <template
+                  v-if="item.contact_entity"
+                >({{item.contact_entity}})</template>
+              </v-card-text>
+              <!--      <v-card-text>
+              </v-card-text>-->
+              <v-card-text class="pb-0">
+                <span class="overline">Descripion</span>
+                <br />
+                {{item.description}}
+              </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
+                <v-btn color="accent" @click="contact=true">
+                  <v-icon>mdi-email-edit</v-icon>&nbsp;
+                  Email this project contact
+                </v-btn>
                 <v-btn
+                  v-if="item.url"
                   text
                   @click="all?$router.push({ path: 'projects/'+item.id, params: { id: item.id }}):$router.push({ path: 'projects/draft/'+item.id, params: { id: item.id }})"
                 >
@@ -79,22 +240,38 @@
         </v-expand-transition>
       </template>
     </v-data-table>
+    <ContactDialog :open="contact" @close="contact=false" />
   </div>
 </template>
 <script>
 import listProjects from "~/graphql/queries/list.gql";
 import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
+import ContactDialog from "~/components/contact/ContactDialog";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { zones, countries, types, fields } from "~/assets/data";
 export default {
   data() {
     return {
+      zones,
+      countries,
+      types,
+      fields,
+      contact: false,
+      loading: false,
       projects: [],
       expanded: [],
       showFilters: false,
       projectId: "",
-      filters: this.$route.query.filters
-        ? JSON.parse(this.$route.query.filters)
-        : false,
+      limit: 10,
+      filters: {
+        field: [],
+        type: "",
+        zone:
+          zones.find(zone => this.$route.params.zone === zone.value).value ||
+          "worldwide",
+        country: [],
+        verified: false
+      },
       total: 0,
       options: {
         itemsPerPage: 10,
@@ -102,11 +279,8 @@ export default {
         sortBy: [],
         sortDesc: [true]
       },
-      skip: 0,
       limit: 10,
-      search: this.$route.query.search
-        ? JSON.parse(this.$route.query.search)
-        : "",
+      search: "",
       headers: [
         {
           text: "Name",
@@ -121,7 +295,7 @@ export default {
           value: "status"
         },
         {
-          text: "Field",
+          text: "Discipline",
           align: "left",
           sortable: false,
           value: "type"
@@ -148,6 +322,7 @@ export default {
       ]
     };
   },
+  created() {},
   mounted() {
     this.refreshQuery();
   },
@@ -156,17 +331,122 @@ export default {
   methods: {
     async refreshQuery() {
       console.log("REFRESH QUERY", listProjects);
-
+      const filter = {};
+      if (
+        this.filters.zone &&
+        this.filters.zone.length &&
+        this.filters.zone !== "worldwide"
+      ) {
+        filter.zone = {
+          eq: this.filters.zone
+        };
+      } else {
+        if (!this.filters.zone) {
+          this.filters.zone = "worldwide";
+        }
+      }
+      this.$router.push({
+        path: "/" + this.filters.zone,
+        params: { zone: this.filters.zone },
+        query: this.$router.query
+      });
+      if (this.filters.type && this.filters.type.length) {
+        filter.type = {
+          eq: this.filters.type
+        };
+      }
+      if (this.filters.country && this.filters.country.length) {
+        if (!filter.or) filter.or = [];
+        this.filters.country.forEach(country => {
+          filter.or.push({
+            country: {
+              contains: country
+            }
+          });
+        });
+      }
+      if (this.filters.field && this.filters.field.length) {
+        if (!filter.or) filter.or = [];
+        this.filters.field.forEach(field => {
+          filter.or.push({
+            field: {
+              contains: field
+            }
+          });
+        });
+      }
+      if (this.filters.verified) {
+        filter.status = {
+          eq: "verified"
+        };
+      }
+      if (this.search && this.search.length) {
+        if (!filter.or) filter.or = [];
+        filter.or.push(
+          {
+            name: {
+              contains: this.search
+            }
+          },
+          {
+            field: {
+              contains: this.search
+            }
+          },
+          {
+            contact_lastname: {
+              contains: this.search
+            }
+          },
+          {
+            contact_entity: {
+              contains: this.search
+            }
+          },
+          {
+            country: {
+              contains: this.search
+            }
+          },
+          {
+            description: {
+              contains: this.search
+            }
+          }
+        );
+      }
+      const limit = 0;
+      /* this.loading = true;
+      console.log(filter);
+      const options = Object.keys(filter).length
+        ? {
+            filter,
+            limit: this.options.itemsPerPage,
+            nextToken: this.nextToken
+          }
+        : { limit: this.limit, nextToken: this.nextToken };
       const projects = await API.graphql(
-        graphqlOperation(listProjects.loc.source.body, {})
+        graphqlOperation(listProjects.loc.source.body, options)
       );
       console.log(projects);
 
       this.projects = projects.data.listProjects.items;
+      this.nextToken = projects.data.listProjects.nextToken;
+      this.loading = false; */
+    },
+    getFilters() {
+      const filterObject = [];
+      if (this.filters.type) filterObject.push("type");
+      if (this.filters.zone) filterObject.push("zone");
+      if (this.filters.field) filterObject.push("field");
+      if (this.filters.country) filterObject.push("country");
+      if (this.filters.verified) filterObject.push("verified");
+      return JSON.stringify(filterObject);
     }
   },
   components: {
-    ProjectStatusBadge
+    ProjectStatusBadge,
+    ContactDialog
   },
   watch: {
     "$route.query"() {
@@ -181,7 +461,7 @@ export default {
       } else {
         this.filters = [];
       }
-      refreshQuery();
+      this.refreshQuery();
     }
   }
 };
