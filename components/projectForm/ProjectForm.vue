@@ -392,7 +392,7 @@
                   <div class="subtitle-1">{{project.contact_email}}</div>
                 </v-col>
               </v-row>
-              <v-checkbox :rules="requiredRules" v-model="agreed" ref="agreed">
+              <v-checkbox :rules="requiredRules" v-model="agreed" ref="agreedRef">
                 <template v-slot:label>
                   <div>
                     I confirm that I provided exact information and agree with the
@@ -439,7 +439,7 @@
           $refs.email&&$refs.email.valid&&
           $refs.entity&&$refs.entity.valid&&
           $refs.zone&&$refs.zone.valid&&
-          $refs.agreed&&$refs.agreed.valid)"
+          $refs.agreedRef&&$refs.agreedRef.valid)"
         >
           Submit&nbsp;
           <v-icon>mdi-send</v-icon>
@@ -509,7 +509,7 @@ export default {
       ],
       requiredRules: [
         value => !!value || "This field is required.",
-        value => !!value.length || "This field is required."
+        value => value === true || !!value.length || "This field is required."
       ],
       showDateMenu: false,
       showTimeMenu: false,
@@ -519,7 +519,7 @@ export default {
         type: "",
         field: [],
         country: [],
-        zone: "",
+        zone: "worldwide",
         contact_email: "",
         city: "",
         contact_firstname: "",
@@ -532,6 +532,7 @@ export default {
     };
   },
   async mounted() {
+    console.log("mounted");
     await this.$recaptcha.init();
   },
   props: {},
@@ -561,16 +562,16 @@ export default {
     },
     async onSubmit() {
       try {
-        this.$emit("WorkInProgressDialogToggle");
-        /*         this.loading = true;
+        /*         this.$emit("WorkInProgressDialogToggle"); */
+        this.loading = true;
         let args = this.project;
         Object.keys(this.project).forEach(key => {
           console.log(key);
           console.log(this.project[key]);
           if (!args[key] || args[key].length === 0) delete args[key];
-        }); /*
-        const token = await this.$recaptcha.execute("login");
-        console.log(token);
+        });
+        /*       const token = await this.$recaptcha.execute("login");
+        console.log(token); */
         console.log(args);
         const res = await API.graphql(graphqlOperation(newProject, args));
         console.log(res);
@@ -581,7 +582,7 @@ export default {
           console.log("YEAAAAAAH");
           this.error = true;
         }
-        this.loading = false; */
+        this.loading = false;
       } catch (error) {
         console.log(error);
         this.error = true;

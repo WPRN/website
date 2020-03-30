@@ -8,7 +8,7 @@
       <br />You might be contacted by the moderator to correct some of your project information.
     </div>
     <br />
-    <v-card-actions>
+    <!--     <v-card-actions>
       <v-spacer></v-spacer>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
@@ -18,6 +18,6 @@
         </template>
         <span>Register another project</span>
       </v-tooltip>
-    </v-card-actions>
+    </v-card-actions>-->
   </v-card>
 </template>

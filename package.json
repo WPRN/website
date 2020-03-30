@@ -9,14 +9,16 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "prod": "nuxt generate && aws s3 cp dist s3://wprn.org --recursive",
+    "test": "nuxt generate && aws s3 cp dist s3://test.wprn.org --recursive",
     "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
     "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy": "gh-pages -d dist",
-    "deploy-prod": " aws s3 cp dist s3://wprn.org --recursive"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.0-rc19",
     "@nuxtjs/recaptcha": "^0.6.2",
+    "@nuxtjs/sitemap": "^2.1.0",
     "aws-amplify": "^2.2.6",
     "aws-amplify-vue": "^1.1.4",
     "gh-pages": "^2.2.0",
@@ -24,12 +26,14 @@
     "vue-timeago": "^5.1.2"
   },
   "devDependencies": {
+    "@nuxtjs/google-analytics": "^2.2.3",
     "@nuxtjs/vuetify": "^1.0.0",
     "@types/graphql": "latest",
-    "graphql-tag": "^2.10.3",
     "concurrent-transform": "^1.0.0",
+    "graphql-tag": "^2.10.3",
     "gulp": "^4.0.2",
     "gulp-awspublish": "^4.1.1",
-    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0"
+    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
+    "webpack-graphql-loader": "^1.0.2"
   }
 }

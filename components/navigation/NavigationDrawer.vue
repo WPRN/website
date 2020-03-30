@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app bottom right>
+  <v-navigation-drawer v-model="drawer" app bottom right @click:outside="$emit('close')">
     <div class="d-flex flex-row-reverse">
       <v-tooltip left>
         <template v-slot:activator="{ on }">

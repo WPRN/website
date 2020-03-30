@@ -57,6 +57,7 @@ export default {
   plugins: [
     '~/plugins/timeago',
     '~plugins/filters.js',
+    { src: '~plugins/ga.js', mode: 'client' },
     {
       src: '~plugins/amplify.js',
       ssr: false
@@ -67,13 +68,29 @@ export default {
   */
   buildModules: [
     '@nuxtjs/vuetify',
+    '@nuxtjs/google-analytics'
   ],
+  googleAnalytics: {
+    id: 'UA-162015115-1',
+    /*    dev: false,
+       debug: {
+         enabled: true,
+         sendHitTask: true
+       } */
+  },
+  sitemap: {
+    hostname: 'https://wprn.org',
+    gzip: true,
+    exclude: [
+    ],
+  },
   /*
   ** Nuxt.js modules
   */
   modules: [
     '@nuxtjs/recaptcha',
     '@nuxtjs/apollo',
+    '@nuxtjs/sitemap'
 
   ],
   recaptcha: {
@@ -191,6 +208,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+
     extend(config, ctx) {
     }
   }

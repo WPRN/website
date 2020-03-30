@@ -23,7 +23,7 @@
                 <v-btn
                   outlined
                   small
-                  v-if="search&&search.length||filters.field&&filters.field.length||filters.type&&filters.type.length||filters.zone&&filters.zone.length"
+                  v-if="filtering"
                   color="white"
                   @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false};refreshQuery();$router.push({path: '/worldwide'})"
                   class="ml-3"
@@ -39,7 +39,7 @@
                 ></v-checkbox>
                 <v-text-field
                   class="pt-0 mr-4"
-                  v-model.trim="filters.search"
+                  v-model.trim="search"
                   label="Search"
                   placeholder="Search a project"
                   prepend-inner-icon="mdi-magnify"
@@ -79,7 +79,7 @@
                 :disabled="!filters.zone|| loading"
                 :items="filters.zone!=='worldwide'?countries[filters.zone]:Object.keys(countries).map(countryKey=>countries[countryKey]).flat().sort()"
                 no-data-text="No country matching your search"
-                @change="refreshQuery()"
+                @change="refreshQuery('country')"
                 label="Country"
                 outlined
                 multiple
@@ -101,7 +101,7 @@
                 :disabled="loading"
                 hide-details
                 dense
-                @change="refreshQuery()"
+                @change="refreshQuery('field')"
               ></v-combobox>
             </v-col>
             <v-col cols="12" sm="6" md="4" lg="3">
@@ -124,8 +124,11 @@
         <v-skeleton-loader transition="scale-transition" type="table-tbody"></v-skeleton-loader>
       </template>
       <template v-slot:no-data>
-        <template v-if="!filters.length&&!search.length">
-          <div class="my-3"></div>There are no projects to display
+        <template v-if="!filtering">
+          <div class="my-3">There are no projects to display</div>
+        </template>
+        <template v-else>
+          No projects match your search.
           <br />
           <v-btn
             outlined
@@ -138,7 +141,6 @@
             <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
           </v-btn>
         </template>
-        <template v-else>No projects match your search.</template>
       </template>
       <template v-slot:item="{ item }">
         <tr
@@ -164,8 +166,6 @@
               small
               label
               light
-              v-for="(field, index) in item.field"
-              :key="index"
               class="ma-1"
             >{{zones.find(zone => item.zone === zone.value).text }}</v-chip>
           </td>
@@ -199,10 +199,9 @@
           <td colspan="8">
             <v-card class="ml-3 mt-3 pb-3" flat>
               <v-card-text class="pb-0">
-                <span>
-                  Created
-                  <timeago :datetime="+item.createdAt" :auto-update="60"></timeago>
-                </span>
+                <span class="overline">CREATION DATE :</span>
+                <br />
+                {{item.createdAt.split('T')[0]}} at {{item.createdAt.split('T')[1].split(':')[0]}}h{{item.createdAt.split('T')[1].split(':')[1]}} (GMT)
               </v-card-text>
               <v-card-text class="pb-0">
                 <span class="overline">CONTACT :</span>
@@ -225,22 +224,25 @@
                   <v-icon>mdi-email-edit</v-icon>&nbsp;
                   Email this project contact
                 </v-btn>
-                <v-btn
-                  v-if="item.url"
-                  text
-                  @click="all?$router.push({ path: 'projects/'+item.id, params: { id: item.id }}):$router.push({ path: 'projects/draft/'+item.id, params: { id: item.id }})"
-                >
-                  Open project url&nbsp;
-                  <v-icon>mdi-chevron-right</v-icon>
+                <v-btn v-if="item.url" color="accent">
+                  <a
+                    :href="item.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="text-decoration:none;color:white;"
+                  >
+                    Open project url&nbsp;
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </a>
                 </v-btn>
               </v-card-actions>
               <v-divider class="mt-3"></v-divider>
             </v-card>
           </td>
         </v-expand-transition>
+        <ContactDialog :open="contact" @close="contact=false" :id="item.id" />
       </template>
     </v-data-table>
-    <ContactDialog :open="contact" @close="contact=false" />
   </div>
 </template>
 <script>
@@ -261,8 +263,10 @@ export default {
       projects: [],
       expanded: [],
       showFilters: false,
+      filtering: false,
       projectId: "",
       limit: 10,
+      nextToken: false,
       filters: {
         field: [],
         type: "",
@@ -285,13 +289,13 @@ export default {
         {
           text: "Name",
           align: "left",
-          sortable: true,
+          sortable: false,
           value: "name"
         },
         {
           text: "Status",
           align: "left",
-          sortable: true,
+          sortable: false,
           value: "status"
         },
         {
@@ -329,8 +333,28 @@ export default {
   props: {},
   computed: {},
   methods: {
-    async refreshQuery() {
+    async refreshQuery(model) {
       console.log("REFRESH QUERY", listProjects);
+      // clean models from search string artefacts
+      if (model) {
+        console.log("CHANGE", model);
+        if (model === "field") {
+          this.filters.field = this.filters.field.filter(item =>
+            fields.includes(item)
+          );
+        }
+        if (model === "country") {
+          this.filters.country = this.filters.country.filter(item =>
+            this.filters.zone === "worldwide"
+              ? Object.keys(countries)
+                  .map(countryKey => countries[countryKey])
+                  .flat()
+                  .includes(item)
+              : countries[this.filters.zone].includes(item)
+          );
+        }
+      }
+
       const filter = {};
       if (
         this.filters.zone &&
@@ -356,7 +380,7 @@ export default {
         };
       }
       if (this.filters.country && this.filters.country.length) {
-        if (!filter.or) filter.or = [];
+        filter.or = [];
         this.filters.country.forEach(country => {
           filter.or.push({
             country: {
@@ -366,14 +390,28 @@ export default {
         });
       }
       if (this.filters.field && this.filters.field.length) {
-        if (!filter.or) filter.or = [];
-        this.filters.field.forEach(field => {
-          filter.or.push({
-            field: {
-              contains: field
-            }
+        if (!filter.or) {
+          filter.or = [];
+          this.filters.field.forEach(field => {
+            filter.or.push({
+              field: {
+                contains: field
+              }
+            });
           });
-        });
+        } else {
+          const fieldFilter = [];
+          this.filters.field.forEach(field => {
+            fieldFilter.push({
+              field: {
+                contains: field
+              }
+            });
+          });
+          filter.and = [{ or: filter.or }];
+          delete filter.or;
+          filter.and.push({ or: fieldFilter });
+        }
       }
       if (this.filters.verified) {
         filter.status = {
@@ -381,8 +419,18 @@ export default {
         };
       }
       if (this.search && this.search.length) {
-        if (!filter.or) filter.or = [];
-        filter.or.push(
+        /*    filter.multi_match = {
+          query: this.search,
+          fields: [
+            "title^3",
+            "description",
+            "field",
+            "contact_lastname^2",
+            "contact_entity^2",
+            "country"
+          ]
+        };  */
+        filter.search = [
           {
             name: {
               contains: this.search
@@ -413,18 +461,31 @@ export default {
               contains: this.search
             }
           }
-        );
+        ];
+        if (!filter.or && !filter.and) {
+          filter.or = [...filter.search];
+          delete filter.search;
+        } else {
+          if (filter.and) {
+            filter.and = [{ or: filter.search }, ...filter.and];
+          } else {
+            filter.and = [{ or: filter.search }, { or: filter.or }];
+          }
+          delete filter.or;
+          delete filter.search;
+        }
       }
       const limit = 0;
-      /* this.loading = true;
-      console.log(filter);
-      const options = Object.keys(filter).length
-        ? {
-            filter,
-            limit: this.options.itemsPerPage,
-            nextToken: this.nextToken
-          }
-        : { limit: this.limit, nextToken: this.nextToken };
+      this.loading = true;
+      console.log("FILTER L", Object.keys(filter).length);
+      const options = {};
+      if (Object.keys(filter).length) options.filter = filter;
+      if (this.nextToken) options.nextToken = this.nextToken;
+      Object.keys(filter).length
+        ? (this.filtering = true)
+        : (this.filtering = false);
+      options.limit = this.options.itemsPerPage;
+      console.log("options", options);
       const projects = await API.graphql(
         graphqlOperation(listProjects.loc.source.body, options)
       );
@@ -432,7 +493,7 @@ export default {
 
       this.projects = projects.data.listProjects.items;
       this.nextToken = projects.data.listProjects.nextToken;
-      this.loading = false; */
+      this.loading = false;
     },
     getFilters() {
       const filterObject = [];

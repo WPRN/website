@@ -34,7 +34,7 @@
         ref="message"
       ></v-textarea>
     </v-col>
-    <div class="text-center">
+    <div class="text-center white--text">
       <div class="mb-8">
         <small>
           This site is protected by reCAPTCHA and the Google
@@ -63,6 +63,8 @@
 </template>
 <script>
 import { alpha, pattern, email } from "~/assets/regex";
+import newContact from "~/graphql/mutations/contact.gql";
+import Amplify, { API, graphqlOperation } from "aws-amplify";
 export default {
   data() {
     return {
@@ -94,7 +96,7 @@ export default {
         value => !!value || "Required.",
         value =>
           value.length >= 5 ||
-          "The project name  must have at least 4 characters",
+          "Your message subjects must have at least 4 characters",
         value => value.length <= 40 || "Max 40 characters",
         value => {
           return true;
@@ -102,10 +104,10 @@ export default {
       ],
 
       messageRules: [
-        value => !!value || "A description is required.",
+        value => !!value || "A message is required.",
         value =>
           value.length >= 20 ||
-          "The description must have at least 20 characters",
+          "The message text must have at least 20 characters",
         value => value.length <= 500 || "Max 500 characters"
       ]
     };
@@ -116,10 +118,39 @@ export default {
         input
       ].replace(/(?:^|[\s'-])\S/g, a => a.toUpperCase()));
     },
-    onSubmit() {
-      this.sending = true;
+    async onSubmit() {
       this.$emit("WorkInProgressDialogToggle");
+      try {
+        this.sending = true;
+        let args = this.contact;
+        if (this.id) args.relatedProjectId = this.id;
+        Object.keys(this.contact).forEach(key => {
+          console.log(key);
+          console.log(this.contact[key]);
+          if (!args[key] || args[key].length === 0) delete args[key];
+        });
+        /*      const token = await this.$recaptcha.execute("login");
+        console.log(token); */
+        console.log(args);
+        const res = await API.graphql(graphqlOperation(newContact, args));
+        console.log(res);
+        if (res && !res.errors) {
+          console.log("YEAAAAAAH", res);
+          this.$emit("complete");
+        } else {
+          console.log("YEAAAAAAH");
+          this.error = true;
+        }
+        this.sending = false;
+      } catch (error) {
+        console.log(error);
+        this.error = true;
+        this.sending = false;
+      }
     }
+  },
+  props: {
+    id: String
   }
 };
 </script>

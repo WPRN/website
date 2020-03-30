@@ -19,7 +19,7 @@
         </v-tooltip>
         {{ new Date().getFullYear() }} - This website is maintained by
         <a
-          href="https://www.paris-iea.fr"
+          href="https://www.paris-iea.fr/en"
           target="_blank"
           rel="noopener noreferrer"
         >IAS Paris</a>.

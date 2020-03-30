@@ -27,101 +27,104 @@ export const contributors = [
     "Claire Jeandel",
     "Bertrand Pouvesle",
     "Cécile Durand",
-    "Solène de Bonis", */
-  "Antoine Cordelois"
+    "Solène de Bonis",
+  "Antoine Cordelois"*/
 ]
 export const board = [
-  /*   {
-      name: "Professor Xiaobo Zhang",
-      org: "Beijing University and IFPRI",
-      role: "Asia",
-      picture: "",
-      id: ""
-    }, */
   {
-    name: "Professor Saadi Lahlou",
-    org: "Paris Institute for Advanced Study and LSE",
-    role: "Global",
+    name: "Ama De Graft Aikins ",
+    org: "Accra / London",
+    role: " Social psychology, Health (Sub-Saharian Africa)",
+    url: "",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "Marc Fleurbaey",
+    org: "Princeton / Paris",
+    role: "Economics, philosophy, social justice, well-being",
+    url: "https://wws.princeton.edu/faculty-research/faculty/mfleurba",
+    picture: "https://wws.princeton.edu/sites/default/files/styles/detail-person/public/person/images/mfleurba_photo_1.jpg?itok=wfFXpw48",
+    id: ""
+  },
+  {
+    name: "Michal Linial",
+    org: "Jerusalem",
+    role: "Data science, computational biology",
+    url: "",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "Nadia Al Bagdadi",
+    org: "Budapest",
+    role: "Modern history (Eastern Europe)",
+    url: "",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "Nir Eyal",
+    org: "Harvard",
+    role: "Bioethics, public health (North America)",
+    url: "",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "Pascale Allotey",
+    org: "Geneva",
+    role: "Global public health",
+    url: "",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "Raouf Boucekkine",
+    org: "Marseille",
+    role: "Economics / mathematical modeling (North Africa)",
+    url: "",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "Paulo Saldiva",
+    org: "São Paulo",
+    role: "Medicine, pulmonary diseases (South America)",
+    url: "",
+    picture: "",
+    id: ""
+  },
+  {
+    name: "Saadi Lahlou",
+    org: "Paris / London",
+    role: "Psychological & behavioural science",
+    url: "",
     picture: "https://www.paris-iea.fr/images/equipe/1569/lahlousaadi.jpg",
     id: ""
-  },
-  /*   {
-      name: "Professor Raouf Boucekkine",
-      org: "Aix Marseille University",
-      role: "North-Africa",
-      picture: "",
-      id: ""
-    },
-    {
-      name: "Professor Ama de Graft-Aikins",
-      org: "University of Ghana and UCL",
-      role: "Sub-Saharian Africa",
-      picture: "",
-      id: ""
-    },
-    {
-      name: "Paolo Saldiva",
-      org: "Universidade de São Paulo",
-      role: "South America",
-      picture: "",
-      id: ""
-    }, */
-  {
-    name: "XXX",
-    org: "",
-    role: "North America",
+  }, {
+    name: "Uichol Kim",
+    org: "Incheon",
+    url: "",
+    role: "Business Administration (South Asia)",
     picture: "",
     id: ""
   },
   {
-    name: "XXX",
-    org: "",
-    role: "Oceania",
-    picture: "",
+    name: "Zhang Xiaobo",
+    org: "Beijing, ",
+    url: "https://en.nsd.pku.edu.cn/faculty/fulltime/z/239570.htm",
+    role: "Economics, Management (China)",
+    picture: "https://en.nsd.pku.edu.cn/images/content/2018-10/20181027213024139107.jpg",
     id: ""
-  },
-  /*   {
-      name: "Olivier Bouin, Director",
-      org: "Network of European Institutes for Advanced Study. Coordinator, International Panel on Social Progress",
-      role: "",
-      picture: "",
-      id: ""
-    },
-    {
-      name: "Professor Pascale Allotey",
-      org: "United Nations University International Institute for Global Health (UNU-IIGH)",
-      role: "",
-      picture: "",
-      id: ""
-    },
-    {
-      name: "Professor Vinh-kim Nguyen",
-      org: "Université de Montréal & Max-Planck Institute for Social Anthropology, Germany.",
-      role: "",
-      picture: "",
-      id: ""
-    },
-    {
-      name: "Professor Patrice Duran",
-      org: "Institut des sciences sociales du politique (CNRS/ENS Paris-Saclay)",
-      role: "",
-      picture: "",
-      id: ""
-    }, {
-      name: "Professor Marc Fleurbaey",
-      org: "Princeton University",
-      role: "",
-      picture: "",
-      id: ""
-    }, {
-      name: "Professor Jerôme Adda",
-      org: "Bocconi University",
-      role: "",
-      picture: "",
-  id: ""
-  }*/
+  }
 ]
 export const zones = [
+
+  {
+    text: "Worldwide / Intercontinental",
+    value: "worldwide"
+  },
   {
     text: "Asia",
     value: "asia"
@@ -149,10 +152,6 @@ export const zones = [
   {
     text: "Oceania",
     value: "oceania"
-  },
-  {
-    text: "Worldwide / Intercontinental",
-    value: "worldwide"
   }
 ]
 export const fields = [

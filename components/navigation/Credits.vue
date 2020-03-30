@@ -1,5 +1,11 @@
 <template>
-  <v-dialog v-model="credits" scrollable max-width="700px" light persistent>
+  <v-dialog
+    v-model="credits"
+    scrollable
+    max-width="700px"
+    light
+    @click:outside="$emit('closeCredits')"
+  >
     <v-card>
       <v-card-title>
         <v-avatar small class="mr-3" tile color="grey lighten-5" size="72">
@@ -55,13 +61,8 @@
           target="_blank"
           rel="noopener noreferrer"
         >Nuxt</a> and
-        <a href="http://vuetifyjs.com" target="_blank" rel="noopener noreferrer">Vuetify</a>. It is hosted on
-        <a
-          href="https://pages.github.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Github Pages</a>.
-        <br />The logo is based on an SVG file downloaded from
+        <a href="http://vuetifyjs.com" target="_blank" rel="noopener noreferrer">Vuetify</a>..
+        <br />The logo is based on a SVG file downloaded from
         <a
           href="https://thenounproject.com"
           target="_blank"
@@ -72,12 +73,12 @@
           target="_blank"
           rel="noopener noreferrer"
         >NTT</a>
-        <br />The backend (work in progress) is built around a serverless graphQL API made with
+        <br />The backend (work in progress) is built around a serverless/FAAS graphQL API made on top of
         <a
-          href="https://aws.amazon.com/amplify/"
+          href="https://aws.amazon.com/"
           target="_blank"
           rel="noopener noreferrer"
-        >AWS Amplify</a>. Its source code will not be released as it is a private service, but the API will be made public in the upcoming weeks.
+        >AWS ecosystem</a>. Its source code will not be released as it is based on a private service, but talks about making the API public in the upcoming weeks are in progress.
         <br />All the images used are free of rights (or distributed as such).
       </v-card-text>
       <v-card-text class="font-weight-light caption px-6 mb-3" style="max-height:250px">

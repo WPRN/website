@@ -16,7 +16,7 @@
       :drawer="drawer"
     />
     <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})">
+      <v-btn text @click="$router.push({path:'/'})" class="ml-0 pl-0">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
           <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>
@@ -78,6 +78,17 @@ export default {
   watch: {
     "$route.params"() {
       console.log("paarams", this.$route.params);
+    }
+  },
+  mounted() {
+    if (!zones.map(zone => zone.value).includes(this.$route.params.zone)) {
+      // not an allowed zone
+      this.$router.push({
+        path: "/worldwide",
+        params: {
+          zone: "worldwide"
+        }
+      });
     }
   }
 };

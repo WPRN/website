@@ -21,7 +21,6 @@ query list (
       date
       time
       createdAt
-      views
     }
     nextToken
   }

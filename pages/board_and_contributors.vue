@@ -43,10 +43,25 @@
     <v-content v-scroll="onScroll">
       <v-container id="content">
         <v-row align="center" justify="center">
-          <v-col cols="12" sm="12" md="8">
+          <v-col cols="1">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <nuxt-link to="/">
+                  <v-btn fab icon large v-on="on" class="mr-2">
+                    <v-icon large>mdi-arrow-left</v-icon>
+                  </v-btn>
+                </nuxt-link>
+              </template>
+              <span>Back to the main page</span>
+            </v-tooltip>
+          </v-col>
+          <v-col cols="10" sm="10" md="8">
             <h2
               class="display-2 font-weight-bold my-3 text-uppercase text-center"
             >Boards and contributors</h2>
+          </v-col>
+          <v-col cols="1"></v-col>
+          <v-col cols="12" sm="12" md="8">
             <v-responsive class="mx-auto mb-12" width="56">
               <v-divider class="mb-1"></v-divider>
               <v-divider></v-divider>
@@ -60,12 +75,24 @@
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-list-item-title>
-                    {{person.name}}
-                    <v-chip small label v-if="person.role" class="ml-2">{{person.role}} contact</v-chip>
+                    <template v-if="person.url">
+                      <a
+                        :href="person.url"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="text-decoration:none; color:white;"
+                      >
+                        <v-icon small>mdi-link</v-icon>
+                        &nbsp;
+                        {{person.name}}
+                      </a>
+                    </template>
+                    <template v-else>{{person.name}}</template>
+                    <v-chip small label v-if="person.role" class="ml-2">{{person.role}}</v-chip>
                   </v-list-item-title>
                   <v-list-item-subtitle>{{person.org}}</v-list-item-subtitle>
                 </v-list-item-content>
-                <v-list-item-icon>
+                <!--    <v-list-item-icon>
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
                       <v-btn icon color="primary" v-on="on">
@@ -74,7 +101,7 @@
                     </template>
                     <span>Contact {{person.name}}</span>
                   </v-tooltip>
-                </v-list-item-icon>
+                </v-list-item-icon>-->
               </v-list-item>
             </v-list>
 
