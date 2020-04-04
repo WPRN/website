@@ -1,69 +1,71 @@
 <template>
-  <v-form lazy-validation color="#333333">
-    <v-col cols="12">
-      <v-text-field
-        v-model="contact.name"
-        label="Name*"
-        @blur="capitalize('name')"
-        solo
-        :rules="contactNameRules"
-        ref="name"
-      ></v-text-field>
-    </v-col>
+  <div>
+    <v-form lazy-validation color="#333333">
+      <v-col cols="12">
+        <v-text-field
+          v-model="contact.name"
+          label="Name*"
+          @blur="capitalize('name')"
+          solo
+          :rules="contactNameRules"
+          ref="name"
+        ></v-text-field>
+      </v-col>
 
-    <v-col cols="12">
-      <v-text-field v-model="contact.email" label="Email*" solo :rules="emailRules" ref="email"></v-text-field>
-    </v-col>
+      <v-col cols="12">
+        <v-text-field v-model="contact.email" label="Email*" solo :rules="emailRules" ref="email"></v-text-field>
+      </v-col>
 
-    <v-col cols="12">
-      <v-text-field
-        v-model="contact.subject"
-        label="Subject*"
-        solo
-        :rules="subjectRules"
-        ref="subject"
-      ></v-text-field>
-    </v-col>
+      <v-col cols="12">
+        <v-text-field
+          v-model="contact.subject"
+          label="Subject*"
+          solo
+          :rules="subjectRules"
+          ref="subject"
+        ></v-text-field>
+      </v-col>
 
-    <v-col cols="12">
-      <v-textarea
-        v-model="contact.message"
-        label="Message*"
-        solo
-        :rules="messageRules"
-        ref="message"
-      ></v-textarea>
-    </v-col>
-    <div class="text-center white--text">
-      <div class="mb-8">
-        <small>
-          This site is protected by reCAPTCHA and the Google
-          <a
-            href="https://policies.google.com/privacy"
-          >Privacy Policy</a> and
-          <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-        </small>
-      </div>
-      <v-btn
-        color="success"
-        x-large
-        @click="onSubmit()"
-        :loading="sending"
-        :disabled="!(
+      <v-col cols="12">
+        <v-textarea
+          v-model="contact.message"
+          label="Message*"
+          solo
+          :rules="messageRules"
+          ref="message"
+        ></v-textarea>
+      </v-col>
+      <div class="text-center white--text">
+        <div class="mb-8">
+          <small>
+            This site is protected by reCAPTCHA and the Google
+            <a
+              href="https://policies.google.com/privacy"
+            >Privacy Policy</a> and
+            <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+          </small>
+        </div>
+        <v-btn
+          color="success"
+          x-large
+          @click="onSubmit()"
+          :loading="sending"
+          :disabled="!(
           $refs.name&&$refs.name.valid&&
           $refs.message&&$refs.message.valid&&
           $refs.subject&&$refs.subject.valid&&
           $refs.email&&$refs.email.valid)"
-      >
-        Submit&nbsp;
-        <v-icon>mdi-send</v-icon>
-      </v-btn>
-    </div>
-  </v-form>
+        >
+          Submit&nbsp;
+          <v-icon>mdi-send</v-icon>
+        </v-btn>
+      </div>
+    </v-form>
+  </div>
 </template>
 <script>
 import { alpha, pattern, email } from "~/assets/regex";
-import newContact from "~/graphql/mutations/contact.gql";
+import { newContact } from "../../../backend/src/graphql/mutations";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 export default {
   data() {
@@ -112,6 +114,10 @@ export default {
       ]
     };
   },
+  async mounted() {
+    /*    await this.$recaptcha.init();
+    console.log(this.$recaptcha); */
+  },
   methods: {
     capitalize(input) {
       return (this.contact[input] = this.contact[
@@ -119,20 +125,22 @@ export default {
       ].replace(/(?:^|[\s'-])\S/g, a => a.toUpperCase()));
     },
     async onSubmit() {
-      this.$emit("WorkInProgressDialogToggle");
+      /*  this.$emit("WorkInProgressDialogToggle"); */
       try {
         this.sending = true;
         let args = this.contact;
+        console.log(newContact);
+
         if (this.id) args.relatedProjectId = this.id;
         Object.keys(this.contact).forEach(key => {
-          console.log(key);
-          console.log(this.contact[key]);
           if (!args[key] || args[key].length === 0) delete args[key];
         });
-        /*      const token = await this.$recaptcha.execute("login");
-        console.log(token); */
+        args.recaptcha = await this.$recaptcha.getResponse();
+        console.log("ReCaptcha token:", args.recaptcha);
         console.log(args);
-        const res = await API.graphql(graphqlOperation(newContact, args));
+        const res = await API.graphql(
+          graphqlOperation(newContact, { input: args })
+        );
         console.log(res);
         if (res && !res.errors) {
           console.log("YEAAAAAAH", res);
@@ -142,10 +150,12 @@ export default {
           this.error = true;
         }
         this.sending = false;
+        await this.$recaptcha.reset();
       } catch (error) {
         console.log(error);
         this.error = true;
         this.sending = false;
+        await this.$recaptcha.reset();
       }
     }
   },

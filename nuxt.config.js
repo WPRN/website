@@ -1,5 +1,4 @@
 import colors from 'vuetify/es5/util/colors'
-import awsmobile from './assets/aws-exports.js'
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
     base: '/website/'
@@ -89,96 +88,15 @@ export default {
   */
   modules: [
     '@nuxtjs/recaptcha',
-    '@nuxtjs/apollo',
     '@nuxtjs/sitemap'
 
   ],
   recaptcha: {
     /* reCAPTCHA options */
     hideBadge: true, // Hide badge element (v3 & v2 via size=invisible)
-    siteKey: "6Ldjy- IUAAAAAOjIjm1DrJXemRFrfvAuxSlGuJ2m",    // Site key for requests
-    version: 3,     // Version
-  },
-  // Give apollo module options
-  apollo: {
-    tokenName: 'x-api-key', // optional, default: apollo-token
-    cookieAttributes: {
-      /**
-        * Define when the cookie will be removed. Value can be a Number
-        * which will be interpreted as days from time of creation or a
-        * Date instance. If omitted, the cookie becomes a session cookie.
-        */
-      expires: 7, // optional, default: 7 (days)
-
-      /**
-        * Define the path where the cookie is available. Defaults to '/'
-        */
-      path: '/' // optional
-    },
-    /**
-      * Define the domain where the cookie is available. Defaults to
-      * the domain of the page where the cookie was created.
-      */
-    //domain: 'example.com', // optional
-
-    /**
-      * A Boolean indicating if the cookie transmission requires a
-      * secure protocol (https). Defaults to false.
-      */
-    // secure: false,
-    // },
-    //includeNodeModules: true, // optional, default: false (this includes graphql-tag for node_modules folder)
-    authenticationType: 'x-api-key', // optional, default: 'Bearer'
-    // (Optional) Default 'apollo' definition
-    defaultOptions: {
-      // See 'apollo' definition
-      // For example: default query options
-      $query: {
-        loadingKey: 'loading',
-        fetchPolicy: 'cache-and-network',
-        errorPolicy: 'all',
-      },
-    },
-    // optional
-    //watchLoading: '~/plugins/apollo-watch-loading-handler.js',
-    // optional
-    // errorHandler: '~/apollo/customErrorHandler.js',
-    // required
-    auth: {
-      type: 'API_KEY',
-      apiKey: awsmobile.aws_appsync_apiKey
-    },
-    clientConfigs: {
-      default: {
-        // required
-        httpEndpoint: awsmobile.aws_appsync_graphqlEndpoint || "http://192.168.0.17:4000/graphql"
-        // optional
-        // override HTTP endpoint in browser only
-        //browserHttpEndpoint: '/graphql',
-        // optional
-        // See https://www.apollographql.com/docs/link/links/http.html#options
-        /*  httpLinkOptions: {
-           credentials: 'same-origin'
-         }, */
-        // You can use `wss` for secure connection (recommended in production)
-        // Use `null` to disable subscriptions
-        //wsEndpoint: 'ws://localhost:4000', // optional
-        // LocalStorage token
-        //tokenName: 'apollo-token', // optional
-        // Enable Automatic Query persisting with Apollo Engine
-        //persisting: false, // Optional
-        // Use websockets for everything (no HTTP)
-        // You need to pass a `wsEndpoint` for this to work
-        //websocketsOnly: false // Optional
-      },
-      /* test: {
-        httpEndpoint: 'http://localhost:5000',
-        wsEndpoint: 'ws://localhost:5000',
-        tokenName: 'apollo-token'
-      }, */
-      // alternative: user path to config which returns exact same config options
-      //test2: '~/plugins/my-alternative-apollo-config.js'
-    }
+    siteKey: "6Lc_xuUUAAAAALwowUq0cC0wFtFnZ2NCi3UH4i1j",    // Site key for requests
+    version: 2,     // Version
+    size: "invisible"
   },
   /*
   ** vuetify module configuration

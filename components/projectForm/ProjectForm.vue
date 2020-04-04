@@ -181,7 +181,8 @@
                   solo
                   v-model="project.zone"
                   :rules="requiredRules"
-                  clearable
+                  :clearable="project.zone!=='worldwide'"
+                  @click:clear="project.country=[]"
                   ref="zone"
                   :disabled="loading"
                 ></v-select>
@@ -452,7 +453,7 @@
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import { zones, countries, types, fields } from "~/assets/data";
 import { alpha, pattern, email } from "~/assets/regex";
-import newProject from "~/graphql/mutations/new.gql";
+import { newProject } from "../../../backend/src/graphql/mutations";
 export default {
   data() {
     return {
@@ -509,7 +510,11 @@ export default {
       ],
       requiredRules: [
         value => !!value || "This field is required.",
-        value => value === true || !!value.length || "This field is required."
+        value =>
+          value === undefined ||
+          value === true ||
+          !!value.length ||
+          "This field is required."
       ],
       showDateMenu: false,
       showTimeMenu: false,
@@ -570,10 +575,12 @@ export default {
           console.log(this.project[key]);
           if (!args[key] || args[key].length === 0) delete args[key];
         });
-        /*       const token = await this.$recaptcha.execute("login");
-        console.log(token); */
+        args.recaptcha = await this.$recaptcha.getResponse();
+
         console.log(args);
-        const res = await API.graphql(graphqlOperation(newProject, args));
+        const res = await API.graphql(
+          graphqlOperation(newProject, { input: args })
+        );
         console.log(res);
         if (res && !res.errors) {
           console.log("YEAAAAAAH", res);
@@ -583,10 +590,12 @@ export default {
           this.error = true;
         }
         this.loading = false;
+        await this.$recaptcha.reset();
       } catch (error) {
         console.log(error);
         this.error = true;
         this.loading = false;
+        await this.$recaptcha.reset();
       }
     }
   }

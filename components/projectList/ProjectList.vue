@@ -198,12 +198,12 @@
         <v-expand-transition>
           <td colspan="8">
             <v-card class="ml-3 mt-3 pb-3" flat>
-              <v-card-text class="pb-0">
+              <v-card-text class="pb-0 white--text">
                 <span class="overline">CREATION DATE :</span>
                 <br />
                 {{item.createdAt.split('T')[0]}} at {{item.createdAt.split('T')[1].split(':')[0]}}h{{item.createdAt.split('T')[1].split(':')[1]}} (GMT)
               </v-card-text>
-              <v-card-text class="pb-0">
+              <v-card-text class="pb-0 white--text">
                 <span class="overline">CONTACT :</span>
                 <br />
                 {{item.contact_firstname + ' ' + item.contact_lastname}}
@@ -213,7 +213,7 @@
               </v-card-text>
               <!--      <v-card-text>
               </v-card-text>-->
-              <v-card-text class="pb-0">
+              <v-card-text class="pb-0 white--text">
                 <span class="overline">Descripion</span>
                 <br />
                 {{item.description}}
@@ -246,7 +246,7 @@
   </div>
 </template>
 <script>
-import listProjects from "~/graphql/queries/list.gql";
+import * as queries from "../../../backend/src/graphql/queries";
 import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
 import ContactDialog from "~/components/contact/ContactDialog";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
@@ -334,7 +334,7 @@ export default {
   computed: {},
   methods: {
     async refreshQuery(model) {
-      console.log("REFRESH QUERY", listProjects);
+      console.log("REFRESH QUERY");
       // clean models from search string artefacts
       if (model) {
         console.log("CHANGE", model);
@@ -487,9 +487,9 @@ export default {
       options.limit = this.options.itemsPerPage;
       console.log("options", options);
       const projects = await API.graphql(
-        graphqlOperation(listProjects.loc.source.body, options)
+        graphqlOperation(queries.listProjects, options)
       );
-      console.log(projects);
+      console.log(projects.data);
 
       this.projects = projects.data.listProjects.items;
       this.nextToken = projects.data.listProjects.nextToken;

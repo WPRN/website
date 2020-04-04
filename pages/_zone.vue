@@ -21,7 +21,7 @@
           <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>
       </v-btn>
-      <h2 class="headline black--text">
+      <h2 class="black--text pr-12" :class="$vuetify.breakpoint.smAndDown?'title':'headline'">
         <template
           v-if="$route.params.zone === 'worldwide'"
         >{{zones.find(zone => $route.params.zone === zone.value).text }} Projects</template>

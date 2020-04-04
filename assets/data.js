@@ -31,14 +31,14 @@ export const contributors = [
   "Antoine Cordelois"*/
 ]
 export const board = [
-  {
-    name: "Ama De Graft Aikins ",
-    org: "Accra / London",
-    role: " Social psychology, Health (Sub-Saharian Africa)",
-    url: "",
-    picture: "",
-    id: ""
-  },
+  /*   {
+      name: "Ama De Graft Aikins ",
+      org: "Accra / London",
+      role: " Social psychology, Health (Sub-Saharian Africa)",
+      url: "",
+      picture: "",
+      id: ""
+    }, */
   {
     name: "Marc Fleurbaey",
     org: "Princeton / Paris",
@@ -63,22 +63,22 @@ export const board = [
     picture: "",
     id: ""
   },
-  {
-    name: "Nir Eyal",
-    org: "Harvard",
-    role: "Bioethics, public health (North America)",
-    url: "",
-    picture: "",
-    id: ""
-  },
-  {
+  /*   {
+      name: "Nir Eyal",
+      org: "Harvard",
+      role: "Bioethics, public health (North America)",
+      url: "",
+      picture: "",
+      id: ""
+    }, */
+  /* {
     name: "Pascale Allotey",
     org: "Geneva",
     role: "Global public health",
     url: "",
     picture: "",
     id: ""
-  },
+  }, */
   {
     name: "Raouf Boucekkine",
     org: "Marseille",
@@ -87,14 +87,14 @@ export const board = [
     picture: "",
     id: ""
   },
-  {
-    name: "Paulo Saldiva",
-    org: "São Paulo",
-    role: "Medicine, pulmonary diseases (South America)",
-    url: "",
-    picture: "",
-    id: ""
-  },
+  /*   {
+      name: "Paulo Saldiva",
+      org: "São Paulo",
+      role: "Medicine, pulmonary diseases (South America)",
+      url: "",
+      picture: "",
+      id: ""
+    }, */
   {
     name: "Saadi Lahlou",
     org: "Paris / London",
@@ -102,14 +102,14 @@ export const board = [
     url: "",
     picture: "https://www.paris-iea.fr/images/equipe/1569/lahlousaadi.jpg",
     id: ""
-  }, {
+  },/*  {
     name: "Uichol Kim",
     org: "Incheon",
     url: "",
     role: "Business Administration (South Asia)",
     picture: "",
     id: ""
-  },
+  }, */
   {
     name: "Zhang Xiaobo",
     org: "Beijing, ",

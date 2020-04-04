@@ -89,7 +89,7 @@
       <section id="about-us">
         <div class="py-12"></div>
         <v-container class="text-center">
-          <h2 class="display-2 font-weight-bold mb-3">ABOUT US</h2>
+          <h2 class="display-2 font-weight-bold mb-3">ABOUT WPRN</h2>
 
           <v-responsive class="mx-auto mb-8" width="56">
             <v-divider class="mb-1"></v-divider>
@@ -150,7 +150,7 @@
                     @click="$vuetify.goTo('#featured', {offset:100})"
                     class="blue--text"
                     style="cursor:pointer;text-decoration:underline"
-                  >multicentric projects</span>.
+                  >featured multicentric projects</span>.
                 </v-card-text>
               </v-card>
             </v-col>
@@ -401,7 +401,7 @@ export default {
       stats: [
         ["XX", "Contributors"],
         ["XXX+", "Projects"],
-        ["5", "Continental Zones"],
+        ["5", "Continents"],
         ["34", "Disciplines"]
       ]
     };

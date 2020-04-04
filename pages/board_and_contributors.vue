@@ -67,7 +67,7 @@
               <v-divider></v-divider>
             </v-responsive>
             <v-list two-line subheader align="left">
-              <v-subheader>Scientific Advisory Board</v-subheader>
+              <v-subheader>Advisory Board</v-subheader>
               <v-list-item v-for="(person, index) in board" :key="index">
                 <v-list-item-avatar>
                   <img v-if="person.picture" :src="person.picture" alt="alt" />

@@ -1,8 +1,15 @@
 <template>
-  <v-dialog v-model="open" persistent max-width="600" light @click:outside="$emit('close')">
-    <v-row justify="center">
+  <v-dialog
+    v-model="open"
+    persistent
+    max-width="600"
+    light
+    @click:outside="$emit('close')"
+    style="background-color:#333333;"
+  >
+    <v-row justify="center" fluid>
       <v-col col="12">
-        <v-card color="#333333" class="pa-6">
+        <v-card flat color="#333333" class="pa-6">
           <v-card-title class="white--text">
             {{ complete?'THANK YOU FOR YOUR INPUT':'GET IN TOUCH WITH A PROJECT CONTACT'}}
             <v-spacer></v-spacer>

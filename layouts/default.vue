@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <nuxt />
+    <recaptcha @error="onError" @success="onSuccess" @expired="onExpired" />
     <v-footer class="justify-center" color="#292929" height="100">
       <div class="title font-weight-light grey--text text--lighten-1 text-center">
         <v-tooltip top>
@@ -48,6 +49,18 @@ export default {
       showCredits: false
     };
   },
-  components: { Credits }
+  components: { Credits },
+  methods: {
+    onError(error) {
+      console.log("Error happened:", error);
+    },
+
+    onSuccess(token) {
+      console.log("Succeeded:", token);
+    },
+    onExpired() {
+      console.log("Expired");
+    }
+  }
 };
 </script>

@@ -16,7 +16,6 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@nuxtjs/apollo": "^4.0.0-rc19",
     "@nuxtjs/recaptcha": "^0.6.2",
     "@nuxtjs/sitemap": "^2.1.0",
     "aws-amplify": "^2.2.6",
