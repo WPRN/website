@@ -21,7 +21,7 @@
     <v-list nav>
       <v-list-item-group active-class="text--accent-4">
         <v-list-item @click="$emit('about')">
-          <v-list-item-title>About us</v-list-item-title>
+          <v-list-item-title>About WPRN</v-list-item-title>
         </v-list-item>
         <v-list-item @click="$emit('featured')">
           <v-list-item-title>Featured projects</v-list-item-title>
@@ -35,7 +35,7 @@
         <v-divider></v-divider>
         <v-list-item class="mt-3 px-0">
           <v-list-item-title>
-            <v-btn color="success" @click="$emit('list')" block large>Browse projects</v-btn>
+            <v-btn color="white" outlined @click="$emit('list')" block large>Browse projects</v-btn>
           </v-list-item-title>
         </v-list-item>
       </v-list-item-group>

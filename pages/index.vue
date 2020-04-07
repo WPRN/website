@@ -64,13 +64,22 @@
           >
             <v-container fill-height>
               <v-row align="center" class="white--text mx-auto" justify="center">
-                <v-col class="white--text text-center" cols="12" tag="h1">
+                <v-col
+                  class="white--text d-flex justify-center flex-column align-center"
+                  cols="12"
+                  tag="h1"
+                >
                   <span
                     :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
                     class="font-weight-black"
                   >
                     <Logo />
                   </span>
+                  <br />
+                  <div
+                    style="background-color:#333333; border-radius:10px; max-width:600px; "
+                    class="pa-2 title d-flex justify-center text-center"
+                  >ASSESSING SOCIETAL AND HUMAN IMPACT OF COVID-19</div>
                 </v-col>
                 <v-btn
                   large
@@ -96,22 +105,30 @@
             <v-divider></v-divider>
           </v-responsive>
           <v-row>
-            <v-col cols="12" sm="12" md="6" lg="5" offset-lg="1">
+            <v-col cols="12">
               <v-responsive
-                :class="{ 'text-right' : $vuetify.breakpoint.mdAndUp } "
                 class="d-flex align-center mx-auto title font-weight-light mb-8"
                 max-width="720"
                 height="100%"
               >
-                <b>The World Pandemic Research Network (WPRN)</b> consolidates a global list of research projects, surveys and initiatives about the social and economic impacts of the Covid-19 pandemic.
-                <br />WPRN is a non-profit academic resource that does not substitute to any ongoing research. It enables researchers and stakeholders to be aware of what initiatives are taken and to get in touch.
-                <br />There is no dependence, no legal nor economic binding. Each participant remains completely independent for action and publication.
-                <br />WPRN is GDPR compliant and will not publish, give or sell email addresses.
+                <b>The World Pandemic Research Network (WPRN)</b> maintains a searchable global directory of
+                research projects, surveys and initiatives about the societal and human impacts of the Covid-19
+                pandemic.
+                <br />WPRN facilitates project awareness, collaboration, follow-up and reference by other projects.
+                Registered projects get a WPRN-ID number and a WPRN webpage which signals their project,
+                enables other researchers and stakeholders to get in touch and to follow project updates or
+                publications.
+                <br />Registration is free. WPRN is a non-profit academic resource. There is no dependence, no legal
+                nor economic binding. Each contributor remains completely independent for action and
+                publication.
+                <br />WPRN is GDPR compliant and will not publish, give or sell e-mail addresses to third parties.
                 <br />
-                <nuxt-link to="/board_and_contributors">Board and contributors</nuxt-link>
+                <nuxt-link to="/board_and_contributors">Advisory Board</nuxt-link>,
+                <nuxt-link to="/board_and_contributors#refs">Referents</nuxt-link>&nbsp;and
+                <nuxt-link to="/board_and_contributors#institutions">Contributors' Institutions</nuxt-link>
               </v-responsive>
             </v-col>
-            <v-col cols="12" sm="12" md="6" lg="5">
+            <v-col cols="12" sm="12" md="6">
               <v-card class="pa-6 mb-6" flat>
                 <div>
                   <v-avatar color="primary" size="88">
@@ -122,7 +139,7 @@
                   class="justify-center font-weight-black text-uppercase"
                 >Directory of projects</v-card-title>
                 <v-card-text class="subtitle-1" color="black">
-                  We host and publish a
+                  WPRN publishes a
                   <nuxt-link
                     to="/worldwide"
                     class="blue--text"
@@ -132,9 +149,14 @@
                     class="blue--text"
                     style="cursor:pointer;text-decoration:underline"
                   >register your project</span>
-                  if you feel that you can contribute.
+                  if you feel that you can contribute. Your project will automatically be added, attributed a WPRN-
+                  ID number and become searcheable in the Directory as soon as you confirm your e-mail address.
+                  <br />A WPRN webpage will be generated for your project once your project is validated by one of our expert
+                  Referents.
                 </v-card-text>
               </v-card>
+            </v-col>
+            <v-col cols="12" sm="12" md="6">
               <v-card class="pa-6" flat>
                 <div>
                   <v-avatar color="primary" size="88">
@@ -145,12 +167,17 @@
                   class="justify-center font-weight-black text-uppercase"
                 >Hub for collaboration</v-card-title>
                 <v-card-text class="subtitle-1" color="black">
-                  <nuxt-link to="/worldwide" class="blue--text">Our project list</nuxt-link>&nbsp;serves as an hub for collaboration and resource sharing. Use the “contact” button for initial get-in-touch with project contact-points. WPRN also houses
+                  <nuxt-link to="/worldwide" class="blue--text">Search the database</nuxt-link>&nbsp;and get in touch to set up
+                  collaboration, find or share resources, get updates. Use the “contact” buttons for initial get-in-touch
+                  with project contact-points.
+                  <br />WPRN highlights
                   <span
                     @click="$vuetify.goTo('#featured', {offset:100})"
                     class="blue--text"
                     style="cursor:pointer;text-decoration:underline"
-                  >featured multicentric projects</span>.
+                  >Research Projects, Open Calls, Resources and Initiatives</span> that have been flagged by our
+                  Referents among the registered projects.
+                  .
                 </v-card-text>
               </v-card>
             </v-col>
@@ -204,19 +231,18 @@
               <h3 class="font-weight-black mb-4 text-uppercase">Economic impact of Covid-19.</h3>
 
               <div class="title font-weight-light mb-5">
-                This stems from the pioneer research led by Professor Xiaobo Zhang on the economic impact of the
-                epidemic on Chinese SMEs. Their team has agreed to share their questionnaire, which is currently
-                translated and surveys launched around the world. Here are the specifications to participate. Please
-                <span
-                  @click="$vuetify.goTo('#contact', {offset:100})"
-                  class="blue--text"
-                  style="cursor:pointer;text-decoration:underline"
-                >click here</span>
-                if you are interested in
-                contributing.
+                This multicentric survey on businesses stems from the pioneer research led by Professor Xiaobo
+                Zhang on the economic impact of the epidemic on Chinese SMEs (WPRN ID XXXXX).
+                Their team has agreed to share their questionnaire, which is currently translated and surveys
+                launched around the world.
               </div>
 
-              <v-btn class="ml-n4 font-weight-black" text>More info</v-btn>
+              <v-btn class="ml-n4 font-weight-black" text>
+                <nuxt-link
+                  to="/economical_impact_of_covid"
+                  style="color:white; text-decoration:none;"
+                >More</nuxt-link>
+              </v-btn>
             </v-col>
             <v-col cols="12" md="4">
               <v-img
@@ -227,24 +253,25 @@
                 lazy-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QBoRXhpZgAASUkqAAgAAAADABIBAwABAAAAAQAAADEBAgAQAAAAMgAAAGmHBAABAAAAQgAAAAAAAABTaG90d2VsbCAwLjI4LjQAAgACoAkAAQAAAIACAAADoAkAAQAAAOABAAAAAAAA/+EJ9Gh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNC40LjAtRXhpdjIiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSI2NDAiIGV4aWY6UGl4ZWxZRGltZW5zaW9uPSI0ODAiIHRpZmY6SW1hZ2VXaWR0aD0iNjQwIiB0aWZmOkltYWdlSGVpZ2h0PSI0ODAiIHRpZmY6T3JpZW50YXRpb249IjEiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgADgATAwEiAAIRAQMRAf/EABcAAQEBAQAAAAAAAAAAAAAAAAgABQb/xAAlEAABAwMDAwUAAAAAAAAAAAABAgMEAAUGERJBIjFhBwgUIXH/xAAWAQEBAQAAAAAAAAAAAAAAAAAFBgf/xAAlEQAABAUCBwAAAAAAAAAAAAAAAQIDBAUGESExQRQiUnGRktH/2gAMAwEAAhEDEQA/AGtKfhk9DhI81y2MZnaslduTcSdFluwZSoryWHAotqHCtKy5N4Und0nT9ouX3H7v6KZdds2tlyD0abLdeMdZIK1OkqKFp02lIPOuvPejWIxTzhNJPJ6CvmFPMwMKqMeTypyq2pFudr57BuJfZ2jtVQ5c92eQQFfHkW2E68j6UtsLSknwCqqneBmnQXkhnRT6kd3leivg/9k="
               ></v-img>
 
-              <h3
-                class="font-weight-black mb-4 text-uppercase"
-              >Resource Directory of Positive Future Programmes.</h3>
+              <h3 class="font-weight-black mb-4 text-uppercase">Just One Giant Lab</h3>
 
               <div class="title font-weight-light mb-5">
-                Positive Futures aims, in collaboration with major forecast and scientific institutes, at creating and
-                disseminating visions of positive, liveable futures, to show that another world is possible and counteract
-                mainstream dystopic visions. It includes a data repository of inspiring positive cases, reports and
-                discoveries that could contribute to make the world better. This will include cases of positive initiatives
-                taken by governments, organizations, or citizens to address the consequences of the current pandemic.
-                <span
-                  @click="$vuetify.goTo('#contact', {offset:100})"
-                  class="blue--text"
-                  style="cursor:pointer;text-decoration:underline"
-                >Write here</span> if you have a pointer to an inspiring resource.
+                Just One Giant Lab (JOGL) is the first research and innovation laboratory operating as a
+                distributed, open and massive mobilisation platform for collaborative task solving. JOGL helps
+                humanity to sync onto fixing our most urgent and important problems using Open Science,
+                Responsible Innovation and Continuous Learning. JOGL partners with academic labs,
+                companies, startups, foundations, NGOs and public services to create participatory research
+                programs for understanding and solving Health, Environmental, Social and Humanitarian issues.
               </div>
 
-              <v-btn class="ml-n4 font-weight-black" text>More info</v-btn>
+              <v-btn class="ml-n4 font-weight-black" text>
+                <a
+                  href="https://jogl.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="color:white; text-decoration:none;"
+                >More</a>
+              </v-btn>
             </v-col>
             <v-col cols="12" md="4">
               <v-img
@@ -260,19 +287,18 @@
               >Psychological and Social impact of Covid-19.</h3>
 
               <div class="title font-weight-light mb-5">
-                Confinement has direct impacts on the morale and behaviour (domestic violence, suicides, divorces,
-                etc.) which in turn impact social services, courts, etc. How do people cope, positively or not, with the
-                stressful situation of lockdown? This survey intends to monitor these effects in various countries and
-                collect the factors that can help mitigating the damage. Please
-                <span
-                  @click="$vuetify.goTo('#contact', {offset:100})"
-                  class="blue--text"
-                  style="cursor:pointer;text-decoration:underline"
-                >click here</span> if you are interested in
-                contributing.
+                How do people cope, positively or not, with the stressful situation of lockdown and confinement?
+                A multidisciplinary team provides a set of questions that assess the sources and forms of stress
+                and coping, as well as the levers for communication and influence to support people during the
+                crisis. The questions can be added to any survey to assess the resilience of respondents.
               </div>
 
-              <v-btn class="ml-n4 font-weight-black" text>More info</v-btn>
+              <v-btn class="ml-n4 font-weight-black" text>
+                <nuxt-link
+                  to="/psychological_and_social_impact_of_covid"
+                  style="color:white; text-decoration:none;"
+                >More</nuxt-link>
+              </v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -369,10 +395,10 @@
         </v-btn>
       </v-fab-transition>
     </v-content>
-    <WorkInProgressDialog
+    <!--     <WorkInProgressDialog
       :dialog="WorkInProgressDialogToggle"
       @close="WorkInProgressDialogToggle=false"
-    />
+    />-->
   </div>
 </template>
 
@@ -385,7 +411,7 @@ import WorldMap from "~/components/mainPage/WorldMap"; */
 import ProjectPostedWindow from "~/components/projectForm/ProjectPostedWindow";
 import ContactPostedWindow from "~/components/contact/ContactPostedWindow";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
-import WorkInProgressDialog from "~/components/navigation/WorkInProgressDialog";
+/* import WorkInProgressDialog from "~/components/navigation/WorkInProgressDialog"; */
 import Logo from "~/components/navigation/Logo";
 import { zones } from "~/assets/data";
 export default {
@@ -394,14 +420,14 @@ export default {
       zones,
       drawer: false,
       contactOnly: false,
-      WorkInProgressDialogToggle: true,
+      /*   WorkInProgressDialogToggle: true, */
       valid: false,
       step: 1,
       offsetTop: 0,
       stats: [
-        ["XX", "Contributors"],
-        ["XXX+", "Projects"],
-        ["5", "Continents"],
+        ["XXX", "Projects"],
+        ["XX", "Contributing Institutions"],
+        ["XX", "Referents"],
         ["34", "Disciplines"]
       ]
     };
@@ -414,7 +440,7 @@ export default {
     NavigationDrawer,
     ContactPostedWindow,
     ProjectPostedWindow,
-    WorkInProgressDialog,
+    /*  WorkInProgressDialog, */
     Logo
   },
 

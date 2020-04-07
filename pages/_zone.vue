@@ -25,7 +25,9 @@
         <template
           v-if="$route.params.zone === 'worldwide'"
         >{{zones.find(zone => $route.params.zone === zone.value).text }} Projects</template>
-        <template v-else>Projects in {{zones.find(zone => $route.params.zone === zone.value).text }}</template>
+        <template
+          v-else
+        >Search results for Projects in {{zones.find(zone => $route.params.zone === zone.value).text }}</template>
       </h2>
 
       <v-spacer></v-spacer>

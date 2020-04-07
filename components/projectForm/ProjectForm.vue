@@ -393,24 +393,19 @@
                   <div class="subtitle-1">{{project.contact_email}}</div>
                 </v-col>
               </v-row>
-              <v-checkbox :rules="requiredRules" v-model="agreed" ref="agreedRef">
-                <template v-slot:label>
-                  <div>
-                    I confirm that I provided exact information and agree with the
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on }">
-                        <a
-                          target="_blank"
-                          href="http://vuetifyjs.com"
-                          @click.stop
-                          v-on="on"
-                        >terms & conditions</a>
-                      </template>
-                      Opens in new window to WPRN terms & conditions
-                    </v-tooltip>&nbsp;of WPRN
-                  </div>
-                </template>
-              </v-checkbox>
+              <span>
+                <v-checkbox :rules="requiredRules" v-model="agreed" ref="agreedRef"></v-checkbox>I certify that the information given in this form is true, complete and accurate, and that I agree to
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <nuxt-link
+                      to="/privacy_policy"
+                      target="_blank"
+                      v-on="on"
+                    >the privacy policy of WPRN</nuxt-link>
+                  </template>
+                  Opens in new window to WPRN privacy policy
+                </v-tooltip>
+              </span>
             </v-card-text>
           </v-form>
         </v-card>
@@ -566,10 +561,10 @@ export default {
       ].replace(/(?:^|[\s'-])\S/g, a => a.toUpperCase()));
     },
     async onSubmit() {
-      try {
-        /*         this.$emit("WorkInProgressDialogToggle"); */
-        this.loading = true;
-        let args = this.project;
+      /*  try { */
+      this.$emit("WorkInProgressDialogToggle");
+      this.loading = true;
+      /* let args = this.project;
         Object.keys(this.project).forEach(key => {
           console.log(key);
           console.log(this.project[key]);
@@ -590,13 +585,13 @@ export default {
           this.error = true;
         }
         this.loading = false;
-        await this.$recaptcha.reset();
-      } catch (error) {
+        await this.$recaptcha.reset(); */
+      /*   } catch (error) {
         console.log(error);
         this.error = true;
         this.loading = false;
         await this.$recaptcha.reset();
-      }
+      } */
     }
   }
 };

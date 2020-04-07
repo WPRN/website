@@ -31,92 +31,102 @@ export const contributors = [
   "Antoine Cordelois"*/
 ]
 export const board = [
-  /*   {
-      name: "Ama De Graft Aikins ",
-      org: "Accra / London",
-      role: " Social psychology, Health (Sub-Saharian Africa)",
-      url: "",
-      picture: "",
-      id: ""
-    }, */
+  {
+    name: "Nadia Al-Bagdadi",
+    position: "Professor, Central European University ; Director, Central European University - Institute for Advanced Study; Chair, Network of European Institutes for Advanced Study",
+    role: "History, Gender, Eastern Europe, Middle East",
+    url: "https://people.ceu.edu/nadia_al-bagdadi",
+    picture: "https://people.ceu.edu/sites/people.ceu.hu/files/styles/panopoly_image_full/public/profile/portrait/1530/albagdaditn.jpg?itok=ARhyOK5j",
+  },
+  {
+    name: "Pascale Allotey",
+    position: "Director, International Institute for Global Health, United Nations University",
+    role: "Public Health, Epidemiology, Anthropology, South East Asia",
+    url: "https://iigh.unu.edu/about/the-team/pascale-allotey#overview",
+    picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf6v2Cj-8VMTnsMGPgxxuIjJihKbkVDyjrx8Z2Xy8uYCZV0AV-&s",
+    id: ""
+  },
+  {
+    name: "Raouf Boucekkine",
+    position: "Professor, Aix Marseille University ; DIrector, Mediterranean Institute for Advanced Research",
+    role: "Economics, Mathematics, Modelling, Maghreb",
+    url: "https://www.amse-aixmarseille.fr/fr/membres/boucekkine",
+    picture: "https://perso.uclouvain.be/raouf.boucekkine/boucekkine.jpg",
+    id: ""
+  },
+  {
+    name: "Olivier Bouin",
+    position: "Director, RFIEA Foundation, President, European Alliance for Social Sciences and Humanities, Coordinator, International Panel on Social Progress",
+    role: "Economics, Science Policy, Europe",
+    url: "http://rfiea.fr/en/node/131",
+    picture: "http://rfiea.fr/sites/default/files/imagecache/portrait-grand/staff/OPB-3.jpg",
+    id: ""
+  },
+  {
+    name: "Ama de Graft Aikins",
+    position: "Britsih Academy Global Professor, University College London - Institute for Advanced Study",
+    role: "Social Psychology, Public Health, Africa",
+    url: "https://www.ucl.ac.uk/institute-of-advanced-studies/people/professor-ama-de-graft-aikins",
+    picture: "https://www.ucl.ac.uk/institute-of-advanced-studies/sites/institute-of-advanced-studies/files/styles/large_image/public/professor_ama_de_graft_aikins.jpg?itok=fgF-AMTh",
+  },
   {
     name: "Marc Fleurbaey",
-    org: "Princeton / Paris",
-    role: "Economics, philosophy, social justice, well-being",
+    position: "Professor, Princeton University",
+    role: "Economics, Philosophy, Social Justice, Well-Being, North America",
     url: "https://wws.princeton.edu/faculty-research/faculty/mfleurba",
     picture: "https://wws.princeton.edu/sites/default/files/styles/detail-person/public/person/images/mfleurba_photo_1.jpg?itok=wfFXpw48",
     id: ""
   },
   {
-    name: "Michal Linial",
-    org: "Jerusalem",
-    role: "Data science, computational biology",
-    url: "",
-    picture: "",
+    name: "Uichol Kim",
+    position: "Professor, Inha University; Director, Paris Institute for Advanced Study ",
+    role: "Business Administration, Cultural Psychology, Korea",
+    url: "https://asiansocialpsych.org/professor%20uichol%20kim",
+    picture: "https://i1.rgstatic.net/ii/profile.image/278811380862977-1443485221214_Q512/Uichol_Kim.jpg",
     id: ""
   },
-  {
-    name: "Nadia Al Bagdadi",
-    org: "Budapest",
-    role: "Modern history (Eastern Europe)",
-    url: "",
-    picture: "",
-    id: ""
-  },
-  /*   {
-      name: "Nir Eyal",
-      org: "Harvard",
-      role: "Bioethics, public health (North America)",
-      url: "",
-      picture: "",
-      id: ""
-    }, */
-  /* {
-    name: "Pascale Allotey",
-    org: "Geneva",
-    role: "Global public health",
-    url: "",
-    picture: "",
-    id: ""
-  }, */
-  {
-    name: "Raouf Boucekkine",
-    org: "Marseille",
-    role: "Economics / mathematical modeling (North Africa)",
-    url: "",
-    picture: "",
-    id: ""
-  },
-  /*   {
-      name: "Paulo Saldiva",
-      org: "São Paulo",
-      role: "Medicine, pulmonary diseases (South America)",
-      url: "",
-      picture: "",
-      id: ""
-    }, */
   {
     name: "Saadi Lahlou",
-    org: "Paris / London",
-    role: "Psychological & behavioural science",
-    url: "",
+    position: "Professor, London School of Economics; Director, Paris Institute for Advanced Study ",
+    role: "Behaviours, Social Psychology, Resilience, Europe ",
+    url: "https://www.paris-iea.fr/fr/liste-des-residents/saadi-lahlou-1625",
     picture: "https://www.paris-iea.fr/images/equipe/1569/lahlousaadi.jpg",
-    id: ""
-  },/*  {
-    name: "Uichol Kim",
-    org: "Incheon",
-    url: "",
-    role: "Business Administration (South Asia)",
-    picture: "",
-    id: ""
-  }, */
+
+  },
   {
-    name: "Zhang Xiaobo",
-    org: "Beijing, ",
-    url: "https://en.nsd.pku.edu.cn/faculty/fulltime/z/239570.htm",
-    role: "Economics, Management (China)",
-    picture: "https://en.nsd.pku.edu.cn/images/content/2018-10/20181027213024139107.jpg",
-    id: ""
+    name: "Vivian Lin",
+    position: "Professor, Hong Kong University",
+    role: "Public Health, Health Policy and Planning, Western Pacific",
+    url: " https://www.med.hku.hk/about-the-faculty/faculty-leadership/professor-vivian-lin",
+    picture: "https://www.med.hku.hk/f/page/3314/6734/98p137/Vivian-Lin-135x189.png",
+
+  },
+  {
+    name: "Michal Linial",
+    position: "Professor, Hebrew University of Jerusalem; Director, Paris Institute for Advanced Study ",
+    role: "Computational Biology, Bioinformatics, Neuroscience",
+    url: "https://www.bio.huji.ac.il/en/content/linial-michal",
+    picture: "https://www.bio.huji.ac.il/sites/science.huji.ac.il/files/michal-linial-picture1.jpg"
+  },
+  {
+    name: "Nora Lustig",
+    position: "Professor, Tulane University ; Senior Fellow, Brookings Institution ; Senior Fellow, Inter-American Dialogue",
+    role: "Economics, Inequality, Social Policy, Latin America",
+    url: "http://www.noralustig.org",
+    picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Z1GOxH72-U612SP7gdO36sQyqx0X0VOFtu_rWFpLuU81EDiE&s",
+  },
+  {
+    name: "Guilherme Ary Plonski",
+    position: "Professor, Universidad di Sao Paulo ; DIrector, Universidad di Sao Paulo  – Istitudos di Studios Avanzados ; Chair Coordinator, UBIAS",
+    role: "Technology, Innovation, Latin America",
+    url: "http://www.iea.usp.br/en/persons/researchers/guilherme-plonski",
+    picture: "http://www.iea.usp.br/imagens/guilherme-ary-plonski-1",
+  }, {
+    name: "Xiaobo Zhang",
+    position: "Professor, Beijing University; Senior Fellow, IFPRI-Washington DC ",
+    role: "Economics, Firms, Innovation, China ",
+    url: "https://www.cgdev.org/expert/xiaobo-zhang",
+    picture: "https://www.cgdev.org/sites/default/files/styles/expert-new/public/media/images/experts/photo/zhang660.jpg?itok=wJWAWPx1",
   }
 ]
 export const zones = [

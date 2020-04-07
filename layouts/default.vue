@@ -7,6 +7,41 @@
         <v-tooltip top>
           <template v-slot:activator="{ on }">
             <v-btn text icon v-on="on">
+              <a href="https://github.com/WPRN/website" target="_blank" rel="noopener noreferrer">
+                <v-icon color="white">mdi-github</v-icon>
+              </a>
+            </v-btn>
+          </template>
+          <span>See this website source code and contribute</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn text icon v-on="on">
+              <a href="https://twitter.com/WPRN_org" target="_blank" rel="noopener noreferrer">
+                <v-icon color="white">mdi-twitter</v-icon>
+              </a>
+            </v-btn>
+          </template>
+          <span>Follow us on Twitter</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn text icon v-on="on">
+              <a
+                href="https://www.facebook.com/WPRN.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <v-icon color="white">mdi-facebook</v-icon>
+              </a>
+            </v-btn>
+          </template>
+          <span>Visit our Facebook page</span>
+        </v-tooltip>
+        <br />
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn text icon v-on="on">
               <a
                 href="http://creativecommons.org/licenses/by-sa/4.0/"
                 target="_blank"
@@ -26,16 +61,6 @@
         >IAS Paris</a>.
         <a style="text-decoration:underline;" @click="showCredits=true">See full credits</a>
         <Credits :credits="showCredits" @closeCredits="showCredits=false" />
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn text icon v-on="on">
-              <a href="https://github.com/WPRN/website" target="_blank" rel="noopener noreferrer">
-                <v-icon color="white">mdi-github</v-icon>
-              </a>
-            </v-btn>
-          </template>
-          <span>See this website source code and contribute</span>
-        </v-tooltip>
       </div>
     </v-footer>
   </v-app>

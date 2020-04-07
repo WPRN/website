@@ -214,7 +214,7 @@
               <!--      <v-card-text>
               </v-card-text>-->
               <v-card-text class="pb-0 white--text">
-                <span class="overline">Descripion</span>
+                <span class="overline">Description</span>
                 <br />
                 {{item.description}}
               </v-card-text>
@@ -234,6 +234,14 @@
                     Open project url&nbsp;
                     <v-icon>mdi-chevron-right</v-icon>
                   </a>
+                </v-btn>
+                <v-btn
+                  v-else
+                  color="accent"
+                  @click="$store.commit('setProject', item);$router.push({path:'/item/'+ item.pubId})"
+                >
+                  Open project page&nbsp;
+                  <v-icon>mdi-chevron-right</v-icon>
                 </v-btn>
               </v-card-actions>
               <v-divider class="mt-3"></v-divider>
@@ -260,7 +268,7 @@ export default {
       fields,
       contact: false,
       loading: false,
-      projects: [],
+      projects: this.$store.state.projects,
       expanded: [],
       showFilters: false,
       filtering: false,
@@ -278,12 +286,12 @@ export default {
       },
       total: 0,
       options: {
-        itemsPerPage: 10,
+        itemsPerPage: 100,
         page: 1,
         sortBy: [],
         sortDesc: [true]
       },
-      limit: 10,
+      limit: 100,
       search: "",
       headers: [
         {
@@ -491,6 +499,7 @@ export default {
       );
       console.log(projects.data);
 
+      this.$store.commit("setProjects", projects.data.listProjects.items);
       this.projects = projects.data.listProjects.items;
       this.nextToken = projects.data.listProjects.nextToken;
       this.loading = false;

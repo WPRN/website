@@ -6,7 +6,7 @@
     :class="{'pr-0':$vuetify.breakpoint.smAndDown}"
   >
     <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})">
+      <v-btn text @click="$router.push({path:'/'})" class="ml-0 pl-0">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
           <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>
@@ -46,7 +46,7 @@
           <v-col cols="1">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
-                <nuxt-link to="/">
+                <nuxt-link to="/#about">
                   <v-btn fab icon large v-on="on" class="mr-2">
                     <v-icon large>mdi-arrow-left</v-icon>
                   </v-btn>
@@ -66,7 +66,7 @@
               <v-divider class="mb-1"></v-divider>
               <v-divider></v-divider>
             </v-responsive>
-            <v-list two-line subheader align="left">
+            <v-list three-line subheader align="left">
               <v-subheader>Advisory Board</v-subheader>
               <v-list-item v-for="(person, index) in board" :key="index">
                 <v-list-item-avatar>
@@ -90,7 +90,7 @@
                     <template v-else>{{person.name}}</template>
                     <v-chip small label v-if="person.role" class="ml-2">{{person.role}}</v-chip>
                   </v-list-item-title>
-                  <v-list-item-subtitle>{{person.org}}</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{person.position}}</v-list-item-subtitle>
                 </v-list-item-content>
                 <!--    <v-list-item-icon>
                   <v-tooltip bottom>
@@ -104,10 +104,34 @@
                 </v-list-item-icon>-->
               </v-list-item>
             </v-list>
-
             <v-divider></v-divider>
-            <v-list subheader align="left">
-              <v-subheader>Contributors</v-subheader>
+            <v-list subheader align="left" id="refs">
+              <v-subheader>Referents</v-subheader>
+              <v-alert type="info" align="left" color="gray lighten-4">
+                WPRN Referents
+                Referents are experts in an area or discipline who accepted to screen projects in their domain of
+                expertise.
+                <br />They weed out spam and irrelevant projects, validate projects that will get a web-page, flag
+                those which they consider most interesting. Referents work pro bono, by invitation of the Advisory
+                Board.
+                <br />Referents receive on a regular basis a list of newly updated projects to validate. Meanwhile uploaded
+                projects are visible and searchable on WPRN, “pending validation”. Please be patient.
+              </v-alert>
+
+              <v-list-item class="ml-3" v-for="(person, index) in referents" :key="index">
+                <v-list-item-content>
+                  <v-list-item-title>{{person}}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+            <v-divider></v-divider>
+            <v-list subheader align="left" id="institutions">
+              <v-subheader>Contributors' Institutions</v-subheader>
+              <v-alert
+                type="info"
+                align="left"
+                color="gray lighten-4"
+              >The list of the WPRN Contributors' Institutions will be made available shortly</v-alert>
               <v-list-item class="ml-3" v-for="(person, index) in contributors" :key="index">
                 <v-list-item-content>
                   <v-list-item-title>{{person}}</v-list-item-title>
@@ -143,6 +167,7 @@ export default {
     return {
       board,
       contributors,
+      referents: [],
       drawer: false,
       offsetTop: 0
     };
