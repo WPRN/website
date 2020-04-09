@@ -1,27 +1,64 @@
 export const types = [
-  "Ongoing research project",
-  "Survey",
-  "Action Research",
-  "Call for Research Proposals",
-  "Call for collaboration",
-  { divider: true },
-  "Grassroot action",
-  "Case study",
+  { header: 'RESEARCH PROJECT' },
+  "Quantitative survey",
+  "Qualitative analysis",
+  "Case Study",
   "Questionnaire",
-  "Data set",
+  "Simulation / Modeling",
+  "Dataset, Data Mining",
+  "Action Research",
   { divider: true },
-  "Conference / Webinar",
+  { header: 'COLLABORATIVE ACTION' },
+  "Call for Research Proposals",
+  "Call for Collaboration",
+  "Citizen/Participatory Science",
+  "Grassroot Action",
+  { divider: true },
+  { header: 'DISSEMINATION' },
+  "Scientific Paper",
   "Report",
-  "Scientific paper",
-  "Policy document",
+  "Policy Document",
   "Regulation",
-  { divider: true },
+  "Conference / Webinar",
   "Video",
   "Blog",
   "Press article",
   { divider: true },
-  "Other resource"]
+  "Other Ressource"
+]
 
+export const thematics = [
+  "Aging, Demography",
+  "Agriculture, Alimentation",
+  "Big Data, Artificial Intelligence",
+  "Cities, Mobility, Logistics",
+  "Consumption and Production Patterns",
+  "Culture and The Arts",
+  "Democracy, Civil Society, Governance",
+  "Education",
+  "Environmental change, Ecology",
+  "Firms, Markets, Finance",
+  "Gender",
+  "Human Behaviours, Social Relations",
+  "Inequalities, Poverty, Development",
+  "Innovation, R & D",
+  "International Relations and Co - operation",
+  "Leisure, Tourism",
+  "Migrations and Diasporas",
+  "Public Discourse, Rhetorics, Communication",
+  "Public Health",
+  "Public Policy, Evaluation, Impact",
+  "Risks, Crisis Management",
+  "Religions and Worldviews",
+  "Violence, Criminality, Security",
+  "Work, Welfare, Social protection"
+]
+
+export const state = [
+  "Planned project",
+  "Ongoing project",
+  "Completed project"
+]
 export const contributors = [
   /*   "Simon Luck",
     "Claire Jeandel",
@@ -39,7 +76,7 @@ export const board = [
     picture: "https://people.ceu.edu/sites/people.ceu.hu/files/styles/panopoly_image_full/public/profile/portrait/1530/albagdaditn.jpg?itok=ARhyOK5j",
   },
   {
-    name: "Pascale Allotey",
+    name: "Pascale Allotey (TBC)",
     position: "Director, International Institute for Global Health, United Nations University",
     role: "Public Health, Epidemiology, Anthropology, South East Asia",
     url: "https://iigh.unu.edu/about/the-team/pascale-allotey#overview",
@@ -64,7 +101,7 @@ export const board = [
   },
   {
     name: "Ama de Graft Aikins",
-    position: "Britsih Academy Global Professor, University College London - Institute for Advanced Study",
+    position: "Britsih Academy Global Professor, University College London - Institute for Advanced Study, University of Ghana",
     role: "Social Psychology, Public Health, Africa",
     url: "https://www.ucl.ac.uk/institute-of-advanced-studies/people/professor-ama-de-graft-aikins",
     picture: "https://www.ucl.ac.uk/institute-of-advanced-studies/sites/institute-of-advanced-studies/files/styles/large_image/public/professor_ama_de_graft_aikins.jpg?itok=fgF-AMTh",
@@ -89,7 +126,7 @@ export const board = [
     name: "Saadi Lahlou",
     position: "Professor, London School of Economics; Director, Paris Institute for Advanced Study ",
     role: "Behaviours, Social Psychology, Resilience, Europe ",
-    url: "https://www.paris-iea.fr/fr/liste-des-residents/saadi-lahlou-1625",
+    url: "https://en.wikipedia.org/wiki/Saadi_Lahlou",
     picture: "https://www.paris-iea.fr/images/equipe/1569/lahlousaadi.jpg",
 
   },
@@ -103,21 +140,28 @@ export const board = [
   },
   {
     name: "Michal Linial",
-    position: "Professor, Hebrew University of Jerusalem; Director, Paris Institute for Advanced Study ",
+    position: "Professor, Hebrew University of Jerusalem;",
     role: "Computational Biology, Bioinformatics, Neuroscience",
-    url: "https://www.bio.huji.ac.il/en/content/linial-michal",
+    url: "https://en.wikipedia.org/wiki/Michal_Linial",
     picture: "https://www.bio.huji.ac.il/sites/science.huji.ac.il/files/michal-linial-picture1.jpg"
   },
   {
     name: "Nora Lustig",
     position: "Professor, Tulane University ; Senior Fellow, Brookings Institution ; Senior Fellow, Inter-American Dialogue",
     role: "Economics, Inequality, Social Policy, Latin America",
-    url: "http://www.noralustig.org",
+    url: "https://en.wikipedia.org/wiki/Nora_Lustig",
     picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Z1GOxH72-U612SP7gdO36sQyqx0X0VOFtu_rWFpLuU81EDiE&s",
   },
   {
+    name: "Helga Nowotny",
+    position: "Professor, ETH Zurich ; founder & former President, European Research Council",
+    role: "Science & Technology Studies, Sociology, Law",
+    url: " https://en.wikipedia.org/wiki/Helga_Nowotny",
+    picture: " https://www.csh.ac.at/wp-content/uploads/2017/06/Helga-Nowotny-500x500.jpg"
+  },
+  {
     name: "Guilherme Ary Plonski",
-    position: "Professor, Universidad di Sao Paulo ; DIrector, Universidad di Sao Paulo  – Istitudos di Studios Avanzados ; Chair Coordinator, UBIAS",
+    position: "Professor, Universidad di Sao Paulo ; Director, Universidad di Sao Paulo  – Istitudos di Studios Avanzados ; Chair Coordinator, UBIAS",
     role: "Technology, Innovation, Latin America",
     url: "http://www.iea.usp.br/en/persons/researchers/guilherme-plonski",
     picture: "http://www.iea.usp.br/imagens/guilherme-ary-plonski-1",
@@ -125,7 +169,7 @@ export const board = [
     name: "Xiaobo Zhang",
     position: "Professor, Beijing University; Senior Fellow, IFPRI-Washington DC ",
     role: "Economics, Firms, Innovation, China ",
-    url: "https://www.cgdev.org/expert/xiaobo-zhang",
+    url: "https://en.nsd.pku.edu.cn/faculty/fulltime/z/239570.htm",
     picture: "https://www.cgdev.org/sites/default/files/styles/expert-new/public/media/images/experts/photo/zhang660.jpg?itok=wJWAWPx1",
   }
 ]
@@ -191,7 +235,7 @@ export const fields = [
   "Systems Science incl.Simulation",
   "Urban Planning and Architecture",
   "Other social sciences and humanities",
-  { header: ' Other disciplines' },
+  { header: ' Other sciences' },
   { divider: true },
   "Biology",
   "Chemistry & Physics",

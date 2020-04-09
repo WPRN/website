@@ -58,7 +58,7 @@
           <v-col cols="10" sm="10" md="8">
             <h2
               class="display-2 font-weight-bold my-3 text-uppercase text-center"
-            >Boards and contributors</h2>
+            >Board, Referents, Contributors</h2>
           </v-col>
           <v-col cols="1"></v-col>
           <v-col cols="12" sm="12" md="8">
@@ -67,7 +67,7 @@
               <v-divider></v-divider>
             </v-responsive>
             <v-list three-line subheader align="left">
-              <v-subheader>Advisory Board</v-subheader>
+              <v-subheader class="overline white--text">Advisory Board</v-subheader>
               <v-list-item v-for="(person, index) in board" :key="index">
                 <v-list-item-avatar>
                   <img v-if="person.picture" :src="person.picture" alt="alt" />
@@ -106,16 +106,18 @@
             </v-list>
             <v-divider></v-divider>
             <v-list subheader align="left" id="refs">
-              <v-subheader>Referents</v-subheader>
+              <v-subheader class="overline white--text">Referents</v-subheader>
               <v-alert type="info" align="left" color="gray lighten-4">
-                WPRN Referents
-                Referents are experts in an area or discipline who accepted to screen projects in their domain of
-                expertise.
-                <br />They weed out spam and irrelevant projects, validate projects that will get a web-page, flag
-                those which they consider most interesting. Referents work pro bono, by invitation of the Advisory
-                Board.
-                <br />Referents receive on a regular basis a list of newly updated projects to validate. Meanwhile uploaded
-                projects are visible and searchable on WPRN, “pending validation”. Please be patient.
+                WPRN Referents are senior scientists who accepted, by invitation of the Advisory Board, to screen projects in
+                their domain of expertise (discipline, theme, type of projects).
+                <br />They weed out spam and irrelevant
+                projects, validate projects that will get a web-page, flag those which they consider most interesting and
+                innovative.
+                <br />Referents receive on a regular basis an updated list of newly uploaded projects to validate. Uploaded
+                projects are visible and searchable on WPRN with the mention “pending validation” until validated by
+                our referents. Please be patient.
+                <br />Referents work
+                <em>pro bono</em> -as everyone else in WPRN.
               </v-alert>
 
               <v-list-item class="ml-3" v-for="(person, index) in referents" :key="index">
@@ -126,7 +128,7 @@
             </v-list>
             <v-divider></v-divider>
             <v-list subheader align="left" id="institutions">
-              <v-subheader>Contributors' Institutions</v-subheader>
+              <v-subheader class="overline white--text">Contributors' Institutions</v-subheader>
               <v-alert
                 type="info"
                 align="left"

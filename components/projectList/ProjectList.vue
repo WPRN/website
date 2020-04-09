@@ -16,7 +16,7 @@
         <v-card flat>
           <v-row no-gutters>
             <v-col cols="12" class="mt-6">
-              <v-card-title :class="{'pl-0':$vuetify.breakpoint.smAndDown}">
+              <v-card-title class="pl-0">
                 <span class="overline">
                   <v-icon>mdi-filter-variant</v-icon>Filters
                 </span>
@@ -25,18 +25,37 @@
                   small
                   v-if="filtering"
                   color="white"
-                  @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false};refreshQuery();$router.push({path: '/worldwide'})"
+                  @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false, thematics:[], state:'', featured:false};refreshQuery();$router.push({path: '/worldwide'})"
                   class="ml-3"
                 >
                   <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-checkbox
-                  v-model="filters.verified"
-                  label="Show verified projects only"
-                  class="mr-3"
-                  @change="refreshQuery()"
-                ></v-checkbox>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                    <v-checkbox
+                      v-model="filters.verified"
+                      label="Verified"
+                      class="mr-3"
+                      @change="refreshQuery()"
+                      v-on="on"
+                      :disabled="filters.featured"
+                    ></v-checkbox>
+                  </template>
+                  <span>{{filters.featured?'Featured projects are always verified':'Select to display only projects verified by a WPRN Referent'}}</span>
+                </v-tooltip>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                    <v-checkbox
+                      v-model="filters.featured"
+                      label="Featured"
+                      class="mr-3"
+                      @change="updateCheckBox()"
+                      v-on="on"
+                    ></v-checkbox>
+                  </template>
+                  <span>Select to display only projects featured by the WPRN community</span>
+                </v-tooltip>
                 <v-text-field
                   class="pt-0 mr-4"
                   v-model.trim="search"
@@ -59,6 +78,20 @@
             </v-col>
           </v-row>
           <v-row :class="{'pr-8':$vuetify.breakpoint.mdAndUp}">
+            <v-col cols="12" sm="6" md="4" lg="3">
+              <v-select
+                :items="state"
+                label="Project status"
+                outlined
+                v-model="filters.state"
+                ref="state"
+                :disabled="loading"
+                hide-details
+                dense
+                @click:clear="refreshQuery()"
+                @change="refreshQuery()"
+              ></v-select>
+            </v-col>
             <v-col cols="12" sm="6" md="4" lg="3">
               <v-select
                 :items="zones"
@@ -105,6 +138,21 @@
               ></v-combobox>
             </v-col>
             <v-col cols="12" sm="6" md="4" lg="3">
+              <v-combobox
+                :items="thematics"
+                label="Project Thematic(s)"
+                outlined
+                v-model="filters.thematics"
+                clearable
+                multiple
+                ref="thematics"
+                :disabled="loading"
+                hide-details
+                dense
+                @change="refreshQuery()"
+              ></v-combobox>
+            </v-col>
+            <v-col cols="12" sm="6" md="4" lg="3">
               <v-select
                 :items="types"
                 label="Project type"
@@ -113,6 +161,7 @@
                 ref="type"
                 hide-details
                 dense
+                multiple
                 @change="refreshQuery()"
                 clearable
               ></v-select>
@@ -135,7 +184,7 @@
             small
             v-if="search&&search.length||filters.field&&filters.field.length||filters.type&&filters.type.length||((filters.zone&&filters.zone.length)||filters.zone!=='worldwide')"
             color="white"
-            @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false};refreshQuery();$router.push({path: '/worldwide', query:undefined})"
+            @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false, thematics:[], state:'', featured:false};refreshQuery();$router.push({path: '/worldwide', query:undefined})"
             class="ma-3"
           >
             <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
@@ -156,18 +205,29 @@
               class="ma-1"
               small
               light
+              label
               v-for="(field, index) in item.field"
               :key="index"
             >{{field}}</v-chip>
           </td>
-          <td>{{item.type}}</td>
+          <td>
+            <v-chip
+              class="ma-1"
+              small
+              light
+              v-for="(type, index) in item.type"
+              :key="index"
+            >{{type}}</v-chip>
+          </td>
           <td>
             <v-chip
               small
               label
               light
               class="ma-1"
-            >{{zones.find(zone => item.zone === zone.value).text }}</v-chip>
+              v-for="(zone, index) in item.zone"
+              :key="index"
+            >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
           </td>
           <td>
             <v-chip
@@ -211,8 +271,19 @@
                   v-if="item.contact_entity"
                 >({{item.contact_entity}})</template>
               </v-card-text>
-              <!--      <v-card-text>
-              </v-card-text>-->
+              <v-card-text class="pb-0 white--text">
+                <span class="overline">Thematics</span>
+                <br />
+                <span v-for="(thematic, index) in item.thematics" :key="index">
+                  <template v-if="index>0">,&nbsp;</template>
+                  {{thematic}}
+                </span>
+              </v-card-text>
+              <v-card-text class="pb-0 white--text">
+                <span class="overline">Status</span>
+                <br />
+                {{item.state}}
+              </v-card-text>
               <v-card-text class="pb-0 white--text">
                 <span class="overline">Description</span>
                 <br />
@@ -248,7 +319,7 @@
             </v-card>
           </td>
         </v-expand-transition>
-        <ContactDialog :open="contact" @close="contact=false" :id="item.id" />
+        <ContactDialog :open="contact" @close="contact=false" :id="item.pubId" />
       </template>
     </v-data-table>
   </div>
@@ -258,7 +329,14 @@ import * as queries from "../../../backend/src/graphql/queries";
 import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
 import ContactDialog from "~/components/contact/ContactDialog";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
-import { zones, countries, types, fields } from "~/assets/data";
+import {
+  zones,
+  countries,
+  types,
+  fields,
+  state,
+  thematics
+} from "~/assets/data";
 export default {
   data() {
     return {
@@ -266,6 +344,8 @@ export default {
       countries,
       types,
       fields,
+      state,
+      thematics,
       contact: false,
       loading: false,
       projects: this.$store.state.projects,
@@ -277,12 +357,15 @@ export default {
       nextToken: false,
       filters: {
         field: [],
-        type: "",
+        type: [],
+        thematics: [],
+        status: "",
         zone:
           zones.find(zone => this.$route.params.zone === zone.value).value ||
           "worldwide",
         country: [],
-        verified: false
+        verified: false,
+        featured: false
       },
       total: 0,
       options: {
@@ -341,11 +424,15 @@ export default {
   props: {},
   computed: {},
   methods: {
+    updateCheckBox() {
+      if (this.filters.featured) {
+        this.filters.verified = true;
+      }
+      this.refreshQuery();
+    },
     async refreshQuery(model) {
-      console.log("REFRESH QUERY");
       // clean models from search string artefacts
       if (model) {
-        console.log("CHANGE", model);
         if (model === "field") {
           this.filters.field = this.filters.field.filter(item =>
             fields.includes(item)
@@ -362,16 +449,77 @@ export default {
           );
         }
       }
-
-      const filter = {};
+      let filter = {};
+      if (this.filters.featured) {
+        filter = {
+          and: [
+            {
+              or: [
+                {
+                  status: {
+                    eq: "FEATURED"
+                  }
+                }
+              ]
+            }
+          ]
+        };
+      } else {
+        if (this.filters.verified) {
+          filter = {
+            and: [
+              {
+                or: [
+                  {
+                    status: {
+                      eq: "FEATURED"
+                    }
+                  },
+                  {
+                    status: {
+                      eq: "VERIFIED"
+                    }
+                  }
+                ]
+              }
+            ]
+          };
+        } else {
+          filter = {
+            and: [
+              {
+                or: [
+                  {
+                    status: {
+                      eq: "FEATURED"
+                    }
+                  },
+                  {
+                    status: {
+                      eq: "VERIFIED"
+                    }
+                  },
+                  {
+                    status: {
+                      eq: "PUBLISHED"
+                    }
+                  }
+                ]
+              }
+            ]
+          };
+        }
+      }
       if (
         this.filters.zone &&
         this.filters.zone.length &&
-        this.filters.zone !== "worldwide"
+        !this.filters.zone.includes("worldwide")
       ) {
-        filter.zone = {
-          eq: this.filters.zone
-        };
+        filter.and.push({
+          zone: {
+            eq: this.filters.zone
+          }
+        });
       } else {
         if (!this.filters.zone) {
           this.filters.zone = "worldwide";
@@ -383,48 +531,55 @@ export default {
         query: this.$router.query
       });
       if (this.filters.type && this.filters.type.length) {
-        filter.type = {
-          eq: this.filters.type
-        };
-      }
-      if (this.filters.country && this.filters.country.length) {
-        filter.or = [];
-        this.filters.country.forEach(country => {
-          filter.or.push({
-            country: {
-              contains: country
+        let typeFilter = { or: [] };
+        this.filters.type.forEach(item => {
+          typeFilter.or.push({
+            type: {
+              contains: item
             }
           });
+          filter.and.push(typeFilter);
+        });
+      }
+      if (this.filters.country && this.filters.country.length) {
+        let countryFilter = { or: [] };
+        this.filters.country.forEach(item => {
+          countryFilter.or.push({
+            country: {
+              contains: item
+            }
+          });
+          filter.and.push(countryFilter);
         });
       }
       if (this.filters.field && this.filters.field.length) {
-        if (!filter.or) {
-          filter.or = [];
-          this.filters.field.forEach(field => {
-            filter.or.push({
-              field: {
-                contains: field
-              }
-            });
+        let fieldFilter = { or: [] };
+        this.filters.field.forEach(item => {
+          fieldFilter.or.push({
+            field: {
+              contains: item
+            }
           });
-        } else {
-          const fieldFilter = [];
-          this.filters.field.forEach(field => {
-            fieldFilter.push({
-              field: {
-                contains: field
-              }
-            });
-          });
-          filter.and = [{ or: filter.or }];
-          delete filter.or;
-          filter.and.push({ or: fieldFilter });
-        }
+          filter.and.push(fieldFilter);
+        });
       }
-      if (this.filters.verified) {
-        filter.status = {
-          eq: "verified"
-        };
+      if (this.filters.state && this.filters.state.length) {
+        filter.and.push({
+          state: {
+            eq: this.filters.state
+          }
+        });
+      }
+      if (this.filters.thematics && this.filters.thematics.length) {
+        let thematicsFilter = { or: [] };
+        this.filters.thematics.forEach(item => {
+          thematicsFilter.or.push({
+            thematics: {
+              contains: item
+            }
+          });
+          filter.and.push(thematicsFilter);
+        });
       }
       if (this.search && this.search.length) {
         /*    filter.multi_match = {
@@ -438,54 +593,45 @@ export default {
             "country"
           ]
         };  */
-        filter.search = [
-          {
-            name: {
-              contains: this.search
+        const search = {
+          or: [
+            {
+              name: {
+                contains: this.search
+              }
+            },
+            {
+              field: {
+                contains: this.search
+              }
+            },
+            {
+              contact_lastname: {
+                contains: this.search
+              }
+            },
+            {
+              contact_entity: {
+                contains: this.search
+              }
+            },
+            {
+              country: {
+                contains: this.search
+              }
+            },
+            {
+              description: {
+                contains: this.search
+              }
             }
-          },
-          {
-            field: {
-              contains: this.search
-            }
-          },
-          {
-            contact_lastname: {
-              contains: this.search
-            }
-          },
-          {
-            contact_entity: {
-              contains: this.search
-            }
-          },
-          {
-            country: {
-              contains: this.search
-            }
-          },
-          {
-            description: {
-              contains: this.search
-            }
-          }
-        ];
-        if (!filter.or && !filter.and) {
-          filter.or = [...filter.search];
-          delete filter.search;
-        } else {
-          if (filter.and) {
-            filter.and = [{ or: filter.search }, ...filter.and];
-          } else {
-            filter.and = [{ or: filter.search }, { or: filter.or }];
-          }
-          delete filter.or;
-          delete filter.search;
-        }
+          ]
+        };
+        filter.and.push(search);
       }
       const limit = 0;
       this.loading = true;
-      console.log("FILTER L", Object.keys(filter).length);
+
       const options = {};
       if (Object.keys(filter).length) options.filter = filter;
       if (this.nextToken) options.nextToken = this.nextToken;
@@ -493,11 +639,10 @@ export default {
         ? (this.filtering = true)
         : (this.filtering = false);
       options.limit = this.options.itemsPerPage;
-      console.log("options", options);
+
       const projects = await API.graphql(
         graphqlOperation(queries.listProjects, options)
       );
-      console.log(projects.data);
 
       this.$store.commit("setProjects", projects.data.listProjects.items);
       this.projects = projects.data.listProjects.items;
@@ -505,12 +650,12 @@ export default {
       this.loading = false;
     },
     getFilters() {
-      const filterObject = [];
+      const filterObject = []; /*
       if (this.filters.type) filterObject.push("type");
       if (this.filters.zone) filterObject.push("zone");
       if (this.filters.field) filterObject.push("field");
       if (this.filters.country) filterObject.push("country");
-      if (this.filters.verified) filterObject.push("verified");
+      if (this.filters.verified) filterObject.push("verified"); */
       return JSON.stringify(filterObject);
     }
   },
@@ -520,7 +665,6 @@ export default {
   },
   watch: {
     "$route.query"() {
-      console.log("QUERY", this.$route.query);
       if (this.$route.query.search) {
         this.search = JSON.parse(this.$route.query.search);
       } else {

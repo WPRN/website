@@ -37,7 +37,7 @@
     />
     <v-content>
       <v-row>
-        <v-col cols="12" v-if="ready">
+        <v-col cols="12" v-if="ready&&project">
           <v-fade-transition mode="out-in">
             <v-card flat min-height="320px" class="pa-4 text-left" v-show="ready">
               <v-card class="ml-3 mt-3 pb-3" flat>
@@ -62,7 +62,11 @@
                     <br />
                     {{project.createdAt.split('T')[0]}} at {{project.createdAt.split('T')[1].split(':')[0]}}h{{project.createdAt.split('T')[1].split(':')[1]}} (GMT)
                   </v-col>
-                  <v-col cols="12" md="6" class="subtitle-1"></v-col>
+                  <v-col cols="12" md="6" class="subtitle-1">
+                    <span class="overline">STATUS :</span>
+                    <br />
+                    {{project.state}}
+                  </v-col>
                   <v-col cols="12" class="subtitle-1">
                     <span class="overline">{{project.field.length >1?'DISCIPLINES':'DISCIPLINE'}} :</span>
                     <br />
@@ -86,6 +90,20 @@
                       :key="index"
                     >{{type}}</v-chip>
                   </v-col>
+                  <v-col cols="12" class="subtitle-1" v-if="project.thematics">
+                    <span
+                      class="overline"
+                    >{{project.thematics&&project.thematics.length >1?'THEMATICS':'THEMATIC'}} :</span>
+                    <br />
+                    <v-chip
+                      class="ma-1"
+                      small
+                      label
+                      light
+                      v-for="(thematic, index) in project.thematics"
+                      :key="index"
+                    >{{thematic}}</v-chip>
+                  </v-col>
                   <v-col cols="12" class="subtitle-1">
                     <span class="overline">{{project.zone.length >1?'CONTINENTS':'CONTINENT'}} :</span>
                     <br />
@@ -94,10 +112,12 @@
                       class="ma-1"
                       v-for="(zone, index) in project.zone"
                       :key="index"
-                    >{{zone}}</v-chip>
+                    >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
                   </v-col>
                   <v-col cols="12" class="subtitle-1">
-                    <span class="overline">{{project.country.length >1?'COUNTRIES':'COUNTRY'}} :</span>
+                    <span
+                      class="overline"
+                    >{{project.country&&project.country.length >1?'COUNTRIES':'COUNTRY'}} :</span>
                     <br />
                     <v-chip
                       small
@@ -142,7 +162,7 @@
               </v-card>
             </v-card>
           </v-fade-transition>
-          <ContactDialog :open="contact" @close="contact=false" :id="project.id" />
+          <ContactDialog :open="contact" @close="contact=false" :id="project.pubId" />
         </v-col>
       </v-row>
     </v-content>
@@ -154,12 +174,21 @@ import * as queries from "../../../backend/src/graphql/queries";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
 import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
 import ContactDialog from "~/components/contact/ContactDialog";
+import {
+  zones,
+  countries,
+  types,
+  fields,
+  state,
+  thematics
+} from "~/assets/data";
 export default {
   data() {
     return {
+      zones,
       drawer: false,
       ready: false,
-      project: this.$store.state.project,
+      project: this.$store.state.project || false,
       contact: false
     };
   },
@@ -169,43 +198,35 @@ export default {
     NavigationDrawer
   },
   async mounted() {
-    console.log(this.$route);
     // do we have the right project
-    if (this.project.pubId !== this.$route.params.id) {
-      console.log("project not found");
-
+    if (this.project.pubId === this.$route.params.id) {
+      this.ready = true;
+    } else {
       // check if we have it in project
       const storedProject = this.$store.state.projects.find(
         item => item.pubId === this.$route.params.id
       );
       if (storedProject) {
-        console.log("project was stored", storedProject);
         this.store.commit("setProject", storedProject);
         this.ready = true;
       } else {
-        console.log("project is fetched");
         try {
           const res = await API.graphql(
             graphqlOperation(queries.getProject, {
-              id: this.$route.params.id
+              pubId: this.$route.params.id
             })
           );
-          console.log(res);
-          if (res && res.data && res.data.getItem && !res.errors) {
-            this.$store.commit("setProject", res.data.getItem);
-            console.log("project is here");
+          if (res && res.data && res.data.getProject && !res.errors) {
+            this.project = res.data.getProject;
+            this.$store.commit("setProject", res.data.getProject);
+
             this.ready = true;
           } else {
-            console.log("project is not");
           }
         } catch (error) {
-          console.log(error);
           this.error = true;
         }
       }
-      console.log(this.project);
-    } else {
-      this.ready = true;
     }
   },
   methods: {}

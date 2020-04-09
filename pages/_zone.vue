@@ -78,9 +78,7 @@ export default {
     NavigationDrawer
   },
   watch: {
-    "$route.params"() {
-      console.log("paarams", this.$route.params);
-    }
+    "$route.params"() {}
   },
   mounted() {
     if (!zones.map(zone => zone.value).includes(this.$route.params.zone)) {

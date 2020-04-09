@@ -18,7 +18,7 @@
         <div class="title my-3">
           The
           <span class="font-italic">World Pandemic Research Network</span> website is still under development.
-          <br />We are working hard to release it on April 13, 2020.
+          <br />We are working hard to release it in the upcoming days.
           <br />Meanwhile, you can browse it to discover our initiative and the project registering process that will be online soon.
         </div>
       </v-card-text>

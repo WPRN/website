@@ -104,7 +104,6 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.$route);
     try {
       const res = await API.graphql(
         graphqlOperation(mutations.verifyEmail, {
@@ -112,7 +111,7 @@ export default {
           key: this.$route.params.key
         })
       );
-      console.log(res);
+
       if (res && res.data && res.data.verifyEmail === true && !res.errors) {
         this.checking = false;
         this.error = false;
@@ -121,7 +120,6 @@ export default {
         this.error = true;
       }
     } catch (error) {
-      console.log(error);
       this.error = true;
       this.checking = false;
     }

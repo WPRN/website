@@ -4,10 +4,10 @@
     <h3 class="headline font-weight-heavy mb-2">YOUR PROJECT HAS BEEN SUCCESSFULLY REGISTERED!</h3>
     <div class="subtitle-1">
       You will receive a confirmation email shortly
-      <b>with a link to check that your email address is a real one</b>.
-      <br />Once you verify your email, your project will be displayed in the
-      <nuxt-link to="/worldwide">project list</nuxt-link>&nbsp;as "not verified" until it is validated by a WPRN moderator.
-      <br />You might be contacted by the moderator to correct some of your project information.
+      <b>with a link to ensure that your email address is valid</b>.
+      <br />Once your email is validated, your project will be displayed in the
+      <nuxt-link to="/worldwide">project list</nuxt-link>&nbsp;as "not verified" until it is checked by a WPRN Referent.
+      <br />You may be contacted by the referent to correct some of your project information.
       <br />Thank you again for your contribution.
     </div>
     <br />

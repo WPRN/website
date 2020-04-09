@@ -38,6 +38,20 @@
           </template>
           <span>Visit our Facebook page</span>
         </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn text icon v-on="on">
+              <a
+                href="https://www.linkedin.com/company/wprn-world-pandemic-research-network/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <v-icon color="white">mdi-linkedin</v-icon>
+              </a>
+            </v-btn>
+          </template>
+          <span>Visit our Linkedin page</span>
+        </v-tooltip>
         <br />
         <v-tooltip top>
           <template v-slot:activator="{ on }">
@@ -76,16 +90,10 @@ export default {
   },
   components: { Credits },
   methods: {
-    onError(error) {
-      console.log("Error happened:", error);
-    },
+    onError(error) {},
 
-    onSuccess(token) {
-      console.log("Succeeded:", token);
-    },
-    onExpired() {
-      console.log("Expired");
-    }
+    onSuccess(token) {},
+    onExpired() {}
   }
 };
 </script>

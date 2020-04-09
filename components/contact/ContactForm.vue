@@ -28,6 +28,7 @@
 
       <v-col cols="12">
         <v-textarea
+          counter="500"
           v-model="contact.message"
           label="Message*"
           solo
@@ -116,7 +117,7 @@ export default {
   },
   async mounted() {
     /*    await this.$recaptcha.init();
-    console.log(this.$recaptcha); */
+     */
   },
   methods: {
     capitalize(input) {
@@ -129,30 +130,25 @@ export default {
       try {
         this.sending = true;
         let args = this.contact;
-        console.log(newContact);
 
         if (this.id) args.relatedProjectId = this.id;
         Object.keys(this.contact).forEach(key => {
           if (!args[key] || args[key].length === 0) delete args[key];
         });
         args.recaptcha = await this.$recaptcha.getResponse();
-        console.log("ReCaptcha token:", args.recaptcha);
-        console.log(args);
+
         const res = await API.graphql(
           graphqlOperation(newContact, { input: args })
         );
-        console.log(res);
+
         if (res && !res.errors) {
-          console.log("YEAAAAAAH", res);
           this.$emit("complete");
         } else {
-          console.log("YEAAAAAAH");
           this.error = true;
         }
         this.sending = false;
         await this.$recaptcha.reset();
       } catch (error) {
-        console.log(error);
         this.error = true;
         this.sending = false;
         await this.$recaptcha.reset();

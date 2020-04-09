@@ -31,7 +31,7 @@
       </v-card-text>
       <v-card-text class="subtitle-1">This is a non-profit initiative. We welcome donations.</v-card-text>
       <v-card-subtitle class="subtitle-2 px-6">Institutional supports</v-card-subtitle>
-      <v-card-text class="subtitle-1 px-6 mb-3" style="max-height:250px">
+      <v-card-text class="subtitle-1 px-6 mb-3">
         This project is sponsored by :
         <ul>
           <li>
@@ -48,7 +48,7 @@
         </ul>
       </v-card-text>
       <v-card-subtitle class="subtitle-2 px-6">Technical supports</v-card-subtitle>
-      <v-card-text class="subtitle-1 px-6 mb-3" style="max-height:250px">
+      <v-card-text class="subtitle-1 px-6 mb-3">
         This website and logo have been designed by
         <a
           href="https://github.com/Billybobbonnet"
@@ -81,7 +81,7 @@
         >AWS ecosystem</a>. Its source code will not be released as it is based on a private service, but talks about making the API public in the upcoming weeks are in progress.
         <br />All the images used are free of rights (or distributed as such).
       </v-card-text>
-      <v-card-text class="font-weight-light caption px-6 mb-3" style="max-height:250px">
+      <v-card-text class="font-weight-light caption px-6 mb-3">
         <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
           <img
             alt="Creative Commons License"

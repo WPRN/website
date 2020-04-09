@@ -108,23 +108,19 @@
             <v-col cols="12">
               <v-responsive
                 class="d-flex align-center mx-auto title font-weight-light mb-8"
-                max-width="720"
+                max-width="800"
                 height="100%"
               >
                 <b>The World Pandemic Research Network (WPRN)</b> maintains a searchable global directory of
                 research projects, surveys and initiatives about the societal and human impacts of the Covid-19
                 pandemic.
                 <br />WPRN facilitates project awareness, collaboration, follow-up and reference by other projects.
-                Registered projects get a WPRN-ID number and a WPRN webpage which signals their project,
-                enables other researchers and stakeholders to get in touch and to follow project updates or
-                publications.
-                <br />Registration is free. WPRN is a non-profit academic resource. There is no dependence, no legal
-                nor economic binding. Each contributor remains completely independent for action and
-                publication.
+                Registered projects get a timestamped WPRN-ID number and a WPRN webpage which signals their projec. It enables other researchers and stakeholders to get in touch and to follow and cite project updates or pre-publications.
+                <br />Registration is free. WPRN is a non-profit academic resource, supported by scientific societies, networks and institutions worldwide and by hundreds of senior scientific referents. There is no dependence, no legal nor economic binding. Each contributor remains completely independent for action and publication.
                 <br />WPRN is GDPR compliant and will not publish, give or sell e-mail addresses to third parties.
                 <br />
-                <nuxt-link to="/board_and_contributors">Advisory Board</nuxt-link>,
-                <nuxt-link to="/board_and_contributors#refs">Referents</nuxt-link>&nbsp;and
+                <nuxt-link to="/board_and_contributors">Advisory Board</nuxt-link>&nbsp;-&nbsp;
+                <nuxt-link to="/board_and_contributors#refs">Referents</nuxt-link>&nbsp;-&nbsp;
                 <nuxt-link to="/board_and_contributors#institutions">Contributors' Institutions</nuxt-link>
               </v-responsive>
             </v-col>
@@ -137,22 +133,20 @@
                 </div>
                 <v-card-title
                   class="justify-center font-weight-black text-uppercase"
-                >Directory of projects</v-card-title>
+                  @click="$vuetify.goTo('#contact'); contactOnly=false; step=1"
+                  style="cursor:pointer;"
+                >REGISTER YOUR PROJECT</v-card-title>
                 <v-card-text class="subtitle-1" color="black">
                   WPRN publishes a
-                  <nuxt-link
-                    to="/worldwide"
-                    class="blue--text"
-                  >searchable directory of projects, calls and resources worldwide</nuxt-link>. Please
+                  searchable directory of projects, calls and resources worldwide.
                   <span
                     @click="$vuetify.goTo('#contact'); contactOnly=false; step=1"
                     class="blue--text"
                     style="cursor:pointer;text-decoration:underline"
-                  >register your project</span>
-                  if you feel that you can contribute. Your project will automatically be added, attributed a WPRN-
-                  ID number and become searcheable in the Directory as soon as you confirm your e-mail address.
-                  <br />A WPRN webpage will be generated for your project once your project is validated by one of our expert
-                  Referents.
+                  >Register your project</span> here.
+                  Your project will automatically be added, attributed a timestamped WPRN-ID number and become searchable in the Directory as soon as you confirm your email address. Your WPRN-ID enables others to refer to your work and cite it even before publication.
+                  <br />ARegistration in the WPRN Directory is free and non-binding. A WPRN webpage will be generated for your project once your project is validated by one of our
+                  <nuxt-link to="/board_and_contributors#refs">Referents</nuxt-link>. You can update your webpage once validated.
                 </v-card-text>
               </v-card>
             </v-col>
@@ -165,18 +159,18 @@
                 </div>
                 <v-card-title
                   class="justify-center font-weight-black text-uppercase"
-                >Hub for collaboration</v-card-title>
+                  @click="$router.push({path:'/worldwide'})"
+                  style="cursor:pointer;"
+                >Search the database</v-card-title>
                 <v-card-text class="subtitle-1" color="black">
-                  <nuxt-link to="/worldwide" class="blue--text">Search the database</nuxt-link>&nbsp;and get in touch to set up
-                  collaboration, find or share resources, get updates. Use the “contact” buttons for initial get-in-touch
-                  with project contact-points.
-                  <br />WPRN highlights
+                  WPRN is a gateway for collaboration. Find who works on what and where.
+                  <nuxt-link to="/worldwide" class="blue--text">Search the database</nuxt-link>&nbsp;to identify projects of interest, find or share resources, get updates, set up collaborations. Use the “contact” buttons to get-in-touch with the other registered contributors. WPRN also publishes calls for research proposals from major research institutions.
+                  <br />WPRN highlights research projects, calls, resources and initiatives that have been flagged by our Referents. Check the list of
                   <span
                     @click="$vuetify.goTo('#featured', {offset:100})"
                     class="blue--text"
                     style="cursor:pointer;text-decoration:underline"
-                  >Research Projects, Open Calls, Resources and Initiatives</span> that have been flagged by our
-                  Referents among the registered projects.
+                  >featured projects</span>.
                   .
                 </v-card-text>
               </v-card>
@@ -210,14 +204,25 @@
         <div class="py-12"></div>
 
         <v-container>
-          <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">FEATURED PROJECTS</h2>
+          <h2
+            class="display-2 font-weight-bold mb-3 text-uppercase text-center"
+          >FEATURED PROJECTS, CALLS AND RESOURCES</h2>
 
           <v-responsive class="mx-auto mb-12" width="56">
             <v-divider class="mb-1"></v-divider>
 
             <v-divider></v-divider>
           </v-responsive>
-
+          <v-responsive
+            class="d-flex align-center mx-auto title font-weight-light mb-8 text-center"
+            max-width="720"
+            height="100%"
+          >
+            Here are the lists of the projects, calls and resources flagged by the WPRN referents.
+            These automatically updated lists present only a short selection of the WPRN database content. Please
+            use the&nbsp;
+            <nuxt-link to="/worldwide">search page</nuxt-link>&nbsp;for a refined search that matches your specific interests.
+          </v-responsive>
           <v-row>
             <v-col cols="12" md="4">
               <v-img
@@ -231,9 +236,9 @@
               <h3 class="font-weight-black mb-4 text-uppercase">Economic impact of Covid-19.</h3>
 
               <div class="title font-weight-light mb-5">
-                This multicentric survey on businesses stems from the pioneer research led by Professor Xiaobo
+                This multicentric survey on enterprises stems from the pioneer research led by Professor Xiaobo
                 Zhang on the economic impact of the epidemic on Chinese SMEs (WPRN ID XXXXX).
-                Their team has agreed to share their questionnaire, which is currently translated and surveys
+                This team has agreed to share the questionnaire, which is currently translated and surveys
                 launched around the world.
               </div>
 
@@ -257,11 +262,11 @@
 
               <div class="title font-weight-light mb-5">
                 Just One Giant Lab (JOGL) is the first research and innovation laboratory operating as a
-                distributed, open and massive mobilisation platform for collaborative task solving. JOGL helps
-                humanity to sync onto fixing our most urgent and important problems using Open Science,
-                Responsible Innovation and Continuous Learning. JOGL partners with academic labs,
-                companies, startups, foundations, NGOs and public services to create participatory research
-                programs for understanding and solving Health, Environmental, Social and Humanitarian issues.
+                distributed, open and massive mobilisation platform for collaborative task solving.
+                JOGL is a free and open-source platform you can use to set up and develop collaborative
+                projects, e.g. with partners you find on WPRN and elsewhere. JOGL builds on the successful
+                experience of Polymath to offer an environment where contributions of participants are traced
+                and acknowledged.
               </div>
 
               <v-btn class="ml-n4 font-weight-black" text>
@@ -290,7 +295,8 @@
                 How do people cope, positively or not, with the stressful situation of lockdown and confinement?
                 A multidisciplinary team provides a set of questions that assess the sources and forms of stress
                 and coping, as well as the levers for communication and influence to support people during the
-                crisis. The questions can be added to any survey to assess the resilience of respondents.
+                crisis. These questions or a subset can be added to any survey to assess the resilience of
+                respondents.
               </div>
 
               <v-btn class="ml-n4 font-weight-black" text>
@@ -395,7 +401,7 @@
         </v-btn>
       </v-fab-transition>
     </v-content>
-    <!--     <WorkInProgressDialog
+    <!-- <WorkInProgressDialog
       :dialog="WorkInProgressDialogToggle"
       @close="WorkInProgressDialogToggle=false"
     />-->
@@ -420,7 +426,7 @@ export default {
       zones,
       drawer: false,
       contactOnly: false,
-      /*   WorkInProgressDialogToggle: true, */
+      /*       WorkInProgressDialogToggle: true, */
       valid: false,
       step: 1,
       offsetTop: 0,
@@ -439,15 +445,13 @@ export default {
     /*   MeetingList, */
     NavigationDrawer,
     ContactPostedWindow,
-    ProjectPostedWindow,
-    /*  WorkInProgressDialog, */
+    ProjectPostedWindow /*
+    WorkInProgressDialog, */,
     Logo
   },
 
   async mounted() {
     if (this.$route.hash) {
-      console.log("HASH", this.$route.hash);
-
       if (this.$route.hash === "#register") {
         this.contactOnly = false;
         this.step = 1;
@@ -458,7 +462,6 @@ export default {
         this.contactOnly = true;
         this.step = 0;
         setTimeout(() => {
-          console.log("goto");
           this.$vuetify.goTo(this.$route.hash, { offset: 100 });
         }, 1);
       }
