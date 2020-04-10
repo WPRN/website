@@ -37,133 +37,28 @@
     />
     <v-content>
       <v-row>
-        <v-col cols="12" v-if="ready&&project">
-          <v-fade-transition mode="out-in">
-            <v-card flat min-height="320px" class="pa-4 text-left" v-show="ready">
-              <v-card class="ml-3 mt-3 pb-3" flat>
-                <v-card-title class="pl-0">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <nuxt-link to="/worldwide">
-                        <v-btn fab icon large v-on="on" class="mr-2">
-                          <v-icon large>mdi-arrow-left</v-icon>
-                        </v-btn>
-                      </nuxt-link>
-                    </template>
-                    <span>Back to the project list</span>
-                  </v-tooltip>
-                  <ProjectStatusBadge :status="project.status" />
-                  &nbsp;
-                  {{project.name}}
-                </v-card-title>
-                <v-card-text class="pb-0 white--text pl-12 ml-4">
-                  <v-col cols="12" md="6" class="subtitle-1">
-                    <span class="overline">CREATION DATE :</span>
-                    <br />
-                    {{project.createdAt.split('T')[0]}} at {{project.createdAt.split('T')[1].split(':')[0]}}h{{project.createdAt.split('T')[1].split(':')[1]}} (GMT)
-                  </v-col>
-                  <v-col cols="12" md="6" class="subtitle-1">
-                    <span class="overline">STATUS :</span>
-                    <br />
-                    {{project.state}}
-                  </v-col>
-                  <v-col cols="12" class="subtitle-1">
-                    <span class="overline">{{project.field.length >1?'DISCIPLINES':'DISCIPLINE'}} :</span>
-                    <br />
-                    <v-chip
-                      class="ma-1"
-                      small
-                      light
-                      v-for="(field, index) in project.field"
-                      :key="index"
-                    >{{field}}</v-chip>
-                  </v-col>
-                  <v-col cols="12" class="subtitle-1">
-                    <span class="overline">{{project.type.length >1?'TYPES':'TYPE'}} :</span>
-                    <br />
-                    <v-chip
-                      class="ma-1"
-                      small
-                      label
-                      light
-                      v-for="(type, index) in project.type"
-                      :key="index"
-                    >{{type}}</v-chip>
-                  </v-col>
-                  <v-col cols="12" class="subtitle-1" v-if="project.thematics">
-                    <span
-                      class="overline"
-                    >{{project.thematics&&project.thematics.length >1?'THEMATICS':'THEMATIC'}} :</span>
-                    <br />
-                    <v-chip
-                      class="ma-1"
-                      small
-                      label
-                      light
-                      v-for="(thematic, index) in project.thematics"
-                      :key="index"
-                    >{{thematic}}</v-chip>
-                  </v-col>
-                  <v-col cols="12" class="subtitle-1">
-                    <span class="overline">{{project.zone.length >1?'CONTINENTS':'CONTINENT'}} :</span>
-                    <br />
-                    <v-chip
-                      small
-                      class="ma-1"
-                      v-for="(zone, index) in project.zone"
-                      :key="index"
-                    >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
-                  </v-col>
-                  <v-col cols="12" class="subtitle-1">
-                    <span
-                      class="overline"
-                    >{{project.country&&project.country.length >1?'COUNTRIES':'COUNTRY'}} :</span>
-                    <br />
-                    <v-chip
-                      small
-                      class="ma-1"
-                      v-for="(country, index) in project.country"
-                      :key="index"
-                    >{{country}}</v-chip>
-                  </v-col>
-                  <v-col cols="12" class="subtitle-1">
-                    <span class="overline">CONTACT :</span>
-                    <br />
-                    {{project.contact_firstname + ' ' + project.contact_lastname}}
-                    <template
-                      v-if="project.contact_entity"
-                    >({{project.contact_entity}})</template>
-                  </v-col>
-                  <v-col cols="12" class="subtitle-1">
-                    <span class="overline">Description</span>
-                    <br />
-                    {{project.description}}
-                  </v-col>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="accent" @click="contact=true">
-                    <v-icon>mdi-email-edit</v-icon>&nbsp;
-                    Email this project contact
-                  </v-btn>
-                  <v-btn v-if="project.url" color="accent">
-                    <a
-                      :href="project.url"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style="text-decoration:none;color:white;"
-                    >
-                      Open project url&nbsp;
-                      <v-icon>mdi-chevron-right</v-icon>
-                    </a>
-                  </v-btn>
-                </v-card-actions>
-                <v-divider class="mt-3"></v-divider>
-              </v-card>
-            </v-card>
-          </v-fade-transition>
-          <ContactDialog :open="contact" @close="contact=false" :id="project.pubId" />
-        </v-col>
+        <template
+          v-if="ready&&(!project.status||['NEW','PENDING','REMOVED', 'BLOCKED'].includes(project.status))"
+        >
+          <v-overlay :value="error" class="text-center headline">
+            <div class="display-1">Sorry for the inconvenience!</div>
+            <br />
+            <v-icon x-large class="mb-3">mdi-ladybug</v-icon>
+            <br />This project is not available because its contact point email is not verified or because it has been removed.
+            <br />Or it could just not be an existing project.
+            <br />You can try again and
+            refresh this page or
+            <nuxt-link to="/#contact">contact WPRN</nuxt-link>.
+          </v-overlay>
+        </template>
+        <template v-else>
+          <v-col cols="12" v-if="ready&&project">
+            <v-fade-transition mode="out-in">
+              <ProjectDetails v-show="ready" :project="project" @contact="contact=true" pageMode />
+            </v-fade-transition>
+          </v-col>
+          <v-boilerplate v-else class="mb-6" type="article, actions"></v-boilerplate>
+        </template>
       </v-row>
     </v-content>
   </v-container>
@@ -172,8 +67,8 @@
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../../backend/src/graphql/queries";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
-import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
 import ContactDialog from "~/components/contact/ContactDialog";
+import ProjectDetails from "~/components/projectList/ProjectDetails";
 import {
   zones,
   countries,
@@ -193,9 +88,9 @@ export default {
     };
   },
   components: {
-    ProjectStatusBadge,
     ContactDialog,
-    NavigationDrawer
+    NavigationDrawer,
+    ProjectDetails
   },
   async mounted() {
     // do we have the right project
@@ -219,12 +114,13 @@ export default {
           if (res && res.data && res.data.getProject && !res.errors) {
             this.project = res.data.getProject;
             this.$store.commit("setProject", res.data.getProject);
-
             this.ready = true;
           } else {
+            this.ready = true;
           }
         } catch (error) {
           this.error = true;
+          this.ready = true;
         }
       }
     }

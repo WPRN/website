@@ -80,20 +80,6 @@
           <v-row :class="{'pr-8':$vuetify.breakpoint.mdAndUp}">
             <v-col cols="12" sm="6" md="4" lg="3">
               <v-select
-                :items="state"
-                label="Project status"
-                outlined
-                v-model="filters.state"
-                ref="state"
-                :disabled="loading"
-                hide-details
-                dense
-                @click:clear="refreshQuery()"
-                @change="refreshQuery()"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="4" lg="3">
-              <v-select
                 :items="zones"
                 label="Continent"
                 outlined
@@ -107,6 +93,22 @@
                 @change="refreshQuery()"
               ></v-select>
             </v-col>
+            <v-col cols="12" sm="6" md="4" lg="3">
+              <v-select
+                :items="state"
+                label="Project status"
+                outlined
+                v-model="filters.state"
+                ref="state"
+                :disabled="loading"
+                hide-details
+                clearable
+                dense
+                @click:clear="filters.state='';refreshQuery()"
+                @change="refreshQuery()"
+              ></v-select>
+            </v-col>
+
             <v-col cols="12" sm="6" md="4" lg="3">
               <v-combobox
                 :disabled="!filters.zone|| loading"
@@ -196,47 +198,209 @@
           :class="$vuetify.theme.dark?{'grey darken-3':item.hasViewed}:{'grey lighten-4':item.hasViewed}"
           @click="expanded.includes(item)?expanded=[]:expanded=[item]"
         >
-          <td>{{item.name}}</td>
+          <!-- STATUS -->
           <td>
             <ProjectStatusBadge :status="item.status" />
           </td>
+          <!-- NAME -->
+          <td>{{item.name}}</td>
+          <!-- STATE -->
+          <td>{{item.state.split(' ')[0]}}</td>
+          <!-- FIELD -->
           <td>
-            <v-chip
-              class="ma-1"
-              small
-              light
-              label
-              v-for="(field, index) in item.field"
-              :key="index"
-            >{{field}}</v-chip>
+            <template v-for="(field, index) in orderItems(item, 'field')">
+              <template v-if="index < 2">
+                <template v-if="field.length>16">
+                  <v-tooltip top :key="index">
+                    <template v-slot:activator="{ on }">
+                      <v-chip
+                        class="ma-1"
+                        :dark="filters.field.includes(field)"
+                        small
+                        light
+                        label
+                        v-on="on"
+                      >{{field|truncate(16)}}</v-chip>
+                    </template>
+                    <span>{{field}}</span>
+                  </v-tooltip>
+                </template>
+                <template v-else>
+                  <v-chip
+                    class="ma-1"
+                    :dark="filters.field.includes(field)"
+                    small
+                    light
+                    label
+                    :key="index"
+                  >{{field}}</v-chip>
+                </template>
+              </template>
+              <template v-if="index===2&&item.field.length>2">
+                <v-tooltip :key="index" top>
+                  <template v-slot:activator="{ on }">
+                    <span
+                      v-on="on"
+                      class="caption"
+                      style="white-space:nowrap;"
+                    >+ {{item.field.length - 2}} more</span>
+                  </template>
+                  <span>{{orderItems(item, 'field').slice(2).join(",&nbsp;")}}</span>
+                </v-tooltip>
+              </template>
+            </template>
           </td>
+          <!-- THEMATICS -->
           <td>
-            <v-chip
-              class="ma-1"
-              small
-              light
-              v-for="(type, index) in item.type"
-              :key="index"
-            >{{type}}</v-chip>
+            <template v-for="(thematics, index) in orderItems(item, 'thematics')">
+              <template v-if="index < 2">
+                <template v-if="thematics.length>16">
+                  <v-tooltip top :key="index">
+                    <template v-slot:activator="{ on }">
+                      <v-chip
+                        class="ma-1"
+                        :light="filters.thematics.includes(thematics)"
+                        :color="filters.thematics.includes(thematics)?'white':''"
+                        outlined
+                        small
+                        label
+                        :key="index"
+                        v-on="on"
+                      >{{thematics|truncate(16)}}</v-chip>
+                    </template>
+                    <span>{{thematics}}</span>
+                  </v-tooltip>
+                </template>
+                <template v-else>
+                  <v-chip
+                    class="ma-1"
+                    :light="filters.thematics.includes(thematics)"
+                    :color="filters.thematics.includes(thematics)?'white':''"
+                    outlined
+                    small
+                    label
+                    :key="index"
+                  >{{thematics}}</v-chip>
+                </template>
+              </template>
+              <template v-else>
+                <template v-if="index===2&&item.thematics.length>2">
+                  <v-tooltip :key="index" top>
+                    <template v-slot:activator="{ on }">
+                      <span
+                        v-on="on"
+                        class="caption"
+                        style="white-space:nowrap;"
+                      >+ {{item.thematics.length - 2}} more</span>
+                    </template>
+                    <span>{{orderItems(item, 'thematics').slice(2).join(",&nbsp;")}}</span>
+                  </v-tooltip>
+                </template>
+              </template>
+            </template>
           </td>
+          <!-- TYPE -->
           <td>
-            <v-chip
-              small
-              label
-              light
-              class="ma-1"
-              v-for="(zone, index) in item.zone"
-              :key="index"
-            >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
+            <template v-for="(type, index) in  orderItems(item, 'type')">
+              <template v-if="index < 2">
+                <template v-if="type.length>19">
+                  <v-tooltip top :key="index">
+                    <template v-slot:activator="{ on }">
+                      <v-chip
+                        :dark="filters.type.includes(type)"
+                        class="ma-1"
+                        small
+                        light
+                        v-on="on"
+                        :key="index"
+                      >{{type|truncate(19)}}</v-chip>
+                    </template>
+                    <span>{{type}}</span>
+                  </v-tooltip>
+                </template>
+                <template v-else>
+                  <v-chip
+                    class="ma-1"
+                    :dark="filters.type.includes(type)"
+                    small
+                    light
+                    :key="index"
+                  >{{type}}</v-chip>
+                </template>
+              </template>
+              <template v-else>
+                <template v-if="index===2&&item.type.length>2">
+                  <v-tooltip :key="index" top>
+                    <template v-slot:activator="{ on }">
+                      <span
+                        v-on="on"
+                        class="caption"
+                        style="white-space:nowrap;"
+                      >+ {{item.type.length - 2}} more</span>
+                    </template>
+                    <span>{{orderItems(item, 'type').slice(2).join(",&nbsp;")}}</span>
+                  </v-tooltip>
+                </template>
+              </template>
+            </template>
           </td>
+          <!-- ZONE (CONTINENT) -->
           <td>
-            <v-chip
-              small
-              class="ma-1"
-              v-for="(country, index) in item.country"
-              :key="index"
-            >{{country}}</v-chip>
+            <template v-for="(zone, index) in item.zone">
+              <template v-if="index < 2">
+                <v-chip
+                  small
+                  label
+                  :dark="filters.zone.includes(zone)"
+                  light
+                  class="ma-1"
+                  :key="index"
+                >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
+              </template>
+              <template v-else>
+                <template v-if="index===2&&item.zone.length>2">
+                  <v-tooltip :key="index" top>
+                    <template v-slot:activator="{ on }">
+                      <span
+                        v-on="on"
+                        class="caption"
+                        style="white-space:nowrap;"
+                      >+ {{item.zone.length - 2}} more</span>
+                    </template>
+                    <span>{{orderItems(item, 'zone').slice(2).join(",&nbsp;")}}</span>
+                  </v-tooltip>
+                </template>
+              </template>
+            </template>
           </td>
+          <!-- COUNTRY -->
+          <td>
+            <template v-for="(country, index) in orderItems(item, 'country')">
+              <template v-if="index < 2">
+                <v-chip
+                  small
+                  class="ma-1"
+                  :key="index"
+                  :light="filters.country.includes(country)"
+                >{{country}}</v-chip>
+              </template>
+              <template v-else>
+                <template v-if="index===2&&item.country.length>2">
+                  <v-tooltip :key="index" top>
+                    <template v-slot:activator="{ on }">
+                      <span
+                        v-on="on"
+                        class="caption"
+                        style="white-space:nowrap;"
+                      >+ {{item.country.length - 2}} more</span>
+                    </template>
+                    <span>{{orderItems(item, 'country').slice(2).join(",&nbsp;")}}</span>
+                  </v-tooltip>
+                </template>
+              </template>
+            </template>
+          </td>
+          <!-- ACTIONS -->
           <td class="pr-0">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
@@ -257,66 +421,7 @@
       <template v-slot:expanded-item="{ item }">
         <v-expand-transition>
           <td colspan="8">
-            <v-card class="ml-3 mt-3 pb-3" flat>
-              <v-card-text class="pb-0 white--text">
-                <span class="overline">CREATION DATE :</span>
-                <br />
-                {{item.createdAt.split('T')[0]}} at {{item.createdAt.split('T')[1].split(':')[0]}}h{{item.createdAt.split('T')[1].split(':')[1]}} (GMT)
-              </v-card-text>
-              <v-card-text class="pb-0 white--text">
-                <span class="overline">CONTACT :</span>
-                <br />
-                {{item.contact_firstname + ' ' + item.contact_lastname}}
-                <template
-                  v-if="item.contact_entity"
-                >({{item.contact_entity}})</template>
-              </v-card-text>
-              <v-card-text class="pb-0 white--text">
-                <span class="overline">Thematics</span>
-                <br />
-                <span v-for="(thematic, index) in item.thematics" :key="index">
-                  <template v-if="index>0">,&nbsp;</template>
-                  {{thematic}}
-                </span>
-              </v-card-text>
-              <v-card-text class="pb-0 white--text">
-                <span class="overline">Status</span>
-                <br />
-                {{item.state}}
-              </v-card-text>
-              <v-card-text class="pb-0 white--text">
-                <span class="overline">Description</span>
-                <br />
-                {{item.description}}
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="accent" @click="contact=true">
-                  <v-icon>mdi-email-edit</v-icon>&nbsp;
-                  Email this project contact
-                </v-btn>
-                <v-btn v-if="item.url" color="accent">
-                  <a
-                    :href="item.url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style="text-decoration:none;color:white;"
-                  >
-                    Open project url&nbsp;
-                    <v-icon>mdi-chevron-right</v-icon>
-                  </a>
-                </v-btn>
-                <v-btn
-                  v-else
-                  color="accent"
-                  @click="$store.commit('setProject', item);$router.push({path:'/item/'+ item.pubId})"
-                >
-                  Open project page&nbsp;
-                  <v-icon>mdi-chevron-right</v-icon>
-                </v-btn>
-              </v-card-actions>
-              <v-divider class="mt-3"></v-divider>
-            </v-card>
+            <ProjectDetails :project="item" @contact="contact=true" />
           </td>
         </v-expand-transition>
         <ContactDialog :open="contact" @close="contact=false" :id="item.pubId" />
@@ -327,6 +432,7 @@
 <script>
 import * as queries from "../../../backend/src/graphql/queries";
 import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
+import ProjectDetails from "~/components/projectList/ProjectDetails";
 import ContactDialog from "~/components/contact/ContactDialog";
 import Amplify, { API, graphqlOperation } from "aws-amplify";
 import {
@@ -378,6 +484,12 @@ export default {
       search: "",
       headers: [
         {
+          text: "",
+          align: "left",
+          sortable: false,
+          value: "status"
+        },
+        {
           text: "Name",
           align: "left",
           sortable: false,
@@ -387,10 +499,16 @@ export default {
           text: "Status",
           align: "left",
           sortable: false,
-          value: "status"
+          value: "state"
         },
         {
           text: "Discipline",
+          align: "left",
+          sortable: false,
+          value: "type"
+        },
+        {
+          text: "Thematic",
           align: "left",
           sortable: false,
           value: "type"
@@ -517,7 +635,7 @@ export default {
       ) {
         filter.and.push({
           zone: {
-            eq: this.filters.zone
+            contains: this.filters.zone
           }
         });
       } else {
@@ -634,6 +752,7 @@ export default {
 
       const options = {};
       if (Object.keys(filter).length) options.filter = filter;
+
       if (this.nextToken) options.nextToken = this.nextToken;
       Object.keys(filter).length
         ? (this.filtering = true)
@@ -657,11 +776,25 @@ export default {
       if (this.filters.country) filterObject.push("country");
       if (this.filters.verified) filterObject.push("verified"); */
       return JSON.stringify(filterObject);
+    },
+    orderItems(project, item) {
+      if (this.filters[item].length && project[item] && project[item].length) {
+        let items = project[item];
+        this.filters[item].forEach(element => {
+          if (items.includes(element)) {
+            items = [element, ...items.filter(dat => dat !== element)];
+          }
+        });
+        return items;
+      } else {
+        return project[item];
+      }
     }
   },
   components: {
     ProjectStatusBadge,
-    ContactDialog
+    ContactDialog,
+    ProjectDetails
   },
   watch: {
     "$route.query"() {

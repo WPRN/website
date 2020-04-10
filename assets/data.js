@@ -116,7 +116,7 @@ export const board = [
   },
   {
     name: "Uichol Kim",
-    position: "Professor, Inha University; Director, Paris Institute for Advanced Study ",
+    position: "Professor, Inha University",
     role: "Business Administration, Cultural Psychology, Korea",
     url: "https://asiansocialpsych.org/professor%20uichol%20kim",
     picture: "https://i1.rgstatic.net/ii/profile.image/278811380862977-1443485221214_Q512/Uichol_Kim.jpg",

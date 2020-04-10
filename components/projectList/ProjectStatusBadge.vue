@@ -10,7 +10,7 @@
     </template>
     <span v-if="status==='PUBLISHED'">This project has not been verified</span>
     <span v-if="status==='FEATURED'">This is a project featured by WPRN community</span>
-    <span v-else>This project has been verified</span>
+    <span v-if="status==='VERIFIED'">This project has been verified</span>
   </v-tooltip>
 </template>
 <script>

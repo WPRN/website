@@ -28,7 +28,7 @@
 
       <v-col cols="12">
         <v-textarea
-          counter="500"
+          counter="1000"
           v-model="contact.message"
           label="Message*"
           solo
@@ -111,7 +111,7 @@ export default {
         value =>
           value.length >= 20 ||
           "The message text must have at least 20 characters",
-        value => value.length <= 500 || "Max 500 characters"
+        value => value.length <= 1000 || "Max 1000 characters"
       ]
     };
   },

@@ -48,7 +48,7 @@
                   v-model="project.description"
                   type="text"
                   :rules="descriptionRules"
-                  counter="1200"
+                  counter="1500"
                   ref="description"
                 ></v-textarea>
               </v-col>
@@ -590,7 +590,7 @@ export default {
         value =>
           value.length >= 500 ||
           "The description must have at least 500 characters",
-        value => value.length <= 1200 || "Max 1200 characters"
+        value => value.length <= 1500 || "Max 1500 characters"
       ],
       requiredRules: [
         value => !!value || "This field is required.",
