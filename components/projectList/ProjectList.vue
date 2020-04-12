@@ -16,10 +16,23 @@
         <v-card flat>
           <v-row no-gutters>
             <v-col cols="12" class="mt-6">
-              <v-card-title class="pl-0">
-                <span class="overline">
-                  <v-icon>mdi-filter-variant</v-icon>Filters
-                </span>
+              <v-card-title class="pl-0" :class="{'pr-0':$vuetify.breakpoint.smAndDown}">
+                <v-btn
+                  outlined
+                  small
+                  color="white"
+                  @click="$store.commit('setShowFilters', !$store.state.showFilters)"
+                  class="overline"
+                >
+                  <template v-if="$store.state.showFilters">
+                    <v-icon>mdi-filter-variant</v-icon>&nbsp;Hide Filters&nbsp;
+                    <v-icon>mdi-chevron-up</v-icon>
+                  </template>
+                  <template v-else>
+                    <v-icon>mdi-filter-variant</v-icon>&nbsp;Show Filters&nbsp;
+                    <v-icon>mdi-chevron-down</v-icon>
+                  </template>
+                </v-btn>
                 <v-btn
                   outlined
                   small
@@ -57,11 +70,12 @@
                   <span>Select to display only projects featured by the WPRN community</span>
                 </v-tooltip>
                 <v-text-field
-                  class="pt-0 mr-4"
+                  class="pt-0"
                   v-model.trim="search"
                   label="Search"
                   placeholder="Search a project"
                   prepend-inner-icon="mdi-magnify"
+                  :class="$vuetify.breakpoint.smAndDown?'mr-0':'mr-4'"
                   single-line
                   hide-details
                   clearable
@@ -77,98 +91,100 @@
               </v-card-title>
             </v-col>
           </v-row>
-          <v-row :class="{'pr-8':$vuetify.breakpoint.mdAndUp}">
-            <v-col cols="12" sm="6" md="4" lg="3">
-              <v-select
-                :items="zones"
-                label="Continent"
-                outlined
-                v-model="filters.zone"
-                :clearable="filters.zone!=='worldwide'"
-                ref="zone"
-                :disabled="loading"
-                hide-details
-                dense
-                @click:clear="filters.zone='worlwide';refreshQuery()"
-                @change="refreshQuery()"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="4" lg="3">
-              <v-select
-                :items="state"
-                label="Project status"
-                outlined
-                v-model="filters.state"
-                ref="state"
-                :disabled="loading"
-                hide-details
-                clearable
-                dense
-                @click:clear="filters.state='';refreshQuery()"
-                @change="refreshQuery()"
-              ></v-select>
-            </v-col>
+          <v-expand-transition class="align-center">
+            <v-row :class="{'pr-8':$vuetify.breakpoint.mdAndUp}" v-show="$store.state.showFilters">
+              <v-col cols="12" sm="6" md="4" lg="3">
+                <v-select
+                  :items="zones"
+                  label="Continent"
+                  outlined
+                  v-model="filters.zone"
+                  :clearable="filters.zone!=='worldwide'"
+                  ref="zone"
+                  :disabled="loading"
+                  hide-details
+                  dense
+                  @click:clear="filters.zone='worlwide';refreshQuery()"
+                  @change="refreshQuery()"
+                ></v-select>
+              </v-col>
+              <v-col cols="12" sm="6" md="4" lg="3">
+                <v-select
+                  :items="state"
+                  label="Project status"
+                  outlined
+                  v-model="filters.state"
+                  ref="state"
+                  :disabled="loading"
+                  hide-details
+                  clearable
+                  dense
+                  @click:clear="filters.state='';refreshQuery()"
+                  @change="refreshQuery()"
+                ></v-select>
+              </v-col>
 
-            <v-col cols="12" sm="6" md="4" lg="3">
-              <v-combobox
-                :disabled="!filters.zone|| loading"
-                :items="filters.zone!=='worldwide'?countries[filters.zone]:Object.keys(countries).map(countryKey=>countries[countryKey]).flat().sort()"
-                no-data-text="No country matching your search"
-                @change="refreshQuery('country')"
-                label="Country"
-                outlined
-                multiple
-                v-model="filters.country"
-                clearable
-                hide-details
-                dense
-              ></v-combobox>
-            </v-col>
-            <v-col cols="12" sm="6" md="4" lg="3">
-              <v-combobox
-                :items="fields"
-                label="Project discipline(s)"
-                outlined
-                v-model="filters.field"
-                clearable
-                multiple
-                ref="field"
-                :disabled="loading"
-                hide-details
-                dense
-                @change="refreshQuery('field')"
-              ></v-combobox>
-            </v-col>
-            <v-col cols="12" sm="6" md="4" lg="3">
-              <v-combobox
-                :items="thematics"
-                label="Project Thematic(s)"
-                outlined
-                v-model="filters.thematics"
-                clearable
-                multiple
-                ref="thematics"
-                :disabled="loading"
-                hide-details
-                dense
-                @change="refreshQuery()"
-              ></v-combobox>
-            </v-col>
-            <v-col cols="12" sm="6" md="4" lg="3">
-              <v-select
-                :items="types"
-                label="Project type"
-                outlined
-                v-model="filters.type"
-                ref="type"
-                hide-details
-                dense
-                multiple
-                @change="refreshQuery()"
-                clearable
-              ></v-select>
-            </v-col>
-          </v-row>
+              <v-col cols="12" sm="6" md="4" lg="3">
+                <v-combobox
+                  :disabled="!filters.zone|| loading"
+                  :items="filters.zone!=='worldwide'?countries[filters.zone]:Object.keys(countries).map(countryKey=>countries[countryKey]).flat().sort()"
+                  no-data-text="No country matching your search"
+                  @change="refreshQuery('country')"
+                  label="Country"
+                  outlined
+                  multiple
+                  v-model="filters.country"
+                  clearable
+                  hide-details
+                  dense
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" md="4" lg="3">
+                <v-combobox
+                  :items="fields"
+                  label="Project discipline(s)"
+                  outlined
+                  v-model="filters.field"
+                  clearable
+                  multiple
+                  ref="field"
+                  :disabled="loading"
+                  hide-details
+                  dense
+                  @change="refreshQuery('field')"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" md="4" lg="3">
+                <v-combobox
+                  :items="thematics"
+                  label="Project Thematic(s)"
+                  outlined
+                  v-model="filters.thematics"
+                  clearable
+                  multiple
+                  ref="thematics"
+                  :disabled="loading"
+                  hide-details
+                  dense
+                  @change="refreshQuery()"
+                ></v-combobox>
+              </v-col>
+              <v-col cols="12" sm="6" md="4" lg="3">
+                <v-select
+                  :items="types"
+                  label="Project type"
+                  outlined
+                  v-model="filters.type"
+                  ref="type"
+                  hide-details
+                  dense
+                  multiple
+                  @change="refreshQuery()"
+                  clearable
+                ></v-select>
+              </v-col>
+            </v-row>
+          </v-expand-transition>
         </v-card>
       </template>
       <template v-slot:loading>
@@ -351,7 +367,7 @@
                 <v-chip
                   small
                   label
-                  :dark="filters.zone.includes(zone)"
+                  :color="filters.zone.includes(zone)?'#c4c4c4':'accent'"
                   light
                   class="ma-1"
                   :key="index"
@@ -419,11 +435,9 @@
         </tr>
       </template>
       <template v-slot:expanded-item="{ item }">
-        <v-expand-transition>
-          <td colspan="8">
-            <ProjectDetails :project="item" @contact="contact=true" />
-          </td>
-        </v-expand-transition>
+        <td colspan="8">
+          <ProjectDetails :project="item" @contact="contact=true" />
+        </td>
         <ContactDialog :open="contact" @close="contact=false" :id="item.pubId" />
       </template>
     </v-data-table>
@@ -434,7 +448,8 @@ import * as queries from "../../../backend/src/graphql/queries";
 import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
 import ProjectDetails from "~/components/projectList/ProjectDetails";
 import ContactDialog from "~/components/contact/ContactDialog";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import gql from "graphql-tag";
+import client from "~/plugins/amplify";
 import {
   zones,
   countries,
@@ -456,7 +471,6 @@ export default {
       loading: false,
       projects: this.$store.state.projects,
       expanded: [],
-      showFilters: false,
       filtering: false,
       projectId: "",
       limit: 10,
@@ -535,6 +549,7 @@ export default {
       ]
     };
   },
+
   created() {},
   mounted() {
     this.refreshQuery();
@@ -714,6 +729,11 @@ export default {
         const search = {
           or: [
             {
+              pubId: {
+                eq: this.search
+              }
+            },
+            {
               name: {
                 contains: this.search
               }
@@ -754,14 +774,14 @@ export default {
       if (Object.keys(filter).length) options.filter = filter;
 
       if (this.nextToken) options.nextToken = this.nextToken;
-      Object.keys(filter).length
+      Object.keys(filter.and).length > 1
         ? (this.filtering = true)
         : (this.filtering = false);
       options.limit = this.options.itemsPerPage;
-
-      const projects = await API.graphql(
-        graphqlOperation(queries.listProjects, options)
-      );
+      const projects = await client.query({
+        query: gql(queries.listProjects),
+        variables: options
+      });
 
       this.$store.commit("setProjects", projects.data.listProjects.items);
       this.projects = projects.data.listProjects.items;

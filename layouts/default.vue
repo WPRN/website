@@ -67,13 +67,17 @@
           </template>
           <span>This website is licenced under Creative Commons</span>
         </v-tooltip>
-        {{ new Date().getFullYear() }} - This website is maintained by
-        <a
-          href="https://www.paris-iea.fr/en"
-          target="_blank"
-          rel="noopener noreferrer"
-        >IAS Paris</a>.
-        <a style="text-decoration:underline;" @click="showCredits=true">See full credits</a>
+        <span class="body-2">
+          {{ new Date().getFullYear() }} - This website is maintained by
+          <a
+            href="https://www.paris-iea.fr/en"
+            target="_blank"
+            rel="noopener noreferrer"
+          >IAS Paris</a>.
+          <a style="text-decoration:underline;" @click="showCredits=true">See full credits</a> -
+          <nuxt-link to="/privacy_policy">Privacy Policy</nuxt-link>
+        </span>
+
         <Credits :credits="showCredits" @closeCredits="showCredits=false" />
       </div>
     </v-footer>

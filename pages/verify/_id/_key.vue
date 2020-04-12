@@ -92,9 +92,10 @@
   </v-container>
 </template>
 <script>
-import Amplify, { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../../../backend/src/graphql/mutations";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import gql from "graphql-tag";
+import client from "~/plugins/amplify";
 export default {
   data() {
     return {
@@ -105,12 +106,13 @@ export default {
   },
   async mounted() {
     try {
-      const res = await API.graphql(
-        graphqlOperation(mutations.verifyEmail, {
+      const res = await client.mutate({
+        mutation: mutations.verifyEmail,
+        variables: {
           id: this.$route.params.id,
           key: this.$route.params.key
-        })
-      );
+        }
+      });
 
       if (res && res.data && res.data.verifyEmail === true && !res.errors) {
         this.checking = false;

@@ -46,11 +46,9 @@
           <v-col cols="1">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
-                <nuxt-link to="/#about">
-                  <v-btn fab icon large v-on="on" class="mr-2">
-                    <v-icon large>mdi-arrow-left</v-icon>
-                  </v-btn>
-                </nuxt-link>
+                <v-btn fab icon large v-on="on" to="/#hero" class="mr-2">
+                  <v-icon large>mdi-arrow-left</v-icon>
+                </v-btn>
               </template>
               <span>Back to the main page</span>
             </v-tooltip>
@@ -58,11 +56,45 @@
           <v-col cols="10" sm="10" md="8">
             <h2
               class="display-2 font-weight-bold my-3 text-uppercase text-center"
+              id="board"
             >Board, Referents, Contributors</h2>
           </v-col>
           <v-col cols="1"></v-col>
           <v-col cols="12" sm="12" md="8">
-            <v-responsive class="mx-auto mb-12" width="56">
+            <v-responsive class="mx-auto mb-6" width="56">
+              <v-divider class="mb-1"></v-divider>
+              <v-divider></v-divider>
+            </v-responsive>
+            <v-item-group>
+              <v-row align-content="center" justify="center">
+                <v-col
+                  v-for="(item, i) in supports"
+                  :key="i"
+                  cols="auto"
+                  class="justify-items-center d-flex"
+                >
+                  <v-item v-slot:default="{  }">
+                    <a
+                      :href="item.url"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      :title="item.name"
+                      :style="'background-color:'+ item.color"
+                      class="pa-2 d-flex justify-items-center"
+                    >
+                      <v-img
+                        :src="'/logos/'+item.image"
+                        contain
+                        width="152"
+                        height="auto"
+                        class="text-right pa-2"
+                      ></v-img>
+                    </a>
+                  </v-item>
+                </v-col>
+              </v-row>
+            </v-item-group>
+            <v-responsive class="mx-auto my-6" width="56">
               <v-divider class="mb-1"></v-divider>
               <v-divider></v-divider>
             </v-responsive>
@@ -162,13 +194,14 @@
   </v-container>
 </template>
 <script>
-import { board, contributors } from "~/assets/data";
+import { board, contributors, supports } from "~/assets/data";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
 export default {
   data() {
     return {
       board,
       contributors,
+      supports,
       referents: [],
       drawer: false,
       offsetTop: 0

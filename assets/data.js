@@ -161,7 +161,7 @@ export const board = [
   },
   {
     name: "Guilherme Ary Plonski",
-    position: "Professor, Universidad di Sao Paulo ; Director, Universidad di Sao Paulo  – Istitudos di Studios Avanzados ; Chair Coordinator, UBIAS",
+    position: "Professor, University of São Paulo (USP); Director, Institute of Advanced Studies (IEA-USP); Coordinator, University-Based Institutes for Advanced Study (UBIAS) ",
     role: "Technology, Innovation, Latin America",
     url: "http://www.iea.usp.br/en/persons/researchers/guilherme-plonski",
     picture: "http://www.iea.usp.br/imagens/guilherme-ary-plonski-1",
@@ -172,6 +172,39 @@ export const board = [
     url: "https://en.nsd.pku.edu.cn/faculty/fulltime/z/239570.htm",
     picture: "https://www.cgdev.org/sites/default/files/styles/expert-new/public/media/images/experts/photo/zhang660.jpg?itok=wJWAWPx1",
   }
+]
+export const supports = [
+
+  {
+    name: "EASSH",
+    url: "http://www.eassh.eu/",
+    image: "logo_eassh.png",
+    color: 'white'
+  },
+  {
+    name: "IPSP",
+    url: "https://www.ipsp.org/",
+    image: "ipsp-header.png",
+    color: "#15c"
+  },
+  {
+    name: "UBIAS",
+    url: "http://www.ubias.net/",
+    image: "ubias-logo.gif",
+    color: 'white'
+
+  },
+  /*  {
+     name: "IAS-PARIS",
+     url: "https://www.paris-iea.fr/en",
+     image: "iea-paris-logo.gif"
+   }, */
+  {
+    name: "NETIAS",
+    url: "http://netias.science/home",
+    image: "netias.png",
+    color: "#ffc54b"
+  },
 ]
 export const zones = [
 

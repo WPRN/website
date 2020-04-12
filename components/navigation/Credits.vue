@@ -22,91 +22,115 @@
         <a
           href="https://www.paris-iea.fr"
           target="_blank"
-          rel="noopener noreferrer"
         >IAS Paris - IEA de Paris</a>.
-      </v-card-text>
-      <v-card-text class="subtitle-1">
-        <b>Thanks</b> to all the contributors whose contribution and collective intelligence provides us all with this
+        <br />
+        <b>Thanks</b>
+        to all the contributors whose contribution and collective intelligence provides us all with this
         shared resource.
-      </v-card-text>
-      <v-card-text class="subtitle-1">This is a non-profit initiative. We welcome donations.</v-card-text>
-      <v-card-subtitle class="subtitle-2 px-6">Institutional supports</v-card-subtitle>
-      <v-card-text class="subtitle-1 px-6 mb-3">
-        This project is sponsored by :
+        <br />This is a non-profit initiative. We welcome donations.
+        <br />
+        <span
+          style="color:#1976d2;text-decoration:underline;cursor:pointer;"
+          @click="$emit('closeCredits');$router.push({path:'/board_and_contributors#board'})"
+        >Advisory Board</span>&nbsp;-&nbsp;
+        <span
+          style="color:#1976d2;text-decoration:underline;cursor:pointer;"
+          @click="$emit('closeCredits');$router.push({path:'/board_and_contributors#refs'})"
+        >Referents</span>&nbsp;-&nbsp;
+        <span
+          style="color:#1976d2;text-decoration:underline;cursor:pointer;"
+          @click="$emit('closeCredits');$router.push({path:'/board_and_contributors#institutions'})"
+        >Contributors' Institutions</span>
+        <br />
+        <div class="overline pt-6 mb-3">Institutional supports</div>
+        <v-divider></v-divider>This project is supported by :
         <ul>
           <li>
-            <a
-              href="https://www.paris-iea.fr"
-              target="_blank"
-              rel="noopener noreferrer"
-            >IAS Paris - IEA de Paris</a>.
+            <a href="https://aws.amazon.com/" target="_blank">Amazon Web Services</a>
           </li>
           <li>
-            <a href="http://" target="_blank" rel="noopener noreferrer">partner name</a>
+            <a
+              href="http://www.eassh.eu/"
+              target="_blank"
+            >EASSSH (European Alliance for Social Siences and Humanities)</a>
           </li>
-          <li></li>
+          <li>
+            <a href="https://www.paris-iea.fr" target="_blank">IAS Paris - IEA de Paris</a>.
+          </li>
+          <li>
+            <a
+              href="https://www.ipsp.org/"
+              target="_blank"
+            >IPSP (International Panel on Social Progress</a>
+          </li>
+          <li>
+            <a href="http://netias.science/home" target="_blank">Netias</a>
+          </li>
+
+          <li>
+            <a
+              href="http://www.ubias.net/"
+              target="_blank"
+            >UBIAS (University-Based Institutes for Advanced Studies)</a>
+          </li>
+          <li>More Pending&hellip;</li>
         </ul>
-      </v-card-text>
-      <v-card-subtitle class="subtitle-2 px-6">Technical supports</v-card-subtitle>
-      <v-card-text class="subtitle-1 px-6 mb-3">
-        This website and logo have been designed by
+        <div class="overline pt-6 mb-3">Technical supports</div>
+        <v-divider></v-divider>This website and logo as well as its infrastructure have been designed by
         <a
           href="https://github.com/Billybobbonnet"
           target="_blank"
-          rel="noopener noreferrer"
         >Antoine Cordelois</a>.
         The frontend is static/lambda-generated and is powered by
         <a
           href="https://nuxtjs.org/"
           target="_blank"
-          rel="noopener noreferrer"
         >Nuxt</a> and
-        <a href="http://vuetifyjs.com" target="_blank" rel="noopener noreferrer">Vuetify</a>..
-        <br />The logo is based on a SVG file downloaded from
-        <a
-          href="https://thenounproject.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >thenounproject.com</a> named "Globe" by
-        <a
-          href="https://thenounproject.com/nguyenthanhthuydesign/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >NTT</a>
+        <a href="http://vuetifyjs.com" target="_blank">Vuetify</a>
+        .
         <br />The backend (work in progress) is built around a serverless/FAAS graphQL API made on top of
         <a
           href="https://aws.amazon.com/"
           target="_blank"
-          rel="noopener noreferrer"
-        >AWS ecosystem</a>. Its source code will not be released as it is based on a private service, but talks about making the API public in the upcoming weeks are in progress.
+        >AWS ecosystem</a>.
+        <br />The logo is based on a SVG file downloaded from
+        <a
+          href="https://thenounproject.com"
+          target="_blank"
+        >thenounproject.com</a> named "Globe" by
+        <a
+          href="https://thenounproject.com/nguyenthanhthuydesign/"
+          target="_blank"
+        >NTT</a>.
         <br />All the images used are free of rights (or distributed as such).
-      </v-card-text>
-      <v-card-text class="font-weight-light caption px-6 mb-3">
-        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-          <img
-            alt="Creative Commons License"
-            style="border-width:0"
-            src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
-          />
-        </a>
         <br />
-        <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">WPRN</span> by
-        <a
-          xmlns:cc="http://creativecommons.org/ns#"
-          href="https://wprn.org"
-          property="cc:attributionName"
-          rel="cc:attributionURL"
-        >World Pandemic Research Network</a> is licensed under a
-        <a
-          rel="license"
-          href="http://creativecommons.org/licenses/by-sa/4.0/"
-        >Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        <br />Based on a work at
-        <a
-          xmlns:dct="http://purl.org/dc/terms/"
-          href="https://github.com/WPRN/website"
-          rel="dct:source"
-        >https://github.com/WPRN/website</a>.
+        <span class="caption">
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img
+              alt="Creative Commons License"
+              style="border-width:0"
+              src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
+            />
+          </a>
+          <br />
+          <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">WPRN</span> by
+          <a
+            xmlns:cc="http://creativecommons.org/ns#"
+            href="https://wprn.org"
+            property="cc:attributionName"
+            rel="cc:attributionURL"
+          >World Pandemic Research Network</a> is licensed under a
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by-sa/4.0/"
+          >Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+          <br />Based on a work at
+          <a
+            xmlns:dct="http://purl.org/dc/terms/"
+            href="https://github.com/WPRN/website"
+            rel="dct:source"
+          >https://github.com/WPRN/website</a> By Antoine Cordelois.
+        </span>
       </v-card-text>
 
       <v-divider></v-divider>

@@ -521,7 +521,6 @@
   </v-stepper>
 </template>
 <script>
-import Amplify, { API, graphqlOperation } from "aws-amplify";
 import {
   zones,
   countries,
@@ -532,6 +531,8 @@ import {
 } from "~/assets/data";
 import { alpha, pattern, email } from "~/assets/regex";
 import { newProject } from "../../../backend/src/graphql/mutations";
+import gql from "graphql-tag";
+import client from "~/plugins/amplify";
 export default {
   data() {
     return {
@@ -688,9 +689,10 @@ export default {
         });
         args.recaptcha = await this.$recaptcha.getResponse();
 
-        const res = await API.graphql(
-          graphqlOperation(newProject, { input: args })
-        );
+        const res = await client.mutate({
+          mutation: gql(newProject),
+          variables: { input: args }
+        });
 
         if (res && !res.errors) {
           this.$emit("complete");

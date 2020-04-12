@@ -67,7 +67,8 @@
 <script>
 import { alpha, pattern, email } from "~/assets/regex";
 import { newContact } from "../../../backend/src/graphql/mutations";
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import gql from "graphql-tag";
+import client from "~/plugins/amplify";
 export default {
   data() {
     return {
@@ -135,11 +136,12 @@ export default {
         Object.keys(this.contact).forEach(key => {
           if (!args[key] || args[key].length === 0) delete args[key];
         });
-        args.recaptcha = await this.$recaptcha.getResponse();
 
-        const res = await API.graphql(
-          graphqlOperation(newContact, { input: args })
-        );
+        args.recaptcha = await this.$recaptcha.getResponse();
+        const res = await client.mutate({
+          mutation: gql(newContact),
+          variables: { input: args }
+        });
 
         if (res && !res.errors) {
           this.$emit("complete");

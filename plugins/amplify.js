@@ -1,11 +1,15 @@
 import Vue from 'vue'
-import Amplify, * as AmplifyModules from 'aws-amplify'
-import { AmplifyPlugin, components } from 'aws-amplify-vue'
-import aws_exports from '../../backend/src/aws-exports'
-Amplify.configure(aws_exports)
+import gql from 'graphql-tag';
+import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
+import awsconfig from '../../backend/src/aws-exports';
+const client = new AWSAppSyncClient({
+  url: awsconfig.aws_appsync_graphqlEndpoint,
+  region: awsconfig.aws_appsync_region,
+  auth: {
+    type: AUTH_TYPE.API_KEY, // or type: awsconfig.aws_appsync_authenticationType,
+    apiKey: awsconfig.aws_appsync_apiKey,
+  }
+});
+Vue.use(client)
 
-Vue.use(AmplifyPlugin, AmplifyModules)
-
-//register components individually for further use
-// Do not import in .vue files
-Vue.component('sign-in', components.SignIn)
+export default client

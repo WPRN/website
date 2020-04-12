@@ -13,15 +13,16 @@
     "test": "nuxt generate && aws s3 cp dist s3://test.wprn.org --recursive",
     "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
     "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "analyze": "nuxt build --analyze"
   },
   "dependencies": {
     "@nuxtjs/recaptcha": "^0.6.2",
     "@nuxtjs/sitemap": "^2.1.0",
-    "aws-amplify": "^2.2.6",
-    "aws-amplify-vue": "^1.1.4",
-    "gh-pages": "^2.2.0",
+    "@tweenjs/tween.js": "^18",
+    "aws-appsync": "^3.0.2",
     "nuxt": "^2.0.0",
+    "nuxt-jsonld": "^1.4.5",
     "slugify": "^1.4.0",
     "vue-timeago": "^5.1.2"
   },

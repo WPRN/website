@@ -1,12 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
-const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
-  router: {
-    base: '/website/'
-  }
+import aws_exports from '../../backend/src/aws-exports'
 
-} : {}
 export default {
-  ...routerBase,
+  router: {
+  },
   server: {
     port: 3000, // par défaut: 3000
     host: '0.0.0.0', // par défaut: localhost
@@ -55,12 +52,10 @@ export default {
   */
   plugins: [
     '~/plugins/timeago',
-    '~plugins/filters.js',
+    '~plugins/filters',
+    '~plugins/amplify',
+    '~/plugins/jsonld',
     { src: '~plugins/ga.js', mode: 'client' },
-    {
-      src: '~plugins/amplify.js',
-      ssr: false
-    }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -88,8 +83,7 @@ export default {
   */
   modules: [
     '@nuxtjs/recaptcha',
-    '@nuxtjs/sitemap'
-
+    '@nuxtjs/sitemap',
   ],
   recaptcha: {
     /* reCAPTCHA options */
@@ -127,8 +121,10 @@ export default {
     /*
     ** You can extend webpack config here
     */
-
     extend(config, ctx) {
+      /*   if (ctx && ctx.isClient) {
+          config.optimization.splitChunks.maxSize = 51200
+        } */
     }
   }
 }

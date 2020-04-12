@@ -8,9 +8,16 @@
       <v-overlay absolute z-index="0" opacity="0.6"></v-overlay>
       <v-container fill-height style="z-index:2;">
         <v-row class="mx-auto">
-          <v-col v-for="[value, title] of stats" :key="title" cols="12" md="3">
+          <v-col v-for="([value, title] , i) of stats" :key="title" cols="12" md="3">
             <div class="text-center">
-              <div class="display-3 font-weight-black mb-4" v-text="value"></div>
+              <div class="display-3 font-weight-black mb-4">
+                <template v-if="tweened">
+                  <div class="display-3 font-weight-black mb-4" v-text="value"></div>
+                </template>
+                <template v-else>
+                  <AnimatedInteger :value="value" :delay="(i+1)*800" @finished="tweened=true" />
+                </template>
+              </div>
 
               <div class="title font-weight-regular text-uppercase" v-text="title"></div>
             </div>
@@ -21,16 +28,21 @@
   </section>
 </template>
 <script>
+import AnimatedInteger from "~/components/mainPage/AnimatedInteger";
 export default {
   data() {
     return {
       stats: [
-        ["XXX", "Projects"],
-        ["XX", "Contributing Institutions"],
-        ["XX", "Referents"],
-        ["34", "Disciplines"]
-      ]
+        [152, "Projects"],
+        [47, "Contributing Institutions"],
+        [246, "Referents"],
+        [34, "Disciplines"]
+      ],
+      tweened: false
     };
+  },
+  components: {
+    AnimatedInteger
   }
 };
 </script>
