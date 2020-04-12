@@ -25,7 +25,7 @@
         >IAS Paris - IEA de Paris</a>.
         <br />
         <b>Thanks</b>
-        to all the contributors whose contribution and collective intelligence provides us all with this
+        to all those whose contribution and collective intelligence provides us all with this
         shared resource.
         <br />This is a non-profit initiative. We welcome donations.
         <br />
@@ -68,6 +68,10 @@
           </li>
 
           <li>
+            <a href="http://www.uai-iua.org/" target="_blank">Union Académique Internationale</a>
+          </li>
+
+          <li>
             <a
               href="http://www.ubias.net/"
               target="_blank"
@@ -88,7 +92,7 @@
         >Nuxt</a> and
         <a href="http://vuetifyjs.com" target="_blank">Vuetify</a>
         .
-        <br />The backend (work in progress) is built around a serverless/FAAS graphQL API made on top of
+        <br />The backend is built around a serverless/FAAS graphQL API made on top of
         <a
           href="https://aws.amazon.com/"
           target="_blank"

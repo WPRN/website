@@ -187,6 +187,13 @@ export const supports = [
     image: "ipsp-header.png",
     color: "#15c"
   },
+
+  {
+    name: "NETIAS",
+    url: "http://netias.science/home",
+    image: "netias.png",
+    color: "#ffc54b"
+  },
   {
     name: "UBIAS",
     url: "http://www.ubias.net/",
@@ -194,16 +201,11 @@ export const supports = [
     color: 'white'
 
   },
-  /*  {
-     name: "IAS-PARIS",
-     url: "https://www.paris-iea.fr/en",
-     image: "iea-paris-logo.gif"
-   }, */
   {
-    name: "NETIAS",
-    url: "http://netias.science/home",
-    image: "netias.png",
-    color: "#ffc54b"
+    name: "Union Académique Internationale",
+    url: "http://www.uai-iua.org/",
+    image: "Logo_de_l'Union_Académique_Internationale.png",
+    color: "white"
   },
 ]
 export const zones = [

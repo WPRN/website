@@ -33,9 +33,9 @@ export default {
   data() {
     return {
       stats: [
-        [152, "Projects"],
-        [47, "Contributing Institutions"],
-        [246, "Referents"],
+        [25, "Projects"],
+        [41, "Contributing Institutions"],
+        [185, "Referents"],
         [34, "Disciplines"]
       ],
       tweened: false

@@ -111,15 +111,15 @@
         <v-col cols="12" class="subtitle-1">
           <span class="overline">CONTACT :</span>
           <br />
-          {{project.contact_firstname + ' ' + project.contact_lastname}}
+          {{project.contact_lastname + ', ' + project.contact_firstname}}
           <template
             v-if="project.contact_entity"
           >({{project.contact_entity}})</template>
         </v-col>
         <v-col cols="12" class="subtitle-1 pr-12">
-          <span class="overline">Description</span>
+          <span class="overline">Team and Project description</span>
           <br />
-          {{project.description}}
+          <p v-html="$options.filters.nl2br(project.description)"></p>
         </v-col>
         <v-col cols="12" class="subtitle-1" v-if="pageMode">
           <span class="overline">To cite this project in your research</span>

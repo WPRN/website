@@ -43,12 +43,12 @@
               <v-col cols="12">
                 <v-textarea
                   required
-                  label="Description*"
+                  label="Project and Team description*"
                   solo
                   v-model="project.description"
                   type="text"
                   :rules="descriptionRules"
-                  counter="1500"
+                  counter="2000"
                   ref="description"
                 ></v-textarea>
               </v-col>
@@ -343,8 +343,10 @@
                   <div class="subtitle-1">{{project.url}}</div>
                 </v-col>
                 <v-col cols="12" class="pl-3">
-                  <div class="font-weight-light caption">Description</div>
-                  <div class="subtitle-1">{{project.description}}</div>
+                  <div class="font-weight-light caption">Project and Team description</div>
+                  <div class="subtitle-1">
+                    <p v-html="$options.filters.nl2br(project.description)"></p>
+                  </div>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -554,7 +556,7 @@ export default {
         value =>
           value.length >= 5 ||
           "The project name  must have at least 4 characters",
-        value => value.length <= 40 || "Max 40 characters",
+        value => value.length <= 140 || "Max 140 characters",
         value => {
           return true;
         }
@@ -564,7 +566,7 @@ export default {
         value =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        value => value.length <= 40 || "Max 40 characters",
+        value => value.length <= 80 || "Max 80 characters",
         value => {
           return true;
         }
@@ -589,9 +591,9 @@ export default {
       descriptionRules: [
         value => !!value || "A description is required.",
         value =>
-          value.length >= 500 ||
-          "The description must have at least 500 characters",
-        value => value.length <= 1500 || "Max 1500 characters"
+          value.length >= 100 ||
+          "The description must have at least 100 characters",
+        value => value.length <= 2000 || "Max 2000 characters"
       ],
       requiredRules: [
         value => !!value || "This field is required.",
