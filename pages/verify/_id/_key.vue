@@ -92,7 +92,7 @@
   </v-container>
 </template>
 <script>
-import * as mutations from "../../../../backend/src/graphql/mutations";
+import * as mutations from "~/graphql/mutations";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
 import gql from "graphql-tag";
 import client from "~/plugins/amplify";
@@ -107,7 +107,7 @@ export default {
   async mounted() {
     try {
       const res = await client.mutate({
-        mutation: mutations.verifyEmail,
+        mutation: gql(mutations.verifyEmail),
         variables: {
           id: this.$route.params.id,
           key: this.$route.params.key

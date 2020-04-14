@@ -64,7 +64,7 @@
   </v-container>
 </template>
 <script>
-import * as queries from "../../../backend/src/graphql/queries";
+import * as queries from "~/graphql/queries";
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
 import ContactDialog from "~/components/contact/ContactDialog";
 import ProjectDetails from "~/components/projectList/ProjectDetails";

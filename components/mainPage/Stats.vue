@@ -7,7 +7,7 @@
     >
       <v-overlay absolute z-index="0" opacity="0.6"></v-overlay>
       <v-container fill-height style="z-index:2;">
-        <v-row class="mx-auto">
+        <!--  <v-row class="mx-auto">
           <v-col v-for="([value, title] , i) of stats" :key="title" cols="12" md="3">
             <div class="text-center">
               <div class="display-3 font-weight-black mb-4">
@@ -22,7 +22,7 @@
               <div class="title font-weight-regular text-uppercase" v-text="title"></div>
             </div>
           </v-col>
-        </v-row>
+        </v-row>-->
       </v-container>
     </v-parallax>
   </section>

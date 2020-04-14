@@ -444,7 +444,7 @@
   </div>
 </template>
 <script>
-import * as queries from "../../../backend/src/graphql/queries";
+import * as queries from "~/graphql/queries";
 import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
 import ProjectDetails from "~/components/projectList/ProjectDetails";
 import ContactDialog from "~/components/contact/ContactDialog";
@@ -780,7 +780,10 @@ export default {
       options.limit = this.options.itemsPerPage;
       const projects = await client.query({
         query: gql(queries.listProjects),
-        variables: options
+        variables: options,
+        options: {
+          fetchPolicy: "cache-and-network"
+        }
       });
 
       this.$store.commit("setProjects", projects.data.listProjects.items);

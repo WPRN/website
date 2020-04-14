@@ -532,7 +532,7 @@ import {
   state
 } from "~/assets/data";
 import { alpha, pattern, email } from "~/assets/regex";
-import { newProject } from "../../../backend/src/graphql/mutations";
+import { newProject } from "~/graphql/mutations";
 import gql from "graphql-tag";
 import client from "~/plugins/amplify";
 export default {

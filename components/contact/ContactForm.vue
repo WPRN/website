@@ -66,7 +66,7 @@
 </template>
 <script>
 import { alpha, pattern, email } from "~/assets/regex";
-import { newContact } from "../../../backend/src/graphql/mutations";
+import { newContact } from "~/graphql/mutations";
 import gql from "graphql-tag";
 import client from "~/plugins/amplify";
 export default {

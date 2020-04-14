@@ -204,7 +204,7 @@ export const supports = [
   {
     name: "Union Académique Internationale",
     url: "http://www.uai-iua.org/",
-    image: "Logo_de_l'Union_Académique_Internationale.png",
+    image: "Logo_de_l'Union_Académique_Internationale.jpg",
     color: "white"
   },
 ]

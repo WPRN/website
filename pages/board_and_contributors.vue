@@ -86,7 +86,7 @@
                         :src="'/logos/'+item.image"
                         contain
                         :width="$vuetify.breakpoint.mdAndUp?'190':'130'"
-                        height="auto"
+                        height="100"
                         class="text-right pa-2"
                       ></v-img>
                     </a>

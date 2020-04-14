@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-import aws_exports from '../../backend/src/aws-exports'
+import aws_exports from './aws-exports'
 
 export default {
   router: {
@@ -36,8 +36,11 @@ export default {
       { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon-96x96.png" },
       { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
       { rel: "manifest", href: "/manifest.json" }
+    ],
+    script: [
     ]
   },
+
   /*
   ** Customize the progress-bar color
   */
@@ -56,6 +59,7 @@ export default {
     '~plugins/amplify',
     '~/plugins/jsonld',
     { src: '~plugins/ga.js', mode: 'client' },
+    { src: '~/plugins/polyfills', mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -118,6 +122,7 @@ export default {
   ** Build configuration
   */
   build: {
+    //...
     /*
     ** You can extend webpack config here
     */
