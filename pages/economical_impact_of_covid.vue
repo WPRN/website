@@ -13,23 +13,17 @@
       </v-btn>
 
       <v-spacer></v-spacer>
-      <v-fab-transition>
-        <v-btn
-          light
-          absolute
-          top
-          right
-          tile
-          fab
-          outlined
-          class="mt-12 mr-0"
-          x-large
-          @click.stop="drawer = !drawer"
-          v-show="!drawer"
-        >
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-      </v-fab-transition>
+      <v-btn
+        light
+        tile
+        outlined
+        class="pa-0 mb-0 ml-0 mt-1 mr-1"
+        width="72"
+        height="72"
+        @click.stop="drawer = !drawer"
+      >
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
     </v-app-bar>
     <NavigationDrawer
       @close="drawer=false"
@@ -98,8 +92,8 @@
                 <br />
                 <br />A multicentric extension of the survey is planned in many countries, with an inclusion of some questions of the crisis coping questionnaire (
                 <a
-                  href
-                >WPRN ID XXXX</a>). This project is open for collaboration.
+                  href="https://wprn.org/item/413552"
+                >WPRN ID 413552</a>). This project is open for collaboration.
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>

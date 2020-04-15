@@ -2,7 +2,11 @@
   <v-app>
     <nuxt />
     <recaptcha @error="onError" @success="onSuccess" @expired="onExpired" />
-    <v-footer class="justify-center" color="#292929" height="100">
+    <v-footer
+      class="justify-center"
+      color="#292929"
+      :class="{'pb-4':$vuetify.breakpoint.smAndDown}"
+    >
       <div class="title font-weight-light grey--text text--lighten-1 text-center">
         <v-tooltip top>
           <template v-slot:activator="{ on }">

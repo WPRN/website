@@ -11,6 +11,7 @@
       :class="$vuetify.breakpoint.mdAndUp?' elevation-1 px-6':'elevation-1'"
       :options.sync="options"
       :footer-props="{itemsPerPageOptions: [5,10,20,50,100]}"
+      calculate-widths
     >
       <template v-slot:top>
         <v-card flat>
@@ -782,7 +783,7 @@ export default {
         query: gql(queries.listProjects),
         variables: options,
         options: {
-          fetchPolicy: "cache-and-network"
+          fetchPolicy: "network-only"
         }
       });
 

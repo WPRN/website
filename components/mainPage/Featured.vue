@@ -27,7 +27,8 @@
 
           <div class="title font-weight-light mb-5">
             This multicentric survey on enterprises stems from the pioneer research led by Professor Xiaobo
-            Zhang on the economic impact of the epidemic on Chinese SMEs (WPRN ID XXXXX).
+            Zhang on the economic impact of the epidemic on Chinese SMEs (
+            <a href="https://wprn.org/item/413452">WPRN ID 413452</a>).
             This team has agreed to share the questionnaire, which is currently translated and surveys
             launched around the world.
           </div>

@@ -1,6 +1,15 @@
 <template>
-  <v-card class="pb-3" :class="{'ml-3 mt-3':pageMode}" flat>
-    <v-card-title class="pl-0 pb-1 justify-space-between d-flex" v-if="pageMode">
+  <v-card
+    class="pb-3"
+    :class="{'ml-3 mt-3':pageMode&&$vuetify.breakpoint.mdAndUp}"
+    flat
+    :max-width="$vuetify.breakpoint.width"
+  >
+    <v-card-title
+      class="pl-0 pb-1 justify-space-between d-flex"
+      v-if="pageMode"
+      :class="{'pl-3':$vuetify.breakpoint.smAndDown}"
+    >
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <nuxt-link to="/worldwide">
@@ -15,7 +24,7 @@
       &nbsp;
       {{project.name}}
       <v-spacer></v-spacer>
-      <v-btn-toggle rounded :class="{'float-right':$vuetify.breakpoint.smAndDown}">
+      <v-btn-toggle rounded :class="{'mt-3':$vuetify.breakpoint.smAndDown}">
         <v-tooltip bottom v-for="(social, index) in socialChannels" :key="index">
           <template v-slot:activator="{ on }">
             <v-btn
@@ -32,8 +41,16 @@
         </v-tooltip>
       </v-btn-toggle>
     </v-card-title>
-    <v-card-subtitle v-if="pageMode" class="ml-12 pl-4 overline">WPRN-{{project.pubId}}</v-card-subtitle>
-    <v-card-text class="pb-0 white--text" :class="{'pl-12 ml-4':pageMode}">
+    <br v-if="pageMode&&$vuetify.breakpoint.smAndDown" />
+    <v-card-subtitle
+      v-if="pageMode"
+      :class="{'ml-12 pl-4':pageMode&&$vuetify.breakpoint.mdAndUp}"
+      class="overline"
+    >WPRN-{{project.pubId}}</v-card-subtitle>
+    <v-card-text
+      class="pb-0 white--text"
+      :class="{'pl-12 ml-4':pageMode&&$vuetify.breakpoint.mdAndUp}"
+    >
       <v-row>
         <v-col cols="12" md="6" xl="4">
           <span class="overline">CREATION DATE :</span>
@@ -273,6 +290,7 @@ export default {
       copyNode.setAttribute("type", "hidden");
       window.getSelection().removeAllRanges();
     }
-  }
+  },
+  mounted() {}
 };
 </script>

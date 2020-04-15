@@ -2,8 +2,8 @@
   <v-navigation-drawer
     v-model="drawer"
     app
-    bottom
     right
+    bottom
     @click:outside="$emit('close')"
     disable-resize-watcher
   >

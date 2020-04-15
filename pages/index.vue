@@ -48,7 +48,6 @@
             class="mt-12 mr-0"
             size="90"
             @click.stop="drawer = !drawer"
-            v-show="!drawer"
             x-large
           >
             <v-icon>mdi-menu</v-icon>

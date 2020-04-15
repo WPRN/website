@@ -16,44 +16,34 @@
       :drawer="drawer"
     />
     <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})" class="ml-0 pl-0">
+      <v-btn text @click="$router.push({path:'/'})" class="mx-0 px-0">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
           <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>
       </v-btn>
-      <h2 class="black--text pr-12" :class="$vuetify.breakpoint.smAndDown?'title':'headline'">
-        <template
-          v-if="$route.params.zone === 'worldwide'"
-        >{{zones.find(zone => $route.params.zone === zone.value).text }} Projects</template>
-        <template
-          v-else
-        >Search results for Projects in {{zones.find(zone => $route.params.zone === zone.value).text }}</template>
+      <h2 class="black--text" :class="$vuetify.breakpoint.smAndDown?'title':'headline'">
+        <template v-if="$route.params.zone === 'worldwide'">All Projects</template>
+        <template v-else>Projects in {{zones.find(zone => $route.params.zone === zone.value).text }}</template>
       </h2>
 
       <v-spacer></v-spacer>
-      <v-fab-transition>
-        <v-btn
-          light
-          absolute
-          top
-          right
-          tile
-          fab
-          outlined
-          class="mt-12 mr-0"
-          x-large
-          @click.stop="drawer = !drawer"
-          v-show="!drawer"
-        >
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-      </v-fab-transition>
+      <v-btn
+        light
+        tile
+        outlined
+        class="pa-0 mb-0 ml-0 mt-1 mr-1"
+        width="72"
+        height="72"
+        @click.stop="drawer = !drawer"
+      >
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-content>
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-text :class="$vuetify.breakpoint.mdAndUp?'px-6':'pl-6'">
+            <v-card-text :class="$vuetify.breakpoint.mdAndUp?'px-6':'pl-3'">
               <ProjectList />
             </v-card-text>
           </v-card>
