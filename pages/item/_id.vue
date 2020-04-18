@@ -1,7 +1,7 @@
 <template>
   <v-container app fill-height :class="{'pr-0':$vuetify.breakpoint.smAndDown}" align-start>
     <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})" class="ml-0 pl-0">
+      <v-btn text @click="$router.push({path:'/'})" class="mx-0 px-0" height="auto">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
           <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>
@@ -60,7 +60,7 @@
         </template>
       </v-row>
     </v-content>
-    <ContactDialog :open="contact" @close="contact=false" :id="project.id" />
+    <ContactDialog :open="contact" @close="contact=false" :id="project.pubId" />
   </v-container>
 </template>
 <script>
@@ -134,7 +134,7 @@ export default {
       zones,
       drawer: false,
       ready: false,
-      project: this.$store.state.project || false,
+      project: false,
       contact: false
     };
   },
@@ -144,38 +144,24 @@ export default {
     ProjectDetails
   },
   async mounted() {
-    // do we have the right project
-    if (this.project.pubId === this.$route.params.id) {
-      this.ready = true;
-    } else {
-      // check if we have it in project
-      const storedProject = this.$store.state.projects.find(
-        item => item.pubId === this.$route.params.id
-      );
-      if (storedProject) {
-        this.store.commit("setProject", storedProject);
+    try {
+      const res = await client.query({
+        query: gql(queries.getProject),
+        variables: {
+          pubId: this.$route.params.id
+        }
+      });
+
+      if (res && res.data && res.data.getProject && !res.errors) {
+        console.log("from network");
+        this.project = res.data.getProject;
         this.ready = true;
       } else {
-        try {
-          const res = await client.query({
-            query: gql(queries.getProject),
-            variables: {
-              pubId: this.$route.params.id
-            }
-          });
-
-          if (res && res.data && res.data.getProject && !res.errors) {
-            this.project = res.data.getProject;
-            this.$store.commit("setProject", res.data.getProject);
-            this.ready = true;
-          } else {
-            this.ready = true;
-          }
-        } catch (error) {
-          this.error = true;
-          this.ready = true;
-        }
+        this.ready = true;
       }
+    } catch (error) {
+      this.error = true;
+      this.ready = true;
     }
   },
   methods: {}

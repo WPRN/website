@@ -88,3 +88,41 @@ export const listProjects = `query ListProjects(
   }
 }
 `;
+export const searchProjects = `query SearchProjects(
+  $filter: SearchableProjectFilterInput
+  $sort: SearchableProjectSortInput
+  $limit: Int
+  $nextToken: String
+) {
+  searchProjects(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      description
+      type
+      status
+      field
+      country
+      city
+      zone
+      contact_firstname
+      contact_lastname
+      contact_entity
+      url
+      date
+      time
+      pubId
+      createdAt
+      state
+      thematics
+    }
+    nextToken
+    total
+  }
+}
+`;

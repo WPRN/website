@@ -9,15 +9,16 @@
       item-key="id"
       :server-items-length="projects&&projects['total']"
       :class="$vuetify.breakpoint.mdAndUp?' elevation-1 px-6':'elevation-1'"
+      class="px-1"
       :options.sync="options"
       :footer-props="{itemsPerPageOptions: [5,10,20,50,100]}"
-      calculate-widths
     >
       <template v-slot:top>
         <v-card flat>
+          <!-- DEFAULT FILTERS -->
           <v-row no-gutters>
-            <v-col cols="12" class="mt-6">
-              <v-card-title class="pl-0" :class="{'pr-0':$vuetify.breakpoint.smAndDown}">
+            <v-col cols="12">
+              <v-card-title class="pl-0 pt-0" :class="{'pr-0':$vuetify.breakpoint.smAndDown}">
                 <v-btn
                   outlined
                   small
@@ -92,6 +93,7 @@
               </v-card-title>
             </v-col>
           </v-row>
+          <!-- ADVANCED FILTERS -->
           <v-expand-transition class="align-center">
             <v-row :class="{'pr-8':$vuetify.breakpoint.mdAndUp}" v-show="$store.state.showFilters">
               <v-col cols="12" sm="6" md="4" lg="3">
@@ -188,9 +190,11 @@
           </v-expand-transition>
         </v-card>
       </template>
+      <!--  LOADING STATE -->
       <template v-slot:loading>
         <v-skeleton-loader transition="scale-transition" type="table-tbody"></v-skeleton-loader>
       </template>
+      <!-- NO DATA STATE -->
       <template v-slot:no-data>
         <template v-if="!filtering">
           <div class="my-3">There are no projects to display</div>
@@ -210,21 +214,21 @@
           </v-btn>
         </template>
       </template>
+      <!-- RESULT ROW -->
       <template v-slot:item="{ item }">
-        <tr
-          :class="$vuetify.theme.dark?{'grey darken-3':item.hasViewed}:{'grey lighten-4':item.hasViewed}"
-          @click="expanded.includes(item)?expanded=[]:expanded=[item]"
-        >
+        <tr @click="expanded.includes(item)?expanded=[]:expanded=[item]" class="font-weight-medium">
           <!-- STATUS -->
-          <td>
+          <td class="pr-0 pl-1">
             <ProjectStatusBadge :status="item.status" />
           </td>
           <!-- NAME -->
-          <td>{{item.name}}</td>
-          <!-- STATE -->
-          <td>{{item.state.split(' ')[0]}}</td>
+          <td :style="$vuetify.breakpoint.mdAndUp?'min-width:30vw;':'min-width:40vw;'" class="px-1">
+            {{item.name}}
+            <!-- STATE -->
+          </td>
+          <td class="px-1">{{item.state.split(' ')[0]}}</td>
           <!-- FIELD -->
-          <td>
+          <td class="px-1">
             <template v-for="(field, index) in orderItems(item, 'field')">
               <template v-if="index < 2">
                 <template v-if="field.length>16">
@@ -268,7 +272,7 @@
             </template>
           </td>
           <!-- THEMATICS -->
-          <td>
+          <td class="px-1">
             <template v-for="(thematics, index) in orderItems(item, 'thematics')">
               <template v-if="index < 2">
                 <template v-if="thematics.length>16">
@@ -317,10 +321,10 @@
             </template>
           </td>
           <!-- TYPE -->
-          <td>
+          <td class="px-1">
             <template v-for="(type, index) in  orderItems(item, 'type')">
               <template v-if="index < 2">
-                <template v-if="type.length>19">
+                <template v-if="type.length>19&&item.type.length>1">
                   <v-tooltip top :key="index">
                     <template v-slot:activator="{ on }">
                       <v-chip
@@ -362,9 +366,9 @@
             </template>
           </td>
           <!-- ZONE (CONTINENT) -->
-          <td>
+          <td class="px-1">
             <template v-for="(zone, index) in item.zone">
-              <template v-if="index < 2">
+              <template v-if="item.zone.length===1&&zone==='worldwide'">
                 <v-chip
                   small
                   label
@@ -372,26 +376,39 @@
                   light
                   class="ma-1"
                   :key="index"
-                >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
+                >Worldwide</v-chip>
               </template>
               <template v-else>
-                <template v-if="index===2&&item.zone.length>2">
-                  <v-tooltip :key="index" top>
-                    <template v-slot:activator="{ on }">
-                      <span
-                        v-on="on"
-                        class="caption"
-                        style="white-space:nowrap;"
-                      >+ {{item.zone.length - 2}} more</span>
-                    </template>
-                    <span>{{orderItems(item, 'zone').slice(2).join(",&nbsp;")}}</span>
-                  </v-tooltip>
+                <template v-if="index < 2">
+                  <v-chip
+                    small
+                    label
+                    :color="filters.zone.includes(zone)?'#c4c4c4':'accent'"
+                    light
+                    class="ma-1"
+                    :key="index"
+                  >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
+                </template>
+                <template v-else>
+                  <template v-if="index===2&&item.zone.length>2">
+                    <v-tooltip :key="index" top>
+                      <template v-slot:activator="{ on }">
+                        <span
+                          v-on="on"
+                          class="caption"
+                          style="white-space:nowrap;"
+                        >+ {{item.zone.length - 2}} more</span>
+                      </template>
+                      <span>{{zones.filter(zone => !orderItems(item, 'zone').slice(2).includes(zone.value)).map(zone => zone.text).join(",&nbsp;")}}</span>
+                      <!-- B-) -->
+                    </v-tooltip>
+                  </template>
                 </template>
               </template>
             </template>
           </td>
           <!-- COUNTRY -->
-          <td>
+          <td class="px-1">
             <template v-for="(country, index) in orderItems(item, 'country')">
               <template v-if="index < 2">
                 <v-chip
@@ -436,7 +453,7 @@
         </tr>
       </template>
       <template v-slot:expanded-item="{ item }">
-        <td colspan="8">
+        <td colspan="9">
           <ProjectDetails :project="item" @contact="contact=true" />
         </td>
         <ContactDialog :open="contact" @close="contact=false" :id="item.pubId" />
@@ -470,11 +487,10 @@ export default {
       thematics,
       contact: false,
       loading: false,
-      projects: this.$store.state.projects,
+      projects: [],
       expanded: [],
       filtering: false,
       projectId: "",
-      limit: 10,
       nextToken: false,
       filters: {
         field: [],
@@ -779,15 +795,13 @@ export default {
         ? (this.filtering = true)
         : (this.filtering = false);
       options.limit = this.options.itemsPerPage;
+
       const projects = await client.query({
         query: gql(queries.listProjects),
         variables: options,
-        options: {
-          fetchPolicy: "network-only"
-        }
+        fetchPolicy: "network-only"
       });
 
-      this.$store.commit("setProjects", projects.data.listProjects.items);
       this.projects = projects.data.listProjects.items;
       this.nextToken = projects.data.listProjects.nextToken;
       this.loading = false;
@@ -804,11 +818,19 @@ export default {
     orderItems(project, item) {
       if (this.filters[item].length && project[item] && project[item].length) {
         let items = project[item];
-        this.filters[item].forEach(element => {
-          if (items.includes(element)) {
-            items = [element, ...items.filter(dat => dat !== element)];
-          }
-        });
+
+        if (item === "zone") {
+          items = [
+            items.find(dat => dat === this.filters[item]),
+            ...items.filter(dat => dat !== this.filters[item])
+          ];
+        } else {
+          this.filters[item].forEach(element => {
+            if (items.includes(element)) {
+              items = [element, ...items.filter(dat => dat !== element)];
+            }
+          });
+        }
         return items;
       } else {
         return project[item];

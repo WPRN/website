@@ -25,10 +25,12 @@
 
           <h3 class="font-weight-black mb-4 text-uppercase">Economic impact of Covid-19.</h3>
 
-          <div class="title font-weight-light mb-5">
+          <div class="title font-weight-regular mb-5">
             This multicentric survey on enterprises stems from the pioneer research led by Professor Xiaobo
-            Zhang on the economic impact of the epidemic on Chinese SMEs (
-            <a href="https://wprn.org/item/413452">WPRN ID 413452</a>).
+            Zhang on the economic impact of the epidemic on Chinese SMEs -
+            <a
+              href="https://wprn.org/item/413452"
+            >WPRN ID 413452</a>.
             This team has agreed to share the questionnaire, which is currently translated and surveys
             launched around the world.
           </div>
@@ -51,7 +53,7 @@
 
           <h3 class="font-weight-black mb-4 text-uppercase">Just One Giant Lab</h3>
 
-          <div class="title font-weight-light mb-5">
+          <div class="title font-weight-regular mb-5">
             Just One Giant Lab (JOGL) is the first research and innovation laboratory operating as a
             distributed, open and massive mobilisation platform for collaborative task solving.
             JOGL is a free and open-source platform you can use to set up and develop collaborative
@@ -82,7 +84,7 @@
             class="font-weight-black mb-4 text-uppercase"
           >Psychological and Social impact of Covid-19.</h3>
 
-          <div class="title font-weight-light mb-5">
+          <div class="title font-weight-regular mb-5">
             How do people cope, positively or not, with the stressful situation of lockdown and confinement?
             A multidisciplinary team provides a set of questions that assess the sources and forms of stress
             and coping, as well as the levers for communication and influence to support people during the

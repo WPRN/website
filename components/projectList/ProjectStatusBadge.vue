@@ -5,7 +5,11 @@
         <v-icon v-on="on">mdi-star</v-icon>
       </template>
       <template v-else>
-        <v-chip x-small dark :color="status==='PUBLISHED'?'red':'green'" v-on="on"></v-chip>
+        <v-sheet
+          style="height:18px;width:18px; border-radius:12px"
+          :color="status==='PUBLISHED'?'red':'green'"
+          v-on="on"
+        ></v-sheet>
       </template>
     </template>
     <span v-if="status==='PUBLISHED'">This project has not been verified</span>

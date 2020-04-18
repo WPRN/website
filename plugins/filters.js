@@ -15,8 +15,8 @@ Vue.filter('formatDate', str => {
     str.getDate()
   );
 })
-Vue.filter('truncate', (text, stop, clamp) => {
-  return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
+Vue.filter('truncate', (text, stop, link, url) => {
+  return text.slice(0, stop) + (stop < text.length ? url ? '... <a href="' + url + '">' + link + '</a>' : '...' : '')
 });
 
 Vue.filter("nl2br", (str, is_xhtml) => {

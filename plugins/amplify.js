@@ -8,7 +8,8 @@ const client = new AWSAppSyncClient({
   auth: {
     type: AUTH_TYPE.API_KEY, // or type: awsconfig.aws_appsync_authenticationType,
     apiKey: awsconfig.aws_appsync_apiKey,
-  }
+  },
+  disableOffline: true
 });
 Vue.use(client)
 

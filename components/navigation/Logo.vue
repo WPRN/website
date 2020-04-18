@@ -1,8 +1,8 @@
 <template>
   <v-avatar
-    class="mr-3"
+    class="mr-3 mb-3"
     tile
-    :size="$vuetify.breakpoint.smAndDown ? 'calc(20vh - ' + $vuetify.application.top + 'px)': 'calc(40vh - ' + $vuetify.application.top + 'px)'"
+    :size="$vuetify.breakpoint.smAndDown ? 'calc(20vh - ' + $vuetify.application.top + 'px)': $vuetify.breakpoint.mdAndDown ?'calc(30vh - ' + $vuetify.application.top + 'px)':'calc(40vh - ' + $vuetify.application.top + 'px)'"
   >
     <v-img
       contain

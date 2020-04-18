@@ -1,7 +1,7 @@
 <template>
   <v-container app fill-height :class="{'pr-0':$vuetify.breakpoint.smAndDown}" align-start>
     <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})" class="ml-0 pl-0">
+      <v-btn text @click="$router.push({path:'/'})" class="mx-0 px-0" height="auto">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
           <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>

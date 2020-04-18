@@ -120,7 +120,7 @@
                   ref="type"
                 ></v-select>
               </v-col>
-              <template v-if="project.type.includes('Conference / Webinar')">
+              <!--  <template v-if="project.type.includes('Conference / Webinar')">
                 <v-col cols="12" md="6">
                   <v-menu
                     ref="dateMenu"
@@ -177,7 +177,7 @@
                     ></v-time-picker>
                   </v-menu>
                 </v-col>
-              </template>
+              </template>-->
             </v-row>
           </v-form>
         </v-card>

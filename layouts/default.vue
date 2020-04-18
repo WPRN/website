@@ -11,7 +11,12 @@
         <v-tooltip top>
           <template v-slot:activator="{ on }">
             <v-btn text icon v-on="on">
-              <a href="https://github.com/WPRN/website" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/WPRN/website"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="text-decoration:none;"
+              >
                 <v-icon color="white">mdi-github</v-icon>
               </a>
             </v-btn>
@@ -21,7 +26,12 @@
         <v-tooltip top>
           <template v-slot:activator="{ on }">
             <v-btn text icon v-on="on">
-              <a href="https://twitter.com/WPRN_org" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://twitter.com/WPRN_org"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="text-decoration:none;"
+              >
                 <v-icon color="white">mdi-twitter</v-icon>
               </a>
             </v-btn>
@@ -35,6 +45,7 @@
                 href="https://www.facebook.com/WPRN.org/"
                 target="_blank"
                 rel="noopener noreferrer"
+                style="text-decoration:none;"
               >
                 <v-icon color="white">mdi-facebook</v-icon>
               </a>
@@ -49,6 +60,7 @@
                 href="https://www.linkedin.com/company/wprn-world-pandemic-research-network/"
                 target="_blank"
                 rel="noopener noreferrer"
+                style="text-decoration:none;"
               >
                 <v-icon color="white">mdi-linkedin</v-icon>
               </a>
@@ -64,6 +76,7 @@
                 href="http://creativecommons.org/licenses/by-sa/4.0/"
                 target="_blank"
                 rel="noopener noreferrer"
+                style="text-decoration:none;"
               >
                 <v-icon color="white">mdi-creative-commons</v-icon>
               </a>
@@ -74,12 +87,19 @@
         <span class="body-2">
           {{ new Date().getFullYear() }} - This website is maintained by
           <a
+            class="blue--text"
             href="https://www.paris-iea.fr/en"
             target="_blank"
             rel="noopener noreferrer"
           >IAS Paris</a>.
-          <a style="text-decoration:underline;" @click="showCredits=true">See full credits</a> -
-          <nuxt-link to="/privacy_policy">Privacy Policy</nuxt-link>
+          <br />
+          <a
+            style="text-decoration:underline;"
+            @click="showCredits=true"
+            class="blue--text"
+          >See full credits</a> &nbsp;-&nbsp;
+          <nuxt-link to="/privacy_policy" class="blue--text">Privacy Policy</nuxt-link>&nbsp;-&nbsp;
+          <nuxt-link to="/press_room" class="blue--text">Press Room</nuxt-link>
         </span>
 
         <Credits :credits="showCredits" @closeCredits="showCredits=false" />
