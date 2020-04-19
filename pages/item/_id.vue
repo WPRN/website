@@ -153,7 +153,6 @@ export default {
       });
 
       if (res && res.data && res.data.getProject && !res.errors) {
-        console.log("from network");
         this.project = res.data.getProject;
         this.ready = true;
       } else {

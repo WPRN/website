@@ -8,7 +8,7 @@
       :loading="loading"
       item-key="id"
       :server-items-length="projects&&projects['total']"
-      :class="$vuetify.breakpoint.mdAndUp?' elevation-1 px-6':'elevation-1'"
+      :class="$vuetify.breakpoint.mdAndUp?' elevation-1 ':'elevation-1'"
       class="px-1"
       :options.sync="options"
       :footer-props="{itemsPerPageOptions: [5,10,20,50,100]}"
@@ -218,7 +218,7 @@
       <template v-slot:item="{ item }">
         <tr @click="expanded.includes(item)?expanded=[]:expanded=[item]" class="font-weight-medium">
           <!-- STATUS -->
-          <td class="pr-0 pl-1">
+          <td class="px-1">
             <ProjectStatusBadge :status="item.status" />
           </td>
           <!-- NAME -->
@@ -581,170 +581,76 @@ export default {
       this.refreshQuery();
     },
     async refreshQuery(model) {
-      // clean models from search string artefacts
-      if (model) {
-        if (model === "field") {
-          this.filters.field = this.filters.field.filter(item =>
-            fields.includes(item)
-          );
+      try {
+        // clean models from search string artefacts
+        if (model) {
+          if (model === "field") {
+            this.filters.field = this.filters.field.filter(item =>
+              fields.includes(item)
+            );
+          }
+          if (model === "country") {
+            this.filters.country = this.filters.country.filter(item =>
+              this.filters.zone === "worldwide"
+                ? Object.keys(countries)
+                    .map(countryKey => countries[countryKey])
+                    .flat()
+                    .includes(item)
+                : countries[this.filters.zone].includes(item)
+            );
+          }
         }
-        if (model === "country") {
-          this.filters.country = this.filters.country.filter(item =>
-            this.filters.zone === "worldwide"
-              ? Object.keys(countries)
-                  .map(countryKey => countries[countryKey])
-                  .flat()
-                  .includes(item)
-              : countries[this.filters.zone].includes(item)
-          );
-        }
-      }
-      let filter = {};
-      if (this.filters.featured) {
-        filter = {
-          and: [
-            {
-              or: [
-                {
-                  status: {
-                    eq: "FEATURED"
-                  }
-                }
-              ]
-            }
-          ]
-        };
-      } else {
-        if (this.filters.verified) {
-          filter = {
-            and: [
-              {
-                or: [
-                  {
-                    status: {
-                      eq: "FEATURED"
-                    }
-                  },
-                  {
-                    status: {
-                      eq: "VERIFIED"
-                    }
-                  }
-                ]
-              }
-            ]
+        let filter = {};
+        if (this.filters.featured) {
+          filter.status = {
+            eq: "FEATURED"
           };
         } else {
-          filter = {
-            and: [
-              {
-                or: [
-                  {
-                    status: {
-                      eq: "FEATURED"
-                    }
-                  },
-                  {
-                    status: {
-                      eq: "VERIFIED"
-                    }
-                  },
-                  {
-                    status: {
-                      eq: "PUBLISHED"
-                    }
-                  }
-                ]
-              }
-            ]
+          if (this.filters.verified) {
+            filter.status = {
+              match: ["FEATURED", "VERIFIED"]
+            };
+          } else {
+            filter.status = {
+              match: ["FEATURED", "VERIFIED", "PUBLISHED"]
+            };
+          }
+        }
+        if (
+          this.filters.zone &&
+          this.filters.zone.length &&
+          !this.filters.zone.includes("worldwide")
+        ) {
+          filter.zone = {
+            match: this.filters.zone
+          };
+        } else {
+          if (!this.filters.zone) {
+            this.filters.zone = "worldwide";
+          }
+        }
+
+        if (this.filters.type && this.filters.type.length) {
+          filter.type = { matchPhrase: this.filters.type };
+        }
+
+        if (this.filters.country && this.filters.country.length) {
+          filter.country = { match: this.filters.country };
+        }
+        if (this.filters.field && this.filters.field.length) {
+          filter.field = { matchPhrase: this.filters.field };
+        }
+        if (this.filters.state && this.filters.state.length) {
+          filter.field = { matchPhrase: this.filters.field };
+          filter.state = {
+            eq: this.filters.state
           };
         }
-      }
-      if (
-        this.filters.zone &&
-        this.filters.zone.length &&
-        !this.filters.zone.includes("worldwide")
-      ) {
-        filter.and.push({
-          zone: {
-            contains: this.filters.zone
-          }
-        });
-      } else {
-        if (!this.filters.zone) {
-          this.filters.zone = "worldwide";
+        if (this.filters.thematics && this.filters.thematics.length) {
+          filter.thematics = { matchPhrase: this.filters.thematics };
         }
-      }
-      this.$router.push({
-        path: "/" + this.filters.zone,
-        params: { zone: this.filters.zone },
-        query: this.$router.query
-      });
-      if (this.filters.type && this.filters.type.length) {
-        let typeFilter = { or: [] };
-        this.filters.type.forEach(item => {
-          typeFilter.or.push({
-            type: {
-              contains: item
-            }
-          });
-          filter.and.push(typeFilter);
-        });
-      }
-      if (this.filters.country && this.filters.country.length) {
-        let countryFilter = { or: [] };
-        this.filters.country.forEach(item => {
-          countryFilter.or.push({
-            country: {
-              contains: item
-            }
-          });
-          filter.and.push(countryFilter);
-        });
-      }
-      if (this.filters.field && this.filters.field.length) {
-        let fieldFilter = { or: [] };
-        this.filters.field.forEach(item => {
-          fieldFilter.or.push({
-            field: {
-              contains: item
-            }
-          });
-          filter.and.push(fieldFilter);
-        });
-      }
-      if (this.filters.state && this.filters.state.length) {
-        filter.and.push({
-          state: {
-            eq: this.filters.state
-          }
-        });
-      }
-      if (this.filters.thematics && this.filters.thematics.length) {
-        let thematicsFilter = { or: [] };
-        this.filters.thematics.forEach(item => {
-          thematicsFilter.or.push({
-            thematics: {
-              contains: item
-            }
-          });
-          filter.and.push(thematicsFilter);
-        });
-      }
-      if (this.search && this.search.length) {
-        /*    filter.multi_match = {
-          query: this.search,
-          fields: [
-            "title^3",
-            "description",
-            "field",
-            "contact_lastname^2",
-            "contact_entity^2",
-            "country"
-          ]
-        };  */
-        const search = {
-          or: [
+        if (this.search && this.search.length) {
+          filter.or = [
             {
               pubId: {
                 eq: this.search
@@ -752,59 +658,52 @@ export default {
             },
             {
               name: {
-                contains: this.search
-              }
-            },
-            {
-              field: {
-                contains: this.search
-              }
-            },
-            {
-              contact_lastname: {
-                contains: this.search
-              }
-            },
-            {
-              contact_entity: {
-                contains: this.search
-              }
-            },
-            {
-              country: {
-                contains: this.search
+                wildcard: "*" + this.search + "*"
               }
             },
             {
               description: {
-                contains: this.search
+                wildcard: "*" + this.search + "*"
+              }
+            },
+            {
+              contact_lastname: {
+                wildcard: "*" + this.search + "*"
+              }
+            },
+            {
+              contact_entity: {
+                wildcard: "*" + this.search + "*"
               }
             }
-          ]
-        };
-        filter.and.push(search);
+          ];
+        }
+        const limit = 0;
+        this.loading = true;
+
+        const options = {};
+        if (Object.keys(filter).length) options.filter = filter;
+
+        // if (this.nextToken) options.nextToken = this.nextToken;
+        Object.keys(filter).length > 1
+          ? (this.filtering = true)
+          : (this.filtering = false);
+        options.limit = this.options.itemsPerPage;
+        console.log(JSON.stringify(options));
+
+        const projects = await client.query({
+          query: gql(queries.searchProjects),
+          variables: options,
+          fetchPolicy: "network-only"
+        });
+        console.log(projects);
+
+        this.projects = projects.data.searchProjects.items;
+        this.nextToken = projects.data.searchProjects.nextToken;
+        this.loading = false;
+      } catch (error) {
+        console.log(error);
       }
-      const limit = 0;
-      this.loading = true;
-
-      const options = {};
-      if (Object.keys(filter).length) options.filter = filter;
-
-      if (this.nextToken) options.nextToken = this.nextToken;
-      Object.keys(filter.and).length > 1
-        ? (this.filtering = true)
-        : (this.filtering = false);
-      options.limit = this.options.itemsPerPage;
-
-      const projects = await client.query({
-        query: gql(queries.listProjects),
-        variables: options,
-        fetchPolicy: "network-only"
-      });
-
-      this.projects = projects.data.listProjects.items;
-      this.nextToken = projects.data.listProjects.nextToken;
-      this.loading = false;
     },
     getFilters() {
       const filterObject = []; /*

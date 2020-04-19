@@ -11,9 +11,6 @@
     "generate": "nuxt generate",
     "prod": "nuxt generate && aws s3 cp dist s3://wprn.org --recursive",
     "test": "nuxt generate && aws s3 cp dist s3://test.wprn.org --recursive",
-    "build:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt build",
-    "generate:gh-pages": "DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy": "gh-pages -d dist",
     "analyze": "nuxt build --analyze"
   },
   "dependencies": {

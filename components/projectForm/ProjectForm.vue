@@ -253,6 +253,7 @@
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-stepper-content>
+      <!--   CONTACT INFO -->
       <v-stepper-content step="4">
         <v-card min-height="320px" flat light color="#333333">
           <v-form lazy-validation>
@@ -299,6 +300,7 @@
                   :rules="emailRules"
                   ref="email"
                   v-model="project.contact_email"
+                  @keyup.enter="next()"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -316,7 +318,7 @@
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
       </v-stepper-content>
-
+      <!-- SUMMARY -->
       <v-stepper-content step="5">
         <v-card min-height="320px" flat dark color="#333333">
           <v-card-title primary-title>Review your project</v-card-title>
@@ -630,6 +632,19 @@ export default {
   },
   props: {},
   methods: {
+    next() {
+      if (
+        this.$refs.firstname &&
+        this.$refs.firstname.valid &&
+        this.$refs.lastname &&
+        this.$refs.lastname.valid &&
+        this.$refs.email &&
+        this.$refs.email.valid &&
+        this.$refs.entity &&
+        this.$refs.entity.valid
+      )
+        this.formStep = 5;
+    },
     setCountries() {
       this.countrySet = [];
       // Remove worldwide if a continent is selected
