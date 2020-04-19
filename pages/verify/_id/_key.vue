@@ -32,7 +32,7 @@
       @register="$router.push({path:'/', hash:'register'})"
       @about="$router.push({path:'/', hash:'about-us'})"
       @featured="$router.push({path:'/', hash:'featured'});"
-      @list="$router.push({path:'/worldwide'})"
+      @list="$router.push({path:'/search'})"
       :drawer="drawer"
     />
     <v-row align="center" justify="center">

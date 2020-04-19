@@ -67,16 +67,6 @@ export default {
   watch: {
     "$route.params"() {}
   },
-  mounted() {
-    if (!zones.map(zone => zone.value).includes(this.$route.params.zone)) {
-      // not an allowed zone
-      this.$router.push({
-        path: "/worldwide",
-        params: {
-          zone: "worldwide"
-        }
-      });
-    }
-  }
+  mounted() {}
 };
 </script>

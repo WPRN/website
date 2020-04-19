@@ -68,12 +68,12 @@
             </div>
             <v-card-title
               class="justify-center font-weight-black text-uppercase"
-              @click="$router.push({path:'/worldwide'})"
+              @click="$router.push({path:'/search'})"
               style="cursor:pointer;"
             >Search the database</v-card-title>
             <v-card-text class="subtitle-1" color="black">
               WPRN is a gateway for collaboration. Find who works on what and where.
-              <nuxt-link to="/worldwide" class="blue--text">Search the database</nuxt-link>&nbsp;to identify projects of interest, find or share resources, get updates, set up collaborations. Use the “contact” buttons to get-in-touch with the other registered contributors. WPRN also publishes calls for research proposals from major research institutions.
+              <nuxt-link to="/search" class="blue--text">Search the database</nuxt-link>&nbsp;to identify projects of interest, find or share resources, get updates, set up collaborations. Use the “contact” buttons to get-in-touch with the other registered contributors. WPRN also publishes calls for research proposals from major research institutions.
               <br />WPRN highlights research projects, calls, resources and initiatives that have been flagged by our Referents. Check the list of
               <span
                 @click="$vuetify.goTo('#featured', {offset:100})"

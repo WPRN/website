@@ -12,7 +12,7 @@
     >
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <nuxt-link to="/worldwide">
+          <nuxt-link to="/search">
             <v-btn fab icon large v-on="on" class="mr-2">
               <v-icon large>mdi-arrow-left</v-icon>
             </v-btn>
@@ -20,10 +20,12 @@
         </template>
         <span>Back to the project list</span>
       </v-tooltip>
-      <ProjectStatusBadge :status="project.status" />
-      &nbsp;
+      <!-- STATUS -->
+      <ProjectStatusBadge :status="project.status" />&nbsp;
+      <!-- NAME -->
       {{project.name}}
       <v-spacer></v-spacer>
+      <!-- SOCIAL -->
       <v-btn-toggle rounded :class="{'mt-3':$vuetify.breakpoint.smAndDown}">
         <v-tooltip bottom v-for="(social, index) in socialChannels" :key="index">
           <template v-slot:activator="{ on }">
@@ -42,15 +44,18 @@
       </v-btn-toggle>
     </v-card-title>
     <br v-if="pageMode&&$vuetify.breakpoint.smAndDown" />
+    <!--  PUB ID -->
     <v-card-subtitle
       :class="{'ml-12 pl-4':pageMode&&$vuetify.breakpoint.mdAndUp}"
       class="overline font-weight-black white--text"
-    >WPRN-{{project.pubId}}</v-card-subtitle>
+      v-html="'WPRN-' + $options.filters.highlight(project.pubId, filters.search)"
+    ></v-card-subtitle>
     <v-card-text
       class="pb-0 white--text"
       :class="{'pl-12 ml-4':pageMode&&$vuetify.breakpoint.mdAndUp}"
     >
       <v-row>
+        <!--  CREATION DATE -->
         <v-col cols="12" md="6" xl="4">
           <span class="overline">CREATION DATE :</span>
           <br />
@@ -58,6 +63,7 @@
             class="subtitle-1"
           >{{project.createdAt.split('T')[0]}} at {{project.createdAt.split('T')[1].split(':')[0]}}h{{project.createdAt.split('T')[1].split(':')[1]}} (GMT)</span>
         </v-col>
+        <!-- STATE (private key) STATUS (public key) -->
         <v-col cols="12" md="6" xl="4">
           <span class="overline">STATUS :</span>
           <br />
@@ -74,6 +80,7 @@
                 class="ma-1"
                 label
                 :small="!pageMode"
+                :dark="!pageMode&&filters.field.includes(field)"
                 light
                 :key="index"
                 v-if="index<11"
@@ -89,7 +96,14 @@
           </template>
           <template v-else>
             <template v-for="(field, index) in project.field">
-              <v-chip class="ma-1" label :small="!pageMode" light :key="index">{{field}}</v-chip>
+              <v-chip
+                class="ma-1"
+                :dark="!pageMode&&filters.field.includes(field)"
+                label
+                :small="!pageMode"
+                light
+                :key="index"
+              >{{field}}</v-chip>
             </template>
             <span
               v-if="project.type.length > 10&&showFields"
@@ -105,7 +119,14 @@
           <br />
           <template v-if="project.type.length > 10&&!showType">
             <template v-for="(type, index) in project.type">
-              <v-chip class="ma-1" :small="!pageMode" light :key="index" v-if="index<11">{{type}}</v-chip>
+              <v-chip
+                class="ma-1"
+                :dark="!pageMode&&filters.type.includes(type)"
+                :small="!pageMode"
+                light
+                :key="index"
+                v-if="index<11"
+              >{{type}}</v-chip>
               <span
                 :key="index"
                 v-if="index===11"
@@ -117,7 +138,13 @@
           </template>
           <template v-else>
             <template v-for="(type, index) in project.type">
-              <v-chip class="ma-1" :small="!pageMode" light :key="index">{{type}}</v-chip>
+              <v-chip
+                class="ma-1"
+                :dark="!pageMode&&filters.type.includes(type)"
+                :small="!pageMode"
+                light
+                :key="index"
+              >{{type}}</v-chip>
             </template>
             <span
               v-if="project.type.length > 10&&showType"
@@ -142,6 +169,8 @@
                 outlined
                 :key="index"
                 v-if="index<11"
+                :light="!pageMode&&filters.thematics.includes(thematics)"
+                :color="!pageMode&&filters.thematics.includes(thematics)?'white':''"
               >{{thematic}}</v-chip>
               <span
                 :key="index"
@@ -154,7 +183,15 @@
           </template>
           <template v-else>
             <template v-for="(thematic, index) in project.thematics">
-              <v-chip class="ma-1" :small="!pageMode" label outlined :key="index">{{thematic}}</v-chip>
+              <v-chip
+                class="ma-1"
+                :light="!pageMode&&filters.thematics.includes(thematics)"
+                :color="!pageMode&&filters.thematics.includes(thematics)?'white':''"
+                :small="!pageMode"
+                label
+                outlined
+                :key="index"
+              >{{thematic}}</v-chip>
             </template>
             <span
               v-if="project.thematics.length > 10&&showThematics"
@@ -172,6 +209,7 @@
             :small="!pageMode"
             class="ma-1"
             v-for="(zone, index) in project.zone"
+            :color="!pageMode&&filters.zone.includes(zone)?'#c4c4c4':'accent'"
             :key="index"
             label
             light
@@ -185,7 +223,13 @@
           <br />
           <template v-if="project.country.length > 10&&!showCountry">
             <template v-for="(country, index) in project.country">
-              <v-chip :small="!pageMode" class="ma-1" :key="index" v-if="index <11">{{country}}</v-chip>
+              <v-chip
+                :small="!pageMode"
+                :light="!pageMode&&filters.country.includes(country)"
+                class="ma-1"
+                :key="index"
+                v-if="index <11"
+              >{{country}}</v-chip>
               <span
                 :key="index"
                 v-if="index===11"
@@ -197,7 +241,12 @@
           </template>
           <template v-else>
             <template v-for="(country, index) in project.country">
-              <v-chip :small="!pageMode" class="ma-1" :key="index">{{country}}</v-chip>
+              <v-chip
+                :small="!pageMode"
+                :light="!pageMode&&filters.country.includes(country)"
+                class="ma-1"
+                :key="index"
+              >{{country}}</v-chip>
             </template>
             <span
               v-if="project.country.length > 10&&showCountry"
@@ -211,22 +260,47 @@
         <v-col cols="12" class="subtitle-1">
           <span class="overline">CONTACT :</span>
           <br />
-          {{project.contact_lastname + ', ' + project.contact_firstname}}
-          <template
-            v-if="project.contact_entity"
-          >({{project.contact_entity}})</template>
+          <template v-if="pageMode">
+            <span v-html="$options.filters.highlight(project.contact_lastname, filters.search)"></span>
+            {{project.contact_lastname + ', ' + project.contact_firstname}}
+            <template
+              v-if="project.contact_entity"
+            >(project.contact_entity)</template>
+          </template>
+          <template v-else>
+            <span v-html="$options.filters.highlight(project.contact_lastname, filters.search)"></span>
+            {{', ' + project.contact_firstname}}
+            <template
+              v-if="project.contact_entity"
+              v-html="'(' + $options.filters.highlight(project.contact_entity, filters.search) + ')'"
+            ></template>
+          </template>
         </v-col>
         <!-- DESCRIPTION -->
         <v-col cols="12" class="subtitle-1 pr-12">
           <span class="overline">Team and Project description</span>
           <br />
           <template v-if="!pageMode&&project.description.length > 400">
-            <p
-              v-html="$options.filters.truncate($options.filters.nl2br(project.description), 400, '(read more)', '/item/'+ project.pubId)"
-            ></p>
+            <template v-if="pageMode">
+              <p
+                v-html="$options.filters.truncate($options.filters.nl2br(project.description), 400, '(read more)', '/item/'+ project.pubId)"
+              ></p>
+            </template>
+            <template v-else>
+              <p
+                v-html="$options.filters.truncate($options.filters.nl2br($options.filters.highlight(project.description, filters.search)), 400, '(read more)', '/item/'+ project.pubId)"
+              ></p>
+            </template>
           </template>
           <template v-else>
-            <p v-html="$options.filters.nl2br(project.description)"></p>
+            <template v-if="pageMode">
+              <p v-html="$options.filters.nl2br(project.description)"></p>
+            </template>
+            <template v-else>
+              <p
+                v-html="$options.filters.nl2br($options.filters.highlight(project.description, filters.search))"
+              ></p>
+            </template>
           </template>
         </v-col>
         <!--  CITE WIDGET -->
@@ -364,7 +438,8 @@ export default {
   },
   props: {
     project: Object,
-    pageMode: Boolean
+    pageMode: Boolean,
+    filters: Object
   },
   components: {
     ProjectStatusBadge

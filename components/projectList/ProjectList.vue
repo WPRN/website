@@ -13,182 +13,9 @@
       :options.sync="options"
       :footer-props="{itemsPerPageOptions: [5,10,20,50,100]}"
     >
+      <!-- FILTERS -->
       <template v-slot:top>
-        <v-card flat>
-          <!-- DEFAULT FILTERS -->
-          <v-row no-gutters>
-            <v-col cols="12">
-              <v-card-title class="pl-0 pt-0" :class="{'pr-0':$vuetify.breakpoint.smAndDown}">
-                <v-btn
-                  outlined
-                  small
-                  color="white"
-                  @click="$store.commit('setShowFilters', !$store.state.showFilters)"
-                  class="overline"
-                >
-                  <template v-if="$store.state.showFilters">
-                    <v-icon>mdi-filter-variant</v-icon>&nbsp;Hide Filters&nbsp;
-                    <v-icon>mdi-chevron-up</v-icon>
-                  </template>
-                  <template v-else>
-                    <v-icon>mdi-filter-variant</v-icon>&nbsp;Show Filters&nbsp;
-                    <v-icon>mdi-chevron-down</v-icon>
-                  </template>
-                </v-btn>
-                <v-btn
-                  outlined
-                  small
-                  v-if="filtering"
-                  color="white"
-                  @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false, thematics:[], state:'', featured:false};refreshQuery();$router.push({path: '/worldwide'})"
-                  class="ml-3"
-                >
-                  <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
-                </v-btn>
-                <v-spacer></v-spacer>
-                <v-tooltip top>
-                  <template v-slot:activator="{ on }">
-                    <v-checkbox
-                      v-model="filters.verified"
-                      label="Verified"
-                      class="mr-3"
-                      @change="refreshQuery()"
-                      v-on="on"
-                      :disabled="filters.featured"
-                    ></v-checkbox>
-                  </template>
-                  <span>{{filters.featured?'Featured projects are always verified':'Select to display only projects verified by a WPRN Referent'}}</span>
-                </v-tooltip>
-                <v-tooltip top>
-                  <template v-slot:activator="{ on }">
-                    <v-checkbox
-                      v-model="filters.featured"
-                      label="Featured"
-                      class="mr-3"
-                      @change="updateCheckBox()"
-                      v-on="on"
-                    ></v-checkbox>
-                  </template>
-                  <span>Select to display only projects featured by the WPRN community</span>
-                </v-tooltip>
-                <v-text-field
-                  class="pt-0"
-                  v-model.trim="search"
-                  label="Search"
-                  placeholder="Search a project"
-                  prepend-inner-icon="mdi-magnify"
-                  :class="$vuetify.breakpoint.smAndDown?'mr-0':'mr-4'"
-                  single-line
-                  hide-details
-                  clearable
-                  solo
-                  dense
-                  dark
-                  outlined
-                  max-width="400px;"
-                  @click:clear="refreshQuery()"
-                  @change="refreshQuery()"
-                  ref="search_field"
-                ></v-text-field>
-              </v-card-title>
-            </v-col>
-          </v-row>
-          <!-- ADVANCED FILTERS -->
-          <v-expand-transition class="align-center">
-            <v-row :class="{'pr-8':$vuetify.breakpoint.mdAndUp}" v-show="$store.state.showFilters">
-              <v-col cols="12" sm="6" md="4" lg="3">
-                <v-select
-                  :items="zones"
-                  label="Continent"
-                  outlined
-                  v-model="filters.zone"
-                  :clearable="filters.zone!=='worldwide'"
-                  ref="zone"
-                  :disabled="loading"
-                  hide-details
-                  dense
-                  @click:clear="filters.zone='worlwide';refreshQuery()"
-                  @change="refreshQuery()"
-                ></v-select>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" lg="3">
-                <v-select
-                  :items="state"
-                  label="Project status"
-                  outlined
-                  v-model="filters.state"
-                  ref="state"
-                  :disabled="loading"
-                  hide-details
-                  clearable
-                  dense
-                  @click:clear="filters.state='';refreshQuery()"
-                  @change="refreshQuery()"
-                ></v-select>
-              </v-col>
-
-              <v-col cols="12" sm="6" md="4" lg="3">
-                <v-combobox
-                  :disabled="!filters.zone|| loading"
-                  :items="filters.zone!=='worldwide'?countries[filters.zone]:Object.keys(countries).map(countryKey=>countries[countryKey]).flat().sort()"
-                  no-data-text="No country matching your search"
-                  @change="refreshQuery('country')"
-                  label="Country"
-                  outlined
-                  multiple
-                  v-model="filters.country"
-                  clearable
-                  hide-details
-                  dense
-                ></v-combobox>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" lg="3">
-                <v-combobox
-                  :items="fields"
-                  label="Project discipline(s)"
-                  outlined
-                  v-model="filters.field"
-                  clearable
-                  multiple
-                  ref="field"
-                  :disabled="loading"
-                  hide-details
-                  dense
-                  @change="refreshQuery('field')"
-                ></v-combobox>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" lg="3">
-                <v-combobox
-                  :items="thematics"
-                  label="Project Thematic(s)"
-                  outlined
-                  v-model="filters.thematics"
-                  clearable
-                  multiple
-                  ref="thematics"
-                  :disabled="loading"
-                  hide-details
-                  dense
-                  @change="refreshQuery()"
-                ></v-combobox>
-              </v-col>
-              <v-col cols="12" sm="6" md="4" lg="3">
-                <v-select
-                  :items="types"
-                  label="Project type"
-                  outlined
-                  v-model="filters.type"
-                  ref="type"
-                  hide-details
-                  dense
-                  multiple
-                  @change="refreshQuery()"
-                  clearable
-                ></v-select>
-              </v-col>
-            </v-row>
-          </v-expand-transition>
-        </v-card>
+        <ProjectFilters :loading="loading" />
       </template>
       <!--  LOADING STATE -->
       <template v-slot:loading>
@@ -207,7 +34,7 @@
             small
             v-if="search&&search.length||filters.field&&filters.field.length||filters.type&&filters.type.length||((filters.zone&&filters.zone.length)||filters.zone!=='worldwide')"
             color="white"
-            @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false, thematics:[], state:'', featured:false};refreshQuery();$router.push({path: '/worldwide', query:undefined})"
+            @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false, thematics:[], state:'', featured:false};refreshQuery();$router.push({path: '/search', query:undefined})"
             class="ma-3"
           >
             <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
@@ -216,245 +43,23 @@
       </template>
       <!-- RESULT ROW -->
       <template v-slot:item="{ item }">
-        <tr @click="expanded.includes(item)?expanded=[]:expanded=[item]" class="font-weight-medium">
-          <!-- STATUS -->
-          <td class="px-1">
-            <ProjectStatusBadge :status="item.status" />
-          </td>
-          <!-- NAME -->
-          <td :style="$vuetify.breakpoint.mdAndUp?'min-width:30vw;':'min-width:40vw;'" class="px-1">
-            {{item.name}}
-            <!-- STATE -->
-          </td>
-          <td class="px-1">{{item.state.split(' ')[0]}}</td>
-          <!-- FIELD -->
-          <td class="px-1">
-            <template v-for="(field, index) in orderItems(item, 'field')">
-              <template v-if="index < 2">
-                <template v-if="field.length>16">
-                  <v-tooltip top :key="index">
-                    <template v-slot:activator="{ on }">
-                      <v-chip
-                        class="ma-1"
-                        :dark="filters.field.includes(field)"
-                        small
-                        light
-                        label
-                        v-on="on"
-                      >{{field|truncate(16)}}</v-chip>
-                    </template>
-                    <span>{{field}}</span>
-                  </v-tooltip>
-                </template>
-                <template v-else>
-                  <v-chip
-                    class="ma-1"
-                    :dark="filters.field.includes(field)"
-                    small
-                    light
-                    label
-                    :key="index"
-                  >{{field}}</v-chip>
-                </template>
-              </template>
-              <template v-if="index===2&&item.field.length>2">
-                <v-tooltip :key="index" top>
-                  <template v-slot:activator="{ on }">
-                    <span
-                      v-on="on"
-                      class="caption"
-                      style="white-space:nowrap;"
-                    >+ {{item.field.length - 2}} more</span>
-                  </template>
-                  <span>{{orderItems(item, 'field').slice(2).join(",&nbsp;")}}</span>
-                </v-tooltip>
-              </template>
-            </template>
-          </td>
-          <!-- THEMATICS -->
-          <td class="px-1">
-            <template v-for="(thematics, index) in orderItems(item, 'thematics')">
-              <template v-if="index < 2">
-                <template v-if="thematics.length>16">
-                  <v-tooltip top :key="index">
-                    <template v-slot:activator="{ on }">
-                      <v-chip
-                        class="ma-1"
-                        :light="filters.thematics.includes(thematics)"
-                        :color="filters.thematics.includes(thematics)?'white':''"
-                        outlined
-                        small
-                        label
-                        :key="index"
-                        v-on="on"
-                      >{{thematics|truncate(16)}}</v-chip>
-                    </template>
-                    <span>{{thematics}}</span>
-                  </v-tooltip>
-                </template>
-                <template v-else>
-                  <v-chip
-                    class="ma-1"
-                    :light="filters.thematics.includes(thematics)"
-                    :color="filters.thematics.includes(thematics)?'white':''"
-                    outlined
-                    small
-                    label
-                    :key="index"
-                  >{{thematics}}</v-chip>
-                </template>
-              </template>
-              <template v-else>
-                <template v-if="index===2&&item.thematics.length>2">
-                  <v-tooltip :key="index" top>
-                    <template v-slot:activator="{ on }">
-                      <span
-                        v-on="on"
-                        class="caption"
-                        style="white-space:nowrap;"
-                      >+ {{item.thematics.length - 2}} more</span>
-                    </template>
-                    <span>{{orderItems(item, 'thematics').slice(2).join(",&nbsp;")}}</span>
-                  </v-tooltip>
-                </template>
-              </template>
-            </template>
-          </td>
-          <!-- TYPE -->
-          <td class="px-1">
-            <template v-for="(type, index) in  orderItems(item, 'type')">
-              <template v-if="index < 2">
-                <template v-if="type.length>19&&item.type.length>1">
-                  <v-tooltip top :key="index">
-                    <template v-slot:activator="{ on }">
-                      <v-chip
-                        :dark="filters.type.includes(type)"
-                        class="ma-1"
-                        small
-                        light
-                        v-on="on"
-                        :key="index"
-                      >{{type|truncate(19)}}</v-chip>
-                    </template>
-                    <span>{{type}}</span>
-                  </v-tooltip>
-                </template>
-                <template v-else>
-                  <v-chip
-                    class="ma-1"
-                    :dark="filters.type.includes(type)"
-                    small
-                    light
-                    :key="index"
-                  >{{type}}</v-chip>
-                </template>
-              </template>
-              <template v-else>
-                <template v-if="index===2&&item.type.length>2">
-                  <v-tooltip :key="index" top>
-                    <template v-slot:activator="{ on }">
-                      <span
-                        v-on="on"
-                        class="caption"
-                        style="white-space:nowrap;"
-                      >+ {{item.type.length - 2}} more</span>
-                    </template>
-                    <span>{{orderItems(item, 'type').slice(2).join(",&nbsp;")}}</span>
-                  </v-tooltip>
-                </template>
-              </template>
-            </template>
-          </td>
-          <!-- ZONE (CONTINENT) -->
-          <td class="px-1">
-            <template v-for="(zone, index) in item.zone">
-              <template v-if="item.zone.length===1&&zone==='worldwide'">
-                <v-chip
-                  small
-                  label
-                  :color="filters.zone.includes(zone)?'#c4c4c4':'accent'"
-                  light
-                  class="ma-1"
-                  :key="index"
-                >Worldwide</v-chip>
-              </template>
-              <template v-else>
-                <template v-if="index < 2">
-                  <v-chip
-                    small
-                    label
-                    :color="filters.zone.includes(zone)?'#c4c4c4':'accent'"
-                    light
-                    class="ma-1"
-                    :key="index"
-                  >{{zones.find(zoneItem => zone === zoneItem.value).text }}</v-chip>
-                </template>
-                <template v-else>
-                  <template v-if="index===2&&item.zone.length>2">
-                    <v-tooltip :key="index" top>
-                      <template v-slot:activator="{ on }">
-                        <span
-                          v-on="on"
-                          class="caption"
-                          style="white-space:nowrap;"
-                        >+ {{item.zone.length - 2}} more</span>
-                      </template>
-                      <span>{{zones.filter(zone => !orderItems(item, 'zone').slice(2).includes(zone.value)).map(zone => zone.text).join(",&nbsp;")}}</span>
-                      <!-- B-) -->
-                    </v-tooltip>
-                  </template>
-                </template>
-              </template>
-            </template>
-          </td>
-          <!-- COUNTRY -->
-          <td class="px-1">
-            <template v-for="(country, index) in orderItems(item, 'country')">
-              <template v-if="index < 2">
-                <v-chip
-                  small
-                  class="ma-1"
-                  :key="index"
-                  :light="filters.country.includes(country)"
-                >{{country}}</v-chip>
-              </template>
-              <template v-else>
-                <template v-if="index===2&&item.country.length>2">
-                  <v-tooltip :key="index" top>
-                    <template v-slot:activator="{ on }">
-                      <span
-                        v-on="on"
-                        class="caption"
-                        style="white-space:nowrap;"
-                      >+ {{item.country.length - 2}} more</span>
-                    </template>
-                    <span>{{orderItems(item, 'country').slice(2).join(",&nbsp;")}}</span>
-                  </v-tooltip>
-                </template>
-              </template>
-            </template>
-          </td>
-          <!-- ACTIONS -->
-          <td class="pr-0">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  text
-                  icon
-                  @click.stop="expanded.includes(item)?expanded=[]:expanded=[item]"
-                  v-on="on"
-                >
-                  <v-icon>{{expanded.includes(item)?'mdi-chevron-up':'mdi-chevron-down'}}</v-icon>
-                </v-btn>
-              </template>
-              <span>{{expanded.includes(item)?'Hide details':'See this project details'}}</span>
-            </v-tooltip>
-          </td>
-        </tr>
+        <ProjectRow
+          :item="item"
+          :expanded="expanded"
+          :filters="filters"
+          @expand="expanded.includes(item)?expanded=[]:expanded=[item]"
+        />
       </template>
       <template v-slot:expanded-item="{ item }">
         <td colspan="9">
-          <ProjectDetails :project="item" @contact="contact=true" />
+          <v-expand-transition>
+            <ProjectDetails
+              :project="item"
+              :filters="filters"
+              @contact="contact=true"
+              v-show="expanded.includes(item)"
+            />
+          </v-expand-transition>
         </td>
         <ContactDialog :open="contact" @close="contact=false" :id="item.pubId" />
       </template>
@@ -463,7 +68,8 @@
 </template>
 <script>
 import * as queries from "~/graphql/queries";
-import ProjectStatusBadge from "~/components/projectList/ProjectStatusBadge";
+import ProjectFilters from "~/components/projectList/ProjectFilters";
+import ProjectRow from "~/components/projectList/ProjectRow";
 import ProjectDetails from "~/components/projectList/ProjectDetails";
 import ContactDialog from "~/components/contact/ContactDialog";
 import gql from "graphql-tag";
@@ -492,18 +98,6 @@ export default {
       filtering: false,
       projectId: "",
       nextToken: false,
-      filters: {
-        field: [],
-        type: [],
-        thematics: [],
-        status: "",
-        zone:
-          zones.find(zone => this.$route.params.zone === zone.value).value ||
-          "worldwide",
-        country: [],
-        verified: false,
-        featured: false
-      },
       total: 0,
       options: {
         itemsPerPage: 100,
@@ -563,10 +157,43 @@ export default {
           value: "country"
         },
         { text: "Actions", value: "action", sortable: false }
-      ]
+      ],
+      filters: {
+        field:
+          this.$route.query && this.$route.query.field
+            ? JSON.parse(this.$route.query.field)
+            : [],
+        type:
+          this.$route.query && this.$route.query.type
+            ? JSON.parse(this.$route.query.type)
+            : [],
+        thematics:
+          this.$route.query && this.$route.query.thematics
+            ? JSON.parse(this.$route.query.thematics)
+            : [],
+        status:
+          this.$route.query && this.$route.query.status
+            ? JSON.parse(this.$route.query.status)
+            : "",
+        zone:
+          this.$route.query && this.$route.query.zone
+            ? zones.find(
+                zone => JSON.parse(this.$route.query.zone) === zone.value
+              ).value
+            : "worldwide",
+        country:
+          this.$route.query && this.$route.query.country
+            ? JSON.parse(this.$route.query.country)
+            : [],
+        verified: this.$route.query ? this.$route.query.verified : false,
+        featured: this.$route.query ? this.$route.query.featured : false,
+        search:
+          this.$route.query && this.$route.query.search
+            ? JSON.parse(this.$route.query.search)
+            : ""
+      }
     };
   },
-
   created() {},
   mounted() {
     this.refreshQuery();
@@ -600,7 +227,7 @@ export default {
             );
           }
         }
-        let filter = {};
+        let filter = { and: [] };
         if (this.filters.featured) {
           filter.status = {
             eq: "FEATURED"
@@ -631,56 +258,108 @@ export default {
         }
 
         if (this.filters.type && this.filters.type.length) {
-          filter.type = { matchPhrase: this.filters.type };
+          if (this.filters.type.length === 1) {
+            filter.type = { matchPhrase: this.filters.type };
+          } else {
+            let or = [];
+            this.filters.type.forEach(type => {
+              or.push({ type: { matchPhrase: type } });
+            });
+            filter.and.push({ or });
+          }
         }
 
         if (this.filters.country && this.filters.country.length) {
-          filter.country = { match: this.filters.country };
+          if (this.filters.country.length === 1) {
+            filter.country = { matchPhrase: this.filters.country };
+          } else {
+            let or = [];
+            this.filters.country.forEach(country => {
+              or.push({ country: { matchPhrase: country } });
+            });
+            filter.and.push({ or });
+          }
         }
         if (this.filters.field && this.filters.field.length) {
-          filter.field = { matchPhrase: this.filters.field };
+          if (this.filters.field.length === 1) {
+            filter.field = { matchPhrase: this.filters.field };
+          } else {
+            let or = [];
+            this.filters.field.forEach(field => {
+              or.push({ field: { matchPhrase: field } });
+            });
+            filter.and.push({ or });
+          }
         }
-        if (this.filters.state && this.filters.state.length) {
-          filter.field = { matchPhrase: this.filters.field };
+        if (this.filters.status && this.filters.status.length) {
           filter.state = {
-            eq: this.filters.state
+            matchPhrase: this.filters.status
           };
         }
         if (this.filters.thematics && this.filters.thematics.length) {
-          filter.thematics = { matchPhrase: this.filters.thematics };
+          if (this.filters.thematics.length === 1) {
+            filter.thematics = { matchPhrase: this.filters.thematics };
+          } else {
+            let or = [];
+            this.filters.thematics.forEach(thematics => {
+              or.push({ thematics: { matchPhrase: thematics } });
+            });
+            filter.and.push({ or });
+          }
         }
-        if (this.search && this.search.length) {
-          filter.or = [
+        if (this.filters.search && this.filters.search.length) {
+          let or = [
             {
               pubId: {
-                eq: this.search
+                eq: this.filters.search
               }
             },
             {
               name: {
-                wildcard: "*" + this.search + "*"
+                wildcard: "*" + this.filters.search + "*"
               }
             },
             {
               description: {
-                wildcard: "*" + this.search + "*"
+                wildcard: "*" + this.filters.search + "*"
               }
             },
             {
               contact_lastname: {
-                wildcard: "*" + this.search + "*"
+                wildcard: "*" + this.filters.search + "*"
               }
             },
             {
               contact_entity: {
-                wildcard: "*" + this.search + "*"
+                wildcard: "*" + this.filters.search + "*"
+              }
+            },
+            {
+              name: {
+                match: this.filters.search
+              }
+            },
+            {
+              description: {
+                match: this.filters.search
+              }
+            },
+            {
+              contact_lastname: {
+                match: this.filters.search
+              }
+            },
+            {
+              contact_entity: {
+                match: this.filters.search
               }
             }
           ];
+          filter.and.push({ or });
         }
         const limit = 0;
         this.loading = true;
-
+        if (!filter.and.length) delete filter.and;
         const options = {};
         if (Object.keys(filter).length) options.filter = filter;
 
@@ -704,55 +383,36 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-    getFilters() {
-      const filterObject = []; /*
-      if (this.filters.type) filterObject.push("type");
-      if (this.filters.zone) filterObject.push("zone");
-      if (this.filters.field) filterObject.push("field");
-      if (this.filters.country) filterObject.push("country");
-      if (this.filters.verified) filterObject.push("verified"); */
-      return JSON.stringify(filterObject);
-    },
-    orderItems(project, item) {
-      if (this.filters[item].length && project[item] && project[item].length) {
-        let items = project[item];
-
-        if (item === "zone") {
-          items = [
-            items.find(dat => dat === this.filters[item]),
-            ...items.filter(dat => dat !== this.filters[item])
-          ];
-        } else {
-          this.filters[item].forEach(element => {
-            if (items.includes(element)) {
-              items = [element, ...items.filter(dat => dat !== element)];
-            }
-          });
-        }
-        return items;
-      } else {
-        return project[item];
-      }
     }
   },
   components: {
-    ProjectStatusBadge,
     ContactDialog,
-    ProjectDetails
+    ProjectDetails,
+    ProjectFilters,
+    ProjectRow
   },
   watch: {
     "$route.query"() {
-      if (this.$route.query.search) {
-        this.search = JSON.parse(this.$route.query.search);
-      } else {
-        this.search = "";
-      }
-      if (this.$route.query.filters) {
-        this.filters = JSON.parse(this.$route.query.filters);
-      } else {
-        this.filters = [];
-      }
+      Object.keys(this.$route.query).forEach(key => {
+        if (typeof this.$route.query[key] !== "undefined") {
+          this.filters[key] = JSON.parse(this.$route.query[key]);
+        } else {
+          console.log(typeof this.filters[key]);
+          switch (typeof this.filters[key]) {
+            case "boolean":
+              this.filters[key] = false;
+              break;
+            case "string":
+              this.filters[key] = "";
+              break;
+            case "object":
+              this.filters[key] = [];
+              break;
+            default:
+              break;
+          }
+        }
+      });
       this.refreshQuery();
     }
   }

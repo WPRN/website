@@ -31,7 +31,7 @@
       @register="$vuetify.goTo('#contact', {offset:100});contactOnly=false;drawer=false;step=1"
       @about="$vuetify.goTo('#about-us', {offset:100});drawer=false"
       @featured="$vuetify.goTo('#featured', {offset:100});drawer=false"
-      @list="$router.push({path:'/worldwide'})"
+      @list="$router.push({path:'/search'})"
       :drawer="drawer"
     />
     <v-content v-scroll="onScroll">
