@@ -54,7 +54,13 @@
         <template v-else>
           <v-col cols="12" v-if="ready&&project">
             <v-fade-transition mode="out-in">
-              <ProjectDetails v-show="ready" :project="project" @contact="contact=true" pageMode />
+              <ProjectDetails
+                v-show="ready"
+                :project="project"
+                @contact="contact=true"
+                pageMode
+                :filters="{search:''}"
+              />
             </v-fade-transition>
           </v-col>
         </template>

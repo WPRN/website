@@ -1,22 +1,30 @@
 <template>
   <v-stepper v-model="formStep" dark alt-labels>
     <v-stepper-header>
-      <v-stepper-step :complete="formStep > 1" step="1">General info</v-stepper-step>
+      <v-stepper-step
+        :complete="editMode || formStep > 1"
+        step="1"
+        :editable="editMode"
+      >General info</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step :complete="formStep > 2" step="2">Project details</v-stepper-step>
+      <v-stepper-step
+        :complete="editMode || formStep > 2"
+        step="2"
+        :editable="editMode"
+      >Project details</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step :complete="formStep > 3" step="3">Location</v-stepper-step>
+      <v-stepper-step :complete="editMode || formStep > 3" step="3" :editable="editMode">Location</v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step :complete="formStep > 4" step="4">Contact</v-stepper-step>
+      <v-stepper-step :complete="editMode || formStep > 4" step="4" :editable="editMode">Contact</v-stepper-step>
       <v-divider></v-divider>
       <v-stepper-step step="5">Confirmation</v-stepper-step>
     </v-stepper-header>
 
-    <v-stepper-items>
+    <v-stepper-items align="center">
       <!--  PROJECT GENERAL INFO (NAME, URL, DESCRIPTION) -->
       <v-stepper-content step="1">
         <v-card flat min-height="320px" light color="#333333">
-          <v-form lazy-validation>
+          <v-form ref="step1">
             <v-row>
               <v-col cols="12" md="6">
                 <v-text-field
@@ -258,11 +266,14 @@
         <v-card min-height="320px" flat light color="#333333">
           <v-form lazy-validation>
             <v-row>
-              <v-alert
-                type="info"
-                align="left"
-                color="gray lighten-4"
-              >WPRN will not disclose online nor transfer or sell contributors’ or referents’ email addresses to any third party. Potential contact requests will be redirected by our servers to guarantee that their personal data is not made public.</v-alert>
+              <v-alert type="info" align="left" color="gray lighten-4">
+                <template
+                  v-if="editMode"
+                >Your email address is the only element of your project details that you cannot change.</template>
+                <template
+                  v-else
+                >WPRN will not disclose online nor transfer or sell contributors’ or referents’ email addresses to any third party. Potential contact requests will be redirected by our servers to guarantee that their personal data is not made public.</template>
+              </v-alert>
 
               <v-col cols="12" md="6">
                 <v-text-field
@@ -291,9 +302,10 @@
                   :rules="requiredRules"
                   v-model="project.contact_entity"
                   ref="entity"
+                  @keyup.enter="next()"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col cols="12" md="6" v-if="!editMode">
                 <v-text-field
                   label="Contact Email*"
                   solo
@@ -311,7 +323,8 @@
         <v-btn
           color="accent"
           @click="formStep = 5"
-          :disabled="!($refs.firstname&&$refs.firstname.valid&&$refs.lastname&&$refs.lastname.valid&&$refs.email&&$refs.email.valid&&$refs.entity&&$refs.entity.valid)"
+          :disabled="!($refs.firstname&&$refs.firstname.valid&&$refs.lastname&&$refs.lastname.valid&&(editMode?true:$refs.email&&$refs.email.valid)
+&&$refs.entity&&$refs.entity.valid)"
           x-large
         >
           Continue&nbsp;
@@ -322,6 +335,12 @@
       <v-stepper-content step="5">
         <v-card min-height="320px" flat dark color="#333333">
           <v-card-title primary-title>Review your project</v-card-title>
+          <v-alert
+            type="info"
+            align="left"
+            color="gray lighten-4"
+            v-if="editMode"
+          >Please note that your project will be marked automatically as "non verified" by the WPRN community after you edit its details, even if it was already verified.</v-alert>
           <v-form lazy-validation>
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
@@ -512,7 +531,8 @@
           $refs.type&&$refs.type.valid&&
           $refs.firstname&&$refs.firstname.valid&&
           $refs.lastname&&$refs.lastname.valid&&
-          $refs.email&&$refs.email.valid&&
+          (editMode?true:$refs.email&&$refs.email.valid)
+&&
           $refs.entity&&$refs.entity.valid&&
           $refs.zone&&$refs.zone.valid&&
           $refs.agreedRef&&$refs.agreedRef.valid)"
@@ -534,7 +554,7 @@ import {
   state
 } from "~/assets/data";
 import { alpha, pattern, email } from "~/assets/regex";
-import { newProject } from "~/graphql/mutations";
+import { newProject, editProject } from "~/graphql/mutations";
 import gql from "graphql-tag";
 import client from "~/plugins/amplify";
 export default {
@@ -593,8 +613,8 @@ export default {
       descriptionRules: [
         value => !!value || "A description is required.",
         value =>
-          value.length >= 100 ||
-          "The description must have at least 100 characters",
+          value.length >= 500 ||
+          "The description must have at least 500 characters",
         value => value.length <= 2000 || "Max 2000 characters"
       ],
       requiredRules: [
@@ -608,29 +628,36 @@ export default {
       showDateMenu: false,
       showTimeMenu: false,
       project: {
-        name: "",
-        description: "",
-        type: [],
-        field: [],
-        state: "",
-        country: [],
-        thematics: [],
-        zone: ["worldwide"],
-        contact_email: "",
-        city: "",
-        contact_firstname: "",
-        contact_lastname: "",
-        contact_entity: "",
-        url: "",
-        date: "",
-        time: ""
+        name: this.editMode ? this.projectInput.name : "",
+        description: this.editMode ? this.projectInput.description : "",
+        type: this.editMode ? this.projectInput.type : [],
+        field: this.editMode ? this.projectInput.field : [],
+        state: this.editMode ? this.projectInput.state : "",
+        country: this.editMode ? this.projectInput.country : [],
+        thematics: this.editMode ? this.projectInput.thematics : [],
+        zone: this.editMode ? this.projectInput.zone : ["worldwide"],
+        contact_email: this.editMode ? this.projectInput.contact_email : "",
+        city: this.editMode ? this.projectInput.city : "",
+        contact_firstname: this.editMode
+          ? this.projectInput.contact_firstname
+          : "",
+        contact_lastname: this.editMode
+          ? this.projectInput.contact_lastname
+          : "",
+        contact_entity: this.editMode ? this.projectInput.contact_entity : "",
+        url: this.editMode ? this.projectInput.url : "",
+        date: this.editMode ? this.projectInput.date : "",
+        time: this.editMode ? this.projectInput.time : ""
       }
     };
   },
   async mounted() {
     await this.$recaptcha.init();
   },
-  props: {},
+  props: {
+    projectInput: Object,
+    editMode: Boolean
+  },
   methods: {
     next() {
       if (
@@ -705,11 +732,32 @@ export default {
           if (!args[key] || args[key].length === 0) delete args[key];
         });
         args.recaptcha = await this.$recaptcha.getResponse();
+        let res = {};
+        if (this.editMode) {
+          console.log("EDIT MODE", {
+            ...args,
+            pubId: this.$route.params.id,
+            key: this.$route.params.key
+          });
+          console.log(editProject);
 
-        const res = await client.mutate({
-          mutation: gql(newProject),
-          variables: { input: args }
-        });
+          res = await client.mutate({
+            mutation: gql(editProject),
+            variables: {
+              input: {
+                ...args,
+                pubId: this.$route.params.id,
+                key: this.$route.params.key
+              }
+            }
+          });
+        } else {
+          res = await client.mutate({
+            mutation: gql(newProject),
+            variables: { input: args }
+          });
+        }
+        console.log("RES", res);
 
         if (res && !res.errors) {
           this.$emit("complete");

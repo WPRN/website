@@ -6,7 +6,6 @@
           <v-img contain max-height="100%" src="/logo.png"></v-img>
         </v-avatar>
       </v-btn>
-
       <v-spacer></v-spacer>
       <v-fab-transition>
         <v-btn
@@ -38,10 +37,23 @@
     <v-content>
       <v-row>
         <v-col cols="12">
+          <v-overlay :value="checking" class="text-center headline">
+            <v-progress-circular class="mb-4" indeterminate size="64"></v-progress-circular>
+            <br />Verifying your credentials
+          </v-overlay>
+          <v-overlay :value="error" class="text-center headline">
+            <div class="display-1">Sorry for the inconvenience!</div>
+            <br />
+            <v-icon x-large class="mb-3">mdi-alert-circle-outline</v-icon>
+            <br />An error happened during the verification.
+            <br />You can try again and
+            refresh this page or
+            <nuxt-link to="/#contact">contact WPRN</nuxt-link>.
+          </v-overlay>
           <v-fade-transition mode="out-in">
             <v-card flat min-height="320px" class="pa-4 text-left">
               <v-card class="ml-3 mt-3 pb-3" flat>
-                <v-card-title class="pl-0">
+                <v-card-title class="pl-0 headline">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
                       <nuxt-link to="/worldwide">
@@ -51,12 +63,25 @@
                       </nuxt-link>
                     </template>
                     <span>Back to the project list</span>
-                  </v-tooltip>&nbsp;
+                  </v-tooltip>Edit or delete your project
                 </v-card-title>
                 <v-divider></v-divider>
-                <v-card-text
-                  class="pb-0 white--text pl-12 ml-4 headline"
-                >This feature will be available shortly</v-card-text>
+                <v-card-text class="pb-0 white--text align-center" justify="center">
+                  <v-expand-transition v-if="ready">
+                    <v-row no-gutters justify="center">
+                      <v-col cols="12">
+                        <ProjectForm
+                          editMode
+                          :projectInput="project"
+                          v-show="project"
+                          @complete="done=true"
+                          v-if="!done"
+                        />
+                        <ProjectUpdatedWindow v-else />
+                      </v-col>
+                    </v-row>
+                  </v-expand-transition>
+                </v-card-text>
                 <v-card-actions></v-card-actions>
                 <v-divider class="mt-3"></v-divider>
               </v-card>
@@ -69,16 +94,50 @@
 </template>
 <script>
 import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import ProjectForm from "~/components/projectForm/ProjectForm";
+import ProjectUpdatedWindow from "~/components/projectForm/ProjectUpdatedWindow";
+import * as queries from "~/graphql/queries";
+import gql from "graphql-tag";
+import client from "~/plugins/amplify";
+
 export default {
   data() {
     return {
-      drawer: false
+      drawer: false,
+      project: false,
+      ready: false,
+      checking: true,
+      error: false,
+      done: false
     };
   },
   components: {
-    NavigationDrawer
+    NavigationDrawer,
+    ProjectForm,
+    ProjectUpdatedWindow
   },
-  async mounted() {},
+  async mounted() {
+    try {
+      const res = await client.query({
+        query: gql(queries.getProjectForEdit),
+        variables: {
+          id: this.$route.params.id,
+          key: this.$route.params.key
+        }
+      });
+
+      if (res && res.data && res.data.getProjectForEdit && !res.errors) {
+        this.project = res.data.getProjectForEdit;
+        this.checking = false;
+        this.ready = true;
+      } else {
+        this.ready = true;
+      }
+    } catch (error) {
+      this.error = true;
+      this.ready = true;
+    }
+  },
   methods: {}
 };
 </script>

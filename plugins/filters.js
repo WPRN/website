@@ -24,8 +24,21 @@ Vue.filter("nl2br", (str, is_xhtml) => {
   return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 })
 Vue.filter('highlight', function (word, query) {
-  var check = new RegExp(query, "ig");
-  return word.toString().replace(check, function (matchedText, a, b) {
-    return ('<strong style="color: darkslategray;background-color: yellow;">' + matchedText + '</strong>');
-  });
+
+
+  if (typeof query === 'string') {
+    var check = new RegExp(query, "ig");
+    return word.toString().replace(check, function (matchedText, a, b) {
+      return ('<strong style="color: darkslategray;background-color: yellow;">' + matchedText + '</strong>');
+    });
+  } else {
+    query.forEach(element => {
+      var check = new RegExp(element, "ig");
+      word = word.toString().replace(check, function (matchedText, a, b) {
+        return ('<strong style="color: darkslategray;background-color: yellow;">' + matchedText + '</strong>');
+      });
+    });
+    return word
+  }
+
 });

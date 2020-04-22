@@ -8,7 +8,7 @@
     <td
       :style="$vuetify.breakpoint.mdAndUp?'min-width:30vw;':'min-width:40vw;'"
       class="px-1"
-      v-html="$options.filters.highlight(item.name, filters.search)"
+      v-html="$options.filters.highlight(item.name, filters.search.split(' '))"
     >
       <!-- STATE -->
     </td>

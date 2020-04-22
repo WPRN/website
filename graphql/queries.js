@@ -1,8 +1,8 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getItem = `query GetItem($pubId: String!) {
-  getItem(pubId: $pubId) {
+export const getProjectForEdit = `query GetProjectForEdit($id: String!, $key: String!) {
+  getProjectForEdit(id: $id, key: $key) {
     id
     name
     description

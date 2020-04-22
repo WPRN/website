@@ -32,9 +32,9 @@
           <v-btn
             outlined
             small
-            v-if="search&&search.length||filters.field&&filters.field.length||filters.type&&filters.type.length||((filters.zone&&filters.zone.length)||filters.zone!=='worldwide')"
+            v-if="filtering"
             color="white"
-            @click="search=''; filters= {field: [],type: '',zone: '',country: [],verified: false, thematics:[], state:'', featured:false};refreshQuery();$router.push({path: '/search', query:undefined})"
+            @click="$router.push({query:{}})"
             class="ma-3"
           >
             <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
@@ -52,14 +52,12 @@
       </template>
       <template v-slot:expanded-item="{ item }">
         <td colspan="9">
-          <v-expand-transition>
-            <ProjectDetails
-              :project="item"
-              :filters="filters"
-              @contact="contact=true"
-              v-show="expanded.includes(item)"
-            />
-          </v-expand-transition>
+          <ProjectDetails
+            :project="item"
+            :filters="filters"
+            @contact="contact=true"
+            :expanded="expanded"
+          />
         </td>
         <ContactDialog :open="contact" @close="contact=false" :id="item.pubId" />
       </template>
@@ -230,16 +228,16 @@ export default {
         let filter = { and: [] };
         if (this.filters.featured) {
           filter.status = {
-            eq: "FEATURED"
+            eq: "xFEATURED"
           };
         } else {
           if (this.filters.verified) {
             filter.status = {
-              match: ["FEATURED", "VERIFIED"]
+              match: ["xFEATURED", "VERIFIED"]
             };
           } else {
             filter.status = {
-              match: ["FEATURED", "VERIFIED", "PUBLISHED"]
+              match: ["xFEATURED", "VERIFIED", "PUBLISHED"]
             };
           }
         }
@@ -308,53 +306,106 @@ export default {
           }
         }
         if (this.filters.search && this.filters.search.length) {
-          let or = [
-            {
-              pubId: {
-                eq: this.filters.search
+          let or = [];
+          if (this.filters.search.includes(" ")) {
+            this.filters.search.split(" ").forEach(element => {
+              or.push(
+                {
+                  pubId: {
+                    eq: element
+                  }
+                },
+                {
+                  name: {
+                    wildcard: "*" + element + "*"
+                  }
+                },
+                {
+                  description: {
+                    wildcard: "*" + element + "*"
+                  }
+                },
+                {
+                  contact_lastname: {
+                    wildcard: "*" + element + "*"
+                  }
+                },
+                {
+                  contact_entity: {
+                    wildcard: "*" + element + "*"
+                  }
+                },
+                {
+                  name: {
+                    match: element
+                  }
+                },
+                {
+                  description: {
+                    match: element
+                  }
+                },
+                {
+                  contact_lastname: {
+                    match: element
+                  }
+                },
+                {
+                  contact_entity: {
+                    match: element
+                  }
+                }
+              );
+            });
+          } else {
+            or = [
+              {
+                pubId: {
+                  eq: this.filters.search
+                }
+              },
+              {
+                name: {
+                  wildcard: "*" + this.filters.search + "*"
+                }
+              },
+              {
+                description: {
+                  wildcard: "*" + this.filters.search + "*"
+                }
+              },
+              {
+                contact_lastname: {
+                  wildcard: "*" + this.filters.search + "*"
+                }
+              },
+              {
+                contact_entity: {
+                  wildcard: "*" + this.filters.search + "*"
+                }
+              },
+              {
+                name: {
+                  match: this.filters.search
+                }
+              },
+              {
+                description: {
+                  match: this.filters.search
+                }
+              },
+              {
+                contact_lastname: {
+                  match: this.filters.search
+                }
+              },
+              {
+                contact_entity: {
+                  match: this.filters.search
+                }
               }
-            },
-            {
-              name: {
-                wildcard: "*" + this.filters.search + "*"
-              }
-            },
-            {
-              description: {
-                wildcard: "*" + this.filters.search + "*"
-              }
-            },
-            {
-              contact_lastname: {
-                wildcard: "*" + this.filters.search + "*"
-              }
-            },
-            {
-              contact_entity: {
-                wildcard: "*" + this.filters.search + "*"
-              }
-            },
-            {
-              name: {
-                match: this.filters.search
-              }
-            },
-            {
-              description: {
-                match: this.filters.search
-              }
-            },
-            {
-              contact_lastname: {
-                match: this.filters.search
-              }
-            },
-            {
-              contact_entity: {
-                match: this.filters.search
-              }
-            }
-          ];
+            ];
+          }
           filter.and.push({ or });
         }
         const limit = 0;
@@ -364,25 +415,19 @@ export default {
         if (Object.keys(filter).length) options.filter = filter;
 
         // if (this.nextToken) options.nextToken = this.nextToken;
-        Object.keys(filter).length > 1
-          ? (this.filtering = true)
-          : (this.filtering = false);
-        options.limit = this.options.itemsPerPage;
-        console.log(JSON.stringify(options));
+        options.limit = "150" || this.options.itemsPerPage;
 
+        options["sort"] = { field: "status", direction: "desc" };
         const projects = await client.query({
           query: gql(queries.searchProjects),
           variables: options,
           fetchPolicy: "network-only"
         });
-        console.log(projects);
 
         this.projects = projects.data.searchProjects.items;
         this.nextToken = projects.data.searchProjects.nextToken;
         this.loading = false;
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   },
   components: {
@@ -393,17 +438,20 @@ export default {
   },
   watch: {
     "$route.query"() {
-      Object.keys(this.$route.query).forEach(key => {
+      this.filtering = false;
+      Object.keys(this.filters).forEach(key => {
         if (typeof this.$route.query[key] !== "undefined") {
           this.filters[key] = JSON.parse(this.$route.query[key]);
+          this.filtering = true;
         } else {
-          console.log(typeof this.filters[key]);
           switch (typeof this.filters[key]) {
             case "boolean":
               this.filters[key] = false;
               break;
             case "string":
-              this.filters[key] = "";
+              key === "zone"
+                ? (this.filters[key] = "worldwide")
+                : (this.filters[key] = "");
               break;
             case "object":
               this.filters[key] = [];
@@ -413,6 +461,7 @@ export default {
           }
         }
       });
+
       this.refreshQuery();
     }
   }

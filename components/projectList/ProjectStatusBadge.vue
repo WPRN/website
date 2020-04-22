@@ -1,21 +1,32 @@
 <template>
-  <v-tooltip bottom>
-    <template v-slot:activator="{ on }">
-      <template v-if="status==='FEATURED'">
-        <v-icon v-on="on">mdi-star</v-icon>
+  <span>
+    <template v-if="status==='xFEATURED'">
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-icon v-on="on">mdi-star</v-icon>
+        </template>
+        <span>This is a project featured by WPRN community</span>
+      </v-tooltip>
+    </template>
+    <template v-else>
+      <template v-if="status==='PUBLISHED'">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-sheet style="height:18px;width:18px; border-radius:12px" color="red" v-on="on"></v-sheet>
+          </template>
+          <span>This project has not been verified</span>
+        </v-tooltip>
       </template>
       <template v-else>
-        <v-sheet
-          style="height:18px;width:18px; border-radius:12px"
-          :color="status==='PUBLISHED'?'red':'green'"
-          v-on="on"
-        ></v-sheet>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-sheet style="height:18px;width:18px; border-radius:12px" color="green" v-on="on"></v-sheet>
+          </template>
+          <span>This project has been verified</span>
+        </v-tooltip>
       </template>
     </template>
-    <span v-if="status==='PUBLISHED'">This project has not been verified</span>
-    <span v-if="status==='FEATURED'">This is a project featured by WPRN community</span>
-    <span v-if="status==='VERIFIED'">This project has been verified</span>
-  </v-tooltip>
+  </span>
 </template>
 <script>
 export default {
