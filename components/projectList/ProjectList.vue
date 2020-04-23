@@ -7,7 +7,7 @@
       :items="projects"
       :loading="loading"
       item-key="id"
-      :server-items-length="projects&&projects['total']"
+      :server-items-length="total"
       :class="$vuetify.breakpoint.mdAndUp?' elevation-1 ':'elevation-1'"
       class="px-1"
       :options.sync="options"
@@ -16,6 +16,7 @@
       <!-- FILTERS -->
       <template v-slot:top>
         <ProjectFilters :loading="loading" />
+        <template v-if="total">{{total}}&nbsp;{{total>1?'Results':'Result'}}</template>
       </template>
       <!--  LOADING STATE -->
       <template v-slot:loading>
@@ -103,7 +104,6 @@ export default {
         sortBy: [],
         sortDesc: [true]
       },
-      limit: 100,
       search: "",
       headers: [
         {
@@ -408,22 +408,18 @@ export default {
           }
           filter.and.push({ or });
         }
-        const limit = 0;
         this.loading = true;
         if (!filter.and.length) delete filter.and;
         const options = {};
         if (Object.keys(filter).length) options.filter = filter;
-
-        // if (this.nextToken) options.nextToken = this.nextToken;
-        options.limit = "150" || this.options.itemsPerPage;
-
+        options.limit = 150;
         options["sort"] = { field: "status", direction: "desc" };
         const projects = await client.query({
           query: gql(queries.searchProjects),
           variables: options,
           fetchPolicy: "network-only"
         });
-
+        this.total = projects.data.searchProjects.total;
         this.projects = projects.data.searchProjects.items;
         this.nextToken = projects.data.searchProjects.nextToken;
         this.loading = false;

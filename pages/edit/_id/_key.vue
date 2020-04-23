@@ -56,15 +56,16 @@
                 <v-card-title class="pl-0 headline">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
-                      <nuxt-link to="/worldwide">
+                      <nuxt-link to="/search">
                         <v-btn fab icon large v-on="on" class="mr-2">
                           <v-icon large>mdi-arrow-left</v-icon>
                         </v-btn>
                       </nuxt-link>
                     </template>
                     <span>Back to the project list</span>
-                  </v-tooltip>Edit or delete your project
+                  </v-tooltip>Edit your project
                 </v-card-title>
+                <v-card-subtitle>The delete feature will be available in a few days</v-card-subtitle>
                 <v-divider></v-divider>
                 <v-card-text class="pb-0 white--text align-center" justify="center">
                   <v-expand-transition v-if="ready">
@@ -73,9 +74,8 @@
                         <ProjectForm
                           editMode
                           :projectInput="project"
-                          v-show="project"
+                          v-if="project&&!done"
                           @complete="done=true"
-                          v-if="!done"
                         />
                         <ProjectUpdatedWindow v-else />
                       </v-col>

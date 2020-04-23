@@ -5,17 +5,41 @@
         :complete="editMode || formStep > 1"
         step="1"
         :editable="editMode"
-      >General info</v-stepper-step>
+        :color="editMode&&formStep===1?'light-blue accent-2':'primary'"
+      >
+        <span style="text-decoration:underline;" v-if="editMode&&formStep===1">General info</span>
+        <template v-else>General info</template>
+      </v-stepper-step>
       <v-divider></v-divider>
       <v-stepper-step
         :complete="editMode || formStep > 2"
         step="2"
         :editable="editMode"
-      >Project details</v-stepper-step>
+        :color="editMode&&formStep===2?'light-blue accent-2':'primary'"
+      >
+        <span style="text-decoration:underline;" v-if="editMode&&formStep===2">Project details</span>
+        <template v-else>Project details</template>
+      </v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step :complete="editMode || formStep > 3" step="3" :editable="editMode">Location</v-stepper-step>
+      <v-stepper-step
+        :complete="editMode || formStep > 3"
+        step="3"
+        :editable="editMode"
+        :color="editMode&&formStep===3?'light-blue accent-2':'primary'"
+      >
+        <span style="text-decoration:underline;" v-if="editMode&&formStep===3">Location</span>
+        <template v-else>Location</template>
+      </v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step :complete="editMode || formStep > 4" step="4" :editable="editMode">Contact</v-stepper-step>
+      <v-stepper-step
+        :complete="editMode || formStep > 4"
+        step="4"
+        :editable="editMode"
+        :color="editMode&&formStep===4?'light-blue accent-2':'primary'"
+      >
+        <span style="text-decoration:underline;" v-if="editMode&&formStep===4">Contact</span>
+        <template v-else>Contact</template>
+      </v-stepper-step>
       <v-divider></v-divider>
       <v-stepper-step step="5">Confirmation</v-stepper-step>
     </v-stepper-header>
@@ -66,7 +90,7 @@
         <v-btn
           color="accent"
           @click="formStep=2"
-          :disabled="!($refs.name&&$refs.name.valid&&$refs.url&&$refs.url.valid&&$refs.description&&$refs.description.valid)"
+          :disabled="editMode?false:!($refs.name&&$refs.name.valid&&$refs.url&&$refs.url.valid&&$refs.description&&$refs.description.valid)"
           x-large
         >
           Continue&nbsp;
@@ -340,7 +364,7 @@
             align="left"
             color="gray lighten-4"
             v-if="editMode"
-          >Please note that your project will be marked automatically as "non verified" by the WPRN community after you edit its details, even if it was already verified.</v-alert>
+          >Please note that if your project is already verified or featured, you are responsible for the updated content.</v-alert>
           <v-form lazy-validation>
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
@@ -635,7 +659,7 @@ export default {
         state: this.editMode ? this.projectInput.state : "",
         country: this.editMode ? this.projectInput.country : [],
         thematics: this.editMode ? this.projectInput.thematics : [],
-        zone: this.editMode ? this.projectInput.zone : ["worldwide"],
+        zone: this.editMode ? this.projectInput.zone : [],
         contact_email: this.editMode ? this.projectInput.contact_email : "",
         city: this.editMode ? this.projectInput.city : "",
         contact_firstname: this.editMode
@@ -653,6 +677,10 @@ export default {
   },
   async mounted() {
     await this.$recaptcha.init();
+
+    setTimeout(() => {
+      this.$refs.step1.resetValidation();
+    }, 1000);
   },
   props: {
     projectInput: Object,
@@ -739,7 +767,6 @@ export default {
             pubId: this.$route.params.id,
             key: this.$route.params.key
           });
-          console.log(editProject);
 
           res = await client.mutate({
             mutation: gql(editProject),
@@ -757,7 +784,6 @@ export default {
             variables: { input: args }
           });
         }
-        console.log("RES", res);
 
         if (res && !res.errors) {
           this.$emit("complete");

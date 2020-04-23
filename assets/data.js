@@ -87,7 +87,7 @@ export const board = [
   },
   {
     name: "Raouf Boucekkine",
-    position: "Professor, Aix Marseille University ; DIrector, Mediterranean Institute for Advanced Research",
+    position: "Professor, Aix Marseille School of Economics; Director, Mediterranean Institute for Advanced Research",
     role: "Economics, Mathematics, Modelling, Maghreb",
     url: "https://www.amse-aixmarseille.fr/fr/membres/boucekkine",
     picture: "boucekkine.jpg",
@@ -225,10 +225,6 @@ export const supports = [
 export const zones = [
 
   {
-    text: "Worldwide / Intercontinental",
-    value: "worldwide"
-  },
-  {
     text: "Asia",
     value: "asia"
   },
@@ -255,7 +251,11 @@ export const zones = [
   {
     text: "Oceania",
     value: "oceania"
-  }
+  },
+  {
+    text: "Worldwide / Intercontinental",
+    value: "worldwide"
+  },
 ]
 export const fields = [
   { header: ' Social Sciences and Humanities' },

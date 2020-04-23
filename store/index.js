@@ -12,8 +12,6 @@ export const mutations = {
     state.projects = data
   },
   setShowFilters(state, data) {
-    console.log("fgergerge", data);
-
     state.showFilters = data
   },
 }
