@@ -1,7 +1,11 @@
 <template>
   <v-app>
     <nuxt />
-    <recaptcha @error="onError" @success="onSuccess" @expired="onExpired" />
+    <recaptcha
+      @error="onError"
+      @success="onSuccess"
+      @expired="onExpired"
+    />
     <v-footer
       class="justify-center"
       color="#292929"
@@ -10,7 +14,11 @@
       <div class="title font-weight-light grey--text text--lighten-1 text-center">
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn text icon v-on="on">
+            <v-btn
+              text
+              icon
+              v-on="on"
+            >
               <a
                 href="https://github.com/WPRN/website"
                 target="_blank"
@@ -25,7 +33,11 @@
         </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn text icon v-on="on">
+            <v-btn
+              text
+              icon
+              v-on="on"
+            >
               <a
                 href="https://twitter.com/WPRN_org"
                 target="_blank"
@@ -40,7 +52,11 @@
         </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn text icon v-on="on">
+            <v-btn
+              text
+              icon
+              v-on="on"
+            >
               <a
                 href="https://www.facebook.com/WPRN.org/"
                 target="_blank"
@@ -55,7 +71,11 @@
         </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn text icon v-on="on">
+            <v-btn
+              text
+              icon
+              v-on="on"
+            >
               <a
                 href="https://www.linkedin.com/company/wprn-world-pandemic-research-network/"
                 target="_blank"
@@ -68,10 +88,14 @@
           </template>
           <span>Visit our Linkedin page</span>
         </v-tooltip>
-        <br />
+        <br>
         <v-tooltip top>
           <template v-slot:activator="{ on }">
-            <v-btn text icon v-on="on">
+            <v-btn
+              text
+              icon
+              v-on="on"
+            >
               <a
                 href="http://creativecommons.org/licenses/by-sa/4.0/"
                 target="_blank"
@@ -92,18 +116,27 @@
             target="_blank"
             rel="noopener noreferrer"
           >IAS Paris</a>.
-          <br />
+          <br>
           <a
             style="text-decoration: underline;"
             class="blue--text"
             @click="showCredits = true"
           >See full credits</a>
           &nbsp;-&nbsp;
-          <nuxt-link to="/privacy_policy" class="blue--text">Privacy Policy</nuxt-link>&nbsp;-&nbsp;
-          <nuxt-link to="/press_room" class="blue--text">Press Room</nuxt-link>
+          <nuxt-link
+            to="/privacy_policy"
+            class="blue--text"
+          >Privacy Policy</nuxt-link>&nbsp;-&nbsp;
+          <nuxt-link
+            to="/press_room"
+            class="blue--text"
+          >Press Room</nuxt-link>
         </span>
 
-        <Credits :credits="showCredits" @closeCredits="showCredits = false" />
+        <Credits
+          :credits="showCredits"
+          @closeCredits="showCredits = false"
+        />
       </div>
     </v-footer>
   </v-app>

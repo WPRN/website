@@ -1,5 +1,8 @@
 <template>
-  <tr class="font-weight-medium" @click="$emit('expand', item)">
+  <tr
+    class="font-weight-medium"
+    @click="$emit('expand', item)"
+  >
     <!-- STATUS -->
     <td class="px-1">
       <template v-if="item.status === 'xFEATURED'">
@@ -12,7 +15,10 @@
           <span>This is a project featured by the WPRN community</span>
         </v-tooltip>
       </template>
-      <ProjectStatusBadge v-else :status="item.status" />
+      <ProjectStatusBadge
+        v-else
+        :status="item.status"
+      />
     </td>
     <!-- NAME -->
     <td
@@ -29,13 +35,18 @@
       :style="
         $vuetify.breakpoint.mdAndUp ? 'min-width:10vw;' : 'min-width:15vw;'
       "
-    >{{ item.contact_entity | truncate(18) }}</td>
+    >
+      {{ item.contact_entity | truncate(18) }}
+    </td>
     <!-- FIELD -->
     <td class="px-1">
       <template v-for="(field, index) in orderItems(item, 'field')">
         <template v-if="index < 2">
           <template v-if="field.length > 16">
-            <v-tooltip :key="index" top>
+            <v-tooltip
+              :key="index"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <v-chip
                   class="ma-1"
@@ -44,7 +55,9 @@
                   light
                   label
                   v-on="on"
-                >{{ field | truncate(16) }}</v-chip>
+                >
+                  {{ field | truncate(16) }}
+                </v-chip>
               </template>
               <span>{{ field }}</span>
             </v-tooltip>
@@ -57,11 +70,16 @@
               small
               light
               label
-            >{{ field }}</v-chip>
+            >
+              {{ field }}
+            </v-chip>
           </template>
         </template>
         <template v-if="index === 2 && item.field.length > 2">
-          <v-tooltip :key="index" top>
+          <v-tooltip
+            :key="index"
+            top
+          >
             <template v-slot:activator="{ on }">
               <span
                 class="caption"
@@ -71,7 +89,7 @@
             </template>
             <span>
               {{
-              orderItems(item, "field").slice(2).join(",&nbsp;")
+                orderItems(item, "field").slice(2).join(",&nbsp;")
               }}
             </span>
           </v-tooltip>
@@ -83,7 +101,10 @@
       <template v-for="(thematics, index) in orderItems(item, 'thematics')">
         <template v-if="index < 2">
           <template v-if="thematics.length > 16">
-            <v-tooltip :key="index" top>
+            <v-tooltip
+              :key="index"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <v-chip
                   :key="index"
@@ -94,7 +115,9 @@
                   small
                   label
                   v-on="on"
-                >{{ thematics | truncate(16) }}</v-chip>
+                >
+                  {{ thematics | truncate(16) }}
+                </v-chip>
               </template>
               <span>{{ thematics }}</span>
             </v-tooltip>
@@ -108,12 +131,17 @@
               outlined
               small
               label
-            >{{ thematics }}</v-chip>
+            >
+              {{ thematics }}
+            </v-chip>
           </template>
         </template>
         <template v-else>
           <template v-if="index === 2 && item.thematics.length > 2">
-            <v-tooltip :key="index" top>
+            <v-tooltip
+              :key="index"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <span
                   class="caption"
@@ -123,7 +151,7 @@
               </template>
               <span>
                 {{
-                orderItems(item, "thematics").slice(2).join(",&nbsp;")
+                  orderItems(item, "thematics").slice(2).join(",&nbsp;")
                 }}
               </span>
             </v-tooltip>
@@ -136,7 +164,10 @@
       <template v-for="(type, index) in orderItems(item, 'type')">
         <template v-if="index < 2">
           <template v-if="type.length > 19 && item.type.length > 1">
-            <v-tooltip :key="index" top>
+            <v-tooltip
+              :key="index"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <v-chip
                   :key="index"
@@ -145,7 +176,9 @@
                   small
                   light
                   v-on="on"
-                >{{ type | truncate(19) }}</v-chip>
+                >
+                  {{ type | truncate(19) }}
+                </v-chip>
               </template>
               <span>{{ type }}</span>
             </v-tooltip>
@@ -157,12 +190,17 @@
               :dark="filters.type.includes(type)"
               small
               light
-            >{{ type }}</v-chip>
+            >
+              {{ type }}
+            </v-chip>
           </template>
         </template>
         <template v-else>
           <template v-if="index === 2 && item.type.length > 2">
-            <v-tooltip :key="index" top>
+            <v-tooltip
+              :key="index"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <span
                   class="caption"
@@ -172,7 +210,7 @@
               </template>
               <span>
                 {{
-                orderItems(item, "type").slice(2).join(",&nbsp;")
+                  orderItems(item, "type").slice(2).join(",&nbsp;")
                 }}
               </span>
             </v-tooltip>
@@ -191,7 +229,9 @@
             :color="filters.zone.includes(zone) ? '#c4c4c4' : 'accent'"
             light
             class="ma-1"
-          >Worldwide</v-chip>
+          >
+            Worldwide
+          </v-chip>
         </template>
         <template v-else>
           <template v-if="index < 2">
@@ -202,11 +242,16 @@
               :color="filters.zone.includes(zone) ? '#c4c4c4' : 'accent'"
               light
               class="ma-1"
-            >{{ zones.find((zoneItem) => zone === zoneItem.value).text }}</v-chip>
+            >
+              {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
+            </v-chip>
           </template>
           <template v-else>
             <template v-if="index === 2 && item.zone.length > 2">
-              <v-tooltip :key="index" top>
+              <v-tooltip
+                :key="index"
+                top
+              >
                 <template v-slot:activator="{ on }">
                   <span
                     class="caption"
@@ -216,13 +261,13 @@
                 </template>
                 <span>
                   {{
-                  zones
-                  .filter(
-                  (zone) =>
-                  !orderItems(item, "zone").slice(2).includes(zone.value)
-                  )
-                  .map((zone) => zone.text)
-                  .join(",&nbsp;")
+                    zones
+                      .filter(
+                        (zone) =>
+                          !orderItems(item, "zone").slice(2).includes(zone.value)
+                      )
+                      .map((zone) => zone.text)
+                      .join(",&nbsp;")
                   }}
                 </span>
                 <!-- B-) -->
@@ -241,11 +286,16 @@
             small
             class="ma-1"
             :light="filters.country.includes(country)"
-          >{{ country }}</v-chip>
+          >
+            {{ country }}
+          </v-chip>
         </template>
         <template v-else>
           <template v-if="index === 2 && item.country.length > 2">
-            <v-tooltip :key="index" top>
+            <v-tooltip
+              :key="index"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <span
                   class="caption"
@@ -255,7 +305,7 @@
               </template>
               <span>
                 {{
-                orderItems(item, "country").slice(2).join(",&nbsp;")
+                  orderItems(item, "country").slice(2).join(",&nbsp;")
                 }}
               </span>
             </v-tooltip>
@@ -267,17 +317,22 @@
     <td class="pr-0">
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn text icon @click.stop="$emit('expand', item)" v-on="on">
+          <v-btn
+            text
+            icon
+            @click.stop="$emit('expand', item)"
+            v-on="on"
+          >
             <v-icon>
               {{
-              expanded.includes(item) ? "mdi-chevron-up" : "mdi-chevron-down"
+                expanded.includes(item) ? "mdi-chevron-up" : "mdi-chevron-down"
               }}
             </v-icon>
           </v-btn>
         </template>
         <span>
           {{
-          expanded.includes(item) ? "Hide details" : "See this project details"
+            expanded.includes(item) ? "Hide details" : "See this project details"
           }}
         </span>
       </v-tooltip>

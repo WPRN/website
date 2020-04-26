@@ -15,10 +15,30 @@
       @featured="$router.push({ path: '/', hash: 'featured' })"
       @list="drawer = false"
     />
-    <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text class="mx-0 px-0" height="auto" @click="$router.push({ path: '/' })">
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+    <v-app-bar
+      app
+      color="white"
+      height="100"
+      elevate-on-scroll
+      elevation-3
+    >
+      <v-btn
+        text
+        class="mx-0 px-0"
+        height="auto"
+        @click="$router.push({ path: '/' })"
+      >
+        <v-avatar
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>
       </v-btn>
 
@@ -39,7 +59,9 @@
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-title class="pb-0">Project list</v-card-title>
+            <v-card-title class="pb-0">
+              Project list
+            </v-card-title>
             <v-card-text :class="$vuetify.breakpoint.mdAndUp ? 'px-3' : 'pl-3'">
               <ProjectList />
             </v-card-text>

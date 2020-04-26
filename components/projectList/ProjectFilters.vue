@@ -3,9 +3,18 @@
     <!-- DEFAULT FILTERS -->
     <v-row no-gutters>
       <v-col cols="12">
-        <v-card-title class="pl-0 pt-0" :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }">
+        <v-card-title
+          class="pl-0 pt-0"
+          :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
+        >
           <!--   TOGGLE FILTERS BUTTON -->
-          <v-btn outlined small color="white" class="overline" @click="showFilters = !showFilters">
+          <v-btn
+            outlined
+            small
+            color="white"
+            class="overline"
+            @click="showFilters = !showFilters"
+          >
             <template v-if="showFilters">
               <v-icon>mdi-filter-variant</v-icon>&nbsp;Hide Filters&nbsp;
               <v-icon>mdi-chevron-up</v-icon>
@@ -61,9 +70,9 @@
             </template>
             <span>
               {{
-              filters.featured
-              ? "Featured projects are always verified"
-              : "Tick this to display only projects verified by a WPRN Referent"
+                filters.featured
+                  ? "Featured projects are always verified"
+                  : "Tick this to display only projects verified by a WPRN Referent"
               }}
             </span>
           </v-tooltip>
@@ -128,9 +137,17 @@
     </v-row>
     <!-- ADVANCED FILTERS -->
     <v-expand-transition class="align-center">
-      <v-row v-show="showFilters" :class="{ 'pr-8': $vuetify.breakpoint.mdAndUp }">
+      <v-row
+        v-show="showFilters"
+        :class="{ 'pr-8': $vuetify.breakpoint.mdAndUp }"
+      >
         <!-- ZONE -->
-        <v-col cols="12" sm="6" md="4" lg="3">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
           <v-select
             ref="zone"
             v-model="filters.zone"
@@ -151,7 +168,12 @@
           />
         </v-col>
         <!-- COUNTRY -->
-        <v-col cols="12" sm="6" md="4" lg="3">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
           <v-combobox
             v-model="filters.country"
             :disabled="loading"
@@ -187,7 +209,12 @@
           />
         </v-col>
         <!-- STATE (ONGOING, COMPLETED ...) -->
-        <v-col cols="12" sm="6" md="4" lg="3">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
           <v-select
             ref="status"
             v-model="filters.status"
@@ -216,7 +243,12 @@
         </v-col>
 
         <!--   FIELD (DISCIPLINES) -->
-        <v-col cols="12" sm="6" md="4" lg="3">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
           <v-combobox
             ref="field"
             v-model="filters.field"
@@ -245,7 +277,12 @@
           />
         </v-col>
         <!-- THEMATICS -->
-        <v-col cols="12" sm="6" md="4" lg="3">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
           <v-combobox
             ref="thematics"
             v-model="filters.thematics"
@@ -274,7 +311,12 @@
           />
         </v-col>
         <!-- PROJECT TYPE(S) -->
-        <v-col cols="12" sm="6" md="4" lg="3">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
           <v-select
             ref="type"
             v-model="filters.type"

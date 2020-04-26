@@ -5,10 +5,30 @@
     style="align-items: start;"
     :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
   >
-    <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text class="mx-0 px-0" height="auto" @click="$router.push({ path: '/' })">
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+    <v-app-bar
+      app
+      color="white"
+      height="100"
+      elevate-on-scroll
+      elevation-3
+    >
+      <v-btn
+        text
+        class="mx-0 px-0"
+        height="auto"
+        @click="$router.push({ path: '/' })"
+      >
+        <v-avatar
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>
       </v-btn>
 
@@ -36,27 +56,51 @@
     />
     <v-content v-scroll="onScroll">
       <v-container id="content">
-        <v-row align="center" justify="center">
+        <v-row
+          align="center"
+          justify="center"
+        >
           <v-col cols="1">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <nuxt-link to="/#featured">
-                  <v-btn fab icon large class="mr-2" v-on="on">
-                    <v-icon large>mdi-arrow-left</v-icon>
+                  <v-btn
+                    fab
+                    icon
+                    large
+                    class="mr-2"
+                    v-on="on"
+                  >
+                    <v-icon large>
+                      mdi-arrow-left
+                    </v-icon>
                   </v-btn>
                 </nuxt-link>
               </template>
               <span>Back to the main page</span>
             </v-tooltip>
           </v-col>
-          <v-col cols="10" sm="10" md="8">
+          <v-col
+            cols="10"
+            sm="10"
+            md="8"
+          >
             <h2
               class="display-2 font-weight-bold my-3 text-uppercase text-center"
-            >Psychological and social impact of covid-19</h2>
+            >
+              Psychological and social impact of covid-19
+            </h2>
           </v-col>
           <v-col cols="1" />
-          <v-col cols="12" sm="12" md="8">
-            <v-responsive class="mx-auto mb-12" width="56">
+          <v-col
+            cols="12"
+            sm="12"
+            md="8"
+          >
+            <v-responsive
+              class="mx-auto mb-12"
+              width="56"
+            >
               <v-divider class="mb-1" />
               <v-divider />
             </v-responsive>

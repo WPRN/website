@@ -1,9 +1,34 @@
 <template>
-  <v-container app fill-height :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }" align-start>
-    <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text class="mx-0 px-0" height="auto" @click="$router.push({ path: '/' })">
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+  <v-container
+    app
+    fill-height
+    :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
+    align-start
+  >
+    <v-app-bar
+      app
+      color="white"
+      height="100"
+      elevate-on-scroll
+      elevation-3
+    >
+      <v-btn
+        text
+        class="mx-0 px-0"
+        height="auto"
+        @click="$router.push({ path: '/' })"
+      >
+        <v-avatar
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>
       </v-btn>
 
@@ -44,21 +69,36 @@
                 ['NEW', 'PENDING', 'REMOVED', 'BLOCKED'].includes(project.status))
           "
         >
-          <v-overlay :value="error" class="text-center headline">
-            <div class="display-1">Sorry for the inconvenience!</div>
-            <br />
-            <v-icon x-large class="mb-3">mdi-ladybug</v-icon>
-            <br />This project is not available because its contact point email
+          <v-overlay
+            :value="error"
+            class="text-center headline"
+          >
+            <div class="display-1">
+              Sorry for the inconvenience!
+            </div>
+            <br>
+            <v-icon
+              x-large
+              class="mb-3"
+            >
+              mdi-ladybug
+            </v-icon>
+            <br>This project is not available because its contact point email
             is not verified or because it has been removed.
-            <br />Or it could
+            <br>Or it could
             just not be an existing project.
-            <br />You can try again and refresh
+            <br>You can try again and refresh
             this page or
-            <nuxt-link to="/#contact">contact WPRN</nuxt-link>.
+            <nuxt-link to="/#contact">
+              contact WPRN
+            </nuxt-link>.
           </v-overlay>
         </template>
         <template v-else>
-          <v-col v-if="ready && project" cols="12">
+          <v-col
+            v-if="ready && project"
+            cols="12"
+          >
             <v-fade-transition mode="out-in">
               <ProjectDetails
                 v-show="ready"
@@ -72,7 +112,11 @@
         </template>
       </v-row>
     </v-content>
-    <ContactDialog :id="project.pubId" :open="contact" @close="contact = false" />
+    <ContactDialog
+      :id="project.pubId"
+      :open="contact"
+      @close="contact = false"
+    />
   </v-container>
 </template>
 <script>

@@ -1,6 +1,9 @@
 <template>
   <v-row>
-    <v-col cols="12" align-center>
+    <v-col
+      cols="12"
+      align-center
+    >
       <svg
         id="svg106"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -314,8 +317,14 @@
         </g>
       </svg>
 
-      <v-row align="start" justify="center">
-        <v-chip-group column active-class="primary--text">
+      <v-row
+        align="start"
+        justify="center"
+      >
+        <v-chip-group
+          column
+          active-class="primary--text"
+        >
           <v-chip
             v-for="zone in zones"
             :key="zone.text"
@@ -325,7 +334,9 @@
             @mouseenter="highlightZone(zone)"
             @mouseleave="unHighlightZone(zone)"
             @click="clickZone(zone)"
-          >{{ zone.text }}</v-chip>
+          >
+            {{ zone.text }}
+          </v-chip>
         </v-chip-group>
       </v-row>
     </v-col>

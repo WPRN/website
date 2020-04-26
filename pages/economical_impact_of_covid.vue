@@ -5,10 +5,30 @@
     style="align-items: start;"
     :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
   >
-    <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text class="mx-0 px-0" height="auto" @click="$router.push({ path: '/' })">
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+    <v-app-bar
+      app
+      color="white"
+      height="100"
+      elevate-on-scroll
+      elevation-3
+    >
+      <v-btn
+        text
+        class="mx-0 px-0"
+        height="auto"
+        @click="$router.push({ path: '/' })"
+      >
+        <v-avatar
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>
       </v-btn>
 
@@ -36,28 +56,50 @@
     />
     <v-content v-scroll="onScroll">
       <v-container id="content">
-        <v-row align="center" justify="center">
+        <v-row
+          align="center"
+          justify="center"
+        >
           <v-col cols="1">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <nuxt-link to="/#featured">
-                  <v-btn fab icon large class="mr-2" v-on="on">
-                    <v-icon large>mdi-arrow-left</v-icon>
+                  <v-btn
+                    fab
+                    icon
+                    large
+                    class="mr-2"
+                    v-on="on"
+                  >
+                    <v-icon large>
+                      mdi-arrow-left
+                    </v-icon>
                   </v-btn>
                 </nuxt-link>
               </template>
               <span>Back to the main page</span>
             </v-tooltip>
           </v-col>
-          <v-col cols="10" sm="10" md="8">
+          <v-col
+            cols="10"
+            sm="10"
+            md="8"
+          >
             <h2 class="display-2 font-weight-bold my-3 text-uppercase text-center">
               Enterprise Survey for Innovation and Entrepreneurship in China
               (ESIEC)
             </h2>
           </v-col>
           <v-col cols="1" />
-          <v-col cols="12" sm="12" md="8">
-            <v-responsive class="mx-auto mb-12" width="56">
+          <v-col
+            cols="12"
+            sm="12"
+            md="8"
+          >
+            <v-responsive
+              class="mx-auto mb-12"
+              width="56"
+            >
               <v-divider class="mb-1" />
               <v-divider />
             </v-responsive>
@@ -73,8 +115,8 @@
                 Following the Covid-19 epidemic, the production activities of
                 many enterprises in China were halted, facing China with a
                 tradeoff between public health and the resumption of production.
-                <br />
-                <br />To study the impact of the lockdown,
+                <br>
+                <br>To study the impact of the lockdown,
                 <a
                   href="https://en.nsd.pku.edu.cn/faculty/fulltime/z/239570.htm"
                   target="_blank"
@@ -97,12 +139,12 @@
                   rel="noopener noreferrer"
                 >blog</a>). A new wave of this survey is starting soon to assess how the
                 economic situation evolves at the end the pandemic.
-                <br />
-                <br />Professor Zhang and his team agreed to share the ESIEC
+                <br>
+                <br>Professor Zhang and his team agreed to share the ESIEC
                 questionnaire, which has been translated from the Chinese
                 version and adapted into English, Spanish and French.
-                <br />
-                <br />A multicentric extension of the survey is planned in many
+                <br>
+                <br>A multicentric extension of the survey is planned in many
                 countries, with an inclusion of some questions of the crisis
                 coping questionnaire (
                 <a
@@ -112,10 +154,17 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="accent" @click="contact = true">
+                <v-btn
+                  color="accent"
+                  @click="contact = true"
+                >
                   <v-icon>mdi-email-edit</v-icon>&nbsp; contact
                 </v-btn>
-                <ContactDialog :id="XXXXX" :open="contact" @close="contact = false" />
+                <ContactDialog
+                  :id="XXXXX"
+                  :open="contact"
+                  @close="contact = false"
+                />
               </v-card-actions>
             </v-card>
           </v-col>

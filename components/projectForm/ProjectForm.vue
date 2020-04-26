@@ -1,5 +1,9 @@
 <template>
-  <v-stepper v-model="formStep" dark alt-labels>
+  <v-stepper
+    v-model="formStep"
+    dark
+    alt-labels
+  >
     <v-stepper-header>
       <v-stepper-step
         :complete="editMode || formStep > 1"
@@ -7,8 +11,13 @@
         :editable="editMode"
         :color="editMode && formStep === 1 ? 'light-blue accent-2' : 'primary'"
       >
-        <span v-if="editMode && formStep === 1" style="text-decoration: underline;">General info</span>
-        <template v-else>General info</template>
+        <span
+          v-if="editMode && formStep === 1"
+          style="text-decoration: underline;"
+        >General info</span>
+        <template v-else>
+          General info
+        </template>
       </v-stepper-step>
       <v-divider />
       <v-stepper-step
@@ -17,8 +26,13 @@
         :editable="editMode"
         :color="editMode && formStep === 2 ? 'light-blue accent-2' : 'primary'"
       >
-        <span v-if="editMode && formStep === 2" style="text-decoration: underline;">Project details</span>
-        <template v-else>Project details</template>
+        <span
+          v-if="editMode && formStep === 2"
+          style="text-decoration: underline;"
+        >Project details</span>
+        <template v-else>
+          Project details
+        </template>
       </v-stepper-step>
       <v-divider />
       <v-stepper-step
@@ -27,8 +41,13 @@
         :editable="editMode"
         :color="editMode && formStep === 3 ? 'light-blue accent-2' : 'primary'"
       >
-        <span v-if="editMode && formStep === 3" style="text-decoration: underline;">Location</span>
-        <template v-else>Location</template>
+        <span
+          v-if="editMode && formStep === 3"
+          style="text-decoration: underline;"
+        >Location</span>
+        <template v-else>
+          Location
+        </template>
       </v-stepper-step>
       <v-divider />
       <v-stepper-step
@@ -37,20 +56,35 @@
         :editable="editMode"
         :color="editMode && formStep === 4 ? 'light-blue accent-2' : 'primary'"
       >
-        <span v-if="editMode && formStep === 4" style="text-decoration: underline;">Contact</span>
-        <template v-else>Contact</template>
+        <span
+          v-if="editMode && formStep === 4"
+          style="text-decoration: underline;"
+        >Contact</span>
+        <template v-else>
+          Contact
+        </template>
       </v-stepper-step>
       <v-divider />
-      <v-stepper-step step="5">Confirmation</v-stepper-step>
+      <v-stepper-step step="5">
+        Confirmation
+      </v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-items align="center">
       <!--  PROJECT GENERAL INFO (NAME, URL, DESCRIPTION) -->
       <v-stepper-content step="1">
-        <v-card flat min-height="320px" light color="#333333">
+        <v-card
+          flat
+          min-height="320px"
+          light
+          color="#333333"
+        >
           <v-form ref="step1">
             <v-row>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   ref="name"
                   v-model="project.name"
@@ -61,7 +95,10 @@
                   :rules="nameRules"
                 />
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   ref="url"
                   v-model="project.url"
@@ -93,13 +130,13 @@
             editMode
               ? false
               : !(
-                  $refs.name &&
-                  $refs.name.valid &&
-                  $refs.url &&
-                  $refs.url.valid &&
-                  $refs.description &&
-                  $refs.description.valid
-                )
+                $refs.name &&
+                $refs.name.valid &&
+                $refs.url &&
+                $refs.url.valid &&
+                $refs.description &&
+                $refs.description.valid
+              )
           "
           x-large
           @click="formStep = 2"
@@ -110,10 +147,18 @@
       </v-stepper-content>
       <!--  PROJECT DETAILS (FIELDS, TYPES, THEMATICS, STATE AND POSSIBLY DATE & TIME) -->
       <v-stepper-content step="2">
-        <v-card flat min-height="320px" light color="#333333">
+        <v-card
+          flat
+          min-height="320px"
+          light
+          color="#333333"
+        >
           <v-form lazy-validation>
             <v-row>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-combobox
                   ref="field"
                   v-model="project.field"
@@ -126,7 +171,10 @@
                   @change="cleanModel('field')"
                 />
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-select
                   ref="state"
                   v-model="project.state"
@@ -138,7 +186,10 @@
                 />
               </v-col>
 
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-select
                   ref="thematics"
                   v-model="project.thematics"
@@ -150,7 +201,10 @@
                   @change="cleanModel('thematics')"
                 />
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-select
                   ref="type"
                   v-model="project.type"
@@ -224,7 +278,12 @@
             </v-row>
           </v-form>
         </v-card>
-        <v-btn text @click="formStep = 1">Previous</v-btn>
+        <v-btn
+          text
+          @click="formStep = 1"
+        >
+          Previous
+        </v-btn>
         <v-btn
           color="accent"
           :disabled="
@@ -246,14 +305,27 @@
       </v-stepper-content>
       <!--  PROJECT LOCATION (ZONES, COUNTRIES, REGION) -->
       <v-stepper-content step="3">
-        <v-card min-height="320px" flat light color="#333333">
+        <v-card
+          min-height="320px"
+          flat
+          light
+          color="#333333"
+        >
           <v-form lazy-validation>
             <v-row>
-              <v-alert type="info" align="left" color="gray lighten-4" width="100%">
+              <v-alert
+                type="info"
+                align="left"
+                color="gray lighten-4"
+                width="100%"
+              >
                 The location of the project refers to where it takes place and
                 is about, regardless of the contact geographical position.
               </v-alert>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-select
                   ref="zone"
                   v-model="project.zone"
@@ -276,7 +348,10 @@
                   @change="setCountries()"
                 />
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-combobox
                   v-model="project.country"
                   :disabled="!project.zone || loading"
@@ -300,7 +375,12 @@
             </v-row>
           </v-form>
         </v-card>
-        <v-btn text @click="formStep = 2">Previous</v-btn>
+        <v-btn
+          text
+          @click="formStep = 2"
+        >
+          Previous
+        </v-btn>
         <v-btn
           color="accent"
           :disabled="!($refs.zone && $refs.zone.valid)"
@@ -313,10 +393,19 @@
       </v-stepper-content>
       <!--   CONTACT INFO -->
       <v-stepper-content step="4">
-        <v-card min-height="320px" flat light color="#333333">
+        <v-card
+          min-height="320px"
+          flat
+          light
+          color="#333333"
+        >
           <v-form lazy-validation>
             <v-row>
-              <v-alert type="info" align="left" color="gray lighten-4">
+              <v-alert
+                type="info"
+                align="left"
+                color="gray lighten-4"
+              >
                 <template v-if="editMode">
                   Your email address is the only element of your project that
                   you cannot change.
@@ -330,7 +419,10 @@
                 </template>
               </v-alert>
 
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   ref="firstname"
                   v-model="project.contact_firstname"
@@ -340,7 +432,10 @@
                   @blur="capitalize('contact_firstname')"
                 />
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   ref="lastname"
                   v-model="project.contact_lastname"
@@ -350,7 +445,10 @@
                   @blur="capitalize('contact_lastname')"
                 />
               </v-col>
-              <v-col cols="12" md="6">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   ref="entity"
                   v-model="project.contact_entity"
@@ -360,7 +458,11 @@
                   @keyup.enter="next()"
                 />
               </v-col>
-              <v-col v-if="!editMode" cols="12" md="6">
+              <v-col
+                v-if="!editMode"
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   ref="email"
                   v-model="project.contact_email"
@@ -374,7 +476,12 @@
           </v-form>
         </v-card>
 
-        <v-btn text @click="formStep = 3">Previous</v-btn>
+        <v-btn
+          text
+          @click="formStep = 3"
+        >
+          Previous
+        </v-btn>
         <v-btn
           color="accent"
           :disabled="
@@ -397,24 +504,51 @@
       </v-stepper-content>
       <!-- SUMMARY -->
       <v-stepper-content step="5">
-        <v-card min-height="320px" flat dark color="#333333">
-          <v-card-title primary-title>Review your project</v-card-title>
-          <v-alert v-if="editMode" type="info" align="left" color="gray lighten-4">
+        <v-card
+          min-height="320px"
+          flat
+          dark
+          color="#333333"
+        >
+          <v-card-title primary-title>
+            Review your project
+          </v-card-title>
+          <v-alert
+            v-if="editMode"
+            type="info"
+            align="left"
+            color="gray lighten-4"
+          >
             Please note that if your project is already verified or featured,
             you are responsible for the updated content.
           </v-alert>
           <v-form lazy-validation>
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
-                <v-col cols="12" class="overline">
+                <v-col
+                  cols="12"
+                  class="overline"
+                >
                   Project Information
-                  <v-btn icon small @click="formStep = 1">
+                  <v-btn
+                    icon
+                    small
+                    @click="formStep = 1"
+                  >
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
-                <v-col cols="12" :md="project.url ? '6' : '12'" class="pl-3">
-                  <div class="font-weight-light caption">Name</div>
-                  <div class="subtitle-1">{{ project.name }}</div>
+                <v-col
+                  cols="12"
+                  :md="project.url ? '6' : '12'"
+                  class="pl-3"
+                >
+                  <div class="font-weight-light caption">
+                    Name
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.name }}
+                  </div>
                 </v-col>
                 <v-col
                   v-if="project.url"
@@ -422,11 +556,20 @@
                   md="6"
                   :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
                 >
-                  <div class="font-weight-light caption">Url</div>
-                  <div class="subtitle-1">{{ project.url }}</div>
+                  <div class="font-weight-light caption">
+                    Url
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.url }}
+                  </div>
                 </v-col>
-                <v-col cols="12" class="pl-3">
-                  <div class="font-weight-light caption">Project and Team description</div>
+                <v-col
+                  cols="12"
+                  class="pl-3"
+                >
+                  <div class="font-weight-light caption">
+                    Project and Team description
+                  </div>
                   <div class="subtitle-1">
                     <p v-html="$options.filters.nl2br(project.description)" />
                   </div>
@@ -436,75 +579,123 @@
             <v-divider color="white" />
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
-                <v-col cols="12" class="overline">
+                <v-col
+                  cols="12"
+                  class="overline"
+                >
                   Project details
-                  <v-btn icon small @click="formStep = 2">
+                  <v-btn
+                    icon
+                    small
+                    @click="formStep = 2"
+                  >
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
-                <v-col cols="12" md="6" class="pl-3">
+                <v-col
+                  cols="12"
+                  md="6"
+                  class="pl-3"
+                >
                   <div class="font-weight-light caption">
                     {{
-                    project.field.length > 1 ? "Disciplines" : "Discipline"
+                      project.field.length > 1 ? "Disciplines" : "Discipline"
                     }}
                   </div>
                   <v-chip
                     v-for="(item, index) in project.field"
                     :key="index"
                     class="subtitle-1 ma-1"
-                  >{{ item }}</v-chip>
+                  >
+                    {{ item }}
+                  </v-chip>
                 </v-col>
-                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
+                <v-col
+                  cols="12"
+                  md="6"
+                  :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+                >
                   <div class="font-weight-light caption">
                     {{
-                    project.type.length > 1 ? "Project Types" : "Project Type"
+                      project.type.length > 1 ? "Project Types" : "Project Type"
                     }}
                   </div>
                   <v-chip
                     v-for="(item, index) in project.type"
                     :key="index"
                     class="subtitle-1 ma-1"
-                  >{{ item }}</v-chip>
+                  >
+                    {{ item }}
+                  </v-chip>
                 </v-col>
-                <v-col cols="12" md="6" class="pl-3">
+                <v-col
+                  cols="12"
+                  md="6"
+                  class="pl-3"
+                >
                   <div class="font-weight-light caption">
                     {{
-                    project.thematics && project.thematics.length > 1
-                    ? "Thematics"
-                    : "Thematic"
+                      project.thematics && project.thematics.length > 1
+                        ? "Thematics"
+                        : "Thematic"
                     }}
                   </div>
                   <v-chip
                     v-for="(item, index) in project.thematics"
                     :key="index"
                     class="subtitle-1 ma-1"
-                  >{{ item }}</v-chip>
+                  >
+                    {{ item }}
+                  </v-chip>
                 </v-col>
-                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
-                  <div class="font-weight-light caption">Project Status</div>
-                  <div class="subtitle-1">{{ project.state }}</div>
+                <v-col
+                  cols="12"
+                  md="6"
+                  :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+                >
+                  <div class="font-weight-light caption">
+                    Project Status
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.state }}
+                  </div>
                 </v-col>
               </v-row>
             </v-card-text>
             <v-divider color="white" />
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
-                <v-col cols="12" class="overline">
+                <v-col
+                  cols="12"
+                  class="overline"
+                >
                   Project location
-                  <v-btn icon small @click="formStep = 3">
+                  <v-btn
+                    icon
+                    small
+                    @click="formStep = 3"
+                  >
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
-                <v-col cols="12" md="6" class="pl-3">
+                <v-col
+                  cols="12"
+                  md="6"
+                  class="pl-3"
+                >
                   <div
                     class="font-weight-light caption"
-                  >{{ project.zone.length > 1 ? "Continents" : "Continent" }}</div>
+                  >
+                    {{ project.zone.length > 1 ? "Continents" : "Continent" }}
+                  </div>
                   <v-chip
                     v-for="(item, index) in project.zone"
                     :key="index"
                     class="subtitle-1 ma-1"
                     label
-                  >{{ zones.find((zoneItem) => item === zoneItem.value).text }}</v-chip>
+                  >
+                    {{ zones.find((zoneItem) => item === zoneItem.value).text }}
+                  </v-chip>
                 </v-col>
                 <v-col
                   v-if="project.country && project.country.length"
@@ -514,9 +705,9 @@
                 >
                   <div class="font-weight-light caption">
                     {{
-                    project.country && project.country.length > 1
-                    ? "Countries"
-                    : "Country"
+                      project.country && project.country.length > 1
+                        ? "Countries"
+                        : "Country"
                     }}
                   </div>
                   <v-chip
@@ -524,42 +715,96 @@
                     :key="index"
                     class="subtitle-1 ma-1"
                     label
-                  >{{ item }}</v-chip>
+                  >
+                    {{ item }}
+                  </v-chip>
                 </v-col>
-                <v-col v-if="project.city" cols="12" md="6" class="pl-3">
-                  <div class="font-weight-light caption">Region, state or city</div>
-                  <div class="subtitle-1">{{ project.city }}</div>
+                <v-col
+                  v-if="project.city"
+                  cols="12"
+                  md="6"
+                  class="pl-3"
+                >
+                  <div class="font-weight-light caption">
+                    Region, state or city
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.city }}
+                  </div>
                 </v-col>
               </v-row>
             </v-card-text>
             <v-divider color="white" />
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
-                <v-col cols="12" class="overline">
+                <v-col
+                  cols="12"
+                  class="overline"
+                >
                   Project contact
-                  <v-btn icon small @click="formStep = 4">
+                  <v-btn
+                    icon
+                    small
+                    @click="formStep = 4"
+                  >
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
-                <v-col cols="12" md="6" class="pl-3">
-                  <div class="font-weight-light caption">Firstname</div>
-                  <div class="subtitle-1">{{ project.contact_firstname }}</div>
+                <v-col
+                  cols="12"
+                  md="6"
+                  class="pl-3"
+                >
+                  <div class="font-weight-light caption">
+                    Firstname
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.contact_firstname }}
+                  </div>
                 </v-col>
-                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
-                  <div class="font-weight-light caption">Lastname</div>
-                  <div class="subtitle-1">{{ project.contact_lastname }}</div>
+                <v-col
+                  cols="12"
+                  md="6"
+                  :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+                >
+                  <div class="font-weight-light caption">
+                    Lastname
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.contact_lastname }}
+                  </div>
                 </v-col>
-                <v-col cols="12" md="6" class="pl-3">
-                  <div class="font-weight-light caption">Institution</div>
-                  <div class="subtitle-1">{{ project.contact_entity }}</div>
+                <v-col
+                  cols="12"
+                  md="6"
+                  class="pl-3"
+                >
+                  <div class="font-weight-light caption">
+                    Institution
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.contact_entity }}
+                  </div>
                 </v-col>
-                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
-                  <div class="font-weight-light caption">Email</div>
-                  <div class="subtitle-1">{{ project.contact_email }}</div>
+                <v-col
+                  cols="12"
+                  md="6"
+                  :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+                >
+                  <div class="font-weight-light caption">
+                    Email
+                  </div>
+                  <div class="subtitle-1">
+                    {{ project.contact_email }}
+                  </div>
                 </v-col>
               </v-row>
               <span>
-                <v-checkbox ref="agreedRef" v-model="agreed" :rules="requiredRules">
+                <v-checkbox
+                  ref="agreedRef"
+                  v-model="agreed"
+                  :rules="requiredRules"
+                >
                   <template v-slot:label>
                     <span>
                       I certify that the information given in this form is true,
@@ -592,7 +837,12 @@
             apply.
           </small>
         </div>
-        <v-btn text @click="formStep = 4">Previous</v-btn>
+        <v-btn
+          text
+          @click="formStep = 4"
+        >
+          Previous
+        </v-btn>
         <v-btn
           color="success"
           x-large

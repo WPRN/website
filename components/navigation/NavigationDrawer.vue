@@ -10,7 +10,13 @@
     <div class="d-flex flex-row-reverse">
       <v-tooltip left>
         <template v-slot:activator="{ on }">
-          <v-btn class="ma-3" large icon @click="$emit('close')" v-on="on">
+          <v-btn
+            class="ma-3"
+            large
+            icon
+            @click="$emit('close')"
+            v-on="on"
+          >
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </template>
@@ -35,7 +41,15 @@
         <v-divider />
         <v-list-item class="mt-3 px-0">
           <v-list-item-title>
-            <v-btn color="white" outlined block large @click="$emit('list')">Browse projects</v-btn>
+            <v-btn
+              color="white"
+              outlined
+              block
+              large
+              @click="$emit('list')"
+            >
+              Browse projects
+            </v-btn>
           </v-list-item-title>
         </v-list-item>
       </v-list-item-group>

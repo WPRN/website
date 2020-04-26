@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-form lazy-validation color="#333333">
+    <v-form
+      lazy-validation
+      color="#333333"
+    >
       <v-col cols="12">
         <v-text-field
           ref="name"
@@ -13,7 +16,13 @@
       </v-col>
 
       <v-col cols="12">
-        <v-text-field ref="email" v-model="contact.email" label="Email*" solo :rules="emailRules" />
+        <v-text-field
+          ref="email"
+          v-model="contact.email"
+          label="Email*"
+          solo
+          :rules="emailRules"
+        />
       </v-col>
 
       <v-col cols="12">

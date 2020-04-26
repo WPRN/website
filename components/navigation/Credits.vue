@@ -8,11 +8,24 @@
   >
     <v-card>
       <v-card-title>
-        <v-avatar small class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+        <v-avatar
+          small
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>Credits
         <v-spacer />
-        <v-btn icon @click="$emit('closeCredits')">
+        <v-btn
+          icon
+          @click="$emit('closeCredits')"
+        >
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-card-title>
@@ -24,12 +37,12 @@
           href="https://www.paris-iea.fr"
           target="_blank"
         >IAS Paris - IEA de Paris</a>.
-        <br />
+        <br>
         <b>Thanks</b>
         to all those whose contribution and collective intelligence provides us
         all with this shared resource.
-        <br />This is a non-profit initiative. We welcome donations.
-        <br />
+        <br>This is a non-profit initiative. We welcome donations.
+        <br>
         <span
           style="color: #1976d2; text-decoration: underline; cursor: pointer;"
           @click="
@@ -51,12 +64,17 @@
             $router.push({ path: '/board_and_contributors#institutions' })
           "
         >Contributors' Institutions</span>
-        <br />
-        <div class="overline pt-6 mb-3">Institutional supports</div>
+        <br>
+        <div class="overline pt-6 mb-3">
+          Institutional supports
+        </div>
         <v-divider />This project is supported by :
         <ul>
           <li>
-            <a href="https://aws.amazon.com/" target="_blank">Amazon Web Services</a>
+            <a
+              href="https://aws.amazon.com/"
+              target="_blank"
+            >Amazon Web Services</a>
           </li>
           <li>
             <a
@@ -65,7 +83,10 @@
             >EASSSH (European Alliance for Social Siences and Humanities)</a>
           </li>
           <li>
-            <a href="https://www.paris-iea.fr" target="_blank">IAS Paris - IEA de Paris</a>.
+            <a
+              href="https://www.paris-iea.fr"
+              target="_blank"
+            >IAS Paris - IEA de Paris</a>.
           </li>
           <li>
             <a
@@ -74,11 +95,17 @@
             >IPSP (International Panel on Social Progress</a>
           </li>
           <li>
-            <a href="http://netias.science/home" target="_blank">Netias</a>
+            <a
+              href="http://netias.science/home"
+              target="_blank"
+            >Netias</a>
           </li>
 
           <li>
-            <a href="http://www.uai-iua.org/" target="_blank">Union Académique Internationale</a>
+            <a
+              href="http://www.uai-iua.org/"
+              target="_blank"
+            >Union Académique Internationale</a>
           </li>
 
           <li>
@@ -89,7 +116,9 @@
           </li>
           <li>More Pending&hellip;</li>
         </ul>
-        <div class="overline pt-6 mb-3">Technical supports</div>
+        <div class="overline pt-6 mb-3">
+          Technical supports
+        </div>
         <v-divider />This website and logo as well as its infrastructure have
         been designed by
         <a
@@ -100,15 +129,18 @@
           href="https://nuxtjs.org/"
           target="_blank"
         >Nuxt</a> and
-        <a href="http://vuetifyjs.com" target="_blank">Vuetify</a>
+        <a
+          href="http://vuetifyjs.com"
+          target="_blank"
+        >Vuetify</a>
         .
-        <br />The backend is built around a serverless/FAAS graphQL API made on
+        <br>The backend is built around a serverless/FAAS graphQL API made on
         top of
         <a
           href="https://aws.amazon.com/"
           target="_blank"
         >AWS ecosystem</a>.
-        <br />The logo is based on a SVG file downloaded from
+        <br>The logo is based on a SVG file downloaded from
         <a
           href="https://thenounproject.com"
           target="_blank"
@@ -118,19 +150,25 @@
           href="https://thenounproject.com/nguyenthanhthuydesign/"
           target="_blank"
         >NTT</a>.
-        <br />All the images used are free of rights (or distributed as
+        <br>All the images used are free of rights (or distributed as
         such).
-        <br />
+        <br>
         <span class="caption">
-          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by-sa/4.0/"
+          >
             <img
               alt="Creative Commons License"
               style="border-width: 0;"
               src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
-            />
+            >
           </a>
-          <br />
-          <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">WPRN</span>
+          <br>
+          <span
+            xmlns:dct="http://purl.org/dc/terms/"
+            property="dct:title"
+          >WPRN</span>
           by
           <a
             xmlns:cc="http://creativecommons.org/ns#"
@@ -146,7 +184,7 @@
             Creative Commons Attribution-ShareAlike 4.0 International
             License
           </a>.
-          <br />Based on a work at
+          <br>Based on a work at
           <a
             xmlns:dct="http://purl.org/dc/terms/"
             href="https://github.com/WPRN/website"
@@ -159,7 +197,13 @@
       <v-divider />
       <v-card-actions>
         <v-spacer />
-        <v-btn color="blue darken-1" text @click="$emit('closeCredits')">Close</v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="$emit('closeCredits')"
+        >
+          Close
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

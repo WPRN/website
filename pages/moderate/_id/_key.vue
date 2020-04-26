@@ -1,9 +1,34 @@
 <template>
-  <v-container app fill-height :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }" align-start>
-    <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text class="mx-0 px-0" height="auto" @click="$router.push({ path: '/' })">
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+  <v-container
+    app
+    fill-height
+    :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
+    align-start
+  >
+    <v-app-bar
+      app
+      color="white"
+      height="100"
+      elevate-on-scroll
+      elevation-3
+    >
+      <v-btn
+        text
+        class="mx-0 px-0"
+        height="auto"
+        @click="$router.push({ path: '/' })"
+      >
+        <v-avatar
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>
       </v-btn>
 
@@ -39,14 +64,29 @@
       <v-row>
         <v-col cols="12">
           <v-fade-transition mode="out-in">
-            <v-card flat min-height="320px" class="pa-4 text-left">
-              <v-card class="ml-3 mt-3 pb-3" flat>
+            <v-card
+              flat
+              min-height="320px"
+              class="pa-4 text-left"
+            >
+              <v-card
+                class="ml-3 mt-3 pb-3"
+                flat
+              >
                 <v-card-title class="pl-0">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
                       <nuxt-link to="/worldwide">
-                        <v-btn fab icon large class="mr-2" v-on="on">
-                          <v-icon large>mdi-arrow-left</v-icon>
+                        <v-btn
+                          fab
+                          icon
+                          large
+                          class="mr-2"
+                          v-on="on"
+                        >
+                          <v-icon large>
+                            mdi-arrow-left
+                          </v-icon>
                         </v-btn>
                       </nuxt-link>
                     </template>
@@ -56,7 +96,9 @@
                 <v-divider />
                 <v-card-text
                   class="pb-0 white--text pl-12 ml-4 headline"
-                >This feature will be available shortly</v-card-text>
+                >
+                  This feature will be available shortly
+                </v-card-text>
                 <v-card-actions />
                 <v-divider class="mt-3" />
               </v-card>

@@ -14,8 +14,16 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <nuxt-link to="/search">
-            <v-btn fab icon large class="mr-2" v-on="on">
-              <v-icon large>mdi-arrow-left</v-icon>
+            <v-btn
+              fab
+              icon
+              large
+              class="mr-2"
+              v-on="on"
+            >
+              <v-icon large>
+                mdi-arrow-left
+              </v-icon>
             </v-btn>
           </nuxt-link>
         </template>
@@ -27,8 +35,15 @@
       {{ project.name }}
       <v-spacer />
       <!-- SOCIAL -->
-      <v-btn-toggle rounded :class="{ 'mt-3': $vuetify.breakpoint.smAndDown }">
-        <v-tooltip v-for="(social, index) in socialChannels" :key="index" bottom>
+      <v-btn-toggle
+        rounded
+        :class="{ 'mt-3': $vuetify.breakpoint.smAndDown }"
+      >
+        <v-tooltip
+          v-for="(social, index) in socialChannels"
+          :key="index"
+          bottom
+        >
           <template v-slot:activator="{ on }">
             <v-btn
               :small="$vuetify.breakpoint.smAndDown"
@@ -36,7 +51,9 @@
               target="_blank"
               v-on="on"
             >
-              <v-icon :small="$vuetify.breakpoint.smAndDown">mdi-{{ social.icon }}</v-icon>
+              <v-icon :small="$vuetify.breakpoint.smAndDown">
+                mdi-{{ social.icon }}
+              </v-icon>
             </v-btn>
           </template>
           <span v-if="social.label !== 'Email'">Share this project on {{ social.label }}</span>
@@ -44,7 +61,7 @@
         </v-tooltip>
       </v-btn-toggle>
     </v-card-title>
-    <br v-if="pageMode && $vuetify.breakpoint.smAndDown" />
+    <br v-if="pageMode && $vuetify.breakpoint.smAndDown">
     <!--  PUB ID -->
     <v-card-subtitle
       :class="{ 'ml-12 pl-4': pageMode && $vuetify.breakpoint.mdAndUp }"
@@ -60,33 +77,46 @@
     >
       <v-row>
         <!--  CREATION DATE -->
-        <v-col cols="12" md="6" xl="4">
+        <v-col
+          cols="12"
+          md="6"
+          xl="4"
+        >
           <span class="overline">CREATION DATE :</span>
-          <br />
+          <br>
           <span class="subtitle-1">
             {{ project.createdAt.split("T")[0] }} at
             {{ project.createdAt.split("T")[1].split(":")[0] }}h{{
-            project.createdAt.split("T")[1].split(":")[1]
+              project.createdAt.split("T")[1].split(":")[1]
             }}
             (GMT)
           </span>
         </v-col>
         <!-- STATE (private key) STATUS (public key) -->
-        <v-col cols="12" md="6" xl="4">
+        <v-col
+          cols="12"
+          md="6"
+          xl="4"
+        >
           <span class="overline">STATUS :</span>
-          <br />
+          <br>
           <span class="subtitle-1">{{ project.state }}</span>
         </v-col>
 
         <!-- FIELD -->
-        <v-col cols="12" md="6" xl="4" class="subtitle-1">
+        <v-col
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
           <span class="overline">
             {{
-            project.field.length > 1 ? "DISCIPLINES" : "DISCIPLINE"
+              project.field.length > 1 ? "DISCIPLINES" : "DISCIPLINE"
             }}
             :
           </span>
-          <br />
+          <br>
           <template v-if="project.field.length > 10 && !showFields">
             <template v-for="(field, index) in project.field">
               <v-chip
@@ -97,7 +127,9 @@
                 :small="!pageMode"
                 :dark="!pageMode && filters.field.includes(field)"
                 light
-              >{{ field }}</v-chip>
+              >
+                {{ field }}
+              </v-chip>
               <span
                 v-if="index === 11"
                 :key="index"
@@ -116,7 +148,9 @@
                 label
                 :small="!pageMode"
                 light
-              >{{ field }}</v-chip>
+              >
+                {{ field }}
+              </v-chip>
             </template>
             <span
               v-if="project.type.length > 10 && showFields"
@@ -127,9 +161,14 @@
           </template>
         </v-col>
         <!-- TYPE -->
-        <v-col cols="12" md="6" xl="4" class="subtitle-1">
+        <v-col
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
           <span class="overline">{{ project.type.length > 1 ? "TYPES" : "TYPE" }} :</span>
-          <br />
+          <br>
           <template v-if="project.type.length > 10 && !showType">
             <template v-for="(type, index) in project.type">
               <v-chip
@@ -139,7 +178,9 @@
                 :dark="!pageMode && filters.type.includes(type)"
                 :small="!pageMode"
                 light
-              >{{ type }}</v-chip>
+              >
+                {{ type }}
+              </v-chip>
               <span
                 v-if="index === 11"
                 :key="index"
@@ -157,7 +198,9 @@
                 :dark="!pageMode && filters.type.includes(type)"
                 :small="!pageMode"
                 light
-              >{{ type }}</v-chip>
+              >
+                {{ type }}
+              </v-chip>
             </template>
             <span
               v-if="project.type.length > 10 && showType"
@@ -168,16 +211,22 @@
           </template>
         </v-col>
         <!-- THEMATICS -->
-        <v-col v-if="project.thematics" cols="12" md="6" xl="4" class="subtitle-1">
+        <v-col
+          v-if="project.thematics"
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
           <span class="overline">
             {{
-            project.thematics && project.thematics.length > 1
-            ? "THEMATICS"
-            : "THEMATIC"
+              project.thematics && project.thematics.length > 1
+                ? "THEMATICS"
+                : "THEMATIC"
             }}
             :
           </span>
-          <br />
+          <br>
           <template v-if="project.thematics.length > 10 && !showThematics">
             <template v-for="(thematic, index) in project.thematics">
               <v-chip
@@ -193,7 +242,9 @@
                     ? 'white'
                     : ''
                 "
-              >{{ thematic }}</v-chip>
+              >
+                {{ thematic }}
+              </v-chip>
               <span
                 v-if="index === 11"
                 :key="index"
@@ -217,7 +268,9 @@
                 :small="!pageMode"
                 label
                 outlined
-              >{{ thematic }}</v-chip>
+              >
+                {{ thematic }}
+              </v-chip>
             </template>
             <span
               v-if="project.thematics.length > 10 && showThematics"
@@ -228,9 +281,14 @@
           </template>
         </v-col>
         <!-- ZONE -->
-        <v-col cols="12" md="6" xl="4" class="subtitle-1">
+        <v-col
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
           <span class="overline">{{ project.zone.length > 1 ? "CONTINENTS" : "CONTINENT" }} :</span>
-          <br />
+          <br>
           <v-chip
             v-for="(zone, index) in project.zone"
             :key="index"
@@ -241,19 +299,27 @@
             "
             label
             light
-          >{{ zones.find((zoneItem) => zone === zoneItem.value).text }}</v-chip>
+          >
+            {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
+          </v-chip>
         </v-col>
         <!-- COUNTRY -->
-        <v-col v-if="project.country" cols="12" md="6" xl="4" class="subtitle-1">
+        <v-col
+          v-if="project.country"
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
           <span class="overline">
             {{
-            project.country && project.country.length > 1
-            ? "COUNTRIES"
-            : "COUNTRY"
+              project.country && project.country.length > 1
+                ? "COUNTRIES"
+                : "COUNTRY"
             }}
             :
           </span>
-          <br />
+          <br>
           <template v-if="project.country.length > 10 && !showCountry">
             <template v-for="(country, index) in project.country">
               <v-chip
@@ -262,7 +328,9 @@
                 :small="!pageMode"
                 :light="!pageMode && filters.country.includes(country)"
                 class="ma-1"
-              >{{ country }}</v-chip>
+              >
+                {{ country }}
+              </v-chip>
               <span
                 v-if="index === 11"
                 :key="index"
@@ -279,7 +347,9 @@
                 :small="!pageMode"
                 :light="!pageMode && filters.country.includes(country)"
                 class="ma-1"
-              >{{ country }}</v-chip>
+              >
+                {{ country }}
+              </v-chip>
             </template>
             <span
               v-if="project.country.length > 10 && showCountry"
@@ -290,9 +360,12 @@
           </template>
         </v-col>
         <!-- CONTACT -->
-        <v-col cols="12" class="subtitle-1">
+        <v-col
+          cols="12"
+          class="subtitle-1"
+        >
           <span class="overline">CONTACT :</span>
-          <br />
+          <br>
           <template v-if="pageMode">
             <span
               v-html="
@@ -305,7 +378,9 @@
             {{ ", " + project.contact_firstname }}
             <template
               v-if="project.contact_entity"
-            >({{ project.contact_entity }})</template>
+            >
+              ({{ project.contact_entity }})
+            </template>
           </template>
           <template v-else>
             <span
@@ -333,16 +408,23 @@
                     "
                   />
                 </template>
-                <template v-else>({{ project.contact_entity }})</template>
+                <template v-else>
+                  ({{ project.contact_entity }})
+                </template>
               </template>
-              <template v-else>({{ project.contact_entity }})</template>
+              <template v-else>
+                ({{ project.contact_entity }})
+              </template>
             </template>
           </template>
         </v-col>
         <!-- DESCRIPTION -->
-        <v-col cols="12" class="subtitle-1 pr-12">
+        <v-col
+          cols="12"
+          class="subtitle-1 pr-12"
+        >
           <span class="overline">Team and Project description</span>
-          <br />
+          <br>
           <template v-if="pageMode">
             <p v-html="$options.filters.nl2br(project.description)" />
           </template>
@@ -395,10 +477,18 @@
           </template>
         </v-col>
         <!--  CITE WIDGET -->
-        <v-col v-if="pageMode" cols="12" class="subtitle-1">
+        <v-col
+          v-if="pageMode"
+          cols="12"
+          class="subtitle-1"
+        >
           <span class="overline">To cite this project in your research</span>
-          <br />
-          <v-sheet light elevation="3" class="mr-6 py-3 pl-5 mt-3">
+          <br>
+          <v-sheet
+            light
+            elevation="3"
+            class="mr-6 py-3 pl-5 mt-3"
+          >
             <v-row no-gutters>
               <v-col class="align-self-center">
                 {{ project.contact_lastname }}, {{ project.contact_firstname }}.
@@ -407,7 +497,7 @@
                 . WPRN-{{ project.pubId }},
                 {{ project.createdAt.split("T")[0] }} at
                 {{ project.createdAt.split("T")[1].split(":")[0] }}h{{
-                project.createdAt.split("T")[1].split(":")[1]
+                  project.createdAt.split("T")[1].split(":")[1]
                 }}
                 (GMT):
                 <a
@@ -434,13 +524,25 @@
                       project.createdAt.split('T')[1].split(':')[1] +
                       ' (GMT):'
                   "
-                />
+                >
               </v-col>
-              <v-col cols="auto" class="align-self-center">
+              <v-col
+                cols="auto"
+                class="align-self-center"
+              >
                 <v-tooltip top>
                   <template v-slot:activator="{ on }">
-                    <v-btn icon large tile class="mr-2" v-on="on" @click="copyToClipBoard()">
-                      <v-icon large>mdi-content-copy</v-icon>
+                    <v-btn
+                      icon
+                      large
+                      tile
+                      class="mr-2"
+                      v-on="on"
+                      @click="copyToClipBoard()"
+                    >
+                      <v-icon large>
+                        mdi-content-copy
+                      </v-icon>
                     </v-btn>
                   </template>
                   <span>Copy to clipboard</span>
@@ -453,11 +555,18 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
-      <v-btn color="accent" :class="{ 'mr-3': !project.url }" @click="$emit('contact')">
+      <v-btn
+        color="accent"
+        :class="{ 'mr-3': !project.url }"
+        @click="$emit('contact')"
+      >
         <v-icon>mdi-email-edit</v-icon>&nbsp; Email this project contact
       </v-btn>
       <template v-if="pageMode">
-        <v-btn v-if="project.url" color="accent">
+        <v-btn
+          v-if="project.url"
+          color="accent"
+        >
           <a
             :href="
               project.url.includes('http')
@@ -473,18 +582,32 @@
       </template>
       <template v-if="!pageMode">
         <v-btn color="accent">
-          <a :href="'/item/' + project.pubId" style="text-decoration: none; color: white;">
+          <a
+            :href="'/item/' + project.pubId"
+            style="text-decoration: none; color: white;"
+          >
             Project details&nbsp;
             <v-icon>mdi-chevron-right</v-icon>
           </a>
         </v-btn>
       </template>
     </v-card-actions>
-    <v-snackbar v-if="pageMode" v-model="snackbar" top :timeout="3000" color="accent">
+    <v-snackbar
+      v-if="pageMode"
+      v-model="snackbar"
+      top
+      :timeout="3000"
+      color="accent"
+    >
       CITATION REFERENCE COPIED
-      <v-icon large>mdi-content-copy</v-icon>
+      <v-icon large>
+        mdi-content-copy
+      </v-icon>
     </v-snackbar>
-    <v-divider v-if="!pageMode" class="my-3" />
+    <v-divider
+      v-if="!pageMode"
+      class="my-3"
+    />
   </v-card>
 </template>
 <script>

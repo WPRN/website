@@ -16,20 +16,27 @@
       <!-- FILTERS -->
       <template v-slot:top>
         <ProjectFilters :loading="loading" />
-        <template v-if="total">{{ total }}&nbsp;{{ total > 1 ? "Results" : "Result" }}</template>
+        <template v-if="total">
+          {{ total }}&nbsp;{{ total > 1 ? "Results" : "Result" }}
+        </template>
       </template>
       <!--  LOADING STATE -->
       <template v-slot:loading>
-        <v-skeleton-loader transition="scale-transition" type="table-tbody" />
+        <v-skeleton-loader
+          transition="scale-transition"
+          type="table-tbody"
+        />
       </template>
       <!-- NO DATA STATE -->
       <template v-slot:no-data>
         <template v-if="!filtering">
-          <div class="my-3">There are no projects to display</div>
+          <div class="my-3">
+            There are no projects to display
+          </div>
         </template>
         <template v-else>
           No projects match your search.
-          <br />
+          <br>
           <v-btn
             v-if="filtering"
             outlined
@@ -65,7 +72,11 @@
             @contact="contact = true"
           />
         </td>
-        <ContactDialog :id="item.pubId" :open="contact" @close="contact = false" />
+        <ContactDialog
+          :id="item.pubId"
+          :open="contact"
+          @close="contact = false"
+        />
       </template>
     </v-data-table>
   </div>

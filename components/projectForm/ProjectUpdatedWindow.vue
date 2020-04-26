@@ -1,9 +1,24 @@
 <template>
-  <v-card flat min-height="320px" class="pa-4 text-center" align="center">
-    <v-icon x-large color="success" class="py-6">mdi-check-outline</v-icon>
-    <h3 class="headline font-weight-heavy mb-2">YOUR PROJECT HAS BEEN SUCCESSFULLY UPDATED!</h3>
-    <div class="subtitle-1">Thank you again for your contribution.</div>
-    <br />
+  <v-card
+    flat
+    min-height="320px"
+    class="pa-4 text-center"
+    align="center"
+  >
+    <v-icon
+      x-large
+      color="success"
+      class="py-6"
+    >
+      mdi-check-outline
+    </v-icon>
+    <h3 class="headline font-weight-heavy mb-2">
+      YOUR PROJECT HAS BEEN SUCCESSFULLY UPDATED!
+    </h3>
+    <div class="subtitle-1">
+      Thank you again for your contribution.
+    </div>
+    <br>
     <!--     <v-card-actions>
       <v-spacer></v-spacer>e
       <v-tooltip bottom>

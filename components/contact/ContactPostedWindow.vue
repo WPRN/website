@@ -1,9 +1,23 @@
 <template>
-  <v-card flat min-height="320px" class="pa-4 text-center" align="center" :dark="dark">
-    <v-icon x-large color="success" class="py-6">mdi-check-outline</v-icon>
-    <h3 class="headline font-weight-heavy mb-2">YOUR CONTACT REQUEST HAS BEEN SENT!</h3>
+  <v-card
+    flat
+    min-height="320px"
+    class="pa-4 text-center"
+    align="center"
+    :dark="dark"
+  >
+    <v-icon
+      x-large
+      color="success"
+      class="py-6"
+    >
+      mdi-check-outline
+    </v-icon>
+    <h3 class="headline font-weight-heavy mb-2">
+      YOUR CONTACT REQUEST HAS BEEN SENT!
+    </h3>
 
-    <br />
+    <br>
     <!--     <v-card-actions>
       <v-spacer></v-spacer>
       <v-tooltip bottom>

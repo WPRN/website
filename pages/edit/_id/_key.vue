@@ -5,15 +5,30 @@
     :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
     align-start
   >
-    <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
+    <v-app-bar
+      app
+      color="white"
+      height="100"
+      elevate-on-scroll
+      elevation-3
+    >
       <v-btn
         text
         class="mx-0 px-0"
         height="auto"
         @click="$router.push({ path: '/' })"
       >
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+        <v-avatar
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>
       </v-btn>
       <v-spacer />
@@ -47,16 +62,29 @@
     <v-content>
       <v-row>
         <v-col cols="12">
-          <v-overlay :value="checking" class="text-center headline">
-            <v-progress-circular class="mb-4" indeterminate size="64" />
+          <v-overlay
+            :value="checking"
+            class="text-center headline"
+          >
+            <v-progress-circular
+              class="mb-4"
+              indeterminate
+              size="64"
+            />
             <br>Verifying your credentials
           </v-overlay>
-          <v-overlay :value="error" class="text-center headline">
+          <v-overlay
+            :value="error"
+            class="text-center headline"
+          >
             <div class="display-1">
               Sorry for the inconvenience!
             </div>
             <br>
-            <v-icon x-large class="mb-3">
+            <v-icon
+              x-large
+              class="mb-3"
+            >
               mdi-alert-circle-outline
             </v-icon>
             <br>An error happened during the verification. <br>You can try
@@ -66,13 +94,26 @@
             </nuxt-link>.
           </v-overlay>
           <v-fade-transition mode="out-in">
-            <v-card flat min-height="320px" class="pa-4 text-left">
-              <v-card class="ml-3 mt-3 pb-3" flat>
+            <v-card
+              flat
+              min-height="320px"
+              class="pa-4 text-left"
+            >
+              <v-card
+                class="ml-3 mt-3 pb-3"
+                flat
+              >
                 <v-card-title class="pl-0 headline">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
                       <nuxt-link to="/search">
-                        <v-btn fab icon large class="mr-2" v-on="on">
+                        <v-btn
+                          fab
+                          icon
+                          large
+                          class="mr-2"
+                          v-on="on"
+                        >
                           <v-icon large>
                             mdi-arrow-left
                           </v-icon>
@@ -80,7 +121,7 @@
                       </nuxt-link>
                     </template>
                     <span>Back to the project list</span>
-</v-tooltip>Edit your project
+                  </v-tooltip>Edit your project
                 </v-card-title>
                 <v-card-subtitle>
                   The delete feature will be available in a few
@@ -91,7 +132,10 @@
                   justify="center"
                 >
                   <v-expand-transition v-if="ready">
-                    <v-row no-gutters justify="center">
+                    <v-row
+                      no-gutters
+                      justify="center"
+                    >
                       <v-col cols="12">
                         <ProjectForm
                           v-if="project && !done"

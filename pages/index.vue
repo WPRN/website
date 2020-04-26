@@ -1,9 +1,30 @@
 <template>
   <div>
-    <v-app-bar app color="white" height="100" inverted-scroll elevate-on-scroll elevation-3>
-      <v-btn text class="mx-0 px-0" height="auto" @click="$vuetify.goTo('#hero')">
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png" />
+    <v-app-bar
+      app
+      color="white"
+      height="100"
+      inverted-scroll
+      elevate-on-scroll
+      elevation-3
+    >
+      <v-btn
+        text
+        class="mx-0 px-0"
+        height="auto"
+        @click="$vuetify.goTo('#hero')"
+      >
+        <v-avatar
+          class="mr-3"
+          tile
+          color="grey lighten-5"
+          size="72"
+        >
+          <v-img
+            contain
+            max-height="100%"
+            src="/logo.png"
+          />
         </v-avatar>
       </v-btn>
       <v-spacer />
@@ -78,7 +99,11 @@
             lazy-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgAB8DASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABwYIBf/EACkQAAIBAwIFBAIDAAAAAAAAAAECAwQFEQAGEhMhMUEHIlFhFDIjQvD/xAAWAQEBAQAAAAAAAAAAAAAAAAADAQX/xAAiEQABBAEDBQEAAAAAAAAAAAABAAIDERIEITETQVFhcfD/2gAMAwEAAhEDEQA/AMlWW2Vt4uUVvoITLPJkgDwAMkn6A/2dOFj9Kdo2qzULbjFdWXKrLGUyymCmgVRklVX3sfHUgE57Y1EejFRR2msa7VqQFHl5QMgLZCqWMeFIYcZKrxeM+caUp6KPcV5kittytkNXVUytb+VV+2Bf25TKTlT1ZeED40x0krg1zTTd72v977oXycgcqL3RtX0uuFJcH27cqi0VVLHxQxVErSfkEY4hwni8k44XPRScHRDWU8lLUNDIVJHZlOQw8EfWk/d21a21yvDw86QJluBWGMDJAB+B8fGoa+yRTWul9kCzQSMhKKQ7K3X3dMHBB+9JKyEszhdYUikJNFdn0vojequayQ1FJHXSfyUkdQxTnNjBRX/UOcDAbAPbIPe12lfJNvXeOWqRoY6WrAlR4CJ42XIJVsFkdcYPbv8AZ0MQSyQTJNC7RyIcqynqDpg2t61wwWdbXujatHdf1V6tAvMkReg4lcEFsYHFkdABjoMJDrMY+k4WFXRW7IK+v1wtwNXemhqK2kg5c0siqHlCSgdTGWz5Iz2B7kaz1vKsoay8zzW4VAp5HMiioVRKmf6sV9rY+QBnVnvr1Sp7mlVT7atVZa4qs5qGqasSlugGFUKAq4AwMkDRiSSck5OsyCEQtPkpfgX/2Q=="
           >
             <v-container fill-height>
-              <v-row align="center" class="white--text mx-auto" justify="center">
+              <v-row
+                align="center"
+                class="white--text mx-auto"
+                justify="center"
+              >
                 <v-col
                   class="white--text d-flex justify-center flex-column align-center"
                   cols="12"
@@ -92,7 +117,7 @@
                   >
                     <Logo />
                   </span>
-                  <br />
+                  <br>
                   <div
                     style="
                       background-color: #333333;
@@ -100,7 +125,9 @@
                       max-width: 600px;
                     "
                     class="pa-2 title d-flex justify-center text-center"
-                  >ASSESSING SOCIETAL AND HUMAN IMPACTS OF COVID-19</div>
+                  >
+                    ASSESSING SOCIETAL AND HUMAN IMPACTS OF COVID-19
+                  </div>
                 </v-col>
                 <v-btn
                   large
@@ -108,7 +135,9 @@
                   fab
                   @click="$vuetify.goTo('#about-us', { offset: 100 })"
                 >
-                  <v-icon large>mdi-arrow-down</v-icon>
+                  <v-icon large>
+                    mdi-arrow-down
+                  </v-icon>
                 </v-btn>
               </v-row>
             </v-container>
@@ -121,23 +150,37 @@
 
       <Featured />
       <section id="contact">
-        <v-sheet color="#333333" tile>
+        <v-sheet
+          color="#333333"
+          tile
+        >
           <div class="py-12" />
 
           <v-container>
             <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">
               {{
-              ["CONTACT WPRN", "REGISTER YOUR PROJECT", "THANK YOU!"][step]
+                ["CONTACT WPRN", "REGISTER YOUR PROJECT", "THANK YOU!"][step]
               }}
             </h2>
 
-            <v-responsive class="mx-auto mb-12" width="56">
+            <v-responsive
+              class="mx-auto mb-12"
+              width="56"
+            >
               <v-divider class="mb-1" />
 
               <v-divider />
             </v-responsive>
-            <v-row v-if="step < 2" no-gutters justify="center">
-              <v-col cols="12" md="10" lg="8">
+            <v-row
+              v-if="step < 2"
+              no-gutters
+              justify="center"
+            >
+              <v-col
+                cols="12"
+                md="10"
+                lg="8"
+              >
                 <v-checkbox
                   v-model="contactOnly"
                   class="pl-6 mt-0"
@@ -148,12 +191,24 @@
                 />
               </v-col>
             </v-row>
-            <v-window v-model="step" touchless>
+            <v-window
+              v-model="step"
+              touchless
+            >
               <v-window-item :value="0">
                 <v-card-text class="pb-0">
                   <v-theme-provider light>
-                    <v-row no-gutters justify="center">
-                      <v-col cols="12" md="10" lg="8" no-gutters align="center">
+                    <v-row
+                      no-gutters
+                      justify="center"
+                    >
+                      <v-col
+                        cols="12"
+                        md="10"
+                        lg="8"
+                        no-gutters
+                        align="center"
+                      >
                         <ContactForm
                           @complete="step = 2"
                           @WorkInProgressDialogToggle="
@@ -168,8 +223,17 @@
               <v-window-item :value="1">
                 <v-card-text class="pb-0">
                   <v-theme-provider light>
-                    <v-row no-gutters justify="center">
-                      <v-col cols="12" md="10" lg="8" no-gutters align="center">
+                    <v-row
+                      no-gutters
+                      justify="center"
+                    >
+                      <v-col
+                        cols="12"
+                        md="10"
+                        lg="8"
+                        no-gutters
+                        align="center"
+                      >
                         <ProjectForm
                           @complete="step = 2"
                           @WorkInProgressDialogToggle="
@@ -182,8 +246,15 @@
                 </v-card-text>
               </v-window-item>
               <v-window-item :value="2">
-                <v-row no-gutters justify="center">
-                  <v-col cols="12" md="10" lg="8">
+                <v-row
+                  no-gutters
+                  justify="center"
+                >
+                  <v-col
+                    cols="12"
+                    md="10"
+                    lg="8"
+                  >
                     <template v-if="contactOnly">
                       <ContactPostedWindow
                         @reset="

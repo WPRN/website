@@ -7,7 +7,11 @@
       <template v-if="status === 'PUBLISHED'">
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-sheet style="height: 18px; width: 18px; border-radius: 12px;" color="red" v-on="on" />
+            <v-sheet
+              style="height: 18px; width: 18px; border-radius: 12px;"
+              color="red"
+              v-on="on"
+            />
           </template>
           <span>This project has not been verified</span>
         </v-tooltip>
