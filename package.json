@@ -1,9 +1,14 @@
 {
-  "name": "WPRN",
+  "name": "wprn_frontend",
   "version": "1.0.0",
   "description": "Public initiative to publish and share in one single place the list of all research initiatives and surveys about the current pandemic of Covid-19 coronavirus.",
   "author": "Antoine Cordelois",
   "private": true,
+  "ava": {
+    "files": [
+      "test/**/*"
+    ]
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -21,8 +26,9 @@
     "@tweenjs/tween.js": "^18",
     "array-flat-polyfill": "^1.0.1",
     "aws-appsync": "^3.0.2",
+    "eslint-loader": "^4.0.2",
     "intersection-observer": "^0.9.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.4.2",
     "nuxt-jsonld": "^1.4.5",
     "slugify": "^1.4.0",
     "vue-timeago": "^5.1.2"
@@ -30,30 +36,23 @@
   "devDependencies": {
     "@nuxtjs/google-analytics": "^2.2.3",
     "@nuxtjs/vuetify": "^1.0.0",
-    "@types/graphql": "latest",
-    "concurrent-transform": "^1.0.0",
-    "graphql-tag": "^2.10.3",
-    "gulp": "^4.0.2",
-    "gulp-awspublish": "^4.1.1",
-    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
-    "webpack-graphql-loader": "^1.0.2",
-    "babel-core": "^6.22.1",
-    "babel-eslint": "^8.2.1",
-    "babel-helper-vue-jsx-merge-props": "^2.0.3",
-    "babel-loader": "^7.1.1",
+    "ava": "^3.7.1",
+    "babel-eslint": "^10.1.0",
     "chalk": "^2.0.1",
-    "css-loader": "^0.28.0",
-    "eslint-config-airbnb-base": "^11.3.0",
-    "eslint-import-resolver-webpack": "^0.8.3",
-    "friendly-errors-webpack-plugin": "^1.6.1",
-    "eslint": "^4.15.0",
+    "concurrent-transform": "^1.0.0",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^6.2.2",
+    "graphql-tag": "^2.10.3",
+    "gulp": "^4.0.2",
+    "gulp-awspublish": "^4.1.1",
+    "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
+    "jsdom": "^16.2.2",
+    "webpack-graphql-loader": "^1.0.2"
   }
 }
