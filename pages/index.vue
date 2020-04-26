@@ -1,14 +1,15 @@
 <template>
   <div>
     <v-app-bar app color="white" height="100" inverted-scroll elevate-on-scroll elevation-3>
-      <v-btn text @click="$vuetify.goTo('#hero')" class="mx-0 px-0" height="auto">
+      <v-btn text class="mx-0 px-0" height="auto" @click="$vuetify.goTo('#hero')">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png"></v-img>
+          <v-img contain max-height="100%" src="/logo.png" />
         </v-avatar>
       </v-btn>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-fab-transition>
         <v-btn
+          v-show="!drawer"
           light
           absolute
           top
@@ -19,20 +20,35 @@
           class="mt-12 mr-0"
           x-large
           @click.stop="drawer = !drawer"
-          v-show="!drawer"
         >
           <v-icon>mdi-menu</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-app-bar>
     <NavigationDrawer
-      @close="drawer=false"
-      @contact="$vuetify.goTo('#contact', {offset:100});contactOnly=true;drawer=false;step=0"
-      @register="$vuetify.goTo('#contact', {offset:100});contactOnly=false;drawer=false;step=1"
-      @about="$vuetify.goTo('#about-us', {offset:100});drawer=false"
-      @featured="$vuetify.goTo('#featured', {offset:100});drawer=false"
-      @list="$router.push({path:'/search'})"
       :drawer="drawer"
+      @close="drawer = false"
+      @contact="
+        $vuetify.goTo('#contact', { offset: 100 })
+        contactOnly = true
+        drawer = false
+        step = 0
+      "
+      @register="
+        $vuetify.goTo('#contact', { offset: 100 })
+        contactOnly = false
+        drawer = false
+        step = 1
+      "
+      @about="
+        $vuetify.goTo('#about-us', { offset: 100 })
+        drawer = false
+      "
+      @featured="
+        $vuetify.goTo('#featured', { offset: 100 })
+        drawer = false
+      "
+      @list="$router.push({ path: '/search' })"
     />
     <v-content v-scroll="onScroll">
       <section id="hero">
@@ -47,8 +63,8 @@
             outlined
             class="mt-12 mr-0"
             size="90"
-            @click.stop="drawer = !drawer"
             x-large
+            @click.stop="drawer = !drawer"
           >
             <v-icon>mdi-menu</v-icon>
           </v-btn>
@@ -69,22 +85,28 @@
                   tag="h1"
                 >
                   <span
-                    :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
+                    :class="[
+                      $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4',
+                    ]"
                     class="font-weight-black"
                   >
                     <Logo />
                   </span>
                   <br />
                   <div
-                    style="background-color:#333333; border-radius:10px; max-width:600px; "
+                    style="
+                      background-color: #333333;
+                      border-radius: 10px;
+                      max-width: 600px;
+                    "
                     class="pa-2 title d-flex justify-center text-center"
-                  >ASSESSING SOCIETAL AND HUMAN IMPACT OF COVID-19</div>
+                  >ASSESSING SOCIETAL AND HUMAN IMPACTS OF COVID-19</div>
                 </v-col>
                 <v-btn
                   large
                   class="align-self-end"
                   fab
-                  @click="$vuetify.goTo('#about-us', {offset:100})"
+                  @click="$vuetify.goTo('#about-us', { offset: 100 })"
                 >
                   <v-icon large>mdi-arrow-down</v-icon>
                 </v-btn>
@@ -100,28 +122,30 @@
       <Featured />
       <section id="contact">
         <v-sheet color="#333333" tile>
-          <div class="py-12"></div>
+          <div class="py-12" />
 
           <v-container>
-            <h2
-              class="display-2 font-weight-bold mb-3 text-uppercase text-center"
-            >{{['CONTACT WPRN','REGISTER YOUR PROJECT','THANK YOU!'][step]}}</h2>
+            <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">
+              {{
+              ["CONTACT WPRN", "REGISTER YOUR PROJECT", "THANK YOU!"][step]
+              }}
+            </h2>
 
             <v-responsive class="mx-auto mb-12" width="56">
-              <v-divider class="mb-1"></v-divider>
+              <v-divider class="mb-1" />
 
-              <v-divider></v-divider>
+              <v-divider />
             </v-responsive>
-            <v-row no-gutters justify="center" v-if="step<2">
+            <v-row v-if="step < 2" no-gutters justify="center">
               <v-col cols="12" md="10" lg="8">
                 <v-checkbox
-                  class="pl-6 mt-0"
                   v-model="contactOnly"
+                  class="pl-6 mt-0"
                   label="I just want to contact WPRN"
                   dark
                   hide-details
-                  @change="contactOnly?step=0:step=1"
-                ></v-checkbox>
+                  @change="contactOnly ? (step = 0) : (step = 1)"
+                />
               </v-col>
             </v-row>
             <v-window v-model="step" touchless>
@@ -131,8 +155,10 @@
                     <v-row no-gutters justify="center">
                       <v-col cols="12" md="10" lg="8" no-gutters align="center">
                         <ContactForm
-                          @complete="step=2"
-                          @WorkInProgressDialogToggle="WorkInProgressDialogToggle=true"
+                          @complete="step = 2"
+                          @WorkInProgressDialogToggle="
+                            WorkInProgressDialogToggle = true
+                          "
                         />
                       </v-col>
                     </v-row>
@@ -145,8 +171,10 @@
                     <v-row no-gutters justify="center">
                       <v-col cols="12" md="10" lg="8" no-gutters align="center">
                         <ProjectForm
-                          @complete="step=2"
-                          @WorkInProgressDialogToggle="WorkInProgressDialogToggle=true"
+                          @complete="step = 2"
+                          @WorkInProgressDialogToggle="
+                            WorkInProgressDialogToggle = true
+                          "
                         />
                       </v-col>
                     </v-row>
@@ -157,10 +185,15 @@
                 <v-row no-gutters justify="center">
                   <v-col cols="12" md="10" lg="8">
                     <template v-if="contactOnly">
-                      <ContactPostedWindow @reset="step=0; contactOnly=true" />
+                      <ContactPostedWindow
+                        @reset="
+                          step = 0
+                          contactOnly = true
+                        "
+                      />
                     </template>
                     <template v-else>
-                      <ProjectPostedWindow @reset="step=1" />
+                      <ProjectPostedWindow @reset="step = 1" />
                     </template>
                   </v-col>
                 </v-row>
@@ -168,12 +201,13 @@
             </v-window>
           </v-container>
 
-          <div class="py-12"></div>
+          <div class="py-12" />
         </v-sheet>
       </section>
       <v-fab-transition>
         <v-btn
           v-if="$vuetify.breakpoint.mdAndUp"
+          v-show="offsetTop > 600"
           color="accent"
           dark
           fixed
@@ -181,7 +215,6 @@
           right
           contained
           fab
-          v-show="offsetTop>600"
           @click="$vuetify.goTo('#hero')"
         >
           <v-icon>mdi-arrow-up</v-icon>
@@ -196,22 +229,33 @@
 </template>
 
 <script>
-import ContactForm from "~/components/contact/ContactForm";
-import ProjectForm from "~/components/projectForm/ProjectForm";
-import FeaturedItem from "~/components/mainPage/FeaturedItem";
-import About from "~/components/mainPage/About";
-import Stats from "~/components/mainPage/Stats";
-import Featured from "~/components/mainPage/Featured";
+import ContactForm from '~/components/contact/ContactForm'
+import ProjectForm from '~/components/projectForm/ProjectForm'
+import About from '~/components/mainPage/About'
+import Stats from '~/components/mainPage/Stats'
+import Featured from '~/components/mainPage/Featured'
 /* import MeetingList from "~/components/mainPage/MeetingList";
 import WorldMap from "~/components/mainPage/WorldMap"; */
-import ProjectPostedWindow from "~/components/projectForm/ProjectPostedWindow";
-import ContactPostedWindow from "~/components/contact/ContactPostedWindow";
-import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import ProjectPostedWindow from '~/components/projectForm/ProjectPostedWindow'
+import ContactPostedWindow from '~/components/contact/ContactPostedWindow'
+import NavigationDrawer from '~/components/navigation/NavigationDrawer'
 /* import WorkInProgressDialog from "~/components/navigation/WorkInProgressDialog"; */
-import Logo from "~/components/navigation/Logo";
-import { zones } from "~/assets/data";
+import Logo from '~/components/navigation/Logo'
+import { zones } from '~/assets/data'
 export default {
-  data() {
+  components: {
+    ContactForm,
+    ProjectForm,
+    About,
+    /*   MeetingList, */
+    NavigationDrawer,
+    ContactPostedWindow,
+    ProjectPostedWindow, /*    WorkInProgressDialog, */
+    Logo,
+    Stats,
+    Featured
+  },
+  data () {
     return {
       zones,
       drawer: false,
@@ -220,45 +264,31 @@ export default {
       valid: false,
       step: 1,
       offsetTop: 0
-    };
-  },
-  components: {
-    ContactForm,
-    ProjectForm,
-    FeaturedItem,
-    About,
-    /*   MeetingList, */
-    NavigationDrawer,
-    ContactPostedWindow,
-    ProjectPostedWindow /*
-    WorkInProgressDialog, */,
-    Logo,
-    Stats,
-    Featured
+    }
   },
 
-  async mounted() {
+  async mounted () {
     if (this.$route.hash) {
-      if (this.$route.hash === "#register") {
-        this.contactOnly = false;
-        this.step = 1;
+      if (this.$route.hash === '#register') {
+        this.contactOnly = false
+        this.step = 1
         setTimeout(() => {
-          this.$vuetify.goTo("#contact");
-        }, 1);
+          this.$vuetify.goTo('#contact')
+        }, 1)
       } else {
-        this.contactOnly = true;
-        this.step = 0;
+        this.contactOnly = true
+        this.step = 0
         setTimeout(() => {
-          this.$vuetify.goTo(this.$route.hash, { offset: 100 });
-        }, 1);
+          this.$vuetify.goTo(this.$route.hash, { offset: 100 })
+        }, 1)
       }
     }
-    await this.$recaptcha.init();
+    await this.$recaptcha.init()
   },
   methods: {
-    onScroll(e) {
-      this.offsetTop = e.target.scrollingElement.scrollTop;
+    onScroll (e) {
+      this.offsetTop = e.target.scrollingElement.scrollTop
     }
   }
-};
+}
 </script>

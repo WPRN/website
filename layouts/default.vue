@@ -5,7 +5,7 @@
     <v-footer
       class="justify-center"
       color="#292929"
-      :class="{'pb-4':$vuetify.breakpoint.smAndDown}"
+      :class="{ 'pb-4': $vuetify.breakpoint.smAndDown }"
     >
       <div class="title font-weight-light grey--text text--lighten-1 text-center">
         <v-tooltip top>
@@ -15,7 +15,7 @@
                 href="https://github.com/WPRN/website"
                 target="_blank"
                 rel="noopener noreferrer"
-                style="text-decoration:none;"
+                style="text-decoration: none;"
               >
                 <v-icon color="white">mdi-github</v-icon>
               </a>
@@ -30,7 +30,7 @@
                 href="https://twitter.com/WPRN_org"
                 target="_blank"
                 rel="noopener noreferrer"
-                style="text-decoration:none;"
+                style="text-decoration: none;"
               >
                 <v-icon color="white">mdi-twitter</v-icon>
               </a>
@@ -45,7 +45,7 @@
                 href="https://www.facebook.com/WPRN.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style="text-decoration:none;"
+                style="text-decoration: none;"
               >
                 <v-icon color="white">mdi-facebook</v-icon>
               </a>
@@ -60,7 +60,7 @@
                 href="https://www.linkedin.com/company/wprn-world-pandemic-research-network/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style="text-decoration:none;"
+                style="text-decoration: none;"
               >
                 <v-icon color="white">mdi-linkedin</v-icon>
               </a>
@@ -76,7 +76,7 @@
                 href="http://creativecommons.org/licenses/by-sa/4.0/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style="text-decoration:none;"
+                style="text-decoration: none;"
               >
                 <v-icon color="white">mdi-creative-commons</v-icon>
               </a>
@@ -94,34 +94,31 @@
           >IAS Paris</a>.
           <br />
           <a
-            style="text-decoration:underline;"
-            @click="showCredits=true"
+            style="text-decoration: underline;"
             class="blue--text"
-          >See full credits</a> &nbsp;-&nbsp;
+            @click="showCredits = true"
+          >See full credits</a>
+          &nbsp;-&nbsp;
           <nuxt-link to="/privacy_policy" class="blue--text">Privacy Policy</nuxt-link>&nbsp;-&nbsp;
           <nuxt-link to="/press_room" class="blue--text">Press Room</nuxt-link>
         </span>
 
-        <Credits :credits="showCredits" @closeCredits="showCredits=false" />
+        <Credits :credits="showCredits" @closeCredits="showCredits = false" />
       </div>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import Credits from "~/components/navigation/Credits";
+import Credits from '~/components/navigation/Credits'
 export default {
-  data() {
+  components: { Credits },
+  data () {
     return {
       showCredits: false
-    };
+    }
   },
-  components: { Credits },
   methods: {
-    onError(error) {},
-
-    onSuccess(token) {},
-    onExpired() {}
   }
-};
+}
 </script>

@@ -2,17 +2,17 @@
   <v-container
     app
     fill-height
-    style="align-items:start;"
-    :class="{'pr-0':$vuetify.breakpoint.smAndDown}"
+    style="align-items: start;"
+    :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
   >
     <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})" class="mx-0 px-0" height="auto">
+      <v-btn text class="mx-0 px-0" height="auto" @click="$router.push({ path: '/' })">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png"></v-img>
+          <v-img contain max-height="100%" src="/logo.png" />
         </v-avatar>
       </v-btn>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn
         light
         tile
@@ -26,13 +26,13 @@
       </v-btn>
     </v-app-bar>
     <NavigationDrawer
-      @close="drawer=false"
-      @contact="$router.push({path:'/', hash:'contact'})"
-      @register="$router.push({path:'/', hash:'register'})"
-      @about="$router.push({path:'/', hash:'about-us'})"
-      @featured="$router.push({path:'/', hash:'featured'});"
-      @list="$router.push({path:'/search'})"
       :drawer="drawer"
+      @close="drawer = false"
+      @contact="$router.push({ path: '/', hash: 'contact' })"
+      @register="$router.push({ path: '/', hash: 'register' })"
+      @about="$router.push({ path: '/', hash: 'about-us' })"
+      @featured="$router.push({ path: '/', hash: 'featured' })"
+      @list="$router.push({ path: '/search' })"
     />
     <v-content v-scroll="onScroll">
       <v-container id="content">
@@ -40,7 +40,7 @@
           <v-col cols="1">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
-                <v-btn fab icon large v-on="on" to="/#hero" class="mr-2">
+                <v-btn fab icon large to="/#hero" class="mr-2" v-on="on">
                   <v-icon large>mdi-arrow-left</v-icon>
                 </v-btn>
               </template>
@@ -49,15 +49,15 @@
           </v-col>
           <v-col cols="10" sm="10" md="8">
             <h2
-              class="display-2 font-weight-bold my-3 text-uppercase text-center"
               id="board"
+              class="display-2 font-weight-bold my-3 text-uppercase text-center"
             >Board, Referents, Contributors</h2>
           </v-col>
-          <v-col cols="1"></v-col>
+          <v-col cols="1" />
           <v-col cols="12" sm="12" md="8">
             <v-responsive class="mx-auto mb-6" width="56">
-              <v-divider class="mb-1"></v-divider>
-              <v-divider></v-divider>
+              <v-divider class="mb-1" />
+              <v-divider />
             </v-responsive>
             <v-item-group>
               <v-row align-content="center" justify="center">
@@ -67,30 +67,30 @@
                   cols="auto"
                   class="justify-items-center d-flex"
                 >
-                  <v-item v-slot:default="{  }">
+                  <v-item v-slot:default="{}">
                     <a
                       :href="item.url"
                       target="_blank"
                       rel="noopener noreferrer"
                       :title="item.name"
-                      :style="'background-color:'+ item.color"
+                      :style="'background-color:' + item.color"
                       class="pa-2 d-flex justify-items-center"
                     >
                       <v-img
-                        :src="'/logos/'+item.image"
+                        :src="'/logos/' + item.image"
                         contain
-                        :width="$vuetify.breakpoint.mdAndUp?'190':'130'"
+                        :width="$vuetify.breakpoint.mdAndUp ? '190' : '130'"
                         height="100"
                         class="text-right pa-2"
-                      ></v-img>
+                      />
                     </a>
                   </v-item>
                 </v-col>
               </v-row>
             </v-item-group>
             <v-responsive class="mx-auto my-6" width="56">
-              <v-divider class="mb-1"></v-divider>
-              <v-divider></v-divider>
+              <v-divider class="mb-1" />
+              <v-divider />
             </v-responsive>
             <v-list three-line subheader align="left">
               <v-subheader class="overline white--text">Advisory Board</v-subheader>
@@ -98,12 +98,12 @@
                 <v-list-item-avatar>
                   <img
                     v-if="person.picture"
-                    :src="'/board/'+person.picture"
+                    :src="'/board/' + person.picture"
                     :alt="person.name"
                     :title="person.name"
                     :lazy-src="person.placeholder"
                   />
-                  <v-icon large v-else>mdi-account-circle</v-icon>
+                  <v-icon v-else large>mdi-account-circle</v-icon>
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-list-item-title>
@@ -112,17 +112,17 @@
                         :href="person.url"
                         target="_blank"
                         rel="noopener noreferrer"
-                        style="text-decoration:none; color:white;"
+                        style="text-decoration: none; color: white;"
                       >
                         <v-icon small>mdi-link</v-icon>
                         &nbsp;
-                        {{person.name}}
+                        {{ person.name }}
                       </a>
                     </template>
-                    <template v-else>{{person.name}}</template>
-                    <v-chip small label v-if="person.role" class="ml-2">{{person.role}}</v-chip>
+                    <template v-else>{{ person.name }}</template>
+                    <v-chip v-if="person.role" small label class="ml-2">{{ person.role }}</v-chip>
                   </v-list-item-title>
-                  <v-list-item-subtitle>{{person.position}}</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{ person.position }}</v-list-item-subtitle>
                 </v-list-item-content>
                 <!--    <v-list-item-icon>
                   <v-tooltip bottom>
@@ -136,39 +136,42 @@
                 </v-list-item-icon>-->
               </v-list-item>
             </v-list>
-            <v-divider></v-divider>
-            <v-list subheader align="left" id="refs">
+            <v-divider />
+            <v-list id="refs" subheader align="left">
               <v-subheader class="overline white--text">Referents</v-subheader>
               <v-alert type="info" align="left" color="gray lighten-4">
-                WPRN Referents are senior scientists who accepted, by invitation of the Advisory Board, to screen projects in
-                their domain of expertise (discipline, theme, type of projects).
-                <br />They weed out spam and irrelevant
-                projects, validate projects that will get a web-page, flag those which they consider most interesting and
-                innovative.
-                <br />Referents receive on a regular basis an updated list of newly uploaded projects to validate. Uploaded
-                projects are visible and searchable on WPRN with the mention “pending validation” until validated by
-                our referents. Please be patient.
-                <br />Referents work
+                WPRN Referents are senior scientists who accepted, by invitation
+                of the Advisory Board, to screen projects in their domain of
+                expertise (discipline, theme, type of projects).
+                <br />They weed out spam and irrelevant projects, validate
+                projects that will get a web-page, flag those which they
+                consider most interesting and innovative.
+                <br />Referents
+                receive on a regular basis an updated list of newly uploaded
+                projects to validate. Uploaded projects are visible and
+                searchable on WPRN with the mention “pending validation” until
+                validated by our referents. Please be patient.
+                <br />Referents
+                work
                 <em>pro bono</em> -as everyone else in WPRN.
               </v-alert>
 
-              <v-list-item class="ml-3" v-for="(person, index) in referents" :key="index">
+              <v-list-item v-for="(person, index) in referents" :key="index" class="ml-3">
                 <v-list-item-content>
-                  <v-list-item-title>{{person}}</v-list-item-title>
+                  <v-list-item-title>{{ person }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
-            <v-divider></v-divider>
-            <v-list subheader align="left" id="institutions">
+            <v-divider />
+            <v-list id="institutions" subheader align="left">
               <v-subheader class="overline white--text">Contributors' Institutions</v-subheader>
-              <v-alert
-                type="info"
-                align="left"
-                color="gray lighten-4"
-              >The list of the WPRN Contributors' Institutions will be made available shortly</v-alert>
-              <v-list-item class="ml-3" v-for="(person, index) in contributors" :key="index">
+              <v-alert type="info" align="left" color="gray lighten-4">
+                The list of the WPRN Contributors' Institutions will be made
+                available shortly
+              </v-alert>
+              <v-list-item v-for="(person, index) in contributors" :key="index" class="ml-3">
                 <v-list-item-content>
-                  <v-list-item-title>{{person}}</v-list-item-title>
+                  <v-list-item-title>{{ person }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -178,6 +181,7 @@
     </v-content>
     <v-fab-transition>
       <v-btn
+        v-show="offsetTop > 600"
         color="accent"
         dark
         fixed
@@ -185,7 +189,6 @@
         right
         contained
         fab
-        v-show="offsetTop>600"
         @click="$vuetify.goTo('#content')"
       >
         <v-icon>mdi-arrow-up</v-icon>
@@ -194,10 +197,13 @@
   </v-container>
 </template>
 <script>
-import { board, contributors, supports } from "~/assets/data";
-import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import { board, contributors, supports } from '~/assets/data'
+import NavigationDrawer from '~/components/navigation/NavigationDrawer'
 export default {
-  data() {
+  components: {
+    NavigationDrawer
+  },
+  data () {
     return {
       board,
       contributors,
@@ -205,15 +211,12 @@ export default {
       referents: [],
       drawer: false,
       offsetTop: 0
-    };
-  },
-  components: {
-    NavigationDrawer
+    }
   },
   methods: {
-    onScroll(e) {
-      this.offsetTop = e.target.scrollingElement.scrollTop;
+    onScroll (e) {
+      this.offsetTop = e.target.scrollingElement.scrollTop
     }
   }
-};
+}
 </script>

@@ -5,42 +5,42 @@
         :complete="editMode || formStep > 1"
         step="1"
         :editable="editMode"
-        :color="editMode&&formStep===1?'light-blue accent-2':'primary'"
+        :color="editMode && formStep === 1 ? 'light-blue accent-2' : 'primary'"
       >
-        <span style="text-decoration:underline;" v-if="editMode&&formStep===1">General info</span>
+        <span v-if="editMode && formStep === 1" style="text-decoration: underline;">General info</span>
         <template v-else>General info</template>
       </v-stepper-step>
-      <v-divider></v-divider>
+      <v-divider />
       <v-stepper-step
         :complete="editMode || formStep > 2"
         step="2"
         :editable="editMode"
-        :color="editMode&&formStep===2?'light-blue accent-2':'primary'"
+        :color="editMode && formStep === 2 ? 'light-blue accent-2' : 'primary'"
       >
-        <span style="text-decoration:underline;" v-if="editMode&&formStep===2">Project details</span>
+        <span v-if="editMode && formStep === 2" style="text-decoration: underline;">Project details</span>
         <template v-else>Project details</template>
       </v-stepper-step>
-      <v-divider></v-divider>
+      <v-divider />
       <v-stepper-step
         :complete="editMode || formStep > 3"
         step="3"
         :editable="editMode"
-        :color="editMode&&formStep===3?'light-blue accent-2':'primary'"
+        :color="editMode && formStep === 3 ? 'light-blue accent-2' : 'primary'"
       >
-        <span style="text-decoration:underline;" v-if="editMode&&formStep===3">Location</span>
+        <span v-if="editMode && formStep === 3" style="text-decoration: underline;">Location</span>
         <template v-else>Location</template>
       </v-stepper-step>
-      <v-divider></v-divider>
+      <v-divider />
       <v-stepper-step
         :complete="editMode || formStep > 4"
         step="4"
         :editable="editMode"
-        :color="editMode&&formStep===4?'light-blue accent-2':'primary'"
+        :color="editMode && formStep === 4 ? 'light-blue accent-2' : 'primary'"
       >
-        <span style="text-decoration:underline;" v-if="editMode&&formStep===4">Contact</span>
+        <span v-if="editMode && formStep === 4" style="text-decoration: underline;">Contact</span>
         <template v-else>Contact</template>
       </v-stepper-step>
-      <v-divider></v-divider>
+      <v-divider />
       <v-stepper-step step="5">Confirmation</v-stepper-step>
     </v-stepper-header>
 
@@ -52,46 +52,57 @@
             <v-row>
               <v-col cols="12" md="6">
                 <v-text-field
+                  ref="name"
+                  v-model="project.name"
                   required
                   label="Project Name*"
                   solo
-                  v-model="project.name"
                   type="text"
                   :rules="nameRules"
-                  ref="name"
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
+                  ref="url"
+                  v-model="project.url"
                   label="Project URL"
                   solo
-                  v-model="project.url"
                   type="url"
                   :rules="urlRules"
-                  ref="url"
-                ></v-text-field>
+                />
               </v-col>
 
               <v-col cols="12">
                 <v-textarea
+                  ref="description"
+                  v-model="project.description"
                   required
                   label="Project and Team description*"
                   solo
-                  v-model="project.description"
                   type="text"
                   :rules="descriptionRules"
                   counter="2000"
-                  ref="description"
-                ></v-textarea>
+                />
               </v-col>
             </v-row>
           </v-form>
         </v-card>
         <v-btn
           color="accent"
-          @click="formStep=2"
-          :disabled="editMode?false:!($refs.name&&$refs.name.valid&&$refs.url&&$refs.url.valid&&$refs.description&&$refs.description.valid)"
+          :disabled="
+            editMode
+              ? false
+              : !(
+                  $refs.name &&
+                  $refs.name.valid &&
+                  $refs.url &&
+                  $refs.url.valid &&
+                  $refs.description &&
+                  $refs.description.valid
+                )
+          "
           x-large
+          @click="formStep = 2"
         >
           Continue&nbsp;
           <v-icon>mdi-chevron-right</v-icon>
@@ -104,53 +115,53 @@
             <v-row>
               <v-col cols="12" md="6">
                 <v-combobox
+                  ref="field"
+                  v-model="project.field"
                   :items="fields"
                   label="Project discipline(s)*"
                   solo
-                  v-model="project.field"
                   clearable
                   multiple
-                  @change="cleanModel('field')"
                   :rules="requiredRules"
-                  ref="field"
-                ></v-combobox>
+                  @change="cleanModel('field')"
+                />
               </v-col>
               <v-col cols="12" md="6">
                 <v-select
+                  ref="state"
+                  v-model="project.state"
                   :items="state"
                   label="Project Status*"
                   solo
-                  v-model="project.state"
                   :rules="requiredRules"
-                  ref="state"
                   :disabled="loading"
-                ></v-select>
+                />
               </v-col>
 
               <v-col cols="12" md="6">
                 <v-select
+                  ref="thematics"
+                  v-model="project.thematics"
                   :items="thematics"
                   label="Project Thematic(s)"
                   solo
                   clearable
                   multiple
                   @change="cleanModel('thematics')"
-                  v-model="project.thematics"
-                  ref="thematics"
-                ></v-select>
+                />
               </v-col>
               <v-col cols="12" md="6">
                 <v-select
+                  ref="type"
+                  v-model="project.type"
                   :items="types"
                   label="Project type(s)*"
                   solo
                   clearable
                   multiple
-                  @change="cleanModel('type')"
-                  v-model="project.type"
                   :rules="requiredRules"
-                  ref="type"
-                ></v-select>
+                  @change="cleanModel('type')"
+                />
               </v-col>
               <!--  <template v-if="project.type.includes('Conference / Webinar')">
                 <v-col cols="12" md="6">
@@ -216,9 +227,18 @@
         <v-btn text @click="formStep = 1">Previous</v-btn>
         <v-btn
           color="accent"
-          @click="formStep = 3"
-          :disabled="!($refs.field&&$refs.field.valid&&$refs.state&&$refs.state.valid&&$refs.type&&$refs.type.valid)"
+          :disabled="
+            !(
+              $refs.field &&
+              $refs.field.valid &&
+              $refs.state &&
+              $refs.state.valid &&
+              $refs.type &&
+              $refs.type.valid
+            )
+          "
           x-large
+          @click="formStep = 3"
         >
           Continue&nbsp;
           <v-icon>mdi-chevron-right</v-icon>
@@ -229,47 +249,53 @@
         <v-card min-height="320px" flat light color="#333333">
           <v-form lazy-validation>
             <v-row>
-              <v-alert
-                type="info"
-                align="left"
-                color="gray lighten-4"
-                width="100%"
-              >The location of the project refers to where it takes place and is about, regardless of the contact geographical position.</v-alert>
+              <v-alert type="info" align="left" color="gray lighten-4" width="100%">
+                The location of the project refers to where it takes place and
+                is about, regardless of the contact geographical position.
+              </v-alert>
               <v-col cols="12" md="6">
                 <v-select
+                  ref="zone"
+                  v-model="project.zone"
                   :items="zones"
                   label="Continent*"
                   solo
                   multiple
-                  v-model="project.zone"
                   :rules="requiredRules"
-                  :clearable="!(project.zone.length===1&&project.zone.includes('worldwide'))"
-                  @click:clear="project.country=[];project.zone=['worldwide']"
-                  @change="setCountries()"
-                  ref="zone"
+                  :clearable="
+                    !(
+                      project.zone.length === 1 &&
+                      project.zone.includes('worldwide')
+                    )
+                  "
                   :disabled="loading"
-                ></v-select>
+                  @click:clear="
+                    project.country = []
+                    project.zone = ['worldwide']
+                  "
+                  @change="setCountries()"
+                />
               </v-col>
               <v-col cols="12" md="6">
                 <v-combobox
-                  :disabled="!project.zone|| loading"
+                  v-model="project.country"
+                  :disabled="!project.zone || loading"
                   :items="countrySet"
                   label="Country"
                   solo
-                  @change="cleanModel('country')"
                   multiple
                   no-data-text="No country matching your search"
-                  v-model="project.country"
                   clearable
-                ></v-combobox>
+                  @change="cleanModel('country')"
+                />
               </v-col>
               <v-col cols="12">
                 <v-text-field
+                  v-model="project.city"
                   label="Region, State or City"
                   solo
-                  v-model="project.city"
                   :disabled="loading"
-                ></v-text-field>
+                />
               </v-col>
             </v-row>
           </v-form>
@@ -277,9 +303,9 @@
         <v-btn text @click="formStep = 2">Previous</v-btn>
         <v-btn
           color="accent"
-          @click="formStep = 4"
-          :disabled="!($refs.zone&&$refs.zone.valid)"
+          :disabled="!($refs.zone && $refs.zone.valid)"
           x-large
+          @click="formStep = 4"
         >
           Continue&nbsp;
           <v-icon>mdi-chevron-right</v-icon>
@@ -291,53 +317,58 @@
           <v-form lazy-validation>
             <v-row>
               <v-alert type="info" align="left" color="gray lighten-4">
-                <template
-                  v-if="editMode"
-                >Your email address is the only element of your project details that you cannot change.</template>
-                <template
-                  v-else
-                >WPRN will not disclose online nor transfer or sell contributors’ or referents’ email addresses to any third party. Potential contact requests will be redirected by our servers to guarantee that their personal data is not made public.</template>
+                <template v-if="editMode">
+                  Your email address is the only element of your project that
+                  you cannot change.
+                </template>
+                <template v-else>
+                  WPRN will not disclose online nor transfer or sell
+                  contributors’ or referents’ email addresses to any third
+                  party. Potential contact requests will be redirected by our
+                  servers to guarantee that their personal data is not made
+                  public.
+                </template>
               </v-alert>
 
               <v-col cols="12" md="6">
                 <v-text-field
+                  ref="firstname"
+                  v-model="project.contact_firstname"
                   label="Contact firstname*"
                   solo
-                  v-model="project.contact_firstname"
                   :rules="contactNameRules"
                   @blur="capitalize('contact_firstname')"
-                  ref="firstname"
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
+                  ref="lastname"
+                  v-model="project.contact_lastname"
                   label="Contact lastname*"
                   solo
-                  v-model="project.contact_lastname"
                   :rules="contactNameRules"
                   @blur="capitalize('contact_lastname')"
-                  ref="lastname"
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
+                  ref="entity"
+                  v-model="project.contact_entity"
                   label="Contact Institution* (University, Laboratory, freelance...)"
                   solo
                   :rules="requiredRules"
-                  v-model="project.contact_entity"
-                  ref="entity"
                   @keyup.enter="next()"
-                ></v-text-field>
+                />
               </v-col>
-              <v-col cols="12" md="6" v-if="!editMode">
+              <v-col v-if="!editMode" cols="12" md="6">
                 <v-text-field
+                  ref="email"
+                  v-model="project.contact_email"
                   label="Contact Email*"
                   solo
                   :rules="emailRules"
-                  ref="email"
-                  v-model="project.contact_email"
                   @keyup.enter="next()"
-                ></v-text-field>
+                />
               </v-col>
             </v-row>
           </v-form>
@@ -346,10 +377,19 @@
         <v-btn text @click="formStep = 3">Previous</v-btn>
         <v-btn
           color="accent"
-          @click="formStep = 5"
-          :disabled="!($refs.firstname&&$refs.firstname.valid&&$refs.lastname&&$refs.lastname.valid&&(editMode?true:$refs.email&&$refs.email.valid)
-&&$refs.entity&&$refs.entity.valid)"
+          :disabled="
+            !(
+              $refs.firstname &&
+              $refs.firstname.valid &&
+              $refs.lastname &&
+              $refs.lastname.valid &&
+              (editMode ? true : $refs.email && $refs.email.valid) &&
+              $refs.entity &&
+              $refs.entity.valid
+            )
+          "
           x-large
+          @click="formStep = 5"
         >
           Continue&nbsp;
           <v-icon>mdi-chevron-right</v-icon>
@@ -359,160 +399,171 @@
       <v-stepper-content step="5">
         <v-card min-height="320px" flat dark color="#333333">
           <v-card-title primary-title>Review your project</v-card-title>
-          <v-alert
-            type="info"
-            align="left"
-            color="gray lighten-4"
-            v-if="editMode"
-          >Please note that if your project is already verified or featured, you are responsible for the updated content.</v-alert>
+          <v-alert v-if="editMode" type="info" align="left" color="gray lighten-4">
+            Please note that if your project is already verified or featured,
+            you are responsible for the updated content.
+          </v-alert>
           <v-form lazy-validation>
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
                 <v-col cols="12" class="overline">
                   Project Information
-                  <v-btn icon small @click="formStep=1">
+                  <v-btn icon small @click="formStep = 1">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
-                <v-col cols="12" :md="project.url?'6':'12'" class="pl-3">
+                <v-col cols="12" :md="project.url ? '6' : '12'" class="pl-3">
                   <div class="font-weight-light caption">Name</div>
-                  <div class="subtitle-1">{{project.name}}</div>
+                  <div class="subtitle-1">{{ project.name }}</div>
                 </v-col>
                 <v-col
+                  v-if="project.url"
                   cols="12"
                   md="6"
-                  v-if="project.url"
-                  :class="{'pl-3':$vuetify.breakpoint.mdAndDown}"
+                  :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
                 >
                   <div class="font-weight-light caption">Url</div>
-                  <div class="subtitle-1">{{project.url}}</div>
+                  <div class="subtitle-1">{{ project.url }}</div>
                 </v-col>
                 <v-col cols="12" class="pl-3">
                   <div class="font-weight-light caption">Project and Team description</div>
                   <div class="subtitle-1">
-                    <p v-html="$options.filters.nl2br(project.description)"></p>
+                    <p v-html="$options.filters.nl2br(project.description)" />
                   </div>
                 </v-col>
               </v-row>
             </v-card-text>
-            <v-divider color="white"></v-divider>
+            <v-divider color="white" />
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
                 <v-col cols="12" class="overline">
                   Project details
-                  <v-btn icon small @click="formStep=2">
+                  <v-btn icon small @click="formStep = 2">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6" class="pl-3">
-                  <div
-                    class="font-weight-light caption"
-                  >{{project.field.length>1?'Disciplines':'Discipline'}}</div>
+                  <div class="font-weight-light caption">
+                    {{
+                    project.field.length > 1 ? "Disciplines" : "Discipline"
+                    }}
+                  </div>
                   <v-chip
-                    class="subtitle-1 ma-1"
                     v-for="(item, index) in project.field"
                     :key="index"
-                  >{{item}}</v-chip>
-                </v-col>
-                <v-col cols="12" md="6" :class="{'pl-3':$vuetify.breakpoint.mdAndDown}">
-                  <div
-                    class="font-weight-light caption"
-                  >{{project.type.length>1?'Project Types':'Project Type'}}</div>
-                  <v-chip
                     class="subtitle-1 ma-1"
+                  >{{ item }}</v-chip>
+                </v-col>
+                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
+                  <div class="font-weight-light caption">
+                    {{
+                    project.type.length > 1 ? "Project Types" : "Project Type"
+                    }}
+                  </div>
+                  <v-chip
                     v-for="(item, index) in project.type"
                     :key="index"
-                  >{{item}}</v-chip>
+                    class="subtitle-1 ma-1"
+                  >{{ item }}</v-chip>
                 </v-col>
                 <v-col cols="12" md="6" class="pl-3">
-                  <div
-                    class="font-weight-light caption"
-                  >{{project.thematics&&project.thematics.length>1?'Thematics':'Thematic'}}</div>
+                  <div class="font-weight-light caption">
+                    {{
+                    project.thematics && project.thematics.length > 1
+                    ? "Thematics"
+                    : "Thematic"
+                    }}
+                  </div>
                   <v-chip
-                    class="subtitle-1 ma-1"
                     v-for="(item, index) in project.thematics"
                     :key="index"
-                  >{{item}}</v-chip>
+                    class="subtitle-1 ma-1"
+                  >{{ item }}</v-chip>
                 </v-col>
-                <v-col cols="12" md="6" :class="{'pl-3':$vuetify.breakpoint.mdAndDown}">
+                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
                   <div class="font-weight-light caption">Project Status</div>
-                  <div class="subtitle-1">{{project.state}}</div>
+                  <div class="subtitle-1">{{ project.state }}</div>
                 </v-col>
               </v-row>
             </v-card-text>
-            <v-divider color="white"></v-divider>
+            <v-divider color="white" />
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
                 <v-col cols="12" class="overline">
                   Project location
-                  <v-btn icon small @click="formStep=3">
+                  <v-btn icon small @click="formStep = 3">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6" class="pl-3">
                   <div
                     class="font-weight-light caption"
-                  >{{project.zone.length > 1?'Continents':'Continent'}}</div>
+                  >{{ project.zone.length > 1 ? "Continents" : "Continent" }}</div>
                   <v-chip
-                    class="subtitle-1 ma-1"
                     v-for="(item, index) in project.zone"
                     :key="index"
+                    class="subtitle-1 ma-1"
                     label
-                  >{{zones.find(zoneItem => item === zoneItem.value).text }}</v-chip>
+                  >{{ zones.find((zoneItem) => item === zoneItem.value).text }}</v-chip>
                 </v-col>
                 <v-col
+                  v-if="project.country && project.country.length"
                   cols="12"
                   md="6"
-                  v-if="project.country&&project.country.length"
-                  :class="{'pl-3':$vuetify.breakpoint.mdAndDown}"
+                  :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
                 >
-                  <div
-                    class="font-weight-light caption"
-                  >{{project.country&&project.country.length>1?'Countries':'Country'}}</div>
+                  <div class="font-weight-light caption">
+                    {{
+                    project.country && project.country.length > 1
+                    ? "Countries"
+                    : "Country"
+                    }}
+                  </div>
                   <v-chip
-                    class="subtitle-1 ma-1"
                     v-for="(item, index) in project.country"
                     :key="index"
+                    class="subtitle-1 ma-1"
                     label
-                  >{{item}}</v-chip>
+                  >{{ item }}</v-chip>
                 </v-col>
-                <v-col cols="12" md="6" v-if="project.city" class="pl-3">
+                <v-col v-if="project.city" cols="12" md="6" class="pl-3">
                   <div class="font-weight-light caption">Region, state or city</div>
-                  <div class="subtitle-1">{{project.city}}</div>
+                  <div class="subtitle-1">{{ project.city }}</div>
                 </v-col>
               </v-row>
             </v-card-text>
-            <v-divider color="white"></v-divider>
+            <v-divider color="white" />
             <v-card-text class="text-left pt-1 pb-2">
               <v-row no-gutters>
                 <v-col cols="12" class="overline">
                   Project contact
-                  <v-btn icon small @click="formStep=4">
+                  <v-btn icon small @click="formStep = 4">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6" class="pl-3">
                   <div class="font-weight-light caption">Firstname</div>
-                  <div class="subtitle-1">{{project.contact_firstname}}</div>
+                  <div class="subtitle-1">{{ project.contact_firstname }}</div>
                 </v-col>
-                <v-col cols="12" md="6" :class="{'pl-3':$vuetify.breakpoint.mdAndDown}">
+                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
                   <div class="font-weight-light caption">Lastname</div>
-                  <div class="subtitle-1">{{project.contact_lastname}}</div>
+                  <div class="subtitle-1">{{ project.contact_lastname }}</div>
                 </v-col>
                 <v-col cols="12" md="6" class="pl-3">
                   <div class="font-weight-light caption">Institution</div>
-                  <div class="subtitle-1">{{project.contact_entity}}</div>
+                  <div class="subtitle-1">{{ project.contact_entity }}</div>
                 </v-col>
-                <v-col cols="12" md="6" :class="{'pl-3':$vuetify.breakpoint.mdAndDown}">
+                <v-col cols="12" md="6" :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }">
                   <div class="font-weight-light caption">Email</div>
-                  <div class="subtitle-1">{{project.contact_email}}</div>
+                  <div class="subtitle-1">{{ project.contact_email }}</div>
                 </v-col>
               </v-row>
               <span>
-                <v-checkbox :rules="requiredRules" v-model="agreed" ref="agreedRef">
+                <v-checkbox ref="agreedRef" v-model="agreed" :rules="requiredRules">
                   <template v-slot:label>
                     <span>
-                      I certify that the information given in this form is true, complete and accurate, and that I agree to
+                      I certify that the information given in this form is true,
+                      complete and accurate, and that I agree to
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                           <a
@@ -537,29 +588,43 @@
             <a
               href="https://policies.google.com/privacy"
             >Privacy Policy</a> and
-            <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+            <a href="https://policies.google.com/terms">Terms of Service</a>
+            apply.
           </small>
         </div>
         <v-btn text @click="formStep = 4">Previous</v-btn>
         <v-btn
           color="success"
           x-large
-          @click="onSubmit()"
           :loading="loading"
-          :disabled="!(
-          $refs.name&&$refs.name.valid&&
-          $refs.url&&$refs.url.valid&&
-          $refs.state&&$refs.state.valid&&
-          $refs.description&&$refs.description.valid&&
-          $refs.field&&$refs.field.valid&&
-          $refs.type&&$refs.type.valid&&
-          $refs.firstname&&$refs.firstname.valid&&
-          $refs.lastname&&$refs.lastname.valid&&
-          (editMode?true:$refs.email&&$refs.email.valid)
-&&
-          $refs.entity&&$refs.entity.valid&&
-          $refs.zone&&$refs.zone.valid&&
-          $refs.agreedRef&&$refs.agreedRef.valid)"
+          :disabled="
+            !(
+              $refs.name &&
+              $refs.name.valid &&
+              $refs.url &&
+              $refs.url.valid &&
+              $refs.state &&
+              $refs.state.valid &&
+              $refs.description &&
+              $refs.description.valid &&
+              $refs.field &&
+              $refs.field.valid &&
+              $refs.type &&
+              $refs.type.valid &&
+              $refs.firstname &&
+              $refs.firstname.valid &&
+              $refs.lastname &&
+              $refs.lastname.valid &&
+              (editMode ? true : $refs.email && $refs.email.valid) &&
+              $refs.entity &&
+              $refs.entity.valid &&
+              $refs.zone &&
+              $refs.zone.valid &&
+              $refs.agreedRef &&
+              $refs.agreedRef.valid
+            )
+          "
+          @click="onSubmit()"
         >
           Submit&nbsp;
           <v-icon>mdi-send</v-icon>
@@ -576,13 +641,17 @@ import {
   fields,
   thematics,
   state
-} from "~/assets/data";
-import { alpha, pattern, email } from "~/assets/regex";
-import { newProject, editProject } from "~/graphql/mutations";
-import gql from "graphql-tag";
-import client from "~/plugins/amplify";
+} from '~/assets/data'
+import { alpha, pattern, email } from '~/assets/regex'
+import { newProject, editProject } from '~/graphql/mutations'
+import gql from 'graphql-tag'
+import client from '~/plugins/amplify'
 export default {
-  data() {
+  props: {
+    projectInput: Object,
+    editMode: Boolean
+  },
+  data () {
     return {
       zones,
       countries,
@@ -594,100 +663,96 @@ export default {
       loading: false,
       formStep: 1,
       countrySet: Object.keys(countries)
-        .map(countryKey => countries[countryKey])
+        .map((countryKey) => countries[countryKey])
         .flat()
         .sort(),
       nameRules: [
-        value => !!value || "Required.",
-        value =>
+        (value) => !!value || 'Required.',
+        (value) =>
           value.length >= 5 ||
-          "The project name  must have at least 4 characters",
-        value => value.length <= 140 || "Max 140 characters",
-        value => {
-          return true;
+          'The project name  must have at least 4 characters',
+        (value) => value.length <= 140 || 'Max 140 characters',
+        (value) => {
+          return true
         }
       ],
       contactNameRules: [
-        value => !!value || "Required.",
-        value =>
+        (value) => !!value || 'Required.',
+        (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        value => value.length <= 80 || "Max 80 characters",
-        value => {
-          return true;
+        (value) => value.length <= 80 || 'Max 80 characters',
+        (value) => {
+          return true
         }
       ],
       urlRules: [
-        value => {
+        (value) => {
           return (
             !value ||
             value.length === 0 ||
             (value.length > 0 && pattern.test(value)) ||
-            "Invalid URL."
-          );
+            'Invalid URL.'
+          )
         }
       ],
       emailRules: [
-        value => !!value || "Email address required.",
-        value => (value || "").length <= 61 || "Max 60 characters",
-        value => {
-          return email.test(value) || "Invalid e-mail.";
+        (value) => !!value || 'Email address required.',
+        (value) => (value || '').length <= 61 || 'Max 60 characters',
+        (value) => {
+          return email.test(value) || 'Invalid e-mail.'
         }
       ],
       descriptionRules: [
-        value => !!value || "A description is required.",
-        value =>
+        (value) => !!value || 'A description is required.',
+        (value) =>
           value.length >= 500 ||
-          "The description must have at least 500 characters",
-        value => value.length <= 2000 || "Max 2000 characters"
+          'The description must have at least 500 characters',
+        (value) => value.length <= 2000 || 'Max 2000 characters'
       ],
       requiredRules: [
-        value => !!value || "This field is required.",
-        value =>
+        (value) => !!value || 'This field is required.',
+        (value) =>
           value === undefined ||
           value === true ||
           !!value.length ||
-          "This field is required."
+          'This field is required.'
       ],
       showDateMenu: false,
       showTimeMenu: false,
       project: {
-        name: this.editMode ? this.projectInput.name : "",
-        description: this.editMode ? this.projectInput.description : "",
+        name: this.editMode ? this.projectInput.name : '',
+        description: this.editMode ? this.projectInput.description : '',
         type: this.editMode ? this.projectInput.type : [],
         field: this.editMode ? this.projectInput.field : [],
-        state: this.editMode ? this.projectInput.state : "",
+        state: this.editMode ? this.projectInput.state : '',
         country: this.editMode ? this.projectInput.country : [],
         thematics: this.editMode ? this.projectInput.thematics : [],
         zone: this.editMode ? this.projectInput.zone : [],
-        contact_email: this.editMode ? this.projectInput.contact_email : "",
-        city: this.editMode ? this.projectInput.city : "",
+        contact_email: this.editMode ? this.projectInput.contact_email : '',
+        city: this.editMode ? this.projectInput.city : '',
         contact_firstname: this.editMode
           ? this.projectInput.contact_firstname
-          : "",
+          : '',
         contact_lastname: this.editMode
           ? this.projectInput.contact_lastname
-          : "",
-        contact_entity: this.editMode ? this.projectInput.contact_entity : "",
-        url: this.editMode ? this.projectInput.url : "",
-        date: this.editMode ? this.projectInput.date : "",
-        time: this.editMode ? this.projectInput.time : ""
+          : '',
+        contact_entity: this.editMode ? this.projectInput.contact_entity : '',
+        url: this.editMode ? this.projectInput.url : '',
+        date: this.editMode ? this.projectInput.date : '',
+        time: this.editMode ? this.projectInput.time : ''
       }
-    };
+    }
   },
-  async mounted() {
-    await this.$recaptcha.init();
+  async mounted () {
+    await this.$recaptcha.init()
 
     setTimeout(() => {
-      this.$refs.step1.resetValidation();
-    }, 1000);
-  },
-  props: {
-    projectInput: Object,
-    editMode: Boolean
+      this.$refs.step1.resetValidation()
+    }, 1000)
   },
   methods: {
-    next() {
+    next () {
       if (
         this.$refs.firstname &&
         this.$refs.firstname.valid &&
@@ -697,76 +762,74 @@ export default {
         this.$refs.email.valid &&
         this.$refs.entity &&
         this.$refs.entity.valid
-      )
-        this.formStep = 5;
+      ) { this.formStep = 5 }
     },
-    setCountries() {
-      this.countrySet = [];
+    setCountries () {
+      this.countrySet = []
       // Remove worldwide if a continent is selected
       if (
         this.project.zone.length > 1 &&
-        this.project.zone.includes("worldwide")
-      )
-        if (this.project.zone[this.project.zone.length - 1] === "worldwide") {
-          // did we just add worlwide?
-          this.project.zone = ["worldwide"];
+        this.project.zone.includes('worldwide')
+      ) {
+        if (this.project.zone[this.project.zone.length - 1] === 'worldwide') {
+        // did we just add worlwide?
+          this.project.zone = ['worldwide']
         } else {
           this.project.zone = this.project.zone.filter(
-            item => item !== "worldwide"
-          );
+            (item) => item !== 'worldwide'
+          )
         }
+      }
 
       if (
         this.project.zone.length === 1 &&
-        this.project.zone.includes("worldwide")
+        this.project.zone.includes('worldwide')
       ) {
         this.countrySet = Object.keys(this.countries)
-          .map(countryKey => this.countries[countryKey])
+          .map((countryKey) => this.countries[countryKey])
           .flat()
-          .sort();
+          .sort()
       } else {
-        this.project.zone.forEach(zone => {
-          this.countrySet.push(this.countries[zone]);
-        });
+        this.project.zone.forEach((zone) => {
+          this.countrySet.push(this.countries[zone])
+        })
       }
-      this.project.country = this.project.country.filter(country =>
+      this.project.country = this.project.country.filter((country) =>
         this.countrySet.includes(country)
-      );
-      this.countrySet = this.countrySet.flat().sort();
+      )
+      this.countrySet = this.countrySet.flat().sort()
     },
-    cleanModel(model) {
-      if (model === "field") {
-        return (this.project.field = this.project.field.filter(item =>
+    cleanModel (model) {
+      if (model === 'field') {
+        return (this.project.field = this.project.field.filter((item) =>
           fields.includes(item)
-        ));
+        ))
       }
-      if (model === "country") {
-        return (this.project.country = this.project.country.filter(item =>
+      if (model === 'country') {
+        return (this.project.country = this.project.country.filter((item) =>
           this.countrySet.includes(item)
-        ));
+        ))
       }
     },
-    capitalize(input) {
-      return (this.project[input] = this.project[
-        input
-      ].replace(/(?:^|[\s'-])\S/g, a => a.toUpperCase()));
+    capitalize (input) {
+      return (this.project[input] = this.project[input].replace(/(?:^|[\s'-])\S/g, (a) => a.toUpperCase()))
     },
-    async onSubmit() {
+    async onSubmit () {
       /*       this.$emit("WorkInProgressDialogToggle"); */
       try {
-        this.loading = true;
-        let args = this.project;
-        Object.keys(this.project).forEach(key => {
-          if (!args[key] || args[key].length === 0) delete args[key];
-        });
-        args.recaptcha = await this.$recaptcha.getResponse();
-        let res = {};
+        this.loading = true
+        let args = this.project
+        Object.keys(this.project).forEach((key) => {
+          if (!args[key] || args[key].length === 0) delete args[key]
+        })
+        args.recaptcha = await this.$recaptcha.getResponse()
+        let res = {}
         if (this.editMode) {
-          console.log("EDIT MODE", {
+          console.log('EDIT MODE', {
             ...args,
             pubId: this.$route.params.id,
             key: this.$route.params.key
-          });
+          })
 
           res = await client.mutate({
             mutation: gql(editProject),
@@ -777,27 +840,27 @@ export default {
                 key: this.$route.params.key
               }
             }
-          });
+          })
         } else {
           res = await client.mutate({
             mutation: gql(newProject),
             variables: { input: args }
-          });
+          })
         }
 
         if (res && !res.errors) {
-          this.$emit("complete");
+          this.$emit('complete')
         } else {
-          this.error = true;
+          this.error = true
         }
-        this.loading = false;
-        await this.$recaptcha.reset();
+        this.loading = false
+        await this.$recaptcha.reset()
       } catch (error) {
-        this.error = true;
-        this.loading = false;
-        await this.$recaptcha.reset();
+        this.error = true
+        this.loading = false
+        await this.$recaptcha.reset()
       }
     }
   }
-};
+}
 </script>

@@ -22,5 +22,5 @@ export default {
   props: {
     dark: Boolean
   }
-};
+}
 </script>

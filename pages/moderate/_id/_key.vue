@@ -1,15 +1,16 @@
 <template>
-  <v-container app fill-height :class="{'pr-0':$vuetify.breakpoint.smAndDown}" align-start>
+  <v-container app fill-height :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }" align-start>
     <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})" class="mx-0 px-0" height="auto">
+      <v-btn text class="mx-0 px-0" height="auto" @click="$router.push({ path: '/' })">
         <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png"></v-img>
+          <v-img contain max-height="100%" src="/logo.png" />
         </v-avatar>
       </v-btn>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-fab-transition>
         <v-btn
+          v-show="!drawer"
           light
           absolute
           top
@@ -20,20 +21,19 @@
           class="mt-12 mr-0"
           x-large
           @click.stop="drawer = !drawer"
-          v-show="!drawer"
         >
           <v-icon>mdi-menu</v-icon>
         </v-btn>
       </v-fab-transition>
     </v-app-bar>
     <NavigationDrawer
-      @close="drawer=false"
-      @contact="$router.push({path:'/', hash:'contact'})"
-      @register="$router.push({path:'/', hash:'register'})"
-      @about="$router.push({path:'/', hash:'about-us'})"
-      @featured="$router.push({path:'/', hash:'featured'});"
-      @list="$router.push({path:'/search'})"
       :drawer="drawer"
+      @close="drawer = false"
+      @contact="$router.push({ path: '/', hash: 'contact' })"
+      @register="$router.push({ path: '/', hash: 'register' })"
+      @about="$router.push({ path: '/', hash: 'about-us' })"
+      @featured="$router.push({ path: '/', hash: 'featured' })"
+      @list="$router.push({ path: '/search' })"
     />
     <v-content>
       <v-row>
@@ -45,7 +45,7 @@
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on }">
                       <nuxt-link to="/worldwide">
-                        <v-btn fab icon large v-on="on" class="mr-2">
+                        <v-btn fab icon large class="mr-2" v-on="on">
                           <v-icon large>mdi-arrow-left</v-icon>
                         </v-btn>
                       </nuxt-link>
@@ -53,12 +53,12 @@
                     <span>Back to the project list</span>
                   </v-tooltip>&nbsp;
                 </v-card-title>
-                <v-divider></v-divider>
+                <v-divider />
                 <v-card-text
                   class="pb-0 white--text pl-12 ml-4 headline"
                 >This feature will be available shortly</v-card-text>
-                <v-card-actions></v-card-actions>
-                <v-divider class="mt-3"></v-divider>
+                <v-card-actions />
+                <v-divider class="mt-3" />
               </v-card>
             </v-card>
           </v-fade-transition>
@@ -68,17 +68,17 @@
   </v-container>
 </template>
 <script>
-import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import NavigationDrawer from '~/components/navigation/NavigationDrawer'
 export default {
-  data() {
-    return {
-      drawer: false
-    };
-  },
   components: {
     NavigationDrawer
   },
-  async mounted() {},
+  data () {
+    return {
+      drawer: false
+    }
+  },
+  async mounted () {},
   methods: {}
-};
+}
 </script>

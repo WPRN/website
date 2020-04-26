@@ -5,10 +5,14 @@
     <div class="subtitle-1">
       You will receive a confirmation email shortly
       <b>with a link to ensure that your email address is valid</b>.
-      <br />Once your email is validated, your project will be displayed in the
-      <nuxt-link to="/search">project list</nuxt-link>&nbsp;as "not verified" until it is checked by a WPRN Referent.
-      <br />You may be contacted by the referent to correct some of your project information.
-      <br />Thank you again for your contribution.
+      <br />Once
+      your email is validated, your project will be displayed in the
+      <nuxt-link to="/search">project list</nuxt-link>&nbsp;as "not verified"
+      until it is checked by a WPRN Referent.
+      <br />You may be contacted by the
+      referent to correct some of your project information.
+      <br />Thank you
+      again for your contribution.
     </div>
     <br />
     <!--     <v-card-actions>

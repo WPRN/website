@@ -2,9 +2,8 @@
   <span v-intersect="onIntersect">{{ tweeningValue }}</span>
 </template>
 <script>
-import TWEEN from "@tweenjs/tween.js";
+import TWEEN from '@tweenjs/tween.js'
 export default {
-  mounted() {},
   props: {
     value: {
       type: Number,
@@ -15,20 +14,21 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       tweeningValue: 0
-    };
-  },
-  watch: {
-    value: function(newValue, oldValue) {
-      this.tween(oldValue, newValue);
     }
   },
+  watch: {
+    value: function (newValue, oldValue) {
+      this.tween(oldValue, newValue)
+    }
+  },
+  mounted () {},
   methods: {
-    async onIntersect(entries, observer) {
+    async onIntersect (entries, observer) {
       setTimeout(() => {
-        this.tween(0, this.value);
+        this.tween(0, this.value)
         /*  if (this.delay === 3200) {
           setTimeout(() => {
             console.log("finished");
@@ -36,14 +36,14 @@ export default {
             this.$emit("finished");
           }, 800);
         } */
-      });
+      })
     },
-    tween(startValue, endValue) {
-      var vm = this;
+    tween (startValue, endValue) {
+      var vm = this
 
-      function animate() {
+      function animate () {
         if (TWEEN.update()) {
-          requestAnimationFrame(animate);
+          requestAnimationFrame(animate)
         }
       }
       new TWEEN.Tween({
@@ -55,12 +55,12 @@ export default {
           },
           800
         )
-        .onUpdate(function() {
-          vm.tweeningValue = this._object.tweeningValue.toFixed(0);
+        .onUpdate(function () {
+          vm.tweeningValue = this._object.tweeningValue.toFixed(0)
         })
-        .start();
-      animate();
+        .start()
+      animate()
     }
   }
-};
+}
 </script>

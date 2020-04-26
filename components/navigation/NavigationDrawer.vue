@@ -4,8 +4,8 @@
     app
     right
     bottom
-    @click:outside="$emit('close')"
     disable-resize-watcher
+    @click:outside="$emit('close')"
   >
     <div class="d-flex flex-row-reverse">
       <v-tooltip left>
@@ -17,7 +17,7 @@
         <span>Close the menu</span>
       </v-tooltip>
     </div>
-    <v-divider></v-divider>
+    <v-divider />
     <v-list nav>
       <v-list-item-group active-class="text--accent-4">
         <v-list-item @click="$emit('about')">
@@ -32,10 +32,10 @@
         <v-list-item @click="$emit('contact')">
           <v-list-item-title>Contact us</v-list-item-title>
         </v-list-item>
-        <v-divider></v-divider>
+        <v-divider />
         <v-list-item class="mt-3 px-0">
           <v-list-item-title>
-            <v-btn color="white" outlined @click="$emit('list')" block large>Browse projects</v-btn>
+            <v-btn color="white" outlined block large @click="$emit('list')">Browse projects</v-btn>
           </v-list-item-title>
         </v-list-item>
       </v-list-item-group>
@@ -47,5 +47,5 @@ export default {
   props: {
     drawer: Boolean
   }
-};
+}
 </script>
