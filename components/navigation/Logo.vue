@@ -7,7 +7,7 @@
         ? 'calc(20vh - ' + $vuetify.application.top + 'px)'
         : $vuetify.breakpoint.mdAndDown
           ? 'calc(30vh - ' + $vuetify.application.top + 'px)'
-          : 'calc(40vh - ' + $vuetify.application.top + 'px)'
+          : 'calc(35vh - ' + $vuetify.application.top + 'px)'
     "
   >
     <v-img

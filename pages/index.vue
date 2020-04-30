@@ -30,7 +30,7 @@
       <v-spacer />
       <v-fab-transition>
         <v-btn
-          v-show="!drawer"
+          v-show="!drawer&&$vuetify.breakpoint.smAndDown"
           light
           absolute
           top
@@ -65,6 +65,7 @@
       <section id="hero">
         <v-fab-transition>
           <v-btn
+            v-show="$vuetify.breakpoint.smAndDown"
             dark
             absolute
             top
@@ -113,8 +114,9 @@
                       border-radius: 10px;
                     "
                     class="mission pa-2 d-flex justify-center text-center"
+                    :class="$vuetify.breakpoint.name"
                   >
-                    World Pandemic Research Network <br> Assessing social and economic impact of covid-19
+                    World Pandemic Research Network <br> assessing social and economic impact of covid-19
                   </div>
                 </v-col>
                 <v-btn
@@ -355,8 +357,15 @@ export default {
 <style lang="scss">
   .mission {
     font-family: 'Poiret One', cursive!important;
-    background-color: rgb(39, 39, 39, 0.8);
-    font-size: 1.5em;
+    background-color: rgb(39, 39, 39, 0.9);
+    font-size: 1.3em;
     border-radius:4em;
   }
+  .mission.sm , .mission.xs {
+     font-size: 1em;
+         }
+
+           .mission.md {
+    font-size: 1.2em;
+    }
 </style>
