@@ -412,7 +412,7 @@ export default {
         if (!filter.and.length) delete filter.and;
         const options = {};
         if (Object.keys(filter).length) options.filter = filter;
-        options.limit = 150;
+        options.limit = 200;
         options["sort"] = { field: "status", direction: "desc" };
         const projects = await client.query({
           query: gql(queries.searchProjects),
