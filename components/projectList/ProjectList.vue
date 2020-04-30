@@ -12,6 +12,7 @@
       class="px-1"
       :options.sync="options"
       :footer-props="{itemsPerPageOptions: [5,10,20,50,100]}"
+      hide-default-footer
     >
       <!-- FILTERS -->
       <template v-slot:top>
