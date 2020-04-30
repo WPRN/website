@@ -70,7 +70,7 @@
               <span
                 class="blue--text"
                 style="text-decoration:underline;cursor:pointer;"
-                  @click="
+                @click="
                   $vuetify.goTo('#contact')
                   contactOnly = false
                   step = 1
