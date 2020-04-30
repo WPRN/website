@@ -10,6 +10,7 @@
     <v-row
       justify="center"
       fluid
+      no-gutters
     >
       <v-col col="12">
         <v-card

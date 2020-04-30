@@ -9,10 +9,8 @@
     <NavigationDrawer
       :drawer="drawer"
       @close="drawer = false"
-      @contact="$router.push({ path: '/', hash: 'contact' })"
       @register="$router.push({ path: '/', hash: 'register' })"
       @about="$router.push({ path: '/', hash: 'about-us' })"
-      @featured="$router.push({ path: '/', hash: 'featured' })"
       @list="drawer = false"
     />
     <v-app-bar

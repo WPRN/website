@@ -36,7 +36,7 @@ Vue.filter('nl2br', (str) => {
 Vue.filter('highlight', function (word, query) {
   if (typeof query === 'string') {
     var check = new RegExp(query, 'ig')
-    return word.toString().replace(check, function (matchedText, a, b) {
+    return word.replace(check, function (matchedText, a, b) {
       return (
         '<strong style="color: darkslategray;background-color: yellow;">' +
         matchedText +

@@ -53,10 +53,8 @@
     <NavigationDrawer
       :drawer="drawer"
       @close="drawer = false"
-      @contact="$router.push({ path: '/', hash: 'contact' })"
       @register="$router.push({ path: '/', hash: 'register' })"
       @about="$router.push({ path: '/', hash: 'about-us' })"
-      @featured="$router.push({ path: '/', hash: 'featured' })"
       @list="$router.push({ path: '/search' })"
     />
     <v-content>
@@ -104,24 +102,8 @@
                 flat
               >
                 <v-card-title class="pl-0 headline">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <nuxt-link to="/search">
-                        <v-btn
-                          fab
-                          icon
-                          large
-                          class="mr-2"
-                          v-on="on"
-                        >
-                          <v-icon large>
-                            mdi-arrow-left
-                          </v-icon>
-                        </v-btn>
-                      </nuxt-link>
-                    </template>
-                    <span>Back to the project list</span>
-                  </v-tooltip>Edit your project
+                  <!--  BackButton takes one col -->
+                  <BackButton url="/#search" />
                 </v-card-title>
                 <v-card-subtitle>
                   The delete feature will be available in a few

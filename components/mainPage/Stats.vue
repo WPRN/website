@@ -16,12 +16,16 @@
       >
         <v-row class="mx-auto">
           <v-col
-            v-for="([value, append, title], i) of stats"
+            v-for="([value, append, title, url], i) of stats"
             :key="title"
             cols="12"
             md="3"
           >
-            <div class="text-center">
+            <nuxt-link
+              class="text-center counter"
+              :to="url"
+              style="color:white;text-decoration:none;"
+            >
               <div class="display-3 font-weight-black mb-4">
                 <template v-if="tweened">
                   <span
@@ -47,7 +51,7 @@
                 class="title font-weight-regular text-uppercase"
                 v-text="title"
               />
-            </div>
+            </nuxt-link>
           </v-col>
         </v-row>
       </v-container>
@@ -63,13 +67,18 @@ export default {
   data () {
     return {
       stats: [
-        [100, '+', 'Projects'],
-        [172, '', 'Contributing Institutions'],
-        [51, '', 'Referents'],
-        [34, '', 'Disciplines']
+        [120, '+', 'Projects', '/search'],
+        [182, '', 'Contributing Institutions', '/board_and_contributors/#institutions'],
+        [59, '', 'Referents', '/board_and_contributors/#refs'],
+        [38, '', 'Disciplines', '']
       ],
       tweened: false
     }
   }
 }
 </script>
+<style lang="scss">
+/* .counter:hover {
+  border: 3px solid $primary!important;
+} */
+</style>

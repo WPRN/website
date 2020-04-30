@@ -122,7 +122,7 @@
         <v-divider />This website and logo as well as its infrastructure have
         been designed by
         <a
-          href="https://github.com/Billybobbonnet"
+          href="https://www.linkedin.com/in/antoine-cordelois/?locale=en_US"
           target="_blank"
         >Antoine Cordelois</a>. The frontend is static/lambda-generated and is powered by
         <a

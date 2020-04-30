@@ -1,3 +1,26 @@
+export const socialIcons = [
+  {
+    url: 'https://github.com/WPRN/website',
+    text: 'See this website source code and contribute',
+    icon: 'github'
+  },
+  {
+    url: 'https://twitter.com/WPRN_org',
+    text: 'Follow us on Twitter',
+    icon: 'twitter'
+  },
+  {
+    url: 'https://www.linkedin.com/company/wprn-world-pandemic-research-network/',
+    text: 'Visit our Linkedin page',
+    icon: 'linkedin'
+  },
+  {
+    url: 'https://www.facebook.com/WPRN.org/',
+    text: 'Visit our Facebook page',
+    icon: 'facebook'
+  }
+]
+
 export const types = [
   { header: 'RESEARCH PROJECT' },
   'Quantitative survey',
@@ -26,7 +49,6 @@ export const types = [
   { divider: true },
   'Other Ressource'
 ]
-
 export const thematics = [
   'Aging, Demography',
   'Agriculture, Alimentation',
@@ -185,6 +207,7 @@ export const board = [
     picture: 'zhang.jpg'
   }
 ]
+
 export const supports = [
   {
     name: 'EASSH',
@@ -292,7 +315,6 @@ export const fields = [
   'Mathematics',
   'Medicine'
 ]
-
 export const countries = {
   asia: [
     'Afghanistan',

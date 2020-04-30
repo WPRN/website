@@ -5,40 +5,36 @@
     :class="{ 'ml-3 mt-3': pageMode && $vuetify.breakpoint.mdAndUp }"
     flat
     :max-width="$vuetify.breakpoint.width"
+    :style="!pageMode?'background-color:rgb(45, 45, 45);':'' "
   >
-    <v-card-title
-      v-if="pageMode"
-      class="pl-0 pb-1 justify-space-between d-flex"
-      :class="{ 'pl-3': $vuetify.breakpoint.smAndDown }"
-    >
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <nuxt-link to="/search">
-            <v-btn
-              fab
-              icon
-              large
-              class="mr-2"
-              v-on="on"
-            >
-              <v-icon large>
-                mdi-arrow-left
-              </v-icon>
-            </v-btn>
-          </nuxt-link>
-        </template>
-        <span>Back to the project list</span>
-      </v-tooltip>
-      <!-- STATUS -->
-      <ProjectStatusBadge :status="project.status" />&nbsp;
-      <!-- NAME -->
-      {{ project.name }}
-      <v-spacer />
-      <!-- SOCIAL -->
-      <v-btn-toggle
-        rounded
-        :class="{ 'mt-3': $vuetify.breakpoint.smAndDown }"
+    <!-- SOCIAL -->
+    <!-- TODO: make a social component -->
+    <v-fab-transition>
+      <v-speed-dial
+        v-if="pageMode"
+        v-model="fab"
+        :top="$vuetify.breakpoint.mdAndUp"
+        :bottom="$vuetify.breakpoint.smAndDown"
+        right
+        absolute
+        :direction="$vuetify.breakpoint.mdAndUp?'bottom':'top'"
+        transition="slide-y-reverse-transition"
       >
+        <template v-slot:activator>
+          <v-btn
+            v-model="fab"
+            color="blue darken-2"
+            dark
+            fab
+          >
+            <v-icon v-if="fab">
+              mdi-close
+            </v-icon>
+            <v-icon v-else>
+              mdi-share-variant
+            </v-icon>
+          </v-btn>
+        </template>
         <v-tooltip
           v-for="(social, index) in socialChannels"
           :key="index"
@@ -48,7 +44,10 @@
             <v-btn
               :small="$vuetify.breakpoint.smAndDown"
               :href="social.url"
+              :color="social.color"
               target="_blank"
+              fab
+              dark
               v-on="on"
             >
               <v-icon :small="$vuetify.breakpoint.smAndDown">
@@ -59,23 +58,89 @@
           <span v-if="social.label !== 'Email'">Share this project on {{ social.label }}</span>
           <span v-else>Share this project by {{ social.label }}</span>
         </v-tooltip>
-      </v-btn-toggle>
+      </v-speed-dial>
+    </v-fab-transition>
+    <v-card-title
+      v-if="pageMode"
+      class="pl-0 pb-1 justify-space-between d-flex"
+      :class="{ 'pl-3': $vuetify.breakpoint.smAndDown }"
+    >
+      <v-row no-gutters>
+        <!--  BackButton takes one col -->
+        <BackButton url="/search" />
+        <v-col
+          cols="11"
+          class=" d-flex align-center"
+        >
+          <!-- STATUS -->
+          <ProjectStatusBadge :status="project.status" />&nbsp;
+          <!-- NAME -->
+          <h3
+            :class="{ 'pr-12 mr-6': $vuetify.breakpoint.mdAndUp }"
+          >
+            {{ project.name }}
+          </h3>
+        </v-col>
+      </v-row>
     </v-card-title>
-    <br v-if="pageMode && $vuetify.breakpoint.smAndDown">
-    <!--  PUB ID -->
-    <v-card-subtitle
-      :class="{ 'ml-12 pl-4': pageMode && $vuetify.breakpoint.mdAndUp }"
-      class="overline font-weight-black white--text"
-      v-html="
-        'WPRN-' +
-          $options.filters.highlight(project.pubId, filters.search.split(' '))
-      "
-    />
+
     <v-card-text
       class="pb-0 white--text"
       :class="{ 'pl-12 ml-4': pageMode && $vuetify.breakpoint.mdAndUp }"
     >
+      <!--  PUB ID -->
+      <v-card-subtitle
+        :class="{ 'ml-12 pl-4': pageMode && $vuetify.breakpoint.mdAndUp }"
+        class="overline font-weight-black white--text"
+        v-html="
+          'WPRN-' +
+            $options.filters.highlight(project.pubId, filters.search.split(' '))
+        "
+      />
       <v-row>
+        <v-col
+          cols="12"
+        >
+          <!--  ACTION BUTTONS -->
+          <span class="overline">ACTIONS</span>
+          <br>
+          <v-btn
+            color="primary"
+            :class="{ 'mr-3': !project.url }"
+            @click="$emit('contact')"
+          >
+            <v-icon>mdi-email-edit</v-icon>&nbsp; Email this project contact
+          </v-btn>
+          <template v-if="pageMode">
+            <v-btn
+              v-if="project.url"
+              color="primary"
+            >
+              <a
+                :href="
+                  project.url.includes('http')
+                    ? project.url
+                    : 'https://' + project.url
+                "
+                target="_blank"
+                style="text-decoration: none; color: white;"
+              >
+                <v-icon>mdi-link</v-icon>&nbsp;Open project url&nbsp;
+              </a>
+            </v-btn>
+          </template>
+          <template v-if="!pageMode">
+            <v-btn color="primary">
+              <a
+                :href="'/item/' + project.pubId"
+                style="text-decoration: none; color: white;"
+              >
+                Project details&nbsp;
+                <v-icon>mdi-chevron-right</v-icon>
+              </a>
+            </v-btn>
+          </template>
+        </v-col>
         <!--  CREATION DATE -->
         <v-col
           cols="12"
@@ -477,6 +542,7 @@
           </template>
         </v-col>
         <!--  CITE WIDGET -->
+        <!-- TODO: make a cite component -->
         <v-col
           v-if="pageMode"
           cols="12"
@@ -553,45 +619,7 @@
         </v-col>
       </v-row>
     </v-card-text>
-    <v-card-actions>
-      <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
-      <v-btn
-        color="accent"
-        :class="{ 'mr-3': !project.url }"
-        @click="$emit('contact')"
-      >
-        <v-icon>mdi-email-edit</v-icon>&nbsp; Email this project contact
-      </v-btn>
-      <template v-if="pageMode">
-        <v-btn
-          v-if="project.url"
-          color="accent"
-        >
-          <a
-            :href="
-              project.url.includes('http')
-                ? project.url
-                : 'https://' + project.url
-            "
-            target="_blank"
-            style="text-decoration: none; color: white;"
-          >
-            <v-icon>mdi-link</v-icon>&nbsp;Open project url&nbsp;
-          </a>
-        </v-btn>
-      </template>
-      <template v-if="!pageMode">
-        <v-btn color="accent">
-          <a
-            :href="'/item/' + project.pubId"
-            style="text-decoration: none; color: white;"
-          >
-            Project details&nbsp;
-            <v-icon>mdi-chevron-right</v-icon>
-          </a>
-        </v-btn>
-      </template>
-    </v-card-actions>
+    <v-card-actions />
     <v-snackbar
       v-if="pageMode"
       v-model="snackbar"
@@ -604,10 +632,6 @@
         mdi-content-copy
       </v-icon>
     </v-snackbar>
-    <v-divider
-      v-if="!pageMode"
-      class="my-3"
-    />
   </v-card>
 </template>
 <script>
@@ -620,10 +644,12 @@ import {
   thematics
 } from '~/assets/data'
 import ProjectStatusBadge from '~/components/projectList/ProjectStatusBadge'
+import BackButton from '~/components/navigation/BackButton'
 
 export default {
   components: {
-    ProjectStatusBadge
+    ProjectStatusBadge,
+    BackButton
   },
   props: {
     project: Object,
@@ -639,11 +665,13 @@ export default {
       fields,
       state,
       thematics,
+      fab: false,
       snackbar: false,
       showThematics: false,
       showCountry: false,
       showFields: false,
       showType: false,
+      /* TODO add linkedin */
       socialChannels: [
         {
           label: 'Facebook',
@@ -651,7 +679,8 @@ export default {
           url:
             `${'https://www.facebook.com/sharer.php?u=' +
             'https://wprn.org/item/'}${
-              this.project.pubId}`
+              this.project.pubId}`,
+          color: '#3b5998'
         },
         {
           label: 'Twitter',
@@ -659,7 +688,10 @@ export default {
           url:
             `https://twitter.com/share?url=https://wprn.org/item/${
               this.project.pubId
-            }&text=Check this project on WPRN : &via=WPRN&hashtags=WPRN`
+            }&text=Check this project "${
+              this.project.name
+            }" on WPRN : &via=WPRN&hashtags=WPRN`,
+          color: 'rgb(29, 161, 242)'
         },
         {
           label: 'Email',
@@ -669,7 +701,8 @@ export default {
               this.project.name
             } on WPRN (World Pandemic Research Network) :%0d%0ahttps%3A%2F%2Fwprn.org%2Fitem%2F${
               this.project.pubId
-            }%0d%0a%0d%0aBest regards,`
+            }%0d%0a%0d%0aBest regards,`,
+          color: 'accent'
         }
       ]
     }

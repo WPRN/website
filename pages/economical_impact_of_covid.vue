@@ -48,10 +48,8 @@
     <NavigationDrawer
       :drawer="drawer"
       @close="drawer = false"
-      @contact="$router.push({ path: '/', hash: 'contact' })"
       @register="$router.push({ path: '/', hash: 'register' })"
       @about="$router.push({ path: '/', hash: 'about-us' })"
-      @featured="$router.push({ path: '/', hash: 'featured' })"
       @list="$router.push({ path: '/search' })"
     />
     <v-content v-scroll="onScroll">
@@ -60,26 +58,8 @@
           align="center"
           justify="center"
         >
-          <v-col cols="1">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <nuxt-link to="/#featured">
-                  <v-btn
-                    fab
-                    icon
-                    large
-                    class="mr-2"
-                    v-on="on"
-                  >
-                    <v-icon large>
-                      mdi-arrow-left
-                    </v-icon>
-                  </v-btn>
-                </nuxt-link>
-              </template>
-              <span>Back to the main page</span>
-            </v-tooltip>
-          </v-col>
+          <!--  BackButton take one col -->
+          <BackButton url="/#featured" />
           <v-col
             cols="10"
             sm="10"
@@ -161,7 +141,7 @@
                   <v-icon>mdi-email-edit</v-icon>&nbsp; contact
                 </v-btn>
                 <ContactDialog
-                  :id="XXXXX"
+                  id="413452"
                   :open="contact"
                   @close="contact = false"
                 />
@@ -191,10 +171,13 @@
 <script>
 import NavigationDrawer from '~/components/navigation/NavigationDrawer'
 import ContactDialog from '~/components/contact/ContactDialog'
+import BackButton from '~/components/navigation/BackButton'
+
 export default {
   components: {
     NavigationDrawer,
-    ContactDialog
+    ContactDialog,
+    BackButton
   },
   data () {
     return {

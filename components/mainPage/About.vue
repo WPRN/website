@@ -7,7 +7,7 @@
       </h2>
 
       <v-responsive
-        class="mx-auto mb-8"
+        class="mx-auto my-6"
         width="56"
       >
         <v-divider class="mb-1" />
@@ -16,11 +16,11 @@
       <v-row>
         <v-col cols="12">
           <v-responsive
-            class="d-flex align-center mx-auto title font-weight-regular mb-8"
-            max-width="900"
+            class="d-flex align-center mx-auto title font-weight-regular mb-8 px-3"
+            max-width="750"
             height="100%"
           >
-            <p>
+            <p class="text-justify">
               <b>The World Pandemic Research Network (WPRN)</b> maintains a
               searchable global directory of the scientific resources available
               on the societal and human impacts of the Covid-19 pandemic.
@@ -28,22 +28,22 @@
               projects and initiatives, helps reference them and stimulates
               collaboration and follow-up.
             </p>
-            <p>
+            <p class="text-justify">
               Registered resources get a timestamped WPRN-ID number and a WPRN
               webpage which presents the research project or the scientific
               initiative. It enables researchers and stakeholders worldwide to
               follow updates or pre-publications.
             </p>
-            <p>
+            <p class="text-justify">
               WPRN promotes the most promising and innovative projects and
               initiatives thanks to the support of hundreds of senior scientific
               referents.
-              WPRN is a non-profit academic resource, supported by scientific
+              It is a non-profit academic resource, supported by scientific
               societies, networks and institutions worldwide. Registration is
               free. There is no dependence. Each contributor remains completely
               independent for action and publication.
             </p>
-            <p>
+            <p class="text-justify">
               WPRN is GDPR compliant and will not publish, give or sell e-mail
               addresses to third parties.
             </p>
@@ -65,6 +65,24 @@
                 to="/board_and_contributors#institutions"
               >
                 Contributors' Institutions
+              </nuxt-link>
+              <br>
+              <span
+                class="blue--text"
+                style="text-decoration:underline;cursor:pointer;"
+                  @click="
+                  $vuetify.goTo('#contact')
+                  contactOnly = false
+                  step = 1
+                "
+              >
+                Contact us
+              </span>&nbsp;-&nbsp;
+              <nuxt-link
+                class="blue--text"
+                to="/FAQ"
+              >
+                FAQ
               </nuxt-link>&nbsp;-&nbsp;
               <nuxt-link
                 class="blue--text"
@@ -88,6 +106,12 @@
               <v-avatar
                 color="primary"
                 size="88"
+                style="cursor:pointer;"
+                @click="
+                  $vuetify.goTo('#contact')
+                  contactOnly = false
+                  step = 1
+                "
               >
                 <v-icon
                   dark
@@ -152,6 +176,8 @@
               <v-avatar
                 color="primary"
                 size="88"
+                style="cursor:pointer;"
+                @click="$router.push({ path: '/search' })"
               >
                 <v-icon
                   dark
@@ -162,14 +188,14 @@
               </v-avatar>
             </div>
             <v-card-title
-              class="justify-center font-weight-black text-uppercase"
+              class="justify-center font-weight-black text-uppercase "
               style="cursor: pointer;"
               @click="$router.push({ path: '/search' })"
             >
               Search the database
             </v-card-title>
             <v-card-text
-              class="subtitle-1"
+              class="subtitle-1 white--text"
               color="black"
             >
               WPRN is a gateway for collaboration. Find who works on what and
@@ -180,8 +206,7 @@
               >
                 Search the database
               </nuxt-link>&nbsp;to identify projects of interest, find or share resources,
-              get updates, set up collaborations. Use the “contact” buttons to
-              get-in-touch with the other registered contributors. WPRN also
+              get updates, get-in-touch with the other registered contributors and set up collaborations. WPRN also
               publishes calls for research proposals from major research
               institutions.
               <br>WPRN highlights research projects, calls,

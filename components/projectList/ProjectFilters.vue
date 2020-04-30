@@ -1,5 +1,8 @@
 <template>
-  <v-card flat>
+  <v-card
+    flat
+    class="mt-6"
+  >
     <!-- DEFAULT FILTERS -->
     <v-row no-gutters>
       <v-col cols="12">
@@ -7,95 +10,13 @@
           class="pl-0 pt-0"
           :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
         >
-          <!--   TOGGLE FILTERS BUTTON -->
-          <v-btn
-            outlined
-            small
-            color="white"
-            class="overline"
-            @click="showFilters = !showFilters"
-          >
-            <template v-if="showFilters">
-              <v-icon>mdi-filter-variant</v-icon>&nbsp;Hide Filters&nbsp;
-              <v-icon>mdi-chevron-up</v-icon>
-            </template>
-            <template v-else>
-              <v-icon>mdi-filter-variant</v-icon>&nbsp;Show Filters&nbsp;
-              <v-icon>mdi-chevron-down</v-icon>
-            </template>
-          </v-btn>
-          <!-- RESET FILTERS BUTTON -->
-          <v-btn
-            v-if="filtering"
-            outlined
-            small
-            color="white"
-            class="ml-3"
-            @click="
-              filters = {
-                search: '',
-                field: [],
-                type: '',
-                zone: 'worldwide',
-                country: [],
-                verified: false,
-                thematics: [],
-                state: '',
-                featured: false,
-              }
-              $router.push({ query: {} })
-            "
-          >
-            <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
-          </v-btn>
-          <v-spacer />
-          <!-- VERFIED ONLY TOGGLE CHECKBOX-->
-          <v-tooltip top>
-            <template v-slot:activator="{ on }">
-              <v-checkbox
-                v-model="filters.verified"
-                label="Verified"
-                class="mr-3"
-                :disabled="filters.featured === true"
-                @change="
-                  $router.push({
-                    query: {
-                      ...$route.query,
-                      verified: filters.verified ? 'true' : undefined,
-                    },
-                  })
-                "
-                v-on="on"
-              />
-            </template>
-            <span>
-              {{
-                filters.featured
-                  ? "Featured projects are always verified"
-                  : "Tick this to display only projects verified by a WPRN Referent"
-              }}
-            </span>
-          </v-tooltip>
-          <!-- FEATURED ONLY TOGGLE CHECKBOX-->
-          <v-tooltip top>
-            <template v-slot:activator="{ on }">
-              <v-checkbox
-                v-model="filters.featured"
-                label="Featured"
-                class="mr-3"
-                @change="updateCheckBox()"
-                v-on="on"
-              />
-            </template>
-            <span>Tick this to display only projects featured by the WPRN community</span>
-          </v-tooltip>
           <!-- SEARCH FIELD -->
           <v-text-field
             ref="search_field"
             v-model.trim="filters.search"
-            class="pt-0"
+            class="pt-0 filter"
             label="Search"
-            placeholder="Search a project"
+            placeholder="Search projects"
             prepend-inner-icon="mdi-magnify"
             :class="$vuetify.breakpoint.smAndDown ? 'mr-0' : 'mr-4'"
             single-line
@@ -132,6 +53,92 @@
               })
             "
           />
+          <!-- VERFIED ONLY TOGGLE CHECKBOX-->
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-checkbox
+                v-model="filters.verified"
+                label="Verified"
+                class="mx-3 filter"
+                :dense="$vuetify.breakpoint.mdAndDown"
+                :disabled="filters.featured === true"
+                @change="
+                  $router.push({
+                    query: {
+                      ...$route.query,
+                      verified: filters.verified ? 'true' : undefined,
+                    },
+                  })
+                "
+                v-on="on"
+              />
+            </template>
+            <span>
+              {{
+                filters.featured
+                  ? "Featured projects are always verified"
+                  : "Tick this to display only projects verified by a WPRN Referent"
+              }}
+            </span>
+          </v-tooltip>
+          <!-- FEATURED ONLY TOGGLE CHECKBOX-->
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-checkbox
+                v-model="filters.featured"
+                label="Featured"
+                class="ml-3 filter"
+                :dense="$vuetify.breakpoint.mdAndDown"
+                @change="updateCheckBox()"
+                v-on="on"
+              />
+            </template>
+            <span>Tick this to display only projects featured by the WPRN community</span>
+          </v-tooltip>
+          <v-spacer />
+          <!-- RESET FILTERS BUTTON -->
+          <v-btn
+            v-if="filtering&&showFilters"
+            outlined
+            color="white"
+            class="mr-3 filter"
+            :dense="$vuetify.breakpoint.mdAndDown"
+            @click="
+              filters = {
+                search: '',
+                field: [],
+                type: '',
+                zone: '',
+                country: [],
+                verified: false,
+                thematics: [],
+                state: '',
+                featured: false,
+              }
+              $router.push({ query: {} })
+            "
+          >
+            <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
+          </v-btn>
+
+          <!--   TOGGLE FILTERS BUTTON -->
+          <v-btn
+            v-if="!filtering"
+            outlined
+            color="white"
+            :class="{ 'mr-4': $vuetify.breakpoint.mdAndUp }"
+            :dense="$vuetify.breakpoint.mdAndDown"
+            @click="showFilters = !showFilters"
+          >
+            <template v-if="showFilters">
+              Hide Filters&nbsp;
+              <v-icon>mdi-chevron-up</v-icon>
+            </template>
+            <template v-else>
+              Show Filters&nbsp;
+              <v-icon>mdi-chevron-down</v-icon>
+            </template>
+          </v-btn>
         </v-card-title>
       </v-col>
     </v-row>
@@ -141,6 +148,110 @@
         v-show="showFilters"
         :class="{ 'pr-8': $vuetify.breakpoint.mdAndUp }"
       >
+        <!--   FIELD (DISCIPLINES) -->
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
+          <v-combobox
+            ref="field"
+            v-model="filters.field"
+            :items="fields"
+            label="Project discipline(s)"
+            outlined
+            clearable
+            class="filter"
+            multiple
+            :disabled="loading"
+            hide-details
+            dense
+            @change="
+              $router.push({
+                query: {
+                  ...$route.query,
+                  field:
+                    filters.field && filters.field.length
+                      ? JSON.stringify(filters.field)
+                      : undefined,
+                },
+              })
+            "
+            @click:clear="
+              $router.push({ ...$route.query, query: { field: undefined } })
+            "
+          />
+        </v-col>
+        <!-- THEMATICS -->
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
+          <v-combobox
+            ref="thematics"
+            v-model="filters.thematics"
+            :items="thematics"
+            label="Project Thematic(s)"
+            outlined
+            clearable
+            multiple
+            class="filter"
+            :disabled="loading"
+            hide-details
+            dense
+            @change="
+              $router.push({
+                query: {
+                  ...$route.query,
+                  thematics:
+                    filters.thematics && filters.thematics.length
+                      ? JSON.stringify(filters.thematics)
+                      : undefined,
+                },
+              })
+            "
+            @click:clear="
+              $router.push({ ...$route.query, query: { thematics: undefined } })
+            "
+          />
+        </v-col>
+        <!-- PROJECT TYPE(S) -->
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
+          <v-select
+            ref="type"
+            v-model="filters.type"
+            :items="types"
+            label="Project type"
+            outlined
+            hide-details
+            dense
+            multiple
+            clearable
+            class="filter"
+            @change="
+              $router.push({
+                query: {
+                  ...$route.query,
+                  type:
+                    filters.type && filters.type.length
+                      ? JSON.stringify(filters.type)
+                      : undefined,
+                },
+              })
+            "
+            @click:clear="
+              $router.push({ ...$route.query, query: { type: undefined } })
+            "
+          />
+        </v-col>
         <!-- ZONE -->
         <v-col
           cols="12"
@@ -154,15 +265,16 @@
             :items="zones"
             label="Continent"
             outlined
-            :clearable="filters.zone !== 'worldwide'"
             :disabled="loading"
+            clearable
             hide-details
+            multiple
+            class="filter"
             dense
             @change="updateZoneAndCountries()"
             @click:clear="
-              filters.zone = 'worldwide'
               $router.push({
-                query: { ...$route.query, zone: JSON.stringify('worldwide') },
+                query: { ...$route.query, zone:undefined },
               })
             "
           />
@@ -178,9 +290,13 @@
             v-model="filters.country"
             :disabled="loading"
             :items="
-              !filters.zone || filters.zone !== 'worldwide'
-                ? countries[filters.zone]
-                : Object.keys(countries)
+              filters.zone.includes('worldwide') || !filters.zone.length
+                ?
+                  Object.keys(countries)
+                    .map((countryKey) => countries[countryKey])
+                    .flat()
+                    .sort()
+                : Object.keys(countries).filter(continent => filters.zone.includes(continent))
                   .map((countryKey) => countries[countryKey])
                   .flat()
                   .sort()
@@ -190,6 +306,7 @@
             outlined
             multiple
             clearable
+            class="filter"
             hide-details
             dense
             @change="
@@ -241,108 +358,6 @@
             "
           />
         </v-col>
-
-        <!--   FIELD (DISCIPLINES) -->
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-        >
-          <v-combobox
-            ref="field"
-            v-model="filters.field"
-            :items="fields"
-            label="Project discipline(s)"
-            outlined
-            clearable
-            multiple
-            :disabled="loading"
-            hide-details
-            dense
-            @change="
-              $router.push({
-                query: {
-                  ...$route.query,
-                  field:
-                    filters.field && filters.field.length
-                      ? JSON.stringify(filters.field)
-                      : undefined,
-                },
-              })
-            "
-            @click:clear="
-              $router.push({ ...$route.query, query: { field: undefined } })
-            "
-          />
-        </v-col>
-        <!-- THEMATICS -->
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-        >
-          <v-combobox
-            ref="thematics"
-            v-model="filters.thematics"
-            :items="thematics"
-            label="Project Thematic(s)"
-            outlined
-            clearable
-            multiple
-            :disabled="loading"
-            hide-details
-            dense
-            @change="
-              $router.push({
-                query: {
-                  ...$route.query,
-                  thematics:
-                    filters.thematics && filters.thematics.length
-                      ? JSON.stringify(filters.thematics)
-                      : undefined,
-                },
-              })
-            "
-            @click:clear="
-              $router.push({ ...$route.query, query: { thematics: undefined } })
-            "
-          />
-        </v-col>
-        <!-- PROJECT TYPE(S) -->
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-        >
-          <v-select
-            ref="type"
-            v-model="filters.type"
-            :items="types"
-            label="Project type"
-            outlined
-            hide-details
-            dense
-            multiple
-            clearable
-            @change="
-              $router.push({
-                query: {
-                  ...$route.query,
-                  type:
-                    filters.type && filters.type.length
-                      ? JSON.stringify(filters.type)
-                      : undefined,
-                },
-              })
-            "
-            @click:clear="
-              $router.push({ ...$route.query, query: { type: undefined } })
-            "
-          />
-        </v-col>
       </v-row>
     </v-expand-transition>
   </v-card>
@@ -370,7 +385,7 @@ export default {
       state,
       thematics,
       showFilters: this.$route.query && !!Object.keys(this.$route.query).length,
-      filtering: false,
+      filtering: (this.$route.query && !!Object.keys(this.$route.query).length),
       filters: {
         field:
           this.$route.query && this.$route.query.field
@@ -389,11 +404,9 @@ export default {
             ? JSON.parse(this.$route.query.status)
             : '',
         zone:
-          this.$route.query && this.$route.query.zone
-            ? zones.find(
-              (zone) => JSON.parse(this.$route.query.zone) === zone.value
-            ).value
-            : 'worldwide',
+            this.$route.query && this.$route.query.zone
+              ? JSON.parse(this.$route.query.zone)
+              : [],
         country:
           this.$route.query && this.$route.query.country
             ? JSON.parse(this.$route.query.country)
@@ -411,32 +424,13 @@ export default {
   },
   watch: {
     '$route.query' () {
-      this.filtering = false
-      Object.keys(this.filters).forEach((key) => {
-        if (typeof this.$route.query[key] !== 'undefined') {
-          this.filtering = true
-          this.filters[key] = JSON.parse(this.$route.query[key])
-        } else {
-          switch (typeof this.filters[key]) {
-            case 'boolean':
-              this.filters[key] = false
-              break
-            case 'string':
-              key === 'zone'
-                ? (this.filters[key] = 'worldwide')
-                : (this.filters[key] = '')
-              break
-            case 'object':
-              this.filters[key] = []
-              break
-            default:
-              break
-          }
-        }
-      })
+      this.buildQuery()
     }
   },
-  mounted () {},
+  mounted () {
+    this.buildQuery()
+    console.log(this.$route)
+  },
   methods: {
     focusSearch () {
       this.filters.searching = !this.filters.searching
@@ -457,19 +451,20 @@ export default {
       })
     },
     updateZoneAndCountries () {
-      if (!this.filters.zone) {
-        this.filters.zone = 'worldwide'
-      }
-      if (this.filters.country.length && this.filters.zone !== 'worldwide') {
+      const whitelist = []
+      this.filters.zone.forEach(zone => whitelist.push(this.countries[zone]))
+      if (this.filters.country.length && this.filters.zone !== ['worldwide']) {
         this.filters.country = this.filters.country.filter((item) =>
-          this.countries[this.filters.zone].includes(item)
+          whitelist.includes(item)
         )
       }
-      if (this.filters.zone !== 'worldwide') {
+      if (this.filters.zone !== ['worldwide']) {
         this.$router.push({
           query: {
             ...this.$route.query,
-            zone: JSON.stringify(this.filters.zone),
+            zone: this.filters.zone && this.filters.zone.length
+              ? JSON.stringify(this.filters.zone)
+              : undefined,
             country:
               this.filters.country && this.filters.country.length
                 ? JSON.stringify(this.filters.country)
@@ -484,9 +479,41 @@ export default {
           }
         })
       }
+    },
+    buildQuery () {
+      this.filtering = false
+      Object.keys(this.filters).forEach((key) => {
+        console.log('key', key)
+        console.log('kvaley', this.$route.query[key])
+        if (typeof this.$route.query[key] !== 'undefined') {
+          this.filtering = true
+          this.showFilters = true
+          this.filters[key] = JSON.parse(this.$route.query[key])
+        } else {
+          switch (typeof this.filters[key]) {
+            case 'boolean':
+              this.filters[key] = false
+              break
+            case 'string':
+              this.filters[key] = ''
+              break
+            case 'object':
+              this.filters[key] = []
+              break
+            default:
+              break
+          }
+        }
+      })
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.filter[att]{
+color:#90CAF9 !important;
+    caret-color: #90CAF9 !important;
+}
+
+</style>

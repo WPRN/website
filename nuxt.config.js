@@ -156,9 +156,9 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: colors.blue,
           accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          secondary: colors.blue.lighten3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
@@ -173,14 +173,14 @@ export default {
   build: {
     extend (config, ctx) {
       // ESLint when saving
-      if (ctx.isDev && ctx.isClient) {
+      /*       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })
-      }
+      } */
     }
   }
 }

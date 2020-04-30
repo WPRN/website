@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span class="pt-1 pr-3">
     <template v-if="status === 'xFEATURED'">
       <v-icon>mdi-star</v-icon>
     </template>
@@ -8,8 +8,8 @@
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-sheet
-              style="height: 18px; width: 18px; border-radius: 12px;"
-              color="red"
+              style="height: 16px; width: 16px; border-radius: 12px;"
+              color="grey"
               v-on="on"
             />
           </template>
@@ -20,7 +20,7 @@
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-sheet
-              style="height: 18px; width: 18px; border-radius: 12px;"
+              style="height: 16px; width: 16px; border-radius: 12px;"
               color="green"
               v-on="on"
             />
@@ -34,7 +34,10 @@
 <script>
 export default {
   props: {
-    status: String
+    status: {
+      type: String,
+      default: 'PUBLISHED'
+    }
   },
   data () {
     return {}

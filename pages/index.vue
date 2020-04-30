@@ -49,12 +49,6 @@
     <NavigationDrawer
       :drawer="drawer"
       @close="drawer = false"
-      @contact="
-        $vuetify.goTo('#contact', { offset: 100 })
-        contactOnly = true
-        drawer = false
-        step = 0
-      "
       @register="
         $vuetify.goTo('#contact', { offset: 100 })
         contactOnly = false
@@ -63,10 +57,6 @@
       "
       @about="
         $vuetify.goTo('#about-us', { offset: 100 })
-        drawer = false
-      "
-      @featured="
-        $vuetify.goTo('#featured', { offset: 100 })
         drawer = false
       "
       @list="$router.push({ path: '/search' })"
@@ -94,7 +84,7 @@
           <!-- TODO make a better responsive version -->
           <v-img
             :height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
-            srcset="splash_sm.jpg 480w, splash_lg.jpg 600w, splash_xl.jpg 800w.jpg"
+            srcset="splash_sm.jpg 480w, splash_lg.jpg 600w, splash_xl.jpg 800w"
             src="/splash_lg.jpg"
             lazy-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgAB8DASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABwYIBf/EACkQAAIBAwIFBAIDAAAAAAAAAAECAwQFEQAGEhMhMUEHIlFhFDIjQvD/xAAWAQEBAQAAAAAAAAAAAAAAAAADAQX/xAAiEQABBAEDBQEAAAAAAAAAAAABAAIDERIEITETQVFhcfD/2gAMAwEAAhEDEQA/AMlWW2Vt4uUVvoITLPJkgDwAMkn6A/2dOFj9Kdo2qzULbjFdWXKrLGUyymCmgVRklVX3sfHUgE57Y1EejFRR2msa7VqQFHl5QMgLZCqWMeFIYcZKrxeM+caUp6KPcV5kittytkNXVUytb+VV+2Bf25TKTlT1ZeED40x0krg1zTTd72v977oXycgcqL3RtX0uuFJcH27cqi0VVLHxQxVErSfkEY4hwni8k44XPRScHRDWU8lLUNDIVJHZlOQw8EfWk/d21a21yvDw86QJluBWGMDJAB+B8fGoa+yRTWul9kCzQSMhKKQ7K3X3dMHBB+9JKyEszhdYUikJNFdn0vojequayQ1FJHXSfyUkdQxTnNjBRX/UOcDAbAPbIPe12lfJNvXeOWqRoY6WrAlR4CJ42XIJVsFkdcYPbv8AZ0MQSyQTJNC7RyIcqynqDpg2t61wwWdbXujatHdf1V6tAvMkReg4lcEFsYHFkdABjoMJDrMY+k4WFXRW7IK+v1wtwNXemhqK2kg5c0siqHlCSgdTGWz5Iz2B7kaz1vKsoay8zzW4VAp5HMiioVRKmf6sV9rY+QBnVnvr1Sp7mlVT7atVZa4qs5qGqasSlugGFUKAq4AwMkDRiSSck5OsyCEQtPkpfgX/2Q=="
           >
@@ -120,19 +110,20 @@
                   <br>
                   <div
                     style="
-                      background-color: #333333;
                       border-radius: 10px;
-                      max-width: 600px;
                     "
-                    class="pa-2 title d-flex justify-center text-center"
+                    class="mission pa-2 d-flex justify-center text-center"
                   >
-                    ASSESSING SOCIETAL AND HUMAN IMPACTS OF COVID-19
+                    World Pandemic Research Network <br> Assessing social and economic impact of covid-19
                   </div>
                 </v-col>
                 <v-btn
                   large
                   class="align-self-end"
                   fab
+                  outlined
+                  color="white"
+                  style="background-color:#272727;"
                   @click="$vuetify.goTo('#about-us', { offset: 100 })"
                 >
                   <v-icon large>
@@ -148,7 +139,6 @@
       <About />
       <Stats />
 
-      <Featured />
       <section id="contact">
         <v-sheet
           color="#333333"
@@ -271,7 +261,6 @@
               </v-window-item>
             </v-window>
           </v-container>
-
           <div class="py-12" />
         </v-sheet>
       </section>
@@ -304,7 +293,7 @@ import ContactForm from '~/components/contact/ContactForm'
 import ProjectForm from '~/components/projectForm/ProjectForm'
 import About from '~/components/mainPage/About'
 import Stats from '~/components/mainPage/Stats'
-import Featured from '~/components/mainPage/Featured'
+/* import Featured from '~/components/mainPage/Featured' */
 /* import MeetingList from "~/components/mainPage/MeetingList";
 import WorldMap from "~/components/mainPage/WorldMap"; */
 import ProjectPostedWindow from '~/components/projectForm/ProjectPostedWindow'
@@ -323,8 +312,8 @@ export default {
     ContactPostedWindow,
     ProjectPostedWindow, /*    WorkInProgressDialog, */
     Logo,
-    Stats,
-    Featured
+    Stats
+    /* Featured */
   },
   data () {
     return {
@@ -363,3 +352,11 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .mission {
+    font-family: 'Poiret One', cursive!important;
+    background-color: rgb(39, 39, 39, 0.8);
+    font-size: 1.5em;
+    border-radius:4em;
+  }
+</style>

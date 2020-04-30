@@ -12,7 +12,11 @@
       :class="{ 'pb-4': $vuetify.breakpoint.smAndDown }"
     >
       <div class="title font-weight-light grey--text text--lighten-1 text-center">
-        <v-tooltip top>
+        <v-tooltip
+          v-for="(item, index) in socialIcons"
+          :key="index"
+          top
+        >
           <template v-slot:activator="{ on }">
             <v-btn
               text
@@ -20,73 +24,16 @@
               v-on="on"
             >
               <a
-                href="https://github.com/WPRN/website"
+                :href="item.url"
                 target="_blank"
                 rel="noopener noreferrer"
                 style="text-decoration: none;"
               >
-                <v-icon color="white">mdi-github</v-icon>
+                <v-icon color="white">mdi-{{ item.icon }}</v-icon>
               </a>
             </v-btn>
           </template>
-          <span>See this website source code and contribute</span>
-        </v-tooltip>
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              text
-              icon
-              v-on="on"
-            >
-              <a
-                href="https://twitter.com/WPRN_org"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="text-decoration: none;"
-              >
-                <v-icon color="white">mdi-twitter</v-icon>
-              </a>
-            </v-btn>
-          </template>
-          <span>Follow us on Twitter</span>
-        </v-tooltip>
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              text
-              icon
-              v-on="on"
-            >
-              <a
-                href="https://www.facebook.com/WPRN.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="text-decoration: none;"
-              >
-                <v-icon color="white">mdi-facebook</v-icon>
-              </a>
-            </v-btn>
-          </template>
-          <span>Visit our Facebook page</span>
-        </v-tooltip>
-        <v-tooltip top>
-          <template v-slot:activator="{ on }">
-            <v-btn
-              text
-              icon
-              v-on="on"
-            >
-              <a
-                href="https://www.linkedin.com/company/wprn-world-pandemic-research-network/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="text-decoration: none;"
-              >
-                <v-icon color="white">mdi-linkedin</v-icon>
-              </a>
-            </v-btn>
-          </template>
-          <span>Visit our Linkedin page</span>
+          <span>{{ item.text }}</span>
         </v-tooltip>
         <br>
         <v-tooltip top>
@@ -144,14 +91,19 @@
 
 <script>
 import Credits from '~/components/navigation/Credits'
+import {socialIcons} from '~/assets/data'
 export default {
   components: { Credits },
   data () {
     return {
-      showCredits: false
+      showCredits: false,
+      socialIcons
     }
   },
   methods: {
+    onError (error) { console.log(error) },
+    onSuccess (token) {},
+    onExpired () {}
   }
 }
 </script>

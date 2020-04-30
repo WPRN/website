@@ -22,6 +22,7 @@
         <v-col
           cols="12"
           md="4"
+          class="pa-3"
         >
           <v-img
             src="/economics.jpg"
@@ -35,12 +36,13 @@
             Economic impact of Covid-19.
           </h3>
 
-          <div class="title font-weight-regular mb-5">
+          <div class="body-1 font-weight-regular mb-5">
             This multicentric survey on enterprises stems from the pioneer
             research led by Professor Xiaobo Zhang on the economic impact of the
             epidemic on Chinese SMEs -
             <a
               href="https://wprn.org/item/413452"
+              class="blue--text"
             >WPRN ID 413452</a>. This team
             has agreed to share the questionnaire, which is currently translated
             and surveys launched around the world.
@@ -49,10 +51,11 @@
           <v-btn
             class="ml-n4 font-weight-black"
             text
+            color="primary"
           >
             <nuxt-link
               to="/economical_impact_of_covid"
-              style="color: white; text-decoration: none;"
+              style="text-decoration: none;"
             >
               More
             </nuxt-link>
@@ -61,6 +64,7 @@
         <v-col
           cols="12"
           md="4"
+          class="pa-3"
         >
           <v-img
             src="/future.jpg"
@@ -69,37 +73,31 @@
             max-width="100%"
             lazy-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QBoRXhpZgAASUkqAAgAAAADABIBAwABAAAAAQAAADEBAgAQAAAAMgAAAGmHBAABAAAAQgAAAAAAAABTaG90d2VsbCAwLjI4LjQAAgACoAkAAQAAAIACAAADoAkAAQAAAOABAAAAAAAA/+EJ9Gh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNC40LjAtRXhpdjIiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSI2NDAiIGV4aWY6UGl4ZWxZRGltZW5zaW9uPSI0ODAiIHRpZmY6SW1hZ2VXaWR0aD0iNjQwIiB0aWZmOkltYWdlSGVpZ2h0PSI0ODAiIHRpZmY6T3JpZW50YXRpb249IjEiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgADgATAwEiAAIRAQMRAf/EABcAAQEBAQAAAAAAAAAAAAAAAAgABQb/xAAlEAABAwMDAwUAAAAAAAAAAAABAgMEAAUGERJBIjFhBwgUIXH/xAAWAQEBAQAAAAAAAAAAAAAAAAAFBgf/xAAlEQAABAUCBwAAAAAAAAAAAAAAAQIDBAUGESExQRQiUnGRktH/2gAMAwEAAhEDEQA/AGtKfhk9DhI81y2MZnaslduTcSdFluwZSoryWHAotqHCtKy5N4Und0nT9ouX3H7v6KZdds2tlyD0abLdeMdZIK1OkqKFp02lIPOuvPejWIxTzhNJPJ6CvmFPMwMKqMeTypyq2pFudr57BuJfZ2jtVQ5c92eQQFfHkW2E68j6UtsLSknwCqqneBmnQXkhnRT6kd3leivg/9k="
           />
-
           <h3 class="font-weight-black mb-4 text-uppercase">
             Just One Giant Lab
           </h3>
-
-          <div class="title font-weight-regular mb-5">
-            Just One Giant Lab (JOGL) is the first research and innovation
-            laboratory operating as a distributed, open and massive mobilisation
-            platform for collaborative task solving. JOGL is a free and
-            open-source platform you can use to set up and develop collaborative
-            projects, e.g. with partners you find on WPRN and elsewhere. JOGL
-            builds on the successful experience of Polymath to offer an
-            environment where contributions of participants are traced and
-            acknowledged.
+          <div class="body-1 font-weight-regular mb-5 ">
+            <nuxt-link
+              to="/item/427752"
+              color="primary"
+            >
+              Just One Giant Lab (JOGL)
+            </nuxt-link> is the first research and innovation laboratory operating as a distributed, open and massive mobilisation platform for collaborative task solving. JOGL is a free and open-source platform you can use to set up and develop collaborative projects, e.g. with partners you find on WPRN and elsewhere. In the context of the pandemic, JOGL runs the OpenCovid19 initiative, a research program aimed at collectively developing open-source and low-cost tools and methodologies that are safe and easy to use to fight the COVID-19 pandemic, and distributing micro-grants to accelerate projects selected by a community peer-review process.
           </div>
-
           <v-btn
             class="ml-n4 font-weight-black"
+            color="primary"
             text
+            href="/item/427752"
+            style="text-decoration: none;"
           >
-            <a
-              href="https://jogl.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="color: white; text-decoration: none;"
-            >More</a>
+            More
           </v-btn>
         </v-col>
         <v-col
           cols="12"
           md="4"
+          class="pa-3"
         >
           <v-img
             src="/social.jpg"
@@ -115,7 +113,7 @@
             Psychological and Social impact of Covid-19.
           </h3>
 
-          <div class="title font-weight-regular mb-5">
+          <div class="body-1 font-weight-regular mb-5">
             How do people cope, positively or not, with the stressful situation
             of lockdown and confinement? A multidisciplinary team provides a set
             of questions that assess the sources and forms of stress and coping,
@@ -127,10 +125,11 @@
           <v-btn
             class="ml-n4 font-weight-black"
             text
+            color="primary"
           >
             <nuxt-link
               to="/psychological_and_social_impact_of_covid"
-              style="color: white; text-decoration: none;"
+              style=" text-decoration: none;"
             >
               More
             </nuxt-link>

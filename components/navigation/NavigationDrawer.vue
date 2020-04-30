@@ -26,32 +26,18 @@
     <v-divider />
     <v-list nav>
       <v-list-item-group active-class="text--accent-4">
-        <v-list-item @click="$emit('about')">
-          <v-list-item-title>About WPRN</v-list-item-title>
-        </v-list-item>
-        <v-list-item @click="$emit('featured')">
-          <v-list-item-title>Featured projects</v-list-item-title>
+        <v-list-item @click="$emit('list')">
+          <v-list-item-title>
+            Browse projects
+          </v-list-item-title>
         </v-list-item>
         <v-list-item @click="$emit('register')">
           <v-list-item-title>Register your project</v-list-item-title>
         </v-list-item>
-        <v-list-item @click="$emit('contact')">
-          <v-list-item-title>Contact us</v-list-item-title>
+        <v-list-item @click="$emit('about')">
+          <v-list-item-title>About WPRN</v-list-item-title>
         </v-list-item>
         <v-divider />
-        <v-list-item class="mt-3 px-0">
-          <v-list-item-title>
-            <v-btn
-              color="white"
-              outlined
-              block
-              large
-              @click="$emit('list')"
-            >
-              Browse projects
-            </v-btn>
-          </v-list-item-title>
-        </v-list-item>
       </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
@@ -63,3 +49,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+  .base-divider .v-divider {
+    border-width: 3px 0 0 0 !important;
+}
+</style>

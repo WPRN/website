@@ -1,55 +1,89 @@
 <template>
   <div>
     <v-data-table
-      dense
       :expanded.sync="expanded"
-      :headers="headers"
       :items="projects"
       :loading="loading"
       item-key="id"
       :server-items-length="total"
-      :class="$vuetify.breakpoint.mdAndUp ? ' elevation-1 ' : 'elevation-1'"
-      class="px-1"
+      :class="{ ' elevation-1 ' : $vuetify.breakpoint.mdAndUp}"
+      class="px-1 mt-6"
       :options.sync="options"
       :footer-props="{ itemsPerPageOptions: [5, 10, 20, 50, 100] }"
+      :headers-length="6"
+      :dense="$vuetify.breakpoint.mdAndDown"
     >
       <!-- FILTERS -->
       <template v-slot:top>
         <ProjectFilters :loading="loading" />
-        <template v-if="total">
+        <div
+          v-if="total"
+          class="mt-3 ml-1"
+        >
           {{ total }}&nbsp;{{ total > 1 ? "Results" : "Result" }}
-        </template>
+        </div>
+      </template>
+      <!-- HEADERS -->
+      <template v-slot:header>
+        <tr>
+          <th class="pl-8">
+            Name
+          </th>
+          <th class="px-1">
+            Institution
+          </th>
+          <th class="px-2">
+            Discipline
+          </th>
+          <th class="px-2">
+            Thematic
+          </th>
+          <th class="px-2">
+            Type
+          </th>
+          <th class="px-2">
+            Location
+          </th>
+        </tr>
       </template>
       <!--  LOADING STATE -->
       <template v-slot:loading>
         <v-skeleton-loader
           transition="scale-transition"
           type="table-tbody"
+          width="100%"
         />
       </template>
       <!-- NO DATA STATE -->
       <template v-slot:no-data>
         <template v-if="!filtering">
-          <div class="my-3">
+          <div
+            class="my-3"
+            width="100%"
+          >
             There are no projects to display
           </div>
         </template>
         <template v-else>
-          No projects match your search.
-          <br>
-          <v-btn
-            v-if="filtering"
-            outlined
-            small
-            color="white"
-            class="ma-3"
-            @click="
-              $router.push({ query: {} })
-              page = 1
-            "
+          <div
+            width="100%"
           >
-            <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
-          </v-btn>
+            No projects match your search.
+            <br>
+            <v-btn
+              v-if="filtering"
+              outlined
+              small
+              color="white"
+              class="ma-3"
+              @click="
+                $router.push({ query: {} })
+                page = 1
+              "
+            >
+              <v-icon>mdi-refresh</v-icon>&nbsp;Reset filters
+            </v-btn>
+          </div>
         </template>
       </template>
       <!-- RESULT ROW -->
@@ -64,8 +98,11 @@
         />
       </template>
       <template v-slot:expanded-item="{ item }">
-        <td colspan="9">
-          <ProjectDetails
+        <td
+          colspan="6"
+          class="px-0"
+        >
+          <ProjectExpandedRow
             :project="item"
             :filters="filters"
             :expanded="expanded"
@@ -85,7 +122,7 @@
 import * as queries from '~/graphql/queries'
 import ProjectFilters from '~/components/projectList/ProjectFilters'
 import ProjectRow from '~/components/projectList/ProjectRow'
-import ProjectDetails from '~/components/projectList/ProjectDetails'
+import ProjectExpandedRow from '~/components/projectList/ProjectExpandedRow'
 import ContactDialog from '~/components/contact/ContactDialog'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
@@ -100,7 +137,7 @@ import {
 export default {
   components: {
     ContactDialog,
-    ProjectDetails,
+    ProjectExpandedRow,
     ProjectFilters,
     ProjectRow
   },
@@ -122,63 +159,12 @@ export default {
       nextToken: false,
       total: 0,
       options: {
-        itemsPerPage: 20,
+        itemsPerPage: 10,
         page: 1,
         sortBy: [],
         sortDesc: [true]
       },
       search: '',
-      headers: [
-        {
-          text: '',
-          align: 'left',
-          sortable: false,
-          value: 'status'
-        },
-        {
-          text: 'Name',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        {
-          text: 'Status',
-          align: 'left',
-          sortable: false,
-          value: 'state'
-        },
-        {
-          text: 'Discipline',
-          align: 'left',
-          sortable: false,
-          value: 'type'
-        },
-        {
-          text: 'Thematic',
-          align: 'left',
-          sortable: false,
-          value: 'type'
-        },
-        {
-          text: 'Type',
-          align: 'left',
-          sortable: false,
-          value: 'hostCount'
-        },
-        {
-          text: 'Continent',
-          align: 'left',
-          sortable: false,
-          value: 'continent'
-        },
-        {
-          text: 'Country',
-          align: 'left',
-          sortable: false,
-          value: 'country'
-        },
-        { text: 'Actions', value: 'action', sortable: false }
-      ],
       filters: {
         field:
           this.$route.query && this.$route.query.field
@@ -198,10 +184,8 @@ export default {
             : '',
         zone:
           this.$route.query && this.$route.query.zone
-            ? zones.find(
-              (zone) => JSON.parse(this.$route.query.zone) === zone.value
-            ).value
-            : 'worldwide',
+            ? JSON.parse(this.$route.query.zone)
+            : [],
         country:
           this.$route.query && this.$route.query.country
             ? JSON.parse(this.$route.query.country)
@@ -233,9 +217,7 @@ export default {
               this.filters[key] = false
               break
             case 'string':
-              key === 'zone'
-                ? (this.filters[key] = 'worldwide')
-                : (this.filters[key] = '')
+              this.filters[key] = ''
               break
             case 'object':
               this.filters[key] = []
@@ -260,7 +242,20 @@ export default {
       }
       this.refreshQuery()
     },
-
+    /*    addDisjonctiveFilterToQuery (item, filter) {
+      if (this.filters[item] && this.filters[item].length) {
+        if (this.filters[item].length === 1) {
+          filter[item] = { matchPhrase: this.filters[item] }
+        } else {
+          let or = []
+          this.filters[item].forEach((val) => {
+            or.push({ item: { matchPhrase: val } })
+          })
+          filter.and.push({ or })
+        }
+      }
+      return filter
+    }, */
     async refreshQuery (model) {
       try {
         // clean models from search string artefacts
@@ -272,12 +267,15 @@ export default {
           }
           if (model === 'country') {
             this.filters.country = this.filters.country.filter((item) =>
-              this.filters.zone === 'worldwide'
+              this.filters.zone === ['worldwide']
                 ? Object.keys(countries)
                   .map((countryKey) => countries[countryKey])
                   .flat()
                   .includes(item)
-                : countries[this.filters.zone].includes(item)
+                : Object.keys(countries).filter(continent => this.filters.zone.includes(continent))
+                  .map((countryKey) => countries[countryKey])
+                  .flat()
+                  .includes(item)
             )
           }
         }
@@ -298,17 +296,16 @@ export default {
             }
           }
         }
-        if (
-          this.filters.zone &&
-          this.filters.zone.length &&
-          !this.filters.zone.includes('worldwide')
-        ) {
-          filter.zone = {
-            match: this.filters.zone
-          }
-        } else {
-          if (!this.filters.zone) {
-            this.filters.zone = 'worldwide'
+
+        if (this.filters.zone && this.filters.zone.length) {
+          if (this.filters.zone.length === 1) {
+            filter.zone = { matchPhrase: this.filters.zone }
+          } else {
+            let or = []
+            this.filters.zone.forEach((zone) => {
+              or.push({ zone: { matchPhrase: zone } })
+            })
+            filter.and.push({ or })
           }
         }
 

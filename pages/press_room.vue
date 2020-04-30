@@ -48,35 +48,15 @@
     <NavigationDrawer
       :drawer="drawer"
       @close="drawer = false"
-      @contact="$router.push({ path: '/', hash: 'contact' })"
       @register="$router.push({ path: '/', hash: 'register' })"
       @about="$router.push({ path: '/', hash: 'about-us' })"
-      @featured="$router.push({ path: '/', hash: 'featured' })"
       @list="$router.push({ path: '/search' })"
     />
     <v-content v-scroll="onScroll">
       <v-container id="content">
         <v-row justify="center">
-          <v-col cols="1">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <nuxt-link to="/#featured">
-                  <v-btn
-                    fab
-                    icon
-                    large
-                    class="mr-2"
-                    v-on="on"
-                  >
-                    <v-icon large>
-                      mdi-arrow-left
-                    </v-icon>
-                  </v-btn>
-                </nuxt-link>
-              </template>
-              <span>Back to the main page</span>
-            </v-tooltip>
-          </v-col>
+          <!--  BackButton takes one col -->
+          <BackButton />
           <v-col
             cols="10"
             sm="10"
@@ -104,62 +84,31 @@
             cols="12"
             class="text-center"
           >
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
+            <v-tooltip
+              v-for="(item, index) in socialIcons"
+              :key="index"
+              top
+            >
+              <template
+                v-if="index>0"
+                v-slot:activator="{ on }"
+              >
                 <v-btn
                   text
                   icon
                   v-on="on"
                 >
                   <a
-                    href="https://twitter.com/WPRN_org"
+                    :href="item.url"
                     target="_blank"
                     rel="noopener noreferrer"
                     style="text-decoration: none;"
                   >
-                    <v-icon color="white">mdi-twitter</v-icon>
+                    <v-icon color="white">mdi-{{ item.icon }}</v-icon>
                   </a>
                 </v-btn>
               </template>
-              <span>Follow us on Twitter</span>
-            </v-tooltip>
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  text
-                  icon
-                  v-on="on"
-                >
-                  <a
-                    href="https://www.facebook.com/WPRN.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style="text-decoration: none;"
-                  >
-                    <v-icon color="white">mdi-facebook</v-icon>
-                  </a>
-                </v-btn>
-              </template>
-              <span>Visit our Facebook page</span>
-            </v-tooltip>
-            <v-tooltip top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  text
-                  icon
-                  v-on="on"
-                >
-                  <a
-                    href="https://www.linkedin.com/company/wprn-world-pandemic-research-network/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style="text-decoration: none;"
-                  >
-                    <v-icon color="white">mdi-linkedin</v-icon>
-                  </a>
-                </v-btn>
-              </template>
-              <span>Visit our Linkedin page</span>
+              <span>{{ item.text }}</span>
             </v-tooltip>
           </v-col>
           <v-col
@@ -345,15 +294,19 @@
 </template>
 <script>
 import NavigationDrawer from '~/components/navigation/NavigationDrawer'
+import BackButton from '~/components/navigation/BackButton'
+import {socialIcons} from '~/assets/data'
 export default {
   components: {
-    NavigationDrawer
+    NavigationDrawer,
+    BackButton
   },
   data () {
     return {
       drawer: false,
       offsetTop: 0,
-      contact: false
+      contact: false,
+      socialIcons
     }
   },
   methods: {
