@@ -41,7 +41,35 @@
       </v-btn>
 
       <v-spacer />
+      <v-tabs
+        v-if="$vuetify.breakpoint.mdAndUp"
+        value="/search"
+        light
+        right
+        slider-size="8"
+      >
+        <v-tab
+          to="/#about-us"
+          nuxt
+        >
+          About WPRN
+        </v-tab>
+        <v-tab
+          to="/#register"
+          nuxt
+        >
+          Register your project
+        </v-tab>
+        <v-tab
+          active
+          to="/search"
+          nuxt
+        >
+          Browse projects
+        </v-tab>
+      </v-tabs>
       <v-btn
+        v-show="$vuetify.breakpoint.smAndDown"
         light
         tile
         outlined
@@ -57,9 +85,6 @@
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-title class="pb-0">
-              Project list
-            </v-card-title>
             <v-card-text :class="$vuetify.breakpoint.mdAndUp ? 'px-3' : 'pl-3'">
               <ProjectList />
             </v-card-text>

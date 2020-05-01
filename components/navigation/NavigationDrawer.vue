@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="$vuetify.breakpoint.smAndDown"
     v-model="drawer"
     app
     right

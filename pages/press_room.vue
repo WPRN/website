@@ -33,7 +33,34 @@
       </v-btn>
 
       <v-spacer />
+      <v-tabs
+        v-if="$vuetify.breakpoint.mdAndUp"
+        light
+        right
+        optional
+      >
+        <v-tab
+          to="/#about-us"
+          nuxt
+        >
+          About WPRN
+        </v-tab>
+        <v-tab
+          to="/#register"
+          nuxt
+        >
+          Register your project
+        </v-tab>
+        <v-tab
+          active
+          to="/search"
+          nuxt
+        >
+          Browse projects
+        </v-tab>
+      </v-tabs>
       <v-btn
+        v-show="$vuetify.breakpoint.smAndDown"
         light
         tile
         outlined

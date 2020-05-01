@@ -95,7 +95,7 @@ export const board = [
     picture: 'albagdaditn.jpg'
   },
   {
-    name: 'Pascale Allotey (TBC)',
+    name: 'Pascale Allotey',
     position:
             'Director, International Institute for Global Health, United Nations University',
     role: 'Public Health, Epidemiology, Anthropology, South East Asia',
@@ -197,6 +197,14 @@ export const board = [
     role: 'Technology, Innovation, Latin America',
     url: 'http://www.iea.usp.br/en/persons/researchers/guilherme-plonski',
     picture: 'Guilherme-Ary-Plonki.jpg'
+  },
+  {
+    name: 'Elisa Reis',
+    position:
+            ' Professor, Federal University of Rio de Janeiro (UFRJ); Vice-President of the International Science Council; Chair, Interdisciplinary Research Network for the Study of Social Inequality (NIED)',
+    role: 'Political Sociology',
+    url: 'https://twas.org/directory/reis-elisa',
+    picture: 'Reis.jpg'
   },
   {
     name: 'Xiaobo Zhang',

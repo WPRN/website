@@ -133,7 +133,7 @@
               REGISTER YOUR PROJECT
             </v-card-title>
             <v-card-text
-              class="subtitle-1"
+              class="subtitle-1  white--text"
               color="black"
             >
               WPRN publishes a searchable directory of projects, calls and
@@ -192,7 +192,7 @@
               style="cursor: pointer;"
               @click="$router.push({ path: '/search' })"
             >
-              Search the database
+              Browse projects
             </v-card-title>
             <v-card-text
               class="subtitle-1 white--text"
@@ -204,7 +204,7 @@
                 to="/search"
                 class="blue--text"
               >
-                Search the database
+                Browse projects
               </nuxt-link>&nbsp;to identify projects of interest, find or share resources,
               get updates, get-in-touch with the other registered contributors and set up collaborations. WPRN also
               publishes calls for research proposals from major research
@@ -212,11 +212,12 @@
               <br>WPRN highlights research projects, calls,
               resources and initiatives that have been flagged by our Referents.
               Check the list of
-              <span
+              <nuxt-link
+                to="/search?verified=true&featured=true"
                 class="blue--text"
-                style="cursor: pointer; text-decoration: underline;"
-                @click="$vuetify.goTo('#featured', { offset: 100 })"
-              >featured projects</span>.
+              >
+                featured projects
+              </nuxt-link>.
             </v-card-text>
           </v-card>
         </v-col>

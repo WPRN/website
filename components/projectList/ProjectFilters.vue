@@ -252,6 +252,39 @@
             "
           />
         </v-col>
+        <!-- STATE (ONGOING, COMPLETED ...) -->
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
+          <v-select
+            ref="status"
+            v-model="filters.status"
+            :items="state"
+            label="Project status"
+            outlined
+            :disabled="loading"
+            hide-details
+            clearable
+            dense
+            @click:clear="
+              $router.push({ ...$route.query, query: { status: undefined } })
+            "
+            @change="
+              $router.push({
+                query: {
+                  ...$route.query,
+                  status:
+                    filters.status && filters.status.length
+                      ? JSON.stringify(filters.status)
+                      : undefined,
+                },
+              })
+            "
+          />
+        </v-col>
         <!-- ZONE -->
         <v-col
           cols="12"
@@ -322,39 +355,6 @@
             "
             @click:clear="
               $router.push({ ...$route.query, query: { country: undefined } })
-            "
-          />
-        </v-col>
-        <!-- STATE (ONGOING, COMPLETED ...) -->
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-        >
-          <v-select
-            ref="status"
-            v-model="filters.status"
-            :items="state"
-            label="Project status"
-            outlined
-            :disabled="loading"
-            hide-details
-            clearable
-            dense
-            @click:clear="
-              $router.push({ ...$route.query, query: { status: undefined } })
-            "
-            @change="
-              $router.push({
-                query: {
-                  ...$route.query,
-                  status:
-                    filters.status && filters.status.length
-                      ? JSON.stringify(filters.status)
-                      : undefined,
-                },
-              })
             "
           />
         </v-col>
@@ -429,7 +429,6 @@ export default {
   },
   mounted () {
     this.buildQuery()
-    console.log(this.$route)
   },
   methods: {
     focusSearch () {
@@ -483,8 +482,6 @@ export default {
     buildQuery () {
       this.filtering = false
       Object.keys(this.filters).forEach((key) => {
-        console.log('key', key)
-        console.log('kvaley', this.$route.query[key])
         if (typeof this.$route.query[key] !== 'undefined') {
           this.filtering = true
           this.showFilters = true

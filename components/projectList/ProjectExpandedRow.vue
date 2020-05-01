@@ -13,10 +13,23 @@
         <!-- CONTACT -->
         <v-col
           cols="12"
-          class="subtitle-1"
+          class="font-weight-medium body-1"
         >
           <span class="overline">CONTACT :</span>
           <br>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                color="primary"
+                icon
+                v-on="on"
+                @click="$emit('contact')"
+              >
+                <v-icon>mdi-email</v-icon>
+              </v-btn>
+            </template>
+            <span>Email this project contact</span>
+          </v-tooltip>
           <span
             v-html="
               $options.filters.highlight(
@@ -41,28 +54,24 @@
                 "
               />
             </template>
-            <template v-else>
+            <template
+              v-else
+            >
               ({{ project.contact_entity }})
             </template>
           </template>
-          <v-btn
-            color="primary"
-            icon
-          >
-            text
-          </v-btn>
         </v-col>
         <!-- DESCRIPTION -->
         <v-col
           cols="12"
-          class="subtitle-1"
+          class="font-weight-medium body-1"
         >
           <span class="overline">Team and Project description</span>
           <br>
           <template v-if="project.description.length > 400">
             <template v-if="filters.search && filters.search.length">
               <p
-                class="mb-0"
+                class="font-weight-medium body-1 mb-0"
                 v-html="
                   $options.filters.nl2br(
                     $options.filters.highlight(
@@ -80,7 +89,7 @@
             </template>
             <template v-else>
               <p
-                class="mb-0"
+                class="font-weight-medium body-1mb-0"
                 v-html="
                   $options.filters.nl2br(
                     $options.filters.truncate(
@@ -96,7 +105,7 @@
           </template>
           <template v-else>
             <p
-              class="mb-0"
+              class="mb-0 font-weight-medium body-1"
               v-html="
                 $options.filters.nl2br(
                   $options.filters.highlight(
@@ -111,12 +120,12 @@
       </v-row>
     </v-card-text>
     <v-card-actions>
-      <v-spacer />
+      <v-spacer v-if="$vuetify.breakpoint.mdAndUp" />
       <v-btn
         color="primary"
         class="mr-6"
         :href="'/item/' + project.pubId"
-        :small="$vuetify.breakpoint.smAndDown"
+        :block="$vuetify.breakpoint.smAndDown"
       >
         PROJECT PAGE
       </v-btn>

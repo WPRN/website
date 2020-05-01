@@ -110,6 +110,18 @@
               </v-col>
 
               <v-col cols="12">
+                <v-expand-transition>
+                  <v-alert
+                    v-show="project.description.length > 0"
+                    type="error"
+                    align="left"
+                    color="white"
+                    width="100%"
+                    outlined
+                  >
+                    Please be specific in your Project and Team description. E.g. make explicit the project goal, research question, methods, data set, expected outcomes, team.
+                  </v-alert>
+                </v-expand-transition>
                 <v-textarea
                   ref="description"
                   v-model="project.description"

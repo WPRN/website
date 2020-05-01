@@ -32,23 +32,50 @@
       </v-btn>
 
       <v-spacer />
-      <v-fab-transition>
-        <v-btn
-          v-show="!drawer"
-          light
-          absolute
-          top
-          right
-          tile
-          fab
-          outlined
-          class="mt-12 mr-0"
-          x-large
-          @click.stop="drawer = !drawer"
-        >
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-      </v-fab-transition>
+      <v-btn
+        v-if="$vuetify.breakpoint.mdAndUp"
+        height="100%"
+        light
+        text
+        class="mx-2"
+        @click="$router.push({path:'/#about-us'})"
+      >
+        About WPRN
+      </v-btn>
+
+      <v-btn
+        v-if="$vuetify.breakpoint.mdAndUp"
+        text
+        height="100%"
+        light
+        class="mx-2"
+        @click="$router.push({path:'/#register'})"
+      >
+        Register your project
+      </v-btn>
+
+      <v-btn
+        v-if="$vuetify.breakpoint.mdAndUp"
+        text
+        height="100%"
+        light
+        class="mx-2"
+        @click="$router.push({path:'/search'})"
+      >
+        Browse projects
+      </v-btn>
+      <v-btn
+        v-show="$vuetify.breakpoint.smAndDown"
+        light
+        tile
+        outlined
+        class="pa-0 mb-0 ml-0 mt-1 mr-1"
+        width="72"
+        height="72"
+        @click.stop="drawer = !drawer"
+      >
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
     </v-app-bar>
     <NavigationDrawer
       :drawer="drawer"

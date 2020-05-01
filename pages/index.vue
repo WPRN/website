@@ -28,6 +28,37 @@
         </v-avatar>
       </v-btn>
       <v-spacer />
+      <v-tabs
+        v-if="$vuetify.breakpoint.mdAndUp"
+        light
+        right
+        slider-size="8"
+        value="tabsValue"
+      >
+        <v-tab
+          @click="$vuetify.goTo('#about-us', { offset: 100 })"
+        >
+          About WPRN
+        </v-tab>
+        <v-tab
+          @click="
+            contactOnly = false
+            step = 1
+            $vuetify.goTo('#contact', { offset: 100 });"
+        >
+          Register your project
+        </v-tab>
+        <v-tab
+          v-if="$vuetify.breakpoint.mdAndUp"
+          text
+          height="100%"
+          light
+          nuxt
+          to="/search"
+        >
+          Browse projects
+        </v-tab>
+      </v-tabs>
       <v-fab-transition>
         <v-btn
           v-show="!drawer&&$vuetify.breakpoint.smAndDown"
@@ -94,6 +125,7 @@
                 align="center"
                 class="white--text mx-auto"
                 justify="center"
+                @click="$vuetify.goTo('#about-us', { offset: 100 })"
               >
                 <v-col
                   class="white--text d-flex justify-center flex-column align-center"
@@ -116,7 +148,7 @@
                     class="mission pa-2 d-flex justify-center text-center"
                     :class="$vuetify.breakpoint.name"
                   >
-                    World Pandemic Research Network <br> assessing social and economic impact of covid-19
+                    World Pandemic Research Network <br> assessing social and economic impact of Covid-19
                   </div>
                 </v-col>
                 <v-btn
@@ -325,13 +357,15 @@ export default {
       /*       WorkInProgressDialogToggle: true, */
       valid: false,
       step: 1,
-      offsetTop: 0
+      offsetTop: 0,
+      tabsValue: ''
     }
   },
 
   async mounted () {
     if (this.$route.hash) {
       if (this.$route.hash === '#register') {
+        this.tabsValue = '#register'
         this.contactOnly = false
         this.step = 1
         setTimeout(() => {
@@ -350,6 +384,11 @@ export default {
   methods: {
     onScroll (e) {
       this.offsetTop = e.target.scrollingElement.scrollTop
+    },
+    onIntersect (val) {
+      console.log(val)
+      // More information about these options
+      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     }
   }
 }
@@ -357,7 +396,7 @@ export default {
 <style lang="scss">
   .mission {
     font-family: 'Poiret One', cursive!important;
-    background-color: rgb(39, 39, 39, 0.9);
+    background-color: rgb(39, 39, 39, 0.95);
     font-size: 1.3em;
     border-radius:4em;
   }
@@ -368,4 +407,5 @@ export default {
            .mission.md {
     font-size: 1.2em;
     }
+
 </style>

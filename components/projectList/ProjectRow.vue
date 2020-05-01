@@ -4,7 +4,7 @@
     open-delay="200"
   >
     <tr
-      class="font-weight-medium body-1"
+      class="font-weight-medium"
       :class="$vuetify.breakpoint.mdAndUp ? 'body-1' : 'body-2'"
       :style="expanded.includes(item)?hover?'#616161':'background-color:rgb(45, 45, 45);':'' "
       @click="$emit('expand', item)"
@@ -36,8 +36,14 @@
               v-else
               :status="item.status"
             />
-            <span v-html="$options.filters.highlight(item.name, filters.search.split(' '))" /></div>
-
+            <span
+              v-if="filters.search.length>0"
+              v-html="$options.filters.highlight(item.name, filters.search.split(' '))"
+            />
+            <span
+              v-else
+            >{{ item.name }}</span>
+          </div>
         </a>
       </td>
       <!-- INSTITUTION -->
@@ -51,7 +57,13 @@
           :href="'/item/' + item.pubId"
           @click.prevent
         >
-          {{ item.contact_entity }}
+          <span
+            v-if="filters.search.length>0"
+            v-html="$options.filters.highlight(item.contact_entity, filters.search.split(' '))"
+          />
+          <span
+            v-else
+          >{{ item.contact_entity }}</span>
         </a>
       </td>
       <!-- FIELD -->
@@ -76,8 +88,8 @@
                       label
                       outlined
                       v-on="on"
-                      @click.stop.prevent="updateSearch('field', field)"
                     >
+                      <!--   @click.stop.prevent="updateSearch('field', field)"-->
                       {{ field | truncate(16) }}
                     </v-chip>
                   </template>
@@ -93,7 +105,6 @@
                   small
                   label
                   outlined
-                  @click.stop.prevent="updateSearch('field', field)"
                 >
                   {{ field }}
                 </v-chip>
@@ -144,7 +155,6 @@
                       small
                       label
                       v-on="on"
-                      @click.stop.prevent="updateSearch('thematics', thematic)"
                     >
                       {{ thematic | truncate(16) }}
                     </v-chip>
@@ -160,7 +170,6 @@
                   :color="filters.thematics.includes(thematic) ? 'white' : ''"
                   outlined
                   small
-                  @click.stop.prevent="updateSearch('thematics', thematic)"
                 >
                   {{ thematic }}
                 </v-chip>
@@ -212,7 +221,6 @@
                       small
                       outlined
                       v-on="on"
-                      @click.stop.prevent="updateSearch('type', type)"
                     >
                       {{ type | truncate(19) }}
                     </v-chip>
@@ -228,7 +236,6 @@
                   :color="filters.type.includes(type) ? 'white' : ''"
                   small
                   outlined
-                  @click.stop.prevent="updateSearch('type', type)"
                 >
                   {{ type }}
                 </v-chip>
@@ -275,7 +282,6 @@
                   :color="filters.zone.includes(location) ? '#c4c4c4' : 'accent'"
                   light
                   class="ma-1"
-                  @click.stop.prevent="updateSearch('zone', location)"
                 >
                   {{ zones.find((zoneItem) => location === zoneItem.value).text }}
                 </v-chip>
@@ -318,7 +324,6 @@
                     small
                     class="ma-1"
                     :light="filters.country.includes(location)"
-                    @click.stop.prevent="updateSearch('country', location)"
                   >
                     {{ location }}
                   </v-chip>
@@ -411,9 +416,9 @@ export default {
       } else {
         return project[item]
       }
-    },
+    } /*
     updateSearch (filter, value) {
-      /* TODO Refactor to make more legible */
+      /* TODO Refactor to make more legible
       const query = {
         ...this.$route.query
       }
@@ -441,7 +446,7 @@ export default {
       this.$router.push({
         query
       })
-    }
+    } */
   }
 }
 </script>

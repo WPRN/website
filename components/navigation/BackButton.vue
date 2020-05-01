@@ -1,5 +1,8 @@
 <template>
-  <v-col cols="1">
+  <v-col
+    cols="1"
+    align="center"
+  >
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <nuxt-link
