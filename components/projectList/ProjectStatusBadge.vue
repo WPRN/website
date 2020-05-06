@@ -1,18 +1,17 @@
 <template>
-  <span>
-    <template v-if="status==='xFEATURED'">
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-icon v-on="on">mdi-star</v-icon>
-        </template>
-        <span>This is a project featured by WPRN community</span>
-      </v-tooltip>
+  <span :class="{'pt-1 pr-3':!details}">
+    <template v-if="status === 'xFEATURED'">
+      <v-icon>mdi-star</v-icon>
     </template>
     <template v-else>
-      <template v-if="status==='PUBLISHED'">
+      <template v-if="status === 'PUBLISHED'">
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-sheet style="height:18px;width:18px; border-radius:12px" color="red" v-on="on"></v-sheet>
+            <v-sheet
+              style="height: 16px; width: 16px; border-radius: 12px;"
+              color="grey"
+              v-on="on"
+            />
           </template>
           <span>This project has not been verified</span>
         </v-tooltip>
@@ -20,7 +19,11 @@
       <template v-else>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-sheet style="height:18px;width:18px; border-radius:12px" color="green" v-on="on"></v-sheet>
+            <v-sheet
+              style="height: 16px; width: 16px; border-radius: 12px;"
+              color="green"
+              v-on="on"
+            />
           </template>
           <span>This project has been verified</span>
         </v-tooltip>
@@ -30,13 +33,20 @@
 </template>
 <script>
 export default {
-  data() {
-    return {};
-  },
   props: {
-    status: String
+    status: {
+      type: String,
+      default: 'PUBLISHED'
+    },
+    details: {
+      type: Boolean,
+      default: false
+    }
   },
-  methods: {},
-  mounted() {}
-};
+  data () {
+    return {}
+  },
+  mounted () {},
+  methods: {}
+}
 </script>

@@ -1,2 +1,2 @@
-import 'array-flat-polyfill';
+import 'array-flat-polyfill'
 import 'intersection-observer'

@@ -1,72 +1,93 @@
 <template>
   <v-container
+    v-scroll="onScroll"
     app
     fluid
     fill-height
-    style="align-items:start;"
-    :class="{'pr-0':$vuetify.breakpoint.smAndDown}"
+    style="align-items: start;"
+    :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
   >
     <NavigationDrawer
-      @close="drawer=false"
-      @contact="$router.push({path:'/', hash:'contact'})"
-      @register="$router.push({path:'/', hash:'register'})"
-      @about="$router.push({path:'/', hash:'about-us'})"
-      @featured="$router.push({path:'/', hash:'featured'});"
-      @list="drawer=false"
       :drawer="drawer"
+      @close="drawer = false"
+      @register="$router.push({ path: '/', hash: 'register' })"
+      @about="$router.push({ path: '/', hash: 'about-us' })"
+      @list="drawer = false"
     />
-    <v-app-bar app color="white" height="100" elevate-on-scroll elevation-3>
-      <v-btn text @click="$router.push({path:'/'})" class="mx-0 px-0" height="auto">
-        <v-avatar class="mr-3" tile color="grey lighten-5" size="72">
-          <v-img contain max-height="100%" src="/logo.png"></v-img>
-        </v-avatar>
-      </v-btn>
+    <TopBar
+      value="/search"
+      @closeDrawer="drawer=!drawer"
+    />
 
-      <v-spacer></v-spacer>
-      <v-btn
-        light
-        tile
-        outlined
-        class="pa-0 mb-0 ml-0 mt-1 mr-1"
-        width="72"
-        height="72"
-        @click.stop="drawer = !drawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <v-btn
+      v-show="$vuetify.breakpoint.smAndDown"
+      light
+      tile
+      outlined
+      class="pa-0 mb-0 ml-0 mt-1 mr-1"
+      width="72"
+      height="72"
+      @click.stop="drawer = !drawer"
+    >
+      <v-icon>mdi-menu</v-icon>
+    </v-btn>
     <v-content>
       <v-row>
         <v-col cols="12">
           <v-card>
-            <v-card-title class="pb-0">Project list</v-card-title>
-            <v-card-text :class="$vuetify.breakpoint.mdAndUp?'px-3':'pl-3'">
+            <v-card-text :class="$vuetify.breakpoint.mdAndUp ? 'px-3' : 'pl-3'">
               <ProjectList />
             </v-card-text>
           </v-card>
         </v-col>
       </v-row>
     </v-content>
+    <v-fab-transition>
+      <v-btn
+        v-if="$vuetify.breakpoint.mdAndUp"
+        v-show="offsetTop > 600"
+        color="accent"
+        dark
+        fixed
+        bottom
+        right
+        contained
+        fab
+        @click="$vuetify.goTo(0)"
+      >
+        <v-icon color="primary">
+          mdi-arrow-up
+        </v-icon>
+      </v-btn>
+    </v-fab-transition>
   </v-container>
 </template>
 <script>
-import { zones, countries, types, fields } from "~/assets/data";
-import ProjectList from "~/components/projectList/ProjectList";
-import NavigationDrawer from "~/components/navigation/NavigationDrawer";
+import { zones } from '~/assets/data'
+import ProjectList from '~/components/projectList/ProjectList'
+import NavigationDrawer from '~/components/navigation/NavigationDrawer'
+import TopBar from '~/components/navigation/TopBar'
 export default {
-  data() {
-    return {
-      zones,
-      drawer: false
-    };
-  },
   components: {
     ProjectList,
+    TopBar,
     NavigationDrawer
   },
-  watch: {
-    "$route.params"() {}
+  data () {
+    return {
+      zones,
+      drawer: false,
+      offsetTop: 0
+    }
   },
-  mounted() {}
-};
+  watch: {
+    '$route.params' () {}
+  },
+  mounted () {},
+  methods: {
+    onScroll (e) {
+      this.offsetTop = e.target.scrollingElement.scrollTop
+    }
+  }
+}
 </script>

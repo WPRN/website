@@ -1,9 +1,14 @@
 {
-  "name": "WPRN",
+  "name": "wprn_frontend",
   "version": "1.0.0",
   "description": "Public initiative to publish and share in one single place the list of all research initiatives and surveys about the current pandemic of Covid-19 coronavirus.",
   "author": "Antoine Cordelois",
   "private": true,
+  "ava": {
+    "files": [
+      "test/**/*"
+    ]
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -11,7 +16,9 @@
     "generate": "nuxt generate",
     "prod": "nuxt generate && aws s3 cp dist s3://wprn.org --recursive",
     "test": "nuxt generate && aws s3 cp dist s3://test.wprn.org --recursive",
-    "analyze": "nuxt build --analyze"
+    "analyze": "nuxt build --analyze",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore . ",
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "@nuxtjs/recaptcha": "^0.6.2",
@@ -20,20 +27,46 @@
     "array-flat-polyfill": "^1.0.1",
     "aws-appsync": "^3.0.2",
     "intersection-observer": "^0.9.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.4.2",
     "nuxt-jsonld": "^1.4.5",
     "slugify": "^1.4.0",
     "vue-timeago": "^5.1.2"
   },
   "devDependencies": {
-    "@nuxtjs/google-analytics": "^2.2.3",
     "@nuxtjs/vuetify": "^1.0.0",
-    "@types/graphql": "latest",
+    "ava": "^3.7.1",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^10.1.0",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-loader": "^7.1.1",
+    "chalk": "^2.0.1",
     "concurrent-transform": "^1.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-json": "^2.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "friendly-errors-webpack-plugin": "^1.6.1",
     "graphql-tag": "^2.10.3",
     "gulp": "^4.0.2",
     "gulp-awspublish": "^4.1.1",
     "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
+    "husky": "^4.2.5",
+    "jsdom": "^16.2.2",
+    "prettier": "^2.0.5",
+    "vue-eslint-parser": "^7.0.0",
     "webpack-graphql-loader": "^1.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lintfix"
+      
+    }
   }
 }
