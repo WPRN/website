@@ -2,10 +2,10 @@
   <div>
     <v-app-bar
       app
-      color="white"
-      height="100"
-      inverted-scroll
+      light
+      height="80"
       elevate-on-scroll
+      inverted-scroll
       elevation-3
     >
       <v-btn
@@ -36,20 +36,27 @@
         value="tabsValue"
       >
         <v-tab
+          large
+          class="black--text"
           @click="$vuetify.goTo('#about-us', { offset: 100 })"
         >
           About WPRN
         </v-tab>
         <v-tab
+          large
+          class="black--text"
           @click="
+            $vuetify.goTo('#contact', { offset: 100 })
             contactOnly = false
-            step = 1
-            $vuetify.goTo('#contact', { offset: 100 });"
+            drawer = false
+            step = 1"
         >
           Register your project
         </v-tab>
         <v-tab
           v-if="$vuetify.breakpoint.mdAndUp"
+          large
+          class="black--text"
           text
           height="100%"
           light
@@ -93,31 +100,17 @@
       @list="$router.push({ path: '/search' })"
     />
     <v-content v-scroll="onScroll">
-      <section id="hero">
-        <v-fab-transition>
-          <v-btn
-            v-show="$vuetify.breakpoint.smAndDown"
-            dark
-            absolute
-            top
-            right
-            tile
-            fab
-            outlined
-            class="mt-12 mr-0"
-            size="90"
-            x-large
-            @click.stop="drawer = !drawer"
-          >
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
-        </v-fab-transition>
+      <section
+        id="hero"
+      >
         <v-row no-gutters>
           <!-- TODO make a better responsive version -->
           <v-img
-            :height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
+            class="px-6"
+            height="100vh"
             srcset="splash_sm.jpg 480w, splash_lg.jpg 600w, splash_xl.jpg 800w"
             src="/splash_lg.jpg"
+            contain
             lazy-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgAB8DASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABwYIBf/EACkQAAIBAwIFBAIDAAAAAAAAAAECAwQFEQAGEhMhMUEHIlFhFDIjQvD/xAAWAQEBAQAAAAAAAAAAAAAAAAADAQX/xAAiEQABBAEDBQEAAAAAAAAAAAABAAIDERIEITETQVFhcfD/2gAMAwEAAhEDEQA/AMlWW2Vt4uUVvoITLPJkgDwAMkn6A/2dOFj9Kdo2qzULbjFdWXKrLGUyymCmgVRklVX3sfHUgE57Y1EejFRR2msa7VqQFHl5QMgLZCqWMeFIYcZKrxeM+caUp6KPcV5kittytkNXVUytb+VV+2Bf25TKTlT1ZeED40x0krg1zTTd72v977oXycgcqL3RtX0uuFJcH27cqi0VVLHxQxVErSfkEY4hwni8k44XPRScHRDWU8lLUNDIVJHZlOQw8EfWk/d21a21yvDw86QJluBWGMDJAB+B8fGoa+yRTWul9kCzQSMhKKQ7K3X3dMHBB+9JKyEszhdYUikJNFdn0vojequayQ1FJHXSfyUkdQxTnNjBRX/UOcDAbAPbIPe12lfJNvXeOWqRoY6WrAlR4CJ42XIJVsFkdcYPbv8AZ0MQSyQTJNC7RyIcqynqDpg2t61wwWdbXujatHdf1V6tAvMkReg4lcEFsYHFkdABjoMJDrMY+k4WFXRW7IK+v1wtwNXemhqK2kg5c0siqHlCSgdTGWz5Iz2B7kaz1vKsoay8zzW4VAp5HMiioVRKmf6sV9rY+QBnVnvr1Sp7mlVT7atVZa4qs5qGqasSlugGFUKAq4AwMkDRiSSck5OsyCEQtPkpfgX/2Q=="
           >
             <v-container fill-height>
@@ -128,27 +121,25 @@
                 @click="$vuetify.goTo('#about-us', { offset: 100 })"
               >
                 <v-col
-                  class="white--text d-flex justify-center flex-column align-center"
+                  class="white--text d-flex justify-center flex-column align-center "
                   cols="12"
-                  tag="h1"
+                  :class="$vuetify.breakpoint.name"
                 >
-                  <span
-                    :class="[
-                      $vuetify.breakpoint.smAndDown ? 'display-3' : 'display-4',
-                    ]"
-                    class="font-weight-black"
-                  >
-                    <Logo />
-                  </span>
-                  <br>
                   <div
-                    style="
-                      border-radius: 10px;
-                    "
-                    class="mission pa-2 d-flex justify-center text-center"
+                    class="mission pa-9"
                     :class="$vuetify.breakpoint.name"
                   >
-                    World Pandemic Research Network <br> assessing social and economic impact of Covid-19
+                    <h1
+                      class="main_title mb-6"
+                    >
+                      World Pandemic Research Network
+                    </h1>
+                    <div
+                      class="main_subtitle pa-2 d-flex justify-center text-center"
+                    >
+                      Societal Impacts and Aftermath of Covid-19: <br>
+                      A Global Searchable Directory
+                    </div>
                   </div>
                 </v-col>
                 <v-btn
@@ -170,9 +161,14 @@
         </v-row>
       </section>
 
-      <About />
+      <About
+        @goToRegister=" $vuetify.goTo('#contact', { offset: 100 })
+                        contactOnly = false
+                        step = 1"
+      />
+      <ShareProject />
       <Stats />
-
+      <Who />
       <section id="contact">
         <v-sheet
           color="#333333"
@@ -208,7 +204,7 @@
                 <v-checkbox
                   v-model="contactOnly"
                   class="pl-6 mt-0"
-                  label="I just want to contact WPRN"
+                  label="I want to contact WPRN"
                   dark
                   hide-details
                   @change="contactOnly ? (step = 0) : (step = 1)"
@@ -311,7 +307,11 @@
           fab
           @click="$vuetify.goTo('#hero')"
         >
-          <v-icon>mdi-arrow-up</v-icon>
+          <v-icon
+            color="primary"
+          >
+            mdi-arrow-up
+          </v-icon>
         </v-btn>
       </v-fab-transition>
     </v-content>
@@ -327,14 +327,15 @@ import ContactForm from '~/components/contact/ContactForm'
 import ProjectForm from '~/components/projectForm/ProjectForm'
 import About from '~/components/mainPage/About'
 import Stats from '~/components/mainPage/Stats'
-/* import Featured from '~/components/mainPage/Featured' */
+import ShareProject from '~/components/mainPage/ShareProject'
+import Who from '~/components/mainPage/Who'
 /* import MeetingList from "~/components/mainPage/MeetingList";
 import WorldMap from "~/components/mainPage/WorldMap"; */
 import ProjectPostedWindow from '~/components/projectForm/ProjectPostedWindow'
 import ContactPostedWindow from '~/components/contact/ContactPostedWindow'
 import NavigationDrawer from '~/components/navigation/NavigationDrawer'
+
 /* import WorkInProgressDialog from "~/components/navigation/WorkInProgressDialog"; */
-import Logo from '~/components/navigation/Logo'
 import { zones } from '~/assets/data'
 export default {
   components: {
@@ -345,8 +346,10 @@ export default {
     NavigationDrawer,
     ContactPostedWindow,
     ProjectPostedWindow, /*    WorkInProgressDialog, */
-    Logo,
-    Stats
+    Stats,
+    ShareProject,
+    Who
+
     /* Featured */
   },
   data () {
@@ -384,28 +387,52 @@ export default {
   methods: {
     onScroll (e) {
       this.offsetTop = e.target.scrollingElement.scrollTop
-    },
-    onIntersect (val) {
-      console.log(val)
-      // More information about these options
-      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     }
   }
 }
 </script>
 <style lang="scss">
   .mission {
-    font-family: 'Poiret One', cursive!important;
     background-color: rgb(39, 39, 39, 0.95);
-    font-size: 1.3em;
-    border-radius:4em;
+border: 0.5px solid white;
+    .main_title {
+    font-size: 3em;
+    font-family: 'Poiret One', cursive!important;
+    text-align: center;
+    }
+     .main_subtitle {
+    font-size: 2em;
+    font-family: 'Poiret One', cursive!important;
+    font-weight: 800;
+
+    }
   }
+
   .mission.sm , .mission.xs {
-     font-size: 1em;
+         .main_title {
+    font-size: 2.5em;
+         }
+     .main_subtitle {
+    font-size: 1.7em;
+     }
          }
 
-           .mission.md {
-    font-size: 1.2em;
+ .mission.md {
+  .main_title {
+    font-size: 2em;
+         }
+  .main_subtitle {
+    font-size: 1.3em;
+  }
+}
+    #hero {
+       background-color:#060606
+    }
+    .main_menu {
+      position:absolute;
+      top:10px;
+      right:10px;
+      text-align: right;
     }
 
 </style>

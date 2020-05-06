@@ -33,7 +33,6 @@
     "vue-timeago": "^5.1.2"
   },
   "devDependencies": {
-    "@nuxtjs/google-analytics": "^2.2.3",
     "@nuxtjs/vuetify": "^1.0.0",
     "ava": "^3.7.1",
     "babel-core": "^6.22.1",

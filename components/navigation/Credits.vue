@@ -47,78 +47,25 @@
           style="color: #1976d2; text-decoration: underline; cursor: pointer;"
           @click="
             $emit('closeCredits')
-            $router.push({ path: '/board_and_contributors#board' })
+            $router.push({ path: '/advisory_board' })
           "
         >Advisory Board</span>&nbsp;-&nbsp;
         <span
           style="color: #1976d2; text-decoration: underline; cursor: pointer;"
           @click="
             $emit('closeCredits')
-            $router.push({ path: '/board_and_contributors#refs' })
+            $router.push({ path: '/referents' })
           "
         >Referents</span>&nbsp;-&nbsp;
         <span
           style="color: #1976d2; text-decoration: underline; cursor: pointer;"
           @click="
             $emit('closeCredits')
-            $router.push({ path: '/board_and_contributors#institutions' })
+            $router.push({ path: '/institutions' })
           "
         >Contributors' Institutions</span>
         <br>
-        <div class="overline pt-6 mb-3">
-          Institutional supports
-        </div>
-        <v-divider />This project is supported by :
-        <ul>
-          <li>
-            <a
-              href="https://aws.amazon.com/"
-              target="_blank"
-            >Amazon Web Services</a>
-          </li>
-          <li>
-            <a
-              href="http://www.eassh.eu/"
-              target="_blank"
-            >EASSSH (European Alliance for Social Siences and Humanities)</a>
-          </li>
-          <li>
-            <a
-              href="https://www.paris-iea.fr"
-              target="_blank"
-            >IAS Paris - IEA de Paris</a>.
-          </li>
-          <li>
-            <a
-              href="https://www.ipsp.org/"
-              target="_blank"
-            >IPSP (International Panel on Social Progress</a>
-          </li>
-          <li>
-            <a
-              href="http://netias.science/home"
-              target="_blank"
-            >Netias</a>
-          </li>
 
-          <li>
-            <a
-              href="http://www.uai-iua.org/"
-              target="_blank"
-            >Union Académique Internationale</a>
-          </li>
-
-          <li>
-            <a
-              href="http://www.ubias.net/"
-              target="_blank"
-            >UBIAS (University-Based Institutes for Advanced Studies)</a>
-          </li>
-          <li>More Pending&hellip;</li>
-        </ul>
-        <div class="overline pt-6 mb-3">
-          Technical supports
-        </div>
         <v-divider />This website and logo as well as its infrastructure have
         been designed by
         <a

@@ -5,6 +5,8 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    x="0px"
    y="0px"
@@ -13,10 +15,34 @@
    xml:space="preserve"
    id="svg8"
    width="91.630882"
-   height="91.630882"><metadata
+   height="91.630882"
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/bob/Bureau/test/test.png"
+   inkscape:export-xdpi="1.2095238"
+   inkscape:export-ydpi="1.2095238"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2493"
+     inkscape:window-height="1376"
+     id="namedview831"
+     showgrid="false"
+     inkscape:zoom="12.965061"
+     inkscape:cx="45.815441"
+     inkscape:cy="45.815441"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" /><metadata
      id="metadata14"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
      id="defs12">
 
 

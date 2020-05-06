@@ -19,7 +19,7 @@
             v-for="([value, append, title, url], i) of stats"
             :key="title"
             cols="12"
-            md="3"
+            md="4"
           >
             <nuxt-link
               class="text-center counter"
@@ -67,10 +67,9 @@ export default {
   data () {
     return {
       stats: [
-        [150, '+', 'Projects', '/search'],
+        [170, '+', 'Projects', '/search'],
         [194, '', 'Contributing Institutions', '/board_and_contributors/#institutions'],
-        [62, '', 'Referents', '/board_and_contributors/#refs'],
-        [38, '', 'Disciplines', '']
+        [57, '', 'Referents', '/board_and_contributors/#refs']
       ],
       tweened: false
     }

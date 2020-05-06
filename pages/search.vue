@@ -1,5 +1,6 @@
 <template>
   <v-container
+    v-scroll="onScroll"
     app
     fluid
     fill-height
@@ -13,74 +14,23 @@
       @about="$router.push({ path: '/', hash: 'about-us' })"
       @list="drawer = false"
     />
-    <v-app-bar
-      app
-      color="white"
-      height="100"
-      elevate-on-scroll
-      elevation-3
-    >
-      <v-btn
-        text
-        class="mx-0 px-0"
-        height="auto"
-        @click="$router.push({ path: '/' })"
-      >
-        <v-avatar
-          class="mr-3"
-          tile
-          color="grey lighten-5"
-          size="72"
-        >
-          <v-img
-            contain
-            max-height="100%"
-            src="/logo.png"
-          />
-        </v-avatar>
-      </v-btn>
+    <TopBar
+      value="/search"
+      @closeDrawer="drawer=!drawer"
+    />
 
-      <v-spacer />
-      <v-tabs
-        v-if="$vuetify.breakpoint.mdAndUp"
-        value="/search"
-        light
-        right
-        slider-size="8"
-      >
-        <v-tab
-          to="/#about-us"
-          nuxt
-        >
-          About WPRN
-        </v-tab>
-        <v-tab
-          to="/#register"
-          nuxt
-        >
-          Register your project
-        </v-tab>
-        <v-tab
-          active
-          to="/search"
-          nuxt
-        >
-          Browse projects
-        </v-tab>
-      </v-tabs>
-      <v-btn
-        v-show="$vuetify.breakpoint.smAndDown"
-        light
-        tile
-        outlined
-        class="pa-0 mb-0 ml-0 mt-1 mr-1"
-        width="72"
-        height="72"
-        @click.stop="drawer = !drawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <v-btn
+      v-show="$vuetify.breakpoint.smAndDown"
+      light
+      tile
+      outlined
+      class="pa-0 mb-0 ml-0 mt-1 mr-1"
+      width="72"
+      height="72"
+      @click.stop="drawer = !drawer"
+    >
+      <v-icon>mdi-menu</v-icon>
+    </v-btn>
     <v-content>
       <v-row>
         <v-col cols="12">
@@ -92,26 +42,52 @@
         </v-col>
       </v-row>
     </v-content>
+    <v-fab-transition>
+      <v-btn
+        v-if="$vuetify.breakpoint.mdAndUp"
+        v-show="offsetTop > 600"
+        color="accent"
+        dark
+        fixed
+        bottom
+        right
+        contained
+        fab
+        @click="$vuetify.goTo(0)"
+      >
+        <v-icon color="primary">
+          mdi-arrow-up
+        </v-icon>
+      </v-btn>
+    </v-fab-transition>
   </v-container>
 </template>
 <script>
 import { zones } from '~/assets/data'
 import ProjectList from '~/components/projectList/ProjectList'
 import NavigationDrawer from '~/components/navigation/NavigationDrawer'
+import TopBar from '~/components/navigation/TopBar'
 export default {
   components: {
     ProjectList,
+    TopBar,
     NavigationDrawer
   },
   data () {
     return {
       zones,
-      drawer: false
+      drawer: false,
+      offsetTop: 0
     }
   },
   watch: {
     '$route.params' () {}
   },
-  mounted () {}
+  mounted () {},
+  methods: {
+    onScroll (e) {
+      this.offsetTop = e.target.scrollingElement.scrollTop
+    }
+  }
 }
 </script>

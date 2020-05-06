@@ -33,6 +33,7 @@ export default ({ app }) => {
      ** Affecter la page courante
      */
   ga('create', 'UA-162015115-1', 'auto')
+  ga('set', 'anonymizeIp', true)
   /*
      ** Chaque fois que la route change
      */

@@ -466,7 +466,6 @@ export default {
         if (!filter.and.length) delete filter.and
         const options = {}
         if (Object.keys(filter).length) options.filter = filter
-        console.log(this.filters)
 
         options.limit = this.options.itemsPerPage
         options.nextToken = (
@@ -474,13 +473,11 @@ export default {
           this.options.itemsPerPage
         ).toString()
         options['sort'] = { field: 'status', direction: 'desc' }
-        console.log('CALLING QUERY WITH ', options)
 
         const projects = await client.query({
           query: gql(queries.searchProjects),
           variables: options
         })
-        console.log(projects)
 
         this.total = projects.data.searchProjects.total
         this.projects = projects.data.searchProjects.items

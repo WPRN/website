@@ -215,38 +215,54 @@ export const board = [
     picture: 'zhang.jpg'
   }
 ]
+export const referents = []
+export const institutions = [
 
-export const supports = [
   {
-    name: 'EASSH',
+    name: 'European Alliance for the Social Sciences and the Humanities (EASSH)',
     url: 'http://www.eassh.eu/',
     image: 'logo_eassh.png',
-    color: 'white'
+    color: 'white',
+    text: 'The European Alliance for the Social Sciences and the Humanities was formed in 2015. It is a membership organisation spanning all areas of the humanities and social sciences working to promote these areas of knowledge and research and to engage with relevant policymakers and stakeholders. EASSH has over 50 member organisations including a wide range of disciplinary areas, stakeholders and universities from across Europe.'
   },
   {
-    name: 'IPSP',
+    name: 'International Panel on Social Progress (IPSP)',
     url: 'https://www.ipsp.org/',
     image: 'ipsp-header.png',
-    color: '#15c'
-  },
+    color: '#15c',
+    text: 'The International Panel on Social Progress (IPSP) harnesses the competence of about 300 experts worldwide about social issues. It recently delivered a report addressed to all social actors, movements, organizations, politicians and decision-makers, provided them with the best expertise on social change. While the Panel primarily works for the dissemination of knowledge to all relevant actors in society, it also fosters research on the topics it studies and helps to revive interest for research in social long-term prospective analysis.'
 
+  },
   {
-    name: 'NETIAS',
+    name: 'International Science Council (ISC)',
+    url: 'https://council.science/',
+    image: 'ISC.jpg',
+    color: 'white',
+    text: 'The International Science Council (ISC) is a non-governmental organization with a unique global membership that brings together 40 international scientific Unions and Associations and over 140 national and regional scientific organizations including Academies and Research Councils. The ISC was created in 2018 as the result of a merger between the International Council for Science (ICSU, founded in 1931) and the International Social Science Council (ISSC, founded in 1952).It is the only international non-governmental organization bringing together the natural and social sciences and the largest global science organization of its type. More'
+  },
+  {
+    name: 'Network of European Institutes for Advanced Studies (NETIAS)',
     url: 'http://netias.science/home',
     image: 'netias.png',
-    color: '#ffc54b'
-  },
-  {
-    name: 'UBIAS',
-    url: 'http://www.ubias.net/',
-    image: 'ubias-logo.gif',
-    color: 'white'
+    color: '#ffc54b',
+    text: 'NetIAS brings together 25 Institutes for Advanced Study across Europe. It was created in 2004 to stimulate a dialogue on IAS practices and possible forms of cooperation. Within the whole network, more than 500 researchers are hosted every year for up to one full academic year. NetIAS members share the objective of creating international and multidisciplinary learning communities. This openness and the freedom the fellows enjoy for their researches serve to promote scientific and intellectual exchanges. '
+
   },
   {
     name: 'Union Académique Internationale',
     url: 'http://www.uai-iua.org/',
     image: "Logo_de_l'Union_Académique_Internationale.jpg",
-    color: 'white'
+    color: 'white',
+    text: 'The UAI is the world organization of national academies in the humanities and social sciences. Its objectives are to initiate, recognize, promote and finance international research projects based on long-term research. Founded in 1919 in Paris with a General Secretariat based in Brussels, the UAI currently comprises more than 100 Academies from 63 countries and all continents.'
+
+  },
+  {
+    name: 'University-Based Institutes for Advanced Study (UBIAS)',
+    url: 'http://www.ubias.net/',
+    image: 'ubias-logo.gif',
+    color: 'white',
+    text: 'UBIAS stands for “University-Based Institutes for Advanced Study”. Unlike traditional Institutes for Advanced Study, UBIAS institutes are associated with or embedded within a university, and actively contribute to the academic culture and the scientific achievements of their home university. The network now comprises 44 member institutes in 21 countries. '
+
   }
 ]
 export const zones = [

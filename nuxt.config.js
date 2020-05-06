@@ -114,21 +114,21 @@ export default {
     '~plugins/filters',
     '~plugins/amplify',
     '~/plugins/jsonld',
-    { src: '~plugins/ga.js', mode: 'client' },
+    /*   { src: '~plugins/ga.js', mode: 'client' }, */
     { src: '~/plugins/polyfills', mode: 'client' }
   ],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxtjs/vuetify', '@nuxtjs/google-analytics'],
-  googleAnalytics: {
+  buildModules: ['@nuxtjs/vuetify'], /* , '@nuxtjs/google-analytics' */
+  /* googleAnalytics: {
     id: 'UA-162015115-1'
     /*    dev: false,
        debug: {
          enabled: true,
          sendHitTask: true
-       } */
-  },
+       }
+  }, */
   sitemap: {
     hostname: 'https://wprn.org',
     gzip: true,
@@ -173,14 +173,14 @@ export default {
   build: {
     extend (config, ctx) {
       // ESLint when saving
-      /*       if (ctx.isDev && ctx.isClient) {
+      if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         })
-      } */
+      }
     }
   }
 }

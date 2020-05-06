@@ -7,57 +7,7 @@
     style="background-color:rgb(45, 45, 45)"
   >
     <!-- SOCIAL -->
-    <!-- TODO: make a social component -->
-    <v-fab-transition>
-      <v-speed-dial
-        v-model="fab"
-        :top="$vuetify.breakpoint.mdAndUp"
-        :bottom="$vuetify.breakpoint.smAndDown"
-        right
-        absolute
-        :direction="$vuetify.breakpoint.mdAndUp?'bottom':'top'"
-        transition="slide-y-reverse-transition"
-      >
-        <template v-slot:activator>
-          <v-btn
-            v-model="fab"
-            color="blue darken-2"
-            dark
-            fab
-          >
-            <v-icon v-if="fab">
-              mdi-close
-            </v-icon>
-            <v-icon v-else>
-              mdi-share-variant
-            </v-icon>
-          </v-btn>
-        </template>
-        <v-tooltip
-          v-for="(social, index) in socialChannels"
-          :key="index"
-          bottom
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              :small="$vuetify.breakpoint.smAndDown"
-              :href="social.url"
-              :color="social.color"
-              target="_blank"
-              fab
-              dark
-              v-on="on"
-            >
-              <v-icon :small="$vuetify.breakpoint.smAndDown">
-                mdi-{{ social.icon }}
-              </v-icon>
-            </v-btn>
-          </template>
-          <span v-if="social.label !== 'Email'">Share this project on {{ social.label }}</span>
-          <span v-else>Share this project by {{ social.label }}</span>
-        </v-tooltip>
-      </v-speed-dial>
-    </v-fab-transition>
+    <SocialWidget :project="project" />
     <v-card-title
       class="pl-0 pb-1 justify-space-between d-flex"
       :class="{ 'pl-3': $vuetify.breakpoint.smAndDown }"
@@ -75,7 +25,10 @@
             :class="{ 'pr-12 mr-6': $vuetify.breakpoint.mdAndUp }"
           >
             <!-- STATUS -->
-            <ProjectStatusBadge :status="project.status" />&nbsp;
+            <ProjectStatusBadge
+              :status="project.status"
+              :details="true"
+            />&nbsp;
             {{ project.name }}&nbsp;(WPRN-{{ project.pubId }})
           </h3>
         </v-col>
@@ -384,80 +337,10 @@
           </span>
         </v-col>
         <!--  CITE WIDGET -->
-        <!-- TODO: make a cite component -->
-        <v-col
-          cols="12"
-          class="subtitle-1"
-        >
-          <span class="overline">To cite this project in your research</span>
-          <br>
-          <v-sheet
-            light
-            elevation="3"
-            class="mr-6 py-3 pl-5 mt-3"
-          >
-            <v-row no-gutters>
-              <v-col class="align-self-center">
-                {{ project.contact_lastname }}, {{ project.contact_firstname }}.
-                <b>&ldquo;{{ project.name }}&rdquo;</b>.
-                <em>World Pandemic Research Network</em>
-                . WPRN-{{ project.pubId }},
-                {{ project.createdAt.split("T")[0] }} at
-                {{ project.createdAt.split("T")[1].split(":")[0] }}h{{
-                  project.createdAt.split("T")[1].split(":")[1]
-                }}
-                (GMT):
-                <a
-                  :href="'https://wprn.org/item/' + project.pubId"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >https://wprn.org/item/{{ project.pubId }}</a>
-                <input
-                  id="cite"
-                  type="hidden"
-                  :value="
-                    project.contact_lastname +
-                      ', ' +
-                      project.contact_firstname +
-                      '.“' +
-                      project.name +
-                      '”. World Pandemic Research Network. WPRN-' +
-                      project.pubId +
-                      ', ' +
-                      project.createdAt.split('T')[0] +
-                      ' at ' +
-                      project.createdAt.split('T')[1].split(':')[0] +
-                      'h' +
-                      project.createdAt.split('T')[1].split(':')[1] +
-                      ' (GMT):'
-                  "
-                >
-              </v-col>
-              <v-col
-                cols="auto"
-                class="align-self-center"
-              >
-                <v-tooltip top>
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      large
-                      tile
-                      class="mr-2"
-                      v-on="on"
-                      @click="copyToClipBoard()"
-                    >
-                      <v-icon large>
-                        mdi-content-copy
-                      </v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Copy to clipboard</span>
-                </v-tooltip>
-              </v-col>
-            </v-row>
-          </v-sheet>
-        </v-col>
+        <CiteWidget
+          :project="project"
+          @copied="snackbar = true"
+        />
 
         <v-col align="right">
           <!--  ACTION BUTTONS -->
@@ -513,12 +396,16 @@ import {
   thematics
 } from '~/assets/data'
 import ProjectStatusBadge from '~/components/projectList/ProjectStatusBadge'
+import SocialWidget from '~/components/misc/SocialWidget'
+import CiteWidget from '~/components/misc/CiteWidget'
 import BackButton from '~/components/navigation/BackButton'
 
 export default {
   components: {
     ProjectStatusBadge,
-    BackButton
+    BackButton,
+    SocialWidget,
+    CiteWidget
   },
   props: {
     project: Object,
@@ -534,64 +421,17 @@ export default {
       fields,
       state,
       thematics,
-      fab: false,
       snackbar: false,
       showThematics: false,
       showCountry: false,
       showFields: false,
-      showType: false,
-      /* TODO add linkedin */
-      socialChannels: [
-        {
-          label: 'Facebook',
-          icon: 'facebook',
-          url:
-            `${'https://www.facebook.com/sharer.php?u=' +
-            'https://wprn.org/item/'}${
-              this.project.pubId}`,
-          color: '#3b5998'
-        },
-        {
-          label: 'Twitter',
-          icon: 'twitter',
-          url:
-            `https://twitter.com/share?url=https://wprn.org/item/${
-              this.project.pubId
-            }&text=Check this project "${
-              this.project.name
-            }" on WPRN : &via=WPRN&hashtags=WPRN`,
-          color: 'rgb(29, 161, 242)'
-        },
-        {
-          label: 'Email',
-          icon: 'email',
-          url:
-            `mailto:?subject=WPRN Project&body=Hello,%0d%0a%0d%0aPlease check this project called ${
-              this.project.name
-            } on WPRN (World Pandemic Research Network) :%0d%0ahttps%3A%2F%2Fwprn.org%2Fitem%2F${
-              this.project.pubId
-            }%0d%0a%0d%0aBest regards,`,
-          color: 'accent'
-        }
-      ]
+      showType: false
+
     }
   },
   mounted () {},
   methods: {
-    copyToClipBoard () {
-      const copyNode = document.querySelector('#cite')
-      copyNode.setAttribute('type', 'text')
-      copyNode.select()
-      try {
-        document.execCommand('copy')
-        this.snackbar = true
-      } catch (err) {
-        //
-      }
-      /* unselect the range */
-      copyNode.setAttribute('type', 'hidden')
-      window.getSelection().removeAllRanges()
-    }
+
   }
 }
 </script>

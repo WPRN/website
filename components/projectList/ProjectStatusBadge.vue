@@ -1,5 +1,5 @@
 <template>
-  <span class="pt-1 pr-3">
+  <span :class="{'pt-1 pr-3':!details}">
     <template v-if="status === 'xFEATURED'">
       <v-icon>mdi-star</v-icon>
     </template>
@@ -37,6 +37,10 @@ export default {
     status: {
       type: String,
       default: 'PUBLISHED'
+    },
+    details: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
