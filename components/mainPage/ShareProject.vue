@@ -44,6 +44,9 @@
                   </v-icon>
                 </v-avatar>
               </div>
+              <v-card-title class="justify-center font-weight-black text-uppercase headline">
+                Why?
+              </v-card-title>
               <v-card-text
                 class="subtitle-1 white--text title font-weight-regular text-left"
                 color="black"
@@ -70,14 +73,15 @@
                 <v-avatar
                   color="primary"
                   size="88"
-                  class="headline font-weight-bold"
                 >
                   <v-icon x-large>
                     mdi-pencil-circle
                   </v-icon>
                 </v-avatar>
               </div>
-
+              <v-card-title class="justify-center font-weight-black text-uppercase headline">
+                How?
+              </v-card-title>
               <v-card-text
                 class="subtitle-1  white--text title font-weight-regular"
                 color="black"

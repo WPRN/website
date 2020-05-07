@@ -16,9 +16,7 @@
         @list="$router.push({ path: '/search' })"
       />
       <v-content v-scroll="onScroll">
-        <v-container id="content">
-          <nuxt />
-        </v-container>
+        <nuxt />
       </v-content>
       <v-fab-transition>
         <v-btn

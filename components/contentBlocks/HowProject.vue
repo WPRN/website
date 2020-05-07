@@ -6,7 +6,7 @@
           class="blue--text"
           href="/#register"
         >
-          form</a> with basic information + an abstract under 2000 characters. To ensure visibility to your project, carefully select keywords for disciplines, themes and types of project.
+          project register form</a> with basic information + an abstract under 2000 characters. To ensure visibility to your project, carefully select keywords for disciplines, themes and types of project.
       </li>
       <li>
         Verify your contact email and get your secure url to manage your project. There is no complex account system but a simple and secured token based process, fully GDPR/ePR compliant

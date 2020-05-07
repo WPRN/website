@@ -37,15 +37,14 @@
       >
         <v-tab
           large
-          class="black--text"
-          @click="$vuetify.goTo('#about-us', { offset: 100 })"
+          @click="tabsValue='#about-us';$vuetify.goTo('#about-us', { offset: 100 })"
         >
           About WPRN
         </v-tab>
         <v-tab
           large
-          class="black--text"
           @click="
+            tabsValue='#contact';
             $vuetify.goTo('#contact', { offset: 100 })
             contactOnly = false
             drawer = false
@@ -56,7 +55,6 @@
         <v-tab
           v-if="$vuetify.breakpoint.mdAndUp"
           large
-          class="black--text"
           text
           height="100%"
           light
