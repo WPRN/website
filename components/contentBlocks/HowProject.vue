@@ -5,6 +5,7 @@
         Fill out the <a
           class="blue--text"
           href="/#register"
+          @click="$emit('register')"
         >
           project register form</a> with basic information + an abstract under 2000 characters. To ensure visibility to your project, carefully select keywords for disciplines, themes and types of project.
       </li>

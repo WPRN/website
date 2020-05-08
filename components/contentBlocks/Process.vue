@@ -90,7 +90,7 @@
       >
         <v-card class="elevation-20">
           <v-card-title class="title pt-0">
-            Blazons (upcoming feature)
+            Blazons <i>(upcoming feature)</i>
           </v-card-title>
           <v-card-text class="white--text">
             Partnering institutions can signal projects that have undergone a full-fledged validation, e.g. with scientific expertise in research calls selection committees. They can stamp these projects on WPRN with their blazon, which is a label that vets the project with the institution’s cognitive authority.
@@ -103,7 +103,7 @@
       >
         <v-card class="elevation-20">
           <v-card-title class="title pt-0">
-            Alerts (upcoming feature)
+            Alerts <i>(upcoming feature)</i>
           </v-card-title>
           <v-card-text class="white--text">
             After a project is uploaded, the project contact person will receive an email from Ainisydo, our AI agent for Notification of Interesting Stuff in Your Domain, which compares the key-word profile and full-text content of the upload with other items in WPRN. WPRN will send further alerts, if the project contact person wishes so. The project contact person can set a profile of alerts with a special button in the search menu of the “browse projects” page.”

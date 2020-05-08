@@ -5,7 +5,6 @@
       app
       fill-height
       style="align-items: start;"
-      :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
     >
       <TopBar @closeDrawer="drawer=!drawer" />
       <NavigationDrawer
@@ -28,7 +27,7 @@
           right
           contained
           fab
-          @click="$vuetify.goTo('#content')"
+          @click="$vuetify.goTo(0)"
         >
           <v-icon color="primary">
             mdi-arrow-up

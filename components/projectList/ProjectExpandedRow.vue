@@ -3,11 +3,11 @@
     v-show="expanded.includes(project)"
     class="pb-3"
     flat
-    :max-width="$vuetify.breakpoint.width - 40"
+    :max-width="$vuetify.breakpoint.width - 70"
     style="background-color:rgb(45, 45, 45);"
   >
     <v-card-text
-      class="pb-0 white--text"
+      class="pb-0 white--text px-1"
     >
       <v-row no-gutters>
         <!-- CONTACT -->
@@ -66,7 +66,7 @@
           cols="12"
           class="font-weight-medium body-1"
         >
-          <span class="overline">Team and Project description</span>
+          <span class="overline">Team and Project description:</span>
           <br>
           <template v-if="project.description.length > 400">
             <template v-if="filters.search && filters.search.length">

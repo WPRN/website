@@ -86,7 +86,7 @@
                 class="subtitle-1  white--text title font-weight-regular"
                 color="black"
               >
-                <HowProject />
+                <HowProject @register="$emit('register')" />
               </v-card-text>
             </v-card>
           </v-hover>

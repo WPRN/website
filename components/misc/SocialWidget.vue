@@ -4,7 +4,8 @@
       v-model="fab"
       :top="$vuetify.breakpoint.mdAndUp"
       :bottom="$vuetify.breakpoint.smAndDown"
-      right
+      :right="$vuetify.breakpoint.mdAndUp"
+      :left="$vuetify.breakpoint.smAndDown"
       absolute
       :direction="$vuetify.breakpoint.mdAndUp?'bottom':'top'"
       transition="slide-y-reverse-transition"

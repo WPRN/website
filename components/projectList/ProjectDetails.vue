@@ -346,7 +346,7 @@
           <!--  ACTION BUTTONS -->
           <v-btn
             color="primary"
-            :class="{ 'mr-3': !project.url }"
+            :class="{ 'mr-3': !project.url , 'mt-3': $vuetify.breakpoint.smAndDown }"
             class="mr-6"
             @click="$emit('contact')"
           >
@@ -356,6 +356,7 @@
             v-if="project.url"
             color="primary"
             class="mr-6"
+            :class="{ 'mt-3': $vuetify.breakpoint.smAndDown }"
           >
             <a
               :href="

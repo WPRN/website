@@ -2,6 +2,7 @@
   <v-row
     align="center"
     justify="center"
+    class=" px-3"
   >
     <!--  BackButton takes one col -->
     <BackButton url="/#who" />

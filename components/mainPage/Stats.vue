@@ -69,7 +69,7 @@ export default {
       stats: [
         [180, '+', 'Projects', '/search'],
         [194, '', 'Contributing Institutions', '/institutions'],
-        [57, '', 'Referents', '/referents']
+        [70, '', 'Referents', '/referents']
       ],
       tweened: false
     }

@@ -7,7 +7,7 @@
       item-key="id"
       :server-items-length="total"
       :class="{ ' elevation-1 ' : $vuetify.breakpoint.mdAndUp}"
-      class="px-1 mt-6"
+      class="px-1"
       :options.sync="options"
       :footer-props="{ itemsPerPageOptions: [5, 10, 20, 50, 100] }"
       :headers-length="6"

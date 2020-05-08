@@ -60,7 +60,7 @@
       light
       tile
       outlined
-      class="pa-0 mb-0 ml-0 mt-1 mr-1"
+      class="pa-0 mb-0 ml-0 mt-0 mr-1"
       width="72"
       height="72"
       @click.stop="$emit('closeDrawer')"

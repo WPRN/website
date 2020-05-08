@@ -33,7 +33,7 @@
         light
         right
         slider-size="8"
-        value="tabsValue"
+        :value="tabsValue"
       >
         <v-tab
           large
@@ -44,7 +44,7 @@
         <v-tab
           large
           @click="
-            tabsValue='#contact';
+            tabsValue='#register';
             $vuetify.goTo('#contact', { offset: 100 })
             contactOnly = false
             drawer = false
@@ -74,7 +74,7 @@
           tile
           fab
           outlined
-          class="mt-12 mr-0"
+          class="mt-10 mr-0"
           x-large
           @click.stop="drawer = !drawer"
         >
@@ -87,6 +87,7 @@
       @close="drawer = false"
       @register="
         $vuetify.goTo('#contact', { offset: 100 })
+        tabsValue='#register';
         contactOnly = false
         drawer = false
         step = 1
@@ -94,6 +95,7 @@
       @about="
         $vuetify.goTo('#about-us', { offset: 100 })
         drawer = false
+        tabsValue='#about-us';
       "
       @list="$router.push({ path: '/search' })"
     />
@@ -108,14 +110,18 @@
             height="100vh"
             srcset="splash_sm.jpg 480w, splash_lg.jpg 600w, splash_xl.jpg 800w"
             src="/splash_lg.jpg"
-            contain
+            :contain="$vuetify.breakpoint.mdAndUp"
             lazy-src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgAB8DASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABwYIBf/EACkQAAIBAwIFBAIDAAAAAAAAAAECAwQFEQAGEhMhMUEHIlFhFDIjQvD/xAAWAQEBAQAAAAAAAAAAAAAAAAADAQX/xAAiEQABBAEDBQEAAAAAAAAAAAABAAIDERIEITETQVFhcfD/2gAMAwEAAhEDEQA/AMlWW2Vt4uUVvoITLPJkgDwAMkn6A/2dOFj9Kdo2qzULbjFdWXKrLGUyymCmgVRklVX3sfHUgE57Y1EejFRR2msa7VqQFHl5QMgLZCqWMeFIYcZKrxeM+caUp6KPcV5kittytkNXVUytb+VV+2Bf25TKTlT1ZeED40x0krg1zTTd72v977oXycgcqL3RtX0uuFJcH27cqi0VVLHxQxVErSfkEY4hwni8k44XPRScHRDWU8lLUNDIVJHZlOQw8EfWk/d21a21yvDw86QJluBWGMDJAB+B8fGoa+yRTWul9kCzQSMhKKQ7K3X3dMHBB+9JKyEszhdYUikJNFdn0vojequayQ1FJHXSfyUkdQxTnNjBRX/UOcDAbAPbIPe12lfJNvXeOWqRoY6WrAlR4CJ42XIJVsFkdcYPbv8AZ0MQSyQTJNC7RyIcqynqDpg2t61wwWdbXujatHdf1V6tAvMkReg4lcEFsYHFkdABjoMJDrMY+k4WFXRW7IK+v1wtwNXemhqK2kg5c0siqHlCSgdTGWz5Iz2B7kaz1vKsoay8zzW4VAp5HMiioVRKmf6sV9rY+QBnVnvr1Sp7mlVT7atVZa4qs5qGqasSlugGFUKAq4AwMkDRiSSck5OsyCEQtPkpfgX/2Q=="
           >
-            <v-container fill-height>
+            <v-container
+              fill-height
+              :class="{'px-0' : $vuetify.breakpoint.smAndDown}"
+            >
               <v-row
                 align="center"
                 class="white--text mx-auto"
                 justify="center"
+                :no-gutters="$vuetify.breakpoint.smAndDown"
                 @click="$vuetify.goTo('#about-us', { offset: 100 })"
               >
                 <v-col
@@ -161,10 +167,16 @@
 
       <About
         @goToRegister=" $vuetify.goTo('#contact', { offset: 100 })
+                        tabsValue='#register';
                         contactOnly = false
                         step = 1"
       />
-      <ShareProject />
+      <ShareProject
+        @register=" $vuetify.goTo('#contact', { offset: 100 })
+                    tabsValue='#register';
+                    contactOnly = false
+                    step = 1"
+      />
       <Stats />
       <Who />
       <section id="contact">
@@ -294,7 +306,6 @@
       </section>
       <v-fab-transition>
         <v-btn
-          v-if="$vuetify.breakpoint.mdAndUp"
           v-show="offsetTop > 600"
           color="accent"
           dark

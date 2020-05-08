@@ -31,9 +31,9 @@
                 href="/advisory_board"
               >
                 Advisory Board</a>
-              and supported by <a
+              and supported by major <a
                 href="/institutions"
-              >major scientific institutions and scientific networks worldwide</a>.
+              > scientific institutions and scientific networks</a> worldwide.
             </p>
             <p class="text-justify">
               WPRN is the product of a collective scientific intelligence, with validation by senior scholars who act as <a

@@ -159,7 +159,7 @@
             ref="field"
             v-model="filters.field"
             :items="fields"
-            label="Project discipline(s)"
+            label="Discipline(s)"
             outlined
             clearable
             class="filter"
@@ -194,7 +194,7 @@
             ref="thematics"
             v-model="filters.thematics"
             :items="thematics"
-            label="Project Thematic(s)"
+            label="Thematic(s)"
             outlined
             clearable
             multiple
@@ -229,7 +229,7 @@
             ref="type"
             v-model="filters.type"
             :items="types"
-            label="Project type"
+            label="Type(s)"
             outlined
             hide-details
             dense
@@ -263,7 +263,7 @@
             ref="status"
             v-model="filters.status"
             :items="state"
-            label="Project status"
+            label="Status"
             outlined
             :disabled="loading"
             hide-details
@@ -296,7 +296,7 @@
             ref="zone"
             v-model="filters.zone"
             :items="zones"
-            label="Continent"
+            label="Continent(s)"
             outlined
             :disabled="loading"
             clearable
@@ -335,7 +335,7 @@
                   .sort()
             "
             no-data-text="No country matching your search"
-            label="Country"
+            label="Countries"
             outlined
             multiple
             clearable

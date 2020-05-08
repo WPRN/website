@@ -36,7 +36,7 @@
               class="pa-6 white--text  text-center"
               flat
               :elevation="hover ? 12 : 2"
-
+              height="100%"
               href="/advisory_board"
               nuxt
               color="accent"
@@ -54,6 +54,7 @@
               </v-avatar>
               <v-card-title
                 class="justify-center font-weight-black text-uppercase"
+                style="word-break:normal;"
               >
                 Scientific Advisory Board
               </v-card-title>
@@ -75,6 +76,7 @@
               href="/institutions"
               nuxt
               color="accent"
+              height="100%"
             >
               <v-avatar
                 color="primary"
@@ -89,7 +91,7 @@
               </v-avatar>
               <v-card-title
                 class="justify-center font-weight-black text-uppercase"
-                style="cursor:pointer;"
+                style="word-break:normal;"
               >
                 Partner Institutions
               </v-card-title>
@@ -112,6 +114,7 @@
               href="/referents"
               nuxt
               color="accent"
+              height="100%"
             >
               <v-avatar
                 color="primary"
@@ -126,7 +129,10 @@
               </v-avatar>
               <v-card-title
                 class="justify-center font-weight-black text-uppercase"
-                style="cursor:pointer;"
+                style="word-break:normal;"
+                height="100%"
+                justify="center"
+                align="center"
               >
                 Referents
               </v-card-title>

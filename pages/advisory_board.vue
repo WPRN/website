@@ -72,6 +72,7 @@
               <template v-else>
                 {{ person.name }}
               </template>
+              <br v-if="$vuetify.breakpoint.smAndDown">
               <v-chip
                 v-if="person.role"
                 small

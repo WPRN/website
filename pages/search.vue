@@ -5,7 +5,6 @@
     fluid
     fill-height
     style="align-items: start;"
-    :class="{ 'pr-0': $vuetify.breakpoint.smAndDown }"
   >
     <NavigationDrawer
       :drawer="drawer"
@@ -16,6 +15,7 @@
     />
     <TopBar
       value="/search"
+      app
       @closeDrawer="drawer=!drawer"
     />
 
@@ -31,8 +31,14 @@
     >
       <v-icon>mdi-menu</v-icon>
     </v-btn>
-    <v-content>
-      <v-row>
+    <v-content
+      class="pt-3"
+      :class="{'mt-12': $vuetify.breakpoint.mdAndUp}"
+    >
+      <v-row
+        no-gutters
+        :class="{'mt-4': $vuetify.breakpoint.mdAndUp}"
+      >
         <v-col cols="12">
           <v-card>
             <v-card-text :class="$vuetify.breakpoint.mdAndUp ? 'px-3' : 'pl-3'">
