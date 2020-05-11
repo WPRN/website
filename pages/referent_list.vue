@@ -36,7 +36,6 @@
   </v-row>
 </template>
 <script>
-import { referents } from '~/assets/data'
 import BackButton from '~/components/navigation/BackButton'
 import ReferentListContent from '~/components/contentBlocks/ReferentListContent'
 
@@ -48,7 +47,6 @@ export default {
   },
   data () {
     return {
-      referents
     }
   },
   methods: {

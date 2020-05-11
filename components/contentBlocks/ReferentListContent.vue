@@ -11,7 +11,6 @@
       <li> Professor Vivian Lin, University of Hong Kong; former WHO Director of Health Systems in the Western Pacific;</li>
       <li> Professor Mustapha Nabli, Faculté de Droit et des Sciences Politiques et Economiques de Tunis, North African Bureau of Economic Studies; Former Governor of the Central Bank of Tunisia;</li>
       <li> Dr Thomas König, Head of Strategy and Scientific Services, Vienna Institute for Advanced Studies;</li>
-      <li> Professor Daniela Piana, University of Bologna and ENS-Paris-Saclay;</li>
       <li> Professor Marc-Olivier Strauss-Kahn, ESSEC, Atlantic Council; Directeur général honoraire de la Banque de France;</li>
       <li> Professor Akos Rona-Tas, University of California, Co-director of the International Institute, UC San Diego;</li>
       <li> Professor Elena Esposito, University of Bielefeld and University of Bologna;</li>
