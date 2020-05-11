@@ -30,21 +30,22 @@
       <v-spacer />
       <v-tabs
         v-if="$vuetify.breakpoint.mdAndUp"
+        v-model="tabsValue"
         light
         right
         slider-size="8"
-        :value="tabsValue"
       >
         <v-tab
           large
-          @click="tabsValue='#about-us';$vuetify.goTo('#about-us', { offset: 100 })"
+          to="/#about-us"
+          @click="$vuetify.goTo('#about-us', { offset: 100 })"
         >
           About WPRN
         </v-tab>
         <v-tab
           large
+          to="/#register"
           @click="
-            tabsValue='#register';
             $vuetify.goTo('#contact', { offset: 100 })
             contactOnly = false
             drawer = false
@@ -181,6 +182,7 @@
       <Who />
       <section id="contact">
         <v-sheet
+          v-intersect="setTab('register')"
           color="#333333"
           tile
         >
@@ -383,7 +385,8 @@ export default {
         setTimeout(() => {
           this.$vuetify.goTo('#contact')
         }, 1)
-      } else {
+      }
+      if (this.$route.hash === '#contact') {
         this.contactOnly = true
         this.step = 0
         setTimeout(() => {
@@ -396,9 +399,15 @@ export default {
   methods: {
     onScroll (e) {
       this.offsetTop = e.target.scrollingElement.scrollTop
+    },
+    setTab (name) {
+      console.log('setting tab to ', name)
+      this.tabsValue = '/#' + name
     }
+
   }
 }
+
 </script>
 <style lang="scss">
   .mission {

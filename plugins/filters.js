@@ -34,26 +34,14 @@ Vue.filter('nl2br', (str) => {
   )
 })
 Vue.filter('highlight', function (word, query) {
-  if (typeof query === 'string') {
-    var check = new RegExp(query, 'ig')
-    return word.replace(check, function (matchedText, a, b) {
-      return (
-        '<strong style="color: darkslategray;background-color: yellow;">' +
+  console.log('word', word)
+  console.log('query', query)
+  var check = new RegExp(typeof query === 'string' ? query : query.join('|'), 'ig')
+  return word.replace(check, function (matchedText, a, b) {
+    return (
+      '<strong style="color: darkslategray;background-color: yellow;">' +
         matchedText +
         '</strong>'
-      )
-    })
-  } else {
-    query.forEach((element) => {
-      var check = new RegExp(element, 'ig')
-      word = word.toString().replace(check, function (matchedText, a, b) {
-        return (
-          '<strong style="color: darkslategray;background-color: yellow;">' +
-          matchedText +
-          '</strong>'
-        )
-      })
-    })
-    return word
-  }
+    )
+  })
 })
