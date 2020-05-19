@@ -1,5 +1,5 @@
 {
-  "name": "wprn_frontend",
+   "name": "wprn_frontend",
   "version": "1.0.0",
   "description": "Public initiative to publish and share in one single place the list of all research initiatives and surveys about the current pandemic of Covid-19 coronavirus.",
   "author": "Antoine Cordelois",
@@ -27,6 +27,7 @@
     "array-flat-polyfill": "^1.0.1",
     "aws-appsync": "^3.0.2",
     "intersection-observer": "^0.9.0",
+    "node-fetch": "^2.6.0",
     "nuxt": "^2.4.2",
     "nuxt-jsonld": "^1.4.5",
     "slugify": "^1.4.0",
@@ -66,7 +67,6 @@
   "husky": {
     "hooks": {
       "pre-commit": "yarn lintfix"
-      
     }
   }
 }

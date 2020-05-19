@@ -159,7 +159,7 @@ export default {
       nextToken: false,
       total: 0,
       options: {
-        itemsPerPage: 10,
+        itemsPerPage: 20,
         page: 1,
         sortBy: [],
         sortDesc: [true]

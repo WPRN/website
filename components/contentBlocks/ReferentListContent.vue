@@ -47,7 +47,7 @@
       <li> Professor Philippe Terral, University of Toulouse; Directeur adjoint MSH Toulouse;</li>
       <li> Professor Pushpa Arabindoo, University College London;</li>
       <li> Professor Louise Vandelac, Institut des sciences de l'environnement, Université du Quebec à Montréal;</li>
-      <li> Professor Cathy Vaillancourt,  INRS-Institut Armand Frappier; Directrice du RISUQ</li>
+      <li> Professor Cathy Vaillancourt,  INRS-Institut Armand Frappier; Directrice du RISUQ;</li>
       <li> Professor Silvia Marton, University of Bucharest;</li>
       <li> Professor Constantin Ardeleanu, University of Galati, New Europe College;</li>
       <li> Professor Stefano Campostrini, University Ca' Foscari Venice, Director of the Governance &amp; Social Innovation Center;</li>
