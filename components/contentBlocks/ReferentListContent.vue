@@ -68,7 +68,7 @@
       <li> Dr Azmi Bishara, General Director, Arab Center for Research and Policy Studies (ACRPS), Qatar</li>
       <li> Dr Sarah Cook, Director, Institute for Global Development, UNSW, Sydney</li>
       <li> Dr Selina Lo, Senior Editor, The Lancet; Research Fellow Sustainable Development Institute, Monash University</li>
-      <li> Professor Thomas Abel, University of Bern, Switzerland</li>
+      <li> Professor Thomas Abel, University of Bern, Inst. of Social and Preventive Medicine, Switzerland</li>
       <li> Dr Ryan Manuel, Director Silverhorn Investment Advisors, China; Managing Director of Official China Ltd.</li>
       <li> Professor Olena Hankivsky, Director, University of Melbourne, Centre for Health Equity, Australia</li>
     </ul>
