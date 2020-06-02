@@ -378,8 +378,8 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="project.city"
-                  label="Region, State or City"
+                  v-model="project.location"
+                  label="Region, State or location"
                   solo
                   :disabled="loading"
                 />
@@ -732,16 +732,16 @@
                   </v-chip>
                 </v-col>
                 <v-col
-                  v-if="project.city"
+                  v-if="project.location"
                   cols="12"
                   md="6"
                   class="pl-3"
                 >
                   <div class="font-weight-light caption">
-                    Region, state or city
+                    Region, state or location
                   </div>
                   <div class="subtitle-1">
-                    {{ project.city }}
+                    {{ project.location }}
                   </div>
                 </v-col>
               </v-row>
@@ -992,7 +992,7 @@ export default {
         thematics: this.editMode ? this.projectInput.thematics : [],
         zone: this.editMode ? this.projectInput.zone : [],
         contact_email: this.editMode ? this.projectInput.contact_email : '',
-        city: this.editMode ? this.projectInput.city : '',
+        location: this.editMode ? this.projectInput.location : '',
         contact_firstname: this.editMode
           ? this.projectInput.contact_firstname
           : '',

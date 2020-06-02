@@ -1,5 +1,5 @@
 {
-   "name": "wprn_frontend",
+  "name": "wprn_frontend",
   "version": "1.0.0",
   "description": "Public initiative to publish and share in one single place the list of all research initiatives and surveys about the current pandemic of Covid-19 coronavirus.",
   "author": "Antoine Cordelois",
@@ -21,6 +21,7 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@aws-amplify/auth": "^3.2.9",
     "@nuxtjs/recaptcha": "^0.6.2",
     "@nuxtjs/sitemap": "^2.1.0",
     "@tweenjs/tween.js": "^18",

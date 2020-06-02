@@ -10,7 +10,7 @@ export const onCreateProject = `subscription OnCreateProject {
     status
     field
     country
-    city
+    location
     zone
     contact_firstname
     contact_lastname
@@ -34,7 +34,7 @@ export const onUpdateProject = `subscription OnUpdateProject {
     status
     field
     country
-    city
+    location
     zone
     contact_firstname
     contact_lastname
@@ -58,7 +58,7 @@ export const onDeleteProject = `subscription OnDeleteProject {
     status
     field
     country
-    city
+    location
     zone
     contact_firstname
     contact_lastname

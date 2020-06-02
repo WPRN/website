@@ -11,7 +11,7 @@ export const getProjectForEdit = /* GraphQL */ `
       status
       field
       country
-      city
+      location
       zone
       contact_firstname
       contact_lastname
@@ -36,7 +36,7 @@ export const getProject = /* GraphQL */ `
       status
       field
       country
-      city
+      location
       zone
       contact_firstname
       contact_lastname
@@ -75,7 +75,7 @@ export const listProjects = /* GraphQL */ `
         status
         field
         country
-        city
+        location
         zone
         contact_firstname
         contact_lastname
@@ -114,7 +114,7 @@ export const searchProjects = /* GraphQL */ `
         status
         field
         country
-        city
+        location
         zone
         contact_firstname
         contact_lastname
