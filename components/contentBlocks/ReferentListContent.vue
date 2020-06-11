@@ -46,8 +46,8 @@
       <li> Dr Pascal Buleon, Research Director, French National Center for Scientific Research (CNRS), Président, Très Grande Infrastructure de Recherche (TGIR) PROGEDO, Director, MRSH Caen;</li>
       <li> Professor Philippe Terral, University of Toulouse; Directeur adjoint MSH Toulouse;</li>
       <li> Professor Pushpa Arabindoo, University College London;</li>
-      <li> Professor Louise Vandelac, University of Quebec in Montreal;</li>
-      <li> Professor Cathy Vaillancourt, University of Quebec in Montreal , INRS-Institut Armand Frappier;</li>
+      <li> Professor Louise Vandelac, Institut des sciences de l'environnement, Université du Quebec à Montréal;</li>
+      <li> Professor Cathy Vaillancourt,  INRS-Institut Armand Frappier; Directrice du RISUQ;</li>
       <li> Professor Silvia Marton, University of Bucharest;</li>
       <li> Professor Constantin Ardeleanu, University of Galati, New Europe College;</li>
       <li> Professor Stefano Campostrini, University Ca' Foscari Venice, Director of the Governance &amp; Social Innovation Center;</li>
@@ -61,6 +61,16 @@
       <li> Professor Ben Cowling, University of Hong Kong, Head of the Division of Epidemiology and Biostatistics;</li>
       <li> Professor Erma Manoncourt, Paris Institute of Political Studies (Sciences Po);</li>
       <li> Professor Calvin Ho, University of Hong Kong, Ethics Board member of Médecins Sans Frontières (Doctors Without Borders), Co-Head of the Accountability Policy Task Team of the Global Alliance for Genomics &amp; Health.</li>
+      <li> Dr Enis Baris, M.D., Manager for Health, Nutrition and Population, Europe and Central Asia, Advisor, Global Health Policy and Systems, World Bank, USA</li>
+      <li> Professor John Burns, University of Hong Kong</li>
+      <li> Professor Tin Tin Su, Monash University Malaysia,;Deputy Director of Southeast Asia Community Observatory</li>
+      <li> Professor Joan Kaufman , Senior Director for Academic Programs Tsinghua University; Harvard Medical School</li>
+      <li> Dr Azmi Bishara, General Director, Arab Center for Research and Policy Studies (ACRPS), Qatar</li>
+      <li> Dr Sarah Cook, Director, Institute for Global Development, UNSW, Sydney</li>
+      <li> Dr Selina Lo, Senior Editor, The Lancet; Research Fellow Sustainable Development Institute, Monash University</li>
+      <li> Professor Thomas Abel, University of Bern, Inst. of Social and Preventive Medicine, Switzerland</li>
+      <li> Dr Ryan Manuel, Director Silverhorn Investment Advisors, China; Managing Director of Official China Ltd.</li>
+      <li> Professor Olena Hankivsky, Director, University of Melbourne, Centre for Health Equity, Australia</li>
     </ul>
     <i>[and counting]</i>
   </div>

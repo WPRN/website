@@ -26,35 +26,29 @@
       >
         <v-divider class="mb-1" />
         <v-divider />
-      </v-responsive>The World Pandemic Research Network (WPRN) website’s purpose is to
-      offer a global directory of research projects, surveys and
-      initiatives about the societal and human impacts of the Covid-19
-      pandemic. pandemic.
-      <br>By registering their project on the WPRN
-      website, contributors authorize the WPRN to publish online the data
-      collected, except for their personal contact details (e-mail
-      address). address).
-      <br>E-mail addresses will never be disclosed
-      online nor transferred or sold to any third party. They will be used
-      only:
+      </v-responsive>
+      The World Pandemic Research Network (WPRN) website’s purpose is to offer a global directory of research projects, surveys and initiatives about the societal and human impacts of the Covid-19 pandemic. pandemic. <br>
+      By registering their project on the WPRN website, contributors authorize the WPRN to publish online the data collected, except for their personal contact details (e-mail address). <br>
+      E-mail addresses of contribuors or referents will never be disclosed online nor transferred or sold to any third party. They will be used only: <br>
       <ul>
         <li>
-          to redirect potential contact requests to contributors through
-          the WPRN servers;
+          to redirect potential contact requests to contributors through the WPRN servers;
         </li>
         <li>
-          by WPRN to contact contributors to enable their uploads, update
-          their project, facilitate their collaborations and occasionally
-          regarding evolutions of WPRN.
+          to inform WPRN referents of new projects to validate;
         </li>
-      </ul>In compliance with the EU General Data Protection Regulation, you
-      can exert your right to access, correct or oppose the use of your
-      data by contacting info@wprn.org.
+        <li>
+          by the WPRN team to contact contributors to enable their uploads, facilitate their collaborations and occasionally regarding evolutions of WPRN;
+        </li>
+        <li>
+          by WPRN referents to contact contributors to request edits on their project;
+        </li>
+      </ul>
+      In compliance with the EU General Data Protection Regulation, you can exert your right to access, correct or oppose the use of your data by contacting <a href="mailto:info@wprn.org">info@wprn.org</a>.
     </v-col>
   </v-row>
 </template>
 <script>
-import { board, contributors } from '~/assets/data'
 import BackButton from '~/components/navigation/BackButton'
 
 export default {
@@ -64,9 +58,6 @@ export default {
   },
   data () {
     return {
-      board,
-      contributors,
-      referents: []
     }
   },
   methods: {
