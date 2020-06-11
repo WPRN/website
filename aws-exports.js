@@ -12,12 +12,20 @@ const awsmobile = {
         {
             "tableName": "stats-prod",
             "region": "eu-west-2"
+        },
+        {
+            "tableName": "entities-prod",
+            "region": "eu-west-2"
+        },
+        {
+            "tableName": "project-prod",
+            "region": "eu-west-2"
         }
     ],
-    "aws_appsync_graphqlEndpoint": "https://zasfk4e6avea3firmwtoepyrda.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://a3ar73s6jzhere2pfnf4lqsksa.appsync-api.eu-west-2.amazonaws.com/graphql",
     "aws_appsync_region": "eu-west-2",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-lqtsvcgyjnd43ofdk7deadvkcy"
+    "aws_appsync_apiKey": "da2-2qjpd6cnw5c2vcschji5psrrmy"
 };
 
 

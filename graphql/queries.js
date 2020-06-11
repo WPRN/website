@@ -23,6 +23,7 @@ export const getProjectForEdit = /* GraphQL */ `
       createdAt
       state
       thematics
+      withRequest
     }
   }
 `;

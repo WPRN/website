@@ -886,12 +886,17 @@
               $refs.agreedRef.valid
             )
           "
-          @click="onSubmit()"
+          @click="project.withRequest?feedbackModal= true:onSubmit()"
         >
           Submit&nbsp;
           <v-icon>mdi-send</v-icon>
         </v-btn>
       </v-stepper-content>
+      <feedbackModal
+        :open="feedbackModal"
+        @cancel="feedbackModal= false"
+        @update="feedbackModal= false;project.feedback=$event; onSubmit()"
+      />
     </v-stepper-items>
   </v-stepper>
 </template>
@@ -908,7 +913,11 @@ import { alpha, pattern, email } from '~/assets/regex'
 import { newProject, editProject } from '~/graphql/mutations'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
+import feedbackModal from '~/components/projectForm/feedbackModal'
 export default {
+  components: {
+    feedbackModal
+  },
   props: {
     projectInput: Object,
     editMode: Boolean
@@ -923,6 +932,7 @@ export default {
       state,
       agreed: false,
       loading: false,
+      feedbackModal: false,
       formStep: 1,
       countrySet: Object.keys(countries)
         .map((countryKey) => countries[countryKey])
@@ -1001,6 +1011,8 @@ export default {
           : '',
         contact_entity: this.editMode ? this.projectInput.contact_entity : '',
         url: this.editMode ? this.projectInput.url : '',
+        feedback: this.editMode ? this.projectInput.feedback : '',
+        withRequest: this.editMode ? this.projectInput.withRequest : false,
         date: this.editMode ? this.projectInput.date : '',
         time: this.editMode ? this.projectInput.time : ''
       }
@@ -1008,7 +1020,6 @@ export default {
   },
   async mounted () {
     await this.$recaptcha.init()
-
     setTimeout(() => {
       this.$refs.step1.resetValidation()
     }, 1000)
@@ -1081,12 +1092,15 @@ export default {
       try {
         this.loading = true
         let args = this.project
+        console.log('args: ', args)
+
         Object.keys(this.project).forEach((key) => {
           if (!args[key] || args[key].length === 0) delete args[key]
         })
         args.recaptcha = await this.$recaptcha.getResponse()
         let res = {}
         if (this.editMode) {
+          delete args.withRequest
           console.log('EDIT MODE', {
             ...args,
             pubId: this.$route.params.id,
@@ -1118,6 +1132,7 @@ export default {
         this.loading = false
         await this.$recaptcha.reset()
       } catch (error) {
+        console.log('error: ', error)
         this.error = true
         this.loading = false
         await this.$recaptcha.reset()
