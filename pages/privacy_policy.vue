@@ -3,10 +3,8 @@
     align="center"
     justify="center"
   >
-    <!--  BackButton takes one col -->
-    <BackButton />
     <v-col
-      cols="10"
+      cols="12"
       sm="10"
       md="8"
     >
@@ -14,11 +12,10 @@
         Privacy Policy
       </h2>
     </v-col>
-    <v-col cols="1" />
     <v-col
       cols="12"
       sm="12"
-      md="8"
+      md="10"
     >
       <v-responsive
         class="mx-auto mb-12"
@@ -41,7 +38,7 @@
           by the WPRN team to contact contributors to enable their uploads, facilitate their collaborations and occasionally regarding evolutions of WPRN;
         </li>
         <li>
-          by WPRN referents to contact contributors to request edits on their project;
+          by WPRN referents to request edits through WPRN servers
         </li>
       </ul>
       In compliance with the EU General Data Protection Regulation, you can exert your right to access, correct or oppose the use of your data by contacting <a href="mailto:info@wprn.org">info@wprn.org</a>.
@@ -49,16 +46,17 @@
   </v-row>
 </template>
 <script>
-import BackButton from '~/components/navigation/BackButton'
 
 export default {
-  layout: 'page',
+  layout: 'public',
   components: {
-    BackButton
   },
   data () {
     return {
     }
+  },
+  mounted () {
+
   },
   methods: {
   }
