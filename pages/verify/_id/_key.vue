@@ -57,7 +57,7 @@
             YOUR EMAIL IS VERIFIED AND YOUR PROJECT IS PUBLISHED!
           </h3>
           <v-responsive
-            class="mx-auto mb-12"
+            class="mx-auto  my-6"
             width="56"
           >
             <v-divider class="mb-1" />
@@ -74,20 +74,67 @@
               here
             </nuxt-link>.
           </div>
+          <v-responsive
+            class="mx-auto my-6"
+            width="56"
+          >
+            <v-divider class="mb-1" />
 
-          <!--     <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn class large color="acent" @click="$emit('reset')" v-on="on" align="right">
-            <v-icon>mdi-refresh</v-icon>
+            <v-divider />
+          </v-responsive>
+          <div class="title mb-3">
+            You want to be notified of the new WPRN projects similar to yours? <br>
+          </div>
+          <v-btn
+            color="primary"
+            class="ma-1"
+            @click="similarModalOpen = true"
+          >
+            Create a custom email alert
           </v-btn>
-        </template>
-        <span>Register another project</span>
-      </v-tooltip>
-            </v-card-actions>-->
+          <v-responsive
+            class="mx-auto my-6"
+            width="56"
+          >
+            <v-divider class="mb-1" />
+            <v-divider />
+          </v-responsive>
+          <div class="overline">
+            Share your project
+          </div> <br>
+          <div class="justify-center d-flex">
+            <v-tooltip
+              v-for="(social, index) in socialChannels"
+              :key="index"
+              bottom
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  :small="$vuetify.breakpoint.smAndDown"
+                  :href="social.url"
+                  :color="social.color"
+                  target="_blank"
+                  dark
+                  class="mx-2"
+                  v-on="on"
+                >
+                  <v-icon :small="$vuetify.breakpoint.smAndDown">
+                    mdi-{{ social.icon }}
+                  </v-icon>
+                  {{ social.label }}
+                </v-btn>
+              </template>
+              <span v-if="social.label !== 'Email'">Share this project on {{ social.label }}</span>
+              <span v-else>Share this project by {{ social.label }}</span>
+            </v-tooltip>
+          </div>
         </v-card>
       </v-fade-transition>
+      <SimilarProjectsAlertModal
+        :open="similarModalOpen"
+        @updated="subscribe"
+        @close="similarModalOpen = false"
+      />
     </v-col>
   </v-row>
 </template>
@@ -95,14 +142,46 @@
 import * as mutations from '~/graphql/mutations'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
+import SimilarProjectsAlertModal from '~/components/misc/SimilarProjectsAlertModal'
 export default {
   layout: 'page',
   components: {
+    SimilarProjectsAlertModal
   },
   data () {
     return {
       checking: true,
-      error: false
+      error: false,
+      similarModalOpen: false,
+      socialChannels: [
+        {
+          label: 'Facebook',
+          icon: 'facebook',
+          url:
+            `${'https://www.facebook.com/sharer.php?u=' +
+            'https://wprn.org/item/'}${
+              this.$route.params.id}`,
+          color: '#3b5998'
+        },
+        {
+          label: 'Twitter',
+          icon: 'twitter',
+          url:
+            `https://twitter.com/share?url=https://wprn.org/item/${
+              this.$route.params.id
+            }&text=My project is published on WPRN : &via=WPRN&hashtags=WPRN`,
+          color: 'rgb(29, 161, 242)'
+        },
+        {
+          label: 'Email',
+          icon: 'email',
+          url:
+            `mailto:?subject=WPRN Project&body=Hello,%0d%0a%0d%0aPlease check this project on WPRN (World Pandemic Research Network) :%0d%0ahttps%3A%2F%2Fwprn.org%2Fitem%2F${
+              this.$route.params.id
+            }%0d%0a%0d%0aBest regards,`,
+          color: 'accent'
+        }
+      ]
     }
   },
   async mounted () {

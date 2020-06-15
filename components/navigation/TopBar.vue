@@ -5,6 +5,7 @@
     height="80"
     elevate-on-scroll
     elevation-3
+    :inverted-scroll="$route.name==='index'"
   >
     <v-btn
       text
@@ -29,28 +30,40 @@
     <v-spacer />
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
+      id="main-app-bar"
+      v-model="value"
       light
       right
       :optional="!value"
-      value
       slider-size="8"
     >
       <v-tab
         to="/#about-us"
         nuxt
+        active-class="text--blue"
+        class="font-weight-bold"
+        min-width="96"
+        text
       >
         About WPRN
       </v-tab>
       <v-tab
         to="/#register"
         nuxt
+        active-class="text--blue"
+        class="font-weight-bold"
+        min-width="96"
+        text
       >
         Register your project
       </v-tab>
       <v-tab
-        active
         to="/search"
         nuxt
+        active-class="text--blue"
+        class="font-weight-bold"
+        min-width="96"
+        text
       >
         Browse projects
       </v-tab>

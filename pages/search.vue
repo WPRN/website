@@ -18,26 +18,11 @@
       app
       @closeDrawer="drawer=!drawer"
     />
-
-    <v-btn
-      v-show="$vuetify.breakpoint.smAndDown"
-      light
-      tile
-      outlined
-      class="pa-0 mb-0 ml-0 mt-1 mr-1"
-      width="72"
-      height="72"
-      @click.stop="drawer = !drawer"
-    >
-      <v-icon>mdi-menu</v-icon>
-    </v-btn>
     <v-content
       class="pt-3"
-      :class="{'mt-12': $vuetify.breakpoint.mdAndUp}"
     >
       <v-row
         no-gutters
-        :class="{'mt-4': $vuetify.breakpoint.mdAndUp}"
       >
         <v-col cols="12">
           <v-card>

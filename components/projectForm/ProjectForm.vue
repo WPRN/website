@@ -1,6 +1,7 @@
 <template>
   <v-stepper
     v-model="formStep"
+    v-intersect="onIntersect"
     dark
     alt-labels
   >
@@ -1137,6 +1138,12 @@ export default {
         this.loading = false
         await this.$recaptcha.reset()
       }
+    },
+    onIntersect (entries, observer, isIntersecting) {
+      console.log('INTERESCT REGISTER')
+      this.$emit('intersect', 'REGISTER')
+      // More information about these options
+      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     }
   }
 }
