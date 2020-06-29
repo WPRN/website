@@ -73,7 +73,6 @@
 export default {
   methods: {
     onIntersect (entries, observer, isIntersecting) {
-      console.log('INTERESCT ABOUTT')
       this.$emit('intersect', 'ABOUT')
       // More information about these options
       // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API

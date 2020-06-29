@@ -31,7 +31,6 @@
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
       id="main-app-bar"
-      v-model="value"
       light
       right
       :optional="!value"

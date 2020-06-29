@@ -1093,7 +1093,6 @@ export default {
       try {
         this.loading = true
         let args = this.project
-        console.log('args: ', args)
 
         Object.keys(this.project).forEach((key) => {
           if (!args[key] || args[key].length === 0) delete args[key]
@@ -1133,14 +1132,12 @@ export default {
         this.loading = false
         await this.$recaptcha.reset()
       } catch (error) {
-        console.log('error: ', error)
         this.error = true
         this.loading = false
         await this.$recaptcha.reset()
       }
     },
     onIntersect (entries, observer, isIntersecting) {
-      console.log('INTERESCT REGISTER')
       this.$emit('intersect', 'REGISTER')
       // More information about these options
       // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API

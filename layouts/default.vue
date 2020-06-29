@@ -59,7 +59,6 @@ export default {
     }
   },
   mounted () {
-    console.log('IS IT?', this.$route.name === 'index')
   },
   methods: {
     onError (error) { console.log(error) },
