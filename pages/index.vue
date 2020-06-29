@@ -208,8 +208,8 @@ export default {
   },
   methods: {
     onIntersect (event) {
-      /*       if (event === 'REGISTER') this.tabsValue = 'register'
-      if (event === 'ABOUT') this.tabsValue = 'about' */
+      if (event === 'REGISTER') this.tabsValue = 'register'
+      if (event === 'ABOUT') this.tabsValue = 'about'
       // More information about these options
       // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     }

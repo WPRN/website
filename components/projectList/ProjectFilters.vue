@@ -1,8 +1,8 @@
 <template>
   <v-card
     flat
+    class="mt-6"
     :class="{'myClass': pinned&&$vuetify.breakpoint.mdAndUp}"
-    :class="{'mt-6': !pinned||vuetify.breakpoint.smAndDown}"
   >
     <!-- DEFAULT FILTERS -->
     <v-row no-gutters>

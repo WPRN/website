@@ -32,7 +32,7 @@
           </v-tooltip>
           <span
             v-html="
-              $options.filters.highlight(
+              $options.filters.highlightAndTruncate(
                 project.contact_lastname,
                 filters.search.split(' ')
               )
@@ -46,7 +46,7 @@
               <span
                 v-html="
                   '(' +
-                    $options.filters.highlight(
+                    $options.filters.highlightAndTruncate(
                       project.contact_entity,
                       filters.search.split(' ')
                     ) +
@@ -74,15 +74,12 @@
                 class="font-weight-medium body-1 mb-0"
                 v-html="
                   $options.filters.nl2br(
-                    $options.filters.truncate(
-                      $options.filters.highlight(
-                        project.description,
-                        filters.search.split(' ')
-                      ),
-                      400,
+                    $options.filters.highlightAndTruncate(
+                      project.description,
+                      filters.search.split(' '),
                       '(read more)',
                       '/item/' + project.pubId
-                    ),
+                    )
                   )
                 "
               />
@@ -108,9 +105,11 @@
               class="mb-0 font-weight-medium body-1"
               v-html="
                 $options.filters.nl2br(
-                  $options.filters.highlight(
+                  $options.filters.highlightAndTruncate(
                     project.description,
-                    filters.search.split(' ')
+                    filters.search.split(' '),
+                    '(read more)',
+                    '/item/' + project.pubId
                   )
                 )
               "
