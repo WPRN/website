@@ -6,26 +6,29 @@ const awsmobile = {
     "aws_dynamodb_all_tables_region": "eu-west-2",
     "aws_dynamodb_table_schemas": [
         {
-            "tableName": "contact-prod",
+            "tableName": "contact-dev",
             "region": "eu-west-2"
         },
         {
-            "tableName": "stats-prod",
+            "tableName": "stats-dev",
             "region": "eu-west-2"
         },
         {
-            "tableName": "entities-prod",
+            "tableName": "entities-dev",
             "region": "eu-west-2"
         },
         {
-            "tableName": "project-prod",
+            "tableName": "project-dev",
             "region": "eu-west-2"
         }
     ],
-    "aws_appsync_graphqlEndpoint": "https://a3ar73s6jzhere2pfnf4lqsksa.appsync-api.eu-west-2.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://je6j6hivvfhwvmcpmy7qurqxva.appsync-api.eu-west-2.amazonaws.com/graphql",
     "aws_appsync_region": "eu-west-2",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-2qjpd6cnw5c2vcschji5psrrmy"
+    "aws_appsync_apiKey": "da2-wqg7wrcaxjhchaqmtu2qjjpy34",
+    "aws_content_delivery_bucket": "wprn-frontend-dev-dev",
+    "aws_content_delivery_bucket_region": "eu-west-2",
+    "aws_content_delivery_url": "http://wprn-frontend-dev-dev.s3-website.eu-west-2.amazonaws.com"
 };
 
 
