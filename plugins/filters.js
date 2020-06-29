@@ -38,6 +38,8 @@ Vue.filter('highlightAndTruncate', function (word, query, url, link) {
   // remove stop words
   query = query.filter(item => !stopWords.includes(item))
   if (query.length) {
+    console.log('word BEFORE truncate: ', word)
+
     console.log('query has length')
     if (word.length > 400) {
       console.log('word is more than 400 and query is: ', query)
@@ -50,6 +52,7 @@ Vue.filter('highlightAndTruncate', function (word, query, url, link) {
       console.log('firstIndex: ', firstIndex)
       console.log('longuest qery item', query.reduce(function (a, b) { return a.length > b.length ? a : b }).length)
       // is it in the first 400 chars?
+      console.log('condition', firstIndex - query.reduce(function (a, b) { return a.length > b.length ? a : b }).length)
       if (firstIndex - query.reduce(function (a, b) { return a.length > b.length ? a : b }).length > 400) {
       // check if the first index is at the end of the string, if so, we split from the end
         if (word.length - firstIndex < 400) {
@@ -60,8 +63,12 @@ Vue.filter('highlightAndTruncate', function (word, query, url, link) {
           word = '...' + word.substring(Math.min(...indexes) - 5, 395)
           console.log('word from the first index: ', word)
         }
+      } else {
+        word = word.slice(0, stop)
       }
     }
+    console.log('word after truncate: ', word)
+
     query.forEach((element) => {
       var check = new RegExp(element, 'ig')
       word = word.toString().replace(check, function (matchedText, a, b) {
@@ -75,4 +82,28 @@ Vue.filter('highlightAndTruncate', function (word, query, url, link) {
   if (word > 399) word = word + '... <a href="' + url + '">' + link + '</a>'
   console.log('word: ', word)
   return word
+})
+Vue.filter('highlight', function (word, query) {
+  if (typeof query === 'string') {
+    var check = new RegExp(query, 'ig')
+    return word.replace(check, function (matchedText, a, b) {
+      return (
+        '<strong style="color: darkslategray;background-color: yellow;">' +
+        matchedText +
+        '</strong>'
+      )
+    })
+  } else {
+    query.forEach((element) => {
+      var check = new RegExp(element, 'ig')
+      word = word.toString().replace(check, function (matchedText, a, b) {
+        return (
+          '<strong style="color: darkslategray;background-color: yellow;">' +
+          matchedText +
+          '</strong>'
+        )
+      })
+    })
+    return word
+  }
 })

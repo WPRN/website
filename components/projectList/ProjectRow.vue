@@ -38,7 +38,7 @@
             />
             <span
               v-if="filters.search.length>0"
-              v-html="$options.filters.highlightAndTruncate(item.name, filters.search.split(' '))"
+              v-html="$options.filters.highlight(item.name, filters.search.split(' '))"
             />
             <span
               v-else
@@ -59,7 +59,7 @@
         >
           <span
             v-if="filters.search.length>0"
-            v-html="$options.filters.highlightAndTruncate(item.contact_entity, filters.search.split(' '))"
+            v-html="$options.filters.highlight(item.contact_entity, filters.search.split(' '))"
           />
           <span
             v-else

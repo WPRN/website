@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-data-table
+      v-scroll="onScroll"
       :expanded.sync="expanded"
       :items="projects"
       :loading="loading"
@@ -15,7 +16,10 @@
     >
       <!-- FILTERS -->
       <template v-slot:top>
-        <ProjectFilters :loading="loading" />
+        <ProjectFilters
+          :loading="loading"
+          :offset="offsetTop"
+        />
         <div
           v-if="total"
           class="mt-3 ml-1"
@@ -86,6 +90,7 @@
           </div>
         </template>
       </template>
+
       <!-- RESULT ROW -->
       <template v-slot:item="{ item }">
         <ProjectRow
@@ -160,6 +165,7 @@ export default {
       projectId: '',
       nextToken: false,
       total: 0,
+      offsetTop: 0,
       options: {
         itemsPerPage: 20,
         page: 1,
@@ -497,6 +503,9 @@ export default {
         this.projects = projects.data.searchProjects.items
         this.loading = false
       } catch (error) {}
+    },
+    onScroll (e) {
+      this.offsetTop = e.target.scrollingElement.scrollTop
     }
   }
 }

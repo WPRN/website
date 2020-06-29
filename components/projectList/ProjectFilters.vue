@@ -1,8 +1,9 @@
 <template>
   <v-card
     flat
-    class="mt-6"
-    :class="{'myClass': pinned&&$vuetify.breakpoint.mdAndUp}"
+    :style="pinned && $vuetify.breakpoint.mdAndUp && offset >120? 'position:fixed;top:80px;width:100%;z-index:3':''"
+    :class="{'mt-6': !pinned || $vuetify.breakpoint.smAndDown}"
+    color="accent"
   >
     <!-- DEFAULT FILTERS -->
     <v-row no-gutters>
@@ -393,7 +394,11 @@ import {
 export default {
   components: {},
   props: {
-    loading: Boolean
+    loading: Boolean,
+    offset: {
+      type: Number,
+      default: 0
+    }
   },
   data () {
     return {
@@ -523,6 +528,7 @@ export default {
         }
       })
     }
+
   }
 }
 </script>
