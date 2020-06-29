@@ -63,11 +63,11 @@
       <li> Professor Calvin Ho, University of Hong Kong, Ethics Board member of Médecins Sans Frontières (Doctors Without Borders), Co-Head of the Accountability Policy Task Team of the Global Alliance for Genomics &amp; Health.</li>
       <li> Dr Enis Baris, M.D., Manager for Health, Nutrition and Population, Europe and Central Asia, Advisor, Global Health Policy and Systems, World Bank, USA</li>
       <li> Professor John Burns, University of Hong Kong</li>
-      <li> Professor Tin Tin Su, Monash University Malaysia,;Deputy Director of Southeast Asia Community Observatory</li>
+      <li> Professor Tin Tin Su, Monash University Malaysia;Deputy Director of Southeast Asia Community Observatory</li>
       <li> Professor Joan Kaufman , Senior Director for Academic Programs Tsinghua University; Harvard Medical School</li>
       <li> Dr Azmi Bishara, General Director, Arab Center for Research and Policy Studies (ACRPS), Qatar</li>
       <li> Dr Sarah Cook, Director, Institute for Global Development, UNSW, Sydney</li>
-      <li> Dr Selina Lo, Senior Editor, The Lancet; Research Fellow Sustainable Development Institute, Monash University</li>
+      <li> Dr Selina Lo, Senior Research Fellow, Monash Sustainable Development Institute; Consulting Editor, The Lancet </li>
       <li> Professor Thomas Abel, University of Bern, Inst. of Social and Preventive Medicine, Switzerland</li>
       <li> Dr Ryan Manuel, Director Silverhorn Investment Advisors, China; Managing Director of Official China Ltd.</li>
       <li> Professor Olena Hankivsky, Director, University of Melbourne, Centre for Health Equity, Australia</li>
