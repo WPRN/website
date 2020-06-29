@@ -35,6 +35,7 @@
       right
       :optional="!value"
       slider-size="8"
+      nuxt
     >
       <v-tab
         to="/#about-us"

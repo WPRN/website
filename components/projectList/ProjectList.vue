@@ -126,6 +126,8 @@ import ProjectExpandedRow from '~/components/projectList/ProjectExpandedRow'
 import ContactDialog from '~/components/contact/ContactDialog'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
+import stopWords from '~/assets/stopWords'
+
 import {
   zones,
   countries,
@@ -362,105 +364,117 @@ export default {
         if (this.filters.search && this.filters.search.length) {
           let or = []
           if (this.filters.search.includes(' ')) {
-            this.filters.search.split(' ').forEach((element) => {
-              or.push(
+            console.log('this.filters.search: ', this.filters.search)
+            let splitted = this.filters.search.split(' ')
+            console.log('splitted: ', splitted)
+            let filtered = splitted.filter(item => !stopWords.includes(item))
+            console.log('filtered: ', filtered)
+            if (filtered.length) {
+              filtered.forEach((element) => {
+                console.log('element: ', element)
+                or.push(
+                  {
+                    pubId: {
+                      eq: element
+                    }
+                  },
+                  {
+                    name: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    description: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    contact_lastname: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    contact_entity: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    name: {
+                      match: element
+                    }
+                  },
+                  {
+                    description: {
+                      match: element
+                    }
+                  },
+                  {
+                    contact_lastname: {
+                      match: element
+                    }
+                  },
+                  {
+                    contact_entity: {
+                      match: element
+                    }
+                  }
+                )
+              })
+              console.log('or: ', or)
+              filter.and.push({ or })
+            }
+          } else {
+            if (!stopWords.includes(this.filters.search)) {
+              or = [
                 {
                   pubId: {
-                    eq: element
+                    eq: this.filters.search
                   }
                 },
                 {
                   name: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   description: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   contact_lastname: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   contact_entity: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   name: {
-                    match: element
+                    match: this.filters.search
                   }
                 },
                 {
                   description: {
-                    match: element
+                    match: this.filters.search
                   }
                 },
                 {
                   contact_lastname: {
-                    match: element
+                    match: this.filters.search
                   }
                 },
                 {
                   contact_entity: {
-                    match: element
+                    match: this.filters.search
                   }
                 }
-              )
-            })
-          } else {
-            or = [
-              {
-                pubId: {
-                  eq: this.filters.search
-                }
-              },
-              {
-                name: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                description: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                contact_lastname: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                contact_entity: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                name: {
-                  match: this.filters.search
-                }
-              },
-              {
-                description: {
-                  match: this.filters.search
-                }
-              },
-              {
-                contact_lastname: {
-                  match: this.filters.search
-                }
-              },
-              {
-                contact_entity: {
-                  match: this.filters.search
-                }
-              }
-            ]
+              ]
+            }
+            filter.and.push({ or })
           }
-          filter.and.push({ or })
         }
         this.loading = true
         if (!filter.and.length) delete filter.and

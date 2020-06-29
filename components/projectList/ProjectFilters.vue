@@ -1,7 +1,8 @@
 <template>
   <v-card
     flat
-    class="mt-6"
+    :class="{'myClass': pinned&&$vuetify.breakpoint.mdAndUp}"
+    :class="{'mt-6': !pinned||vuetify.breakpoint.smAndDown}"
   >
     <!-- DEFAULT FILTERS -->
     <v-row no-gutters>
@@ -60,7 +61,7 @@
                 v-model="filters.verified"
                 label="Verified"
                 class="mx-3 filter"
-                :dense="$vuetify.breakpoint.mdAndDown"
+                :dense="$vuetify.breakpoint.mdAndDown||pinned"
                 :disabled="filters.featured === true"
                 @change="
                   $router.push({
@@ -88,7 +89,7 @@
                 v-model="filters.featured"
                 label="Featured"
                 class="ml-3 filter"
-                :dense="$vuetify.breakpoint.mdAndDown"
+                :dense="$vuetify.breakpoint.mdAndDown||pinned"
                 @change="updateCheckBox()"
                 v-on="on"
               />
@@ -96,13 +97,31 @@
             <span>Tick this to display only projects featured by the WPRN community</span>
           </v-tooltip>
           <v-spacer />
+          <!-- PIN BUTTON -->
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                v-show="showFilters&&$vuetify.breakpoint.mdAndUp"
+                outlined
+                color="white"
+                class="mr-3"
+                :dense="$vuetify.breakpoint.mdAndDown||pinned"
+                @click="pinned = !pinned"
+                v-on="on"
+              >
+                <v-icon>{{ pinned?'mdi-pin':'mdi-pin-off' }}</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ pinned?'Unpin the advanced filter menu':'Pin the advanced filter menu' }}</span>
+          </v-tooltip>
+
           <!-- RESET FILTERS BUTTON -->
           <v-btn
             v-if="filtering&&showFilters"
             outlined
             color="white"
             class="mr-3 filter"
-            :dense="$vuetify.breakpoint.mdAndDown"
+            :dense="$vuetify.breakpoint.mdAndDown||pinned"
             @click="
               filters = {
                 search: '',
@@ -127,7 +146,7 @@
             outlined
             color="white"
             :class="{ 'mr-4': $vuetify.breakpoint.mdAndUp }"
-            :dense="$vuetify.breakpoint.mdAndDown"
+            :dense="$vuetify.breakpoint.mdAndDown||pinned"
             @click="showFilters = !showFilters"
           >
             <template v-if="showFilters">
@@ -385,6 +404,7 @@ export default {
       state,
       thematics,
       showFilters: this.$route.query && !!Object.keys(this.$route.query).length,
+      pinned: false,
       filtering: (this.$route.query && !!Object.keys(this.$route.query).length),
       filters: {
         field:

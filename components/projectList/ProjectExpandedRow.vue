@@ -74,15 +74,15 @@
                 class="font-weight-medium body-1 mb-0"
                 v-html="
                   $options.filters.nl2br(
-                    $options.filters.highlight(
-                      $options.filters.truncate(
+                    $options.filters.truncate(
+                      $options.filters.highlight(
                         project.description,
-                        400,
-                        '(read more)',
-                        '/item/' + project.pubId
+                        filters.search.split(' ')
                       ),
-                      filters.search.split(' ')
-                    )
+                      400,
+                      '(read more)',
+                      '/item/' + project.pubId
+                    ),
                   )
                 "
               />
