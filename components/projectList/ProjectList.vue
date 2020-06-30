@@ -12,6 +12,7 @@
       :footer-props="{ itemsPerPageOptions: [5, 10, 20, 50, 100] }"
       :headers-length="6"
       :dense="$vuetify.breakpoint.mdAndDown"
+      @update:page="$vuetify.goTo(0)"
     >
       <!-- FILTERS -->
       <template v-slot:top>
