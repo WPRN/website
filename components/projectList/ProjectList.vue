@@ -367,7 +367,8 @@ export default {
             console.log('this.filters.search: ', this.filters.search)
             let splitted = this.filters.search.split(' ')
             console.log('splitted: ', splitted)
-            let filtered = splitted.filter(item => !stopWords.includes(item))
+            // remove stop words and words with less that 3 chars
+            let filtered = splitted.filter(item => !stopWords.includes(item) && item.length > 2)
             console.log('filtered: ', filtered)
             if (filtered.length) {
               filtered.forEach((element) => {

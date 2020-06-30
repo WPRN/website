@@ -893,7 +893,7 @@
           <v-icon>mdi-send</v-icon>
         </v-btn>
       </v-stepper-content>
-      <feedbackModal
+      <feedback-modal
         :open="feedbackModal"
         @cancel="feedbackModal= false"
         @update="feedbackModal= false;project.feedback=$event; onSubmit()"
@@ -914,10 +914,10 @@ import { alpha, pattern, email } from '~/assets/regex'
 import { newProject, editProject } from '~/graphql/mutations'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
-import feedbackModal from '~/components/projectForm/feedbackModal'
+import FeedbackModal from '~/components/projectForm/FeedbackModal'
 export default {
   components: {
-    feedbackModal
+    FeedbackModal
   },
   props: {
     projectInput: Object,

@@ -1,7 +1,6 @@
 <template>
   <v-card
     flat
-    :class="{'myClass': pinned&&$vuetify.breakpoint.mdAndUp}"
     :class="{'mt-6': !pinned||vuetify.breakpoint.smAndDown}"
   >
     <!-- DEFAULT FILTERS -->
