@@ -364,15 +364,13 @@ export default {
         if (this.filters.search && this.filters.search.length) {
           let or = []
           if (this.filters.search.includes(' ')) {
-            console.log('this.filters.search: ', this.filters.search)
             let splitted = this.filters.search.split(' ')
-            console.log('splitted: ', splitted)
+
             // remove stop words and words with less that 3 chars
             let filtered = splitted.filter(item => !stopWords.includes(item) && item.length > 2)
-            console.log('filtered: ', filtered)
+
             if (filtered.length) {
               filtered.forEach((element) => {
-                console.log('element: ', element)
                 or.push(
                   {
                     pubId: {
@@ -421,7 +419,7 @@ export default {
                   }
                 )
               })
-              console.log('or: ', or)
+
               filter.and.push({ or })
             }
           } else {

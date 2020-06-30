@@ -37,38 +37,29 @@ Vue.filter('nl2br', (str) => {
 Vue.filter('highlightAndTruncate', function (word, query, url, link) {
   try {
     // remove stop words
-    console.log('query: ', query)
-    query = query.filter(item => !stopWords.includes(item) && item.length > 2)
-    console.log('query after filter: ', query)
-    if (query.length) {
-      console.log('word BEFORE truncate: ', word)
 
-      console.log('query has length')
+    query = query.filter(item => !stopWords.includes(item) && item.length > 2)
+
+    if (query.length) {
       if (word.length > 400) {
-        console.log('word is more than 400 and query is: ', query)
         // calculate matches indexes
         let indexes = []
         query.forEach((element, index) => {
           if (word.indexOf(element)) indexes.push(word.indexOf(element))
         })
-        console.log('indexes: ', indexes)
 
         // is there a match?
         if (indexes.length) {
           let firstIndex = Math.min(...indexes)
-          console.log('firstIndex: ', firstIndex)
-          console.log('longuest qery item', query.reduce(function (a, b) { return a.length > b.length ? a : b }).length)
-          console.log('condition', firstIndex - query.reduce(function (a, b) { return a.length > b.length ? a : b }).length)
+
           // is it in the first 400 chars?
           if (firstIndex - query.reduce(function (a, b) { return a.length > b.length ? a : b }).length > 400) {
             // check if the first index is at the end of the string, if so, we split from the end
             if (word.length - firstIndex < 400) {
               word = '...' + word.substring(word.length - 400, word.length)
-              console.log('word from the end: ', word)
             } else {
               // if not, we shift the string to its start
               word = '...' + word.substring(firstIndex - 5, 395 + firstIndex)
-              console.log('word from the first index: ', word)
             }
           } else {
             word = word.slice(0, 400)
@@ -76,10 +67,8 @@ Vue.filter('highlightAndTruncate', function (word, query, url, link) {
         } else { // no match, let's just truncate
           word = word.slice(0, 400)
         }
-        console.log('QUERYRYRYYRY:console.log(); ', query)
 
         query.forEach((element) => {
-          console.log('element replaced: ', element)
           var check = new RegExp(element, 'ig')
           word = word.toString().replace(check, function (matchedText, a, b) {
             return (
@@ -92,10 +81,10 @@ Vue.filter('highlightAndTruncate', function (word, query, url, link) {
       }
     }
     word = word + '... <a href="' + url + '">' + link + '</a>'
-    console.log('final word: ', word)
+
     return word
   } catch (error) {
-    console.log('error: ', error)
+
   }
 })
 Vue.filter('highlight', function (word, query) {
