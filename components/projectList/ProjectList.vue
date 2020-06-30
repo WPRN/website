@@ -209,7 +209,7 @@ export default {
     },
     '$route.query' () {
       this.filtering = false
-      let previousFilters = JSON.parse(JSON.stringify(this.filters))
+      const previousFilters = JSON.parse(JSON.stringify(this.filters))
       Object.keys(this.filters).forEach((key) => {
         if (typeof this.$route.query[key] !== 'undefined') {
           this.filters[key] = JSON.parse(this.$route.query[key])
@@ -283,7 +283,7 @@ export default {
           }
         }
 
-        let filter = { and: [] }
+        const filter = { and: [] }
         if (this.filters.featured) {
           filter.status = {
             eq: 'xFEATURED'
@@ -304,7 +304,7 @@ export default {
           if (this.filters.zone.length === 1) {
             filter.zone = { matchPhrase: this.filters.zone }
           } else {
-            let or = []
+            const or = []
             this.filters.zone.forEach((zone) => {
               or.push({ zone: { matchPhrase: zone } })
             })
@@ -316,7 +316,7 @@ export default {
           if (this.filters.type.length === 1) {
             filter.type = { matchPhrase: this.filters.type }
           } else {
-            let or = []
+            const or = []
             this.filters.type.forEach((type) => {
               or.push({ type: { matchPhrase: type } })
             })
@@ -328,7 +328,7 @@ export default {
           if (this.filters.country.length === 1) {
             filter.country = { matchPhrase: this.filters.country }
           } else {
-            let or = []
+            const or = []
             this.filters.country.forEach((country) => {
               or.push({ country: { matchPhrase: country } })
             })
@@ -339,7 +339,7 @@ export default {
           if (this.filters.field.length === 1) {
             filter.field = { matchPhrase: this.filters.field }
           } else {
-            let or = []
+            const or = []
             this.filters.field.forEach((field) => {
               or.push({ field: { matchPhrase: field } })
             })
@@ -355,7 +355,7 @@ export default {
           if (this.filters.thematics.length === 1) {
             filter.thematics = { matchPhrase: this.filters.thematics }
           } else {
-            let or = []
+            const or = []
             this.filters.thematics.forEach((thematics) => {
               or.push({ thematics: { matchPhrase: thematics } })
             })
@@ -365,10 +365,10 @@ export default {
         if (this.filters.search && this.filters.search.length) {
           let or = []
           if (this.filters.search.includes(' ')) {
-            let splitted = this.filters.search.split(' ')
+            const splitted = this.filters.search.split(' ')
 
             // remove stop words and words with less that 3 chars
-            let filtered = splitted.filter(item => !stopWords.includes(item) && item.length > 2)
+            const filtered = splitted.filter(item => !stopWords.includes(item) && item.length > 2)
 
             if (filtered.length) {
               filtered.forEach((element) => {
@@ -486,7 +486,7 @@ export default {
           (this.options.page - 1) *
           this.options.itemsPerPage
         ).toString()
-        options['sort'] = { field: 'status', direction: 'desc' }
+        options.sort = { field: 'status', direction: 'desc' }
 
         const projects = await client.query({
           query: gql(queries.searchProjects),

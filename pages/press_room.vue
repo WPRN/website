@@ -221,7 +221,7 @@
 </template>
 <script>
 import BackButton from '~/components/navigation/BackButton'
-import {socialIcons} from '~/assets/data'
+import { socialIcons } from '~/assets/data'
 export default {
   layout: 'page',
   components: {

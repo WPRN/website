@@ -453,7 +453,7 @@ export default {
     focusSearch () {
       this.filters.searching = !this.filters.searching
       setTimeout(() => {
-        this.$refs['search_field'].focus()
+        this.$refs.search_field.focus()
       }, 1000)
     },
     updateCheckBox () {
