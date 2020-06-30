@@ -920,7 +920,10 @@ export default {
     FeedbackModal
   },
   props: {
-    projectInput: Object,
+    projectInput: {
+      type: Object,
+      default: () => {}
+    },
     editMode: Boolean
   },
   data () {
@@ -1092,7 +1095,7 @@ export default {
       /*       this.$emit("WorkInProgressDialogToggle"); */
       try {
         this.loading = true
-        let args = this.project
+        const args = this.project
 
         Object.keys(this.project).forEach((key) => {
           if (!args[key] || args[key].length === 0) delete args[key]

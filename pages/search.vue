@@ -18,7 +18,7 @@
       app
       @closeDrawer="drawer=!drawer"
     />
-    <v-content
+    <v-main
       class="pt-3"
     >
       <v-row
@@ -32,7 +32,7 @@
           </v-card>
         </v-col>
       </v-row>
-    </v-content>
+    </v-main>
     <v-fab-transition>
       <v-btn
         v-if="$vuetify.breakpoint.mdAndUp"

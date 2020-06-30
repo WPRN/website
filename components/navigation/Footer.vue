@@ -88,7 +88,7 @@
 
 <script>
 import Credits from '~/components/navigation/Credits'
-import {socialIcons} from '~/assets/data'
+import { socialIcons } from '~/assets/data'
 export default {
   components: { Credits },
   data () {

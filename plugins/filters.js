@@ -28,7 +28,7 @@ Vue.filter('truncate', (text, stop, link, url) => {
 })
 
 Vue.filter('nl2br', (str) => {
-  var breakTag = '<br>'
+  const breakTag = '<br>'
   return (str + '').replace(
     /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,
     '$1' + breakTag + '$2'
@@ -43,14 +43,14 @@ Vue.filter('highlightAndTruncate', function (word, query, url, link) {
     if (query.length) {
       if (word.length > 400) {
         // calculate matches indexes
-        let indexes = []
+        const indexes = []
         query.forEach((element, index) => {
           if (word.indexOf(element)) indexes.push(word.indexOf(element))
         })
 
         // is there a match?
         if (indexes.length) {
-          let firstIndex = Math.min(...indexes)
+          const firstIndex = Math.min(...indexes)
 
           // is it in the first 400 chars?
           if (firstIndex - query.reduce(function (a, b) { return a.length > b.length ? a : b }).length > 400) {

@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import AWSAppSyncClient from 'aws-appsync'
 import awsconfig from '~/aws-exports'

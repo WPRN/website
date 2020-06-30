@@ -7,6 +7,7 @@ export default {
     host: '0.0.0.0' // par défaut: localhost
   },
   mode: 'spa',
+  target: 'static',
   /*
    ** Headers of the page
    */
@@ -120,7 +121,9 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxtjs/vuetify'], /* , '@nuxtjs/google-analytics' */
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify'], /* , '@nuxtjs/google-analytics' */
   /* googleAnalytics: {
     id: 'UA-162015115-1'
     /*    dev: false,
@@ -159,6 +162,15 @@ export default {
           primary: colors.blue,
           accent: colors.grey.darken3,
           secondary: colors.blue.lighten3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        },
+        light: {
+          primary: '#42a5f6',
+          secondary: '#050b1f',
+          accent: '#204165',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,

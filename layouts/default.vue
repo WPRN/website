@@ -11,14 +11,14 @@
       @about="$router.push({ path: '/', hash: 'about-us' })"
       @list="$router.push({ path: '/search' })"
     />
-    <v-content>
+    <v-main>
       <nuxt />
       <recaptcha
         @error="onError"
         @success="onSuccess"
         @expired="onExpired"
       />
-    </v-content>
+    </v-main>
     <recaptcha
       @error="onError"
       @success="onSuccess"

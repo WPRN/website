@@ -120,9 +120,19 @@ export default {
   components: {
   },
   props: {
-    project: Object,
-    filters: Object,
-    expanded: Array
+    project: {
+      type: Object,
+      default: () => {}
+    },
+    pageMode: Boolean,
+    filters: {
+      type: Object,
+      default: () => {}
+    },
+    expanded: {
+      type: Array,
+      default: () => []
+    }
   },
   data () {
     return {}
