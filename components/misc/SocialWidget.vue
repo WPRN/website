@@ -54,7 +54,10 @@
 <script>
 export default {
   props: {
-    project: Object
+    project: {
+      type: Object,
+      default: () => {}
+    }
   },
   data () {
     return {

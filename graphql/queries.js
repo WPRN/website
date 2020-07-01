@@ -48,11 +48,6 @@ export const getProject = /* GraphQL */ `
       createdAt
       state
       thematics
-      authors {
-        firstname
-        lastname
-        institution
-      }
       updatedAt
     }
   }

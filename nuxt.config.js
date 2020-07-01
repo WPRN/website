@@ -110,7 +110,6 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/timeago',
     '~plugins/filters',
     '~plugins/amplify',
     '~/plugins/jsonld',

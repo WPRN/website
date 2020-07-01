@@ -920,7 +920,10 @@ export default {
     FeedbackModal
   },
   props: {
-    projectInput: Object,
+    projectInput: {
+      type: Object,
+      default: () => {}
+    },
     editMode: Boolean
   },
   data () {

@@ -68,7 +68,7 @@
           color="red"
           :loading="loading"
           :disabled="deleteFlag.trim().toLowerCase()!=='remove'"
-          @click="removeProject()"
+          @click="removeThisProject()"
         >
           Remove my project from WPRN
         </v-btn>
@@ -91,7 +91,7 @@ export default {
     }
   },
   methods: {
-    async removeProject () {
+    async removeThisProject () {
       try {
         this.loading = true
 
