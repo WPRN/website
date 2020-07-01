@@ -42,18 +42,11 @@
             class="ml-3 mt-3 pb-3"
             flat
           >
-            <v-card-title class="pl-0 headline">
-              <!--  BackButton takes one col -->
-              <BackButton url="/#search" />
-              <v-col cols="11">
-                Edit your project
-              </v-col>
+            <v-card-title class=" headline">
+              Edit your project
+              <v-spacer />
+              <delete-project-modal :project="project" />
             </v-card-title>
-            <v-card-subtitle>
-              The delete feature will be available soon. Meanwhile, you can <nuxt-link to="/#contact">
-                contact us
-              </nuxt-link> to request its removal.
-            </v-card-subtitle>
             <v-divider />
             <v-card-text
               class="pb-0 white--text align-center"
@@ -87,17 +80,17 @@
 <script>
 import ProjectForm from '~/components/projectForm/ProjectForm'
 import ProjectUpdatedWindow from '~/components/projectForm/ProjectUpdatedWindow'
+import DeleteProjectModal from '~/components/projectList/DeleteProjectModal'
 import * as queries from '~/graphql/queries'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
-import BackButton from '~/components/navigation/BackButton'
 
 export default {
   layout: 'page',
   components: {
     ProjectForm,
     ProjectUpdatedWindow,
-    BackButton
+    DeleteProjectModal
   },
   data () {
     return {
@@ -105,7 +98,8 @@ export default {
       ready: false,
       checking: true,
       error: false,
-      done: false
+      done: false,
+      deleting: false
     }
   },
   async mounted () {
