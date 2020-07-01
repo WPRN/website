@@ -29,7 +29,7 @@
                   class="v-select__selection v-select__selection--comma"
                 >
                   {{ item }}
-                  <template v-if="index < 2">
+                  <template v-if="index < 2 && index < field.length-1">
                     ,
                   </template>
                 </div>
@@ -75,7 +75,7 @@
                   class="v-select__selection v-select__selection--comma"
                 >
                   {{ item }}
-                  <template v-if="index < 2">
+                  <template v-if="index < 2 && index < selectedThematics.length-1">
                     ,
                   </template>
                 </div>
@@ -107,7 +107,7 @@
                   class="v-select__selection v-select__selection--comma"
                 >
                   {{ item }}
-                  <template v-if="index < 2">
+                  <template v-if="index < 2 && index < type.length-1">
                     ,
                   </template>
                 </div>

@@ -64,7 +64,7 @@
                   class="v-select__selection v-select__selection--comma"
                 >
                   {{ item }}
-                  <template v-if="index < 4">
+                  <template v-if="index < 4 && index < country.length-1">
                     ,
                   </template>
                 </div>
@@ -199,6 +199,8 @@ export default {
           this.zone.length === 1 &&
           this.zone.includes('worldwide')
         ) {
+          // prevent copy by reference from store
+          this.continent = this.continent.slice()
           this.country.forEach((country) => {
             Object.keys(this.countries).forEach((cont) => {
               if (this.countries[cont].includes(country) &&

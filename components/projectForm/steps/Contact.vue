@@ -8,23 +8,27 @@
     >
       <v-form lazy-validation>
         <v-row>
-          <v-alert
-            type="info"
-            align="left"
-            color="gray lighten-4"
+          <v-col
+            cols="12"
           >
-            <template v-if="editMode">
-              Your email address is the only element of your project that
-              you cannot change.
-            </template>
-            <template v-else>
-              WPRN will not disclose online nor transfer or sell
-              contributors’ or referents’ email addresses to any third
-              party. Potential contact requests will be redirected by our
-              servers to guarantee that their personal data is not made
-              public.
-            </template>
-          </v-alert>
+            <v-alert
+              type="info"
+              align="left"
+              color="gray lighten-4"
+            >
+              <template v-if="editMode">
+                Your email address is the only element of your project that
+                you cannot change.
+              </template>
+              <template v-else>
+                WPRN will not disclose online nor transfer or sell
+                contributors’ or referents’ email addresses to any third
+                party. Potential contact requests will be redirected by our
+                servers to guarantee that their personal data is not made
+                public.
+              </template>
+            </v-alert>
+          </v-col>
 
           <v-col
             cols="12"
