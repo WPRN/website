@@ -8,6 +8,7 @@ export const state = () => ({
     thematics: '',
     type: '',
     zone: '',
+    continent: '',
     country: '',
     location: '',
     contact_firstname: '',

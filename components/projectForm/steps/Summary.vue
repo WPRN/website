@@ -345,7 +345,7 @@
       :loading="loading"
       :disabled="
         !(
-          $store.state.form.project.name &&
+          /* $store.state.form.project.name &&
           $store.state.form.project.name.valid &&
           $store.state.form.project.url &&
           $store.state.form.project.url.valid &&
@@ -365,7 +365,7 @@
           $store.state.form.project.entity &&
           $store.state.form.project.entity.valid &&
           $store.state.form.project.zone &&
-          $store.state.form.project.zone.valid &&
+          $store.state.form.project.zone.valid && */
           $refs.agreedRef &&
           $refs.agreedRef.valid
         )

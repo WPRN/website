@@ -88,7 +88,7 @@
     </v-card>
     <v-btn
       text
-      @click="$store.commit('form/updateProject', {zone, country, location});$emit('nextStep', 2)"
+      @click="$store.commit('form/updateProject', {zone, continent, country, location});$emit('nextStep', 2)"
     >
       Previous
     </v-btn>
@@ -96,7 +96,7 @@
       color="accent"
       :disabled="!($refs.zone && $refs.zone.valid)"
       x-large
-      @click="$store.commit('form/updateProject', {zone, country, location});$emit('nextStep', 4)"
+      @click="$store.commit('form/updateProject', {zone, continent, country, location});$emit('nextStep', 4)"
     >
       Continue&nbsp;
       <v-icon>mdi-chevron-right</v-icon>
@@ -119,6 +119,7 @@ export default {
       zones,
       countries,
       zone: this.editMode ? this.projectInput.zone : '',
+      continent: this.editMode ? this.projectInput.continent : '',
       country: this.editMode ? this.projectInput.country : '',
       location: this.editMode ? this.projectInput.location : '',
       countrySet: Object.keys(countries)
@@ -138,6 +139,7 @@ export default {
   methods: {
     setCountries () {
       let newCountrySet = []
+      this.continent = []
       // Remove worldwide if a continent is selected
       if (
         this.zone.length > 1 &&
@@ -171,10 +173,42 @@ export default {
         this.country = this.country.filter((country) =>
           newCountrySet.includes(country)
         )
+        if (
+          this.zone.length === 1 &&
+          this.zone.includes('worldwide')
+        ) {
+          this.country.forEach((country) => {
+            Object.keys(this.countries).forEach((cont) => {
+              if (this.countries[cont].includes(country) &&
+              !this.continent.includes(cont)) {
+                this.continent.push(cont)
+              }
+            })
+          })
+        } else if (this.zone.length > 1) {
+          this.zone.forEach((zone) => {
+            this.continent.push(zone)
+          })
+        }
       }
       this.countrySet = newCountrySet
     },
     cleanModel () {
+      if (this.country.length > 0) {
+        if (
+          this.zone.length === 1 &&
+          this.zone.includes('worldwide')
+        ) {
+          this.country.forEach((country) => {
+            Object.keys(this.countries).forEach((cont) => {
+              if (this.countries[cont].includes(country) &&
+                !this.continent.includes(cont)) {
+                this.continent.push(cont)
+              }
+            })
+          })
+        }
+      }
       return (this.country = this.country.filter((item) =>
         this.countrySet.includes(item)
       ))

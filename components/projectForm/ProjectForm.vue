@@ -142,7 +142,7 @@ export default {
     return {
       loading: false,
       FeedbackModal: false,
-      formStep: 2
+      formStep: 1
     }
   },
   async mounted () {
