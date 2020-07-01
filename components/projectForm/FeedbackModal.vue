@@ -55,7 +55,7 @@ export default {
   data () {
     return {
       // TODO add rules for feedback (length min max) + counters on the field
-      feedback: ``
+      feedback: ''
     }
   },
   methods: {

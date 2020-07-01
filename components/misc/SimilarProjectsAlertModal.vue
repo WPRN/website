@@ -180,9 +180,9 @@ export default {
           })
 
         this.loading = false
-        this.$store.dispatch('toast', `Your edit request has been sent.`)
+        this.$store.dispatch('toast', 'Your edit request has been sent.')
         if (this.$route.name === 'pending-id') {
-          this.$router.push({path: '/pending'})
+          this.$router.push({ path: '/pending' })
         }
       } catch (error) {
         this.errorFlag = true

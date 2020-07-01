@@ -57,7 +57,23 @@
               no-data-text="No country matching your search"
               clearable
               @change="cleanModel()"
-            />
+            >
+              <template v-slot:selection="{ item, index }">
+                <div
+                  v-if="index < 5"
+                  class="v-select__selection v-select__selection--comma"
+                >
+                  {{ item }}
+                  <template v-if="index < 4">
+                    ,
+                  </template>
+                </div>
+                <span
+                  v-if="index === 5"
+                  class=" caption"
+                >(+{{ country.length - 5 }} {{ country.length - 3 === 1 ?'other':'others' }})</span>
+              </template>
+            </v-combobox>
           </v-col>
           <v-col cols="12">
             <v-text-field

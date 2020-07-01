@@ -148,7 +148,7 @@ export default {
       /*  this.$emit("WorkInProgressDialogToggle"); */
       try {
         this.sending = true
-        let args = this.contact
+        const args = this.contact
 
         if (this.id) args.relatedProjectId = this.id
         Object.keys(this.contact).forEach((key) => {

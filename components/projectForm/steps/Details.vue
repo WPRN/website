@@ -22,7 +22,23 @@
               multiple
               :rules="requiredRules"
               @change="cleanModel('field')"
-            />
+            >
+              <template v-slot:selection="{ item, index }">
+                <div
+                  v-if="index < 3"
+                  class="v-select__selection v-select__selection--comma"
+                >
+                  {{ item }}
+                  <template v-if="index < 2">
+                    ,
+                  </template>
+                </div>
+                <span
+                  v-if="index === 3"
+                  class="caption"
+                >(+{{ field.length - 3 }} {{ field.length - 3 === 1 ?'other':'others' }})</span>
+              </template>
+            </v-combobox>
           </v-col>
           <v-col
             cols="12"
@@ -52,7 +68,23 @@
               clearable
               multiple
               @change="cleanModel('selectedThematics')"
-            />
+            >
+              <template v-slot:selection="{ item, index }">
+                <div
+                  v-if="index < 3"
+                  class="v-select__selection v-select__selection--comma"
+                >
+                  {{ item }}
+                  <template v-if="index < 2">
+                    ,
+                  </template>
+                </div>
+                <span
+                  v-if="index === 3"
+                  class="caption"
+                >(+{{ selectedThematics.length - 3 }} {{ selectedThematics.length - 3 === 1 ?'other':'others' }})</span>
+              </template>
+            </v-select>
           </v-col>
           <v-col
             cols="12"
@@ -68,7 +100,23 @@
               multiple
               :rules="requiredRules"
               @change="cleanModel('type')"
-            />
+            >
+              <template v-slot:selection="{ item, index }">
+                <div
+                  v-if="index < 3"
+                  class="v-select__selection v-select__selection--comma"
+                >
+                  {{ item }}
+                  <template v-if="index < 2">
+                    ,
+                  </template>
+                </div>
+                <span
+                  v-if="index === 3"
+                  class=" caption"
+                >(+{{ type.length - 3 }} {{ type.length - 3 === 1 ?'other':'others' }})</span>
+              </template>
+            </v-select>
           </v-col>
           <!--  <template v-if="project.type.includes('Conference / Webinar')">
             <v-col cols="12" md="6">
