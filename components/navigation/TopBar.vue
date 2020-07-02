@@ -31,11 +31,11 @@
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
       id="main-app-bar"
+      value="value"
       light
       right
       :optional="!value"
       slider-size="8"
-      nuxt
     >
       <v-tab
         to="/#about-us"

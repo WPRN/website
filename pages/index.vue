@@ -1,6 +1,5 @@
 <template>
   <div>
-    <TopBar />
     <Splash />
     <About
       @goToRegister=" $vuetify.goTo('#register', { offset: 100 })
@@ -158,7 +157,6 @@ import ShareProject from '~/components/mainPage/ShareProject'
 import Who from '~/components/mainPage/Who'
 import ProjectPostedWindow from '~/components/projectForm/ProjectPostedWindow'
 import ContactPostedWindow from '~/components/contact/ContactPostedWindow'
-import TopBar from '~/components/navigation/TopBar'
 
 /* import WorkInProgressDialog from "~/components/navigation/WorkInProgressDialog"; */
 import { zones } from '~/assets/data'
@@ -172,8 +170,7 @@ export default {
     Stats,
     ShareProject,
     Who,
-    Splash,
-    TopBar
+    Splash
   },
   data () {
     return {
@@ -208,8 +205,8 @@ export default {
   },
   methods: {
     onIntersect (event) {
-      /*       if (event === 'REGISTER') this.tabsValue = 'register'
-      if (event === 'ABOUT') this.tabsValue = 'about' */
+      if (event === 'REGISTER') this.tabsValue = '/#register'
+      if (event === 'ABOUT') this.tabsValue = '/#about'
       // More information about these options
       // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     }
@@ -222,7 +219,7 @@ export default {
 border: 0.5px solid white;
     .main_title {
     font-size: 3em;
-    font-family: 'Poiret One', cursive!important;
+    font-family: 'Poiret One', 'sans-serif'!important;
     text-align: center;
     }
      .main_subtitle {

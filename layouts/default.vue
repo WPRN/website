@@ -1,7 +1,6 @@
 <template>
   <v-app v-scroll="onScroll">
     <TopBar
-      v-if="$route.name!=='index'"
       @closeDrawer="drawer=!drawer"
     />
     <NavigationDrawer
