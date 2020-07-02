@@ -128,3 +128,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+>>>.v-textarea .theme--light.v-counter {
+  color: white;
+}
+</style>

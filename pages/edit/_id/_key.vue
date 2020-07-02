@@ -44,7 +44,7 @@
           >
             <v-card-title class="pl-0 headline">
               <!--  BackButton takes one col -->
-              <BackButton url="/#search" />
+              <back-button url="/#search" />
               <v-col cols="11">
                 Edit your project
               </v-col>
@@ -65,13 +65,13 @@
                   justify="center"
                 >
                   <v-col cols="12">
-                    <ProjectForm
+                    <project-form
                       v-if="project && !done"
-                      edit-mode
-                      :project-input="project"
+                      editMode
+                      :projectInput="project"
                       @complete="done = true"
                     />
-                    <ProjectUpdatedWindow v-else />
+                    <project-updated-window v-else />
                   </v-col>
                 </v-row>
               </v-expand-transition>
