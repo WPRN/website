@@ -90,33 +90,14 @@
             cols="12"
             md="6"
           >
-            <v-select
-              ref="type"
-              v-model="type"
-              :items="types"
-              label="Project type(s)*"
+            <v-text-field
+              ref="url"
+              v-model="url"
+              :label="extendedTypes.find(item => item.urlMandatory && $store.state.form.project.type.includes(item.name))?'Project URL*':'Project URL'"
               solo
-              clearable
-              multiple
-              :rules="requiredRules"
-              @change="cleanModel('type')"
-            >
-              <template v-slot:selection="{ item, index }">
-                <div
-                  v-if="index < 3"
-                  class="v-select__selection v-select__selection--comma"
-                >
-                  {{ item }}
-                  <template v-if="index < 2 && index < type.length-1">
-                    ,
-                  </template>
-                </div>
-                <span
-                  v-if="index === 3"
-                  class=" caption"
-                >(+{{ type.length - 3 }} {{ type.length - 3 === 1 ?'other':'others' }})</span>
-              </template>
-            </v-select>
+              type="url"
+              :rules="urlRules"
+            />
           </v-col>
           <!--  <template v-if="project.type.includes('Conference / Webinar')">
             <v-col cols="12" md="6">
@@ -193,12 +174,12 @@
           $refs.field.valid &&
           $refs.state &&
           $refs.state.valid &&
-          $refs.type &&
-          $refs.type.valid
+          $refs.url &&
+          $refs.url.valid
         )
       "
       x-large
-      @click="$store.commit('form/updateProject', {field, state: selectedState, thematics: selectedThematics, type});$emit('nextStep', 3)"
+      @click="$store.commit('form/updateProject', {field, state: selectedState, thematics: selectedThematics, url});$emit('nextStep', 3)"
     >
       Continue&nbsp;
       <v-icon>mdi-chevron-right</v-icon>
@@ -207,11 +188,12 @@
 </template>
 <script>
 import {
-  types,
   fields,
   thematics,
-  state
+  state,
+  extendedTypes
 } from '~/assets/data'
+import { pattern } from '~/assets/regex'
 export default {
   props: {
     projectInput: Object,
@@ -220,14 +202,14 @@ export default {
   },
   data () {
     return {
-      types,
       fields,
       thematics,
       state,
+      extendedTypes,
       field: this.editMode ? this.projectInput.field : '',
       selectedState: this.editMode ? this.projectInput.state : '',
       selectedThematics: this.editMode ? this.projectInput.thematics : '',
-      type: this.editMode ? this.projectInput.type : '',
+      url: this.editMode ? this.projectInput.url : '',
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>
@@ -235,6 +217,21 @@ export default {
           value === true ||
           !!value.length ||
           'This field is required.'
+      ],
+      urlRules: [
+        (value) => {
+          if (extendedTypes.find(item => item.urlMandatory && this.$store.state.form.project.type.includes(item.name))) {
+            return ((value.length > 0 && pattern.test(value)) ||
+            'Invalid URL.')
+          } else {
+            return (
+              !value ||
+            value.length === 0 ||
+            (value.length > 0 && pattern.test(value)) ||
+            'Invalid URL.'
+            )
+          }
+        }
       ],
       showDateMenu: false,
       showTimeMenu: false

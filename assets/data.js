@@ -50,6 +50,7 @@ export const types = [
   { divider: true },
   'Other Ressource'
 ]
+
 export const extendedTypes = [
   {
     name: 'Quantitative survey',
@@ -220,6 +221,7 @@ export const extendedTypes = [
     teamMandatory: true
   }
 ]
+
 export const thematics = [
   'Aging, Demography',
   'Agriculture, Alimentation',
