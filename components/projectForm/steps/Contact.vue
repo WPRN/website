@@ -37,7 +37,7 @@
             <v-text-field
               ref="firstname"
               v-model="contact_firstname"
-              label="Contact firstname*"
+              :label="isRequireName() ? 'Contact firstname*' : 'Contact firstname'"
               solo
               :rules="contactNameRules"
               @blur="capitalize('contact_firstname')"
@@ -50,7 +50,7 @@
             <v-text-field
               ref="lastname"
               v-model="contact_lastname"
-              label="Contact lastname*"
+              :label="isRequireName() ? 'Contact lastname*' : 'Contact lastname'"
               solo
               :rules="contactNameRules"
               @blur="capitalize('contact_lastname')"
@@ -77,7 +77,7 @@
             <v-text-field
               ref="email"
               v-model="contact_email"
-              label="Contact Email*"
+              :label="isRequireName() ? 'Contact Email*' : 'Contact Email'"
               solo
               :rules="emailRules"
               @keyup.enter="
@@ -127,6 +127,9 @@
 </template>
 <script>
 import { alpha, email } from '~/assets/regex'
+import {
+  extendedTypes
+} from '~/assets/data'
 export default {
   props: {
     projectInput: Object,
@@ -134,10 +137,12 @@ export default {
   },
   data () {
     return {
+      extendedTypes,
       contact_firstname: this.editMode ? this.projectInput.contact_firstname : '',
       contact_lastname: this.editMode ? this.projectInput.contact_lastname : '',
       contact_email: this.editMode ? this.projectInput.contact_email : '',
       contact_entity: this.editMode ? this.projectInput.contact_entity : '',
+      team: this.editMode ? this.projectInput.team : '',
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>
@@ -147,7 +152,7 @@ export default {
           'This field is required.'
       ],
       contactNameRules: [
-        (value) => !!value || 'Required.',
+        (value) => !!value || !this.isRequireName() || 'Required.',
         (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
@@ -157,10 +162,10 @@ export default {
         }
       ],
       emailRules: [
-        (value) => !!value || 'Email address required.',
-        (value) => (value || '').length <= 61 || 'Max 60 characters',
+        (value) => !!value || !this.isRequireName() || 'Email address required.',
+        (value) => (value || '').length <= 60 || 'Max 60 characters',
         (value) => {
-          return email.test(value) || 'Invalid e-mail.'
+          return value.length === 0 || email.test(value) || 'Invalid e-mail.'
         }
       ]
     }
@@ -168,6 +173,9 @@ export default {
   methods: {
     capitalize (input) {
       return (this[input] = this[input].replace(/(?:^|[\s'-])\S/g, (a) => a.toUpperCase()))
+    },
+    isRequireName () {
+      return extendedTypes.some(item => item.requireName && this.$store.state.form.project.type.includes(item.name))
     }
   }
 }

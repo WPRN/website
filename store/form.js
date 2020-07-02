@@ -18,6 +18,7 @@ export const state = () => ({
     contact_lastname: '',
     contact_email: '',
     contact_entity: '',
+    team: '',
     feedback: ''
   }
 })
