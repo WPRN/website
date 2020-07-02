@@ -26,14 +26,32 @@
             cols="12"
             md="6"
           >
-            <v-text-field
-              ref="url"
-              v-model="url"
-              label="Project URL"
+            <v-select
+              ref="type"
+              v-model="type"
+              :items="types"
+              label="Project type(s)*"
               solo
-              type="url"
-              :rules="urlRules"
-            />
+              clearable
+              multiple
+              :rules="requiredRules"
+            >
+              <template v-slot:selection="{ item, index }">
+                <div
+                  v-if="index < 3"
+                  class="v-select__selection v-select__selection--comma"
+                >
+                  {{ item }}
+                  <template v-if="index < 2 && index < type.length-1">
+                    ,
+                  </template>
+                </div>
+                <span
+                  v-if="index === 3"
+                  class=" caption"
+                >(+{{ type.length - 3 }} {{ type.length - 3 === 1 ?'other':'others' }})</span>
+              </template>
+            </v-select>
           </v-col>
 
           <v-col cols="12">
@@ -71,14 +89,14 @@
           : !(
             $refs.name &&
             $refs.name.valid &&
-            $refs.url &&
-            $refs.url.valid &&
+            $refs.type &&
+            $refs.type.valid &&
             $refs.description &&
             $refs.description.valid
           )
       "
       x-large
-      @click="$store.commit('form/updateProject', {name, url, description});$emit('nextStep', 2)"
+      @click="$store.commit('form/updateProject', {name, type, description});$emit('nextStep', 2)"
     >
       Continue&nbsp;
       <v-icon>mdi-chevron-right</v-icon>
@@ -86,7 +104,9 @@
   </v-stepper-content>
 </template>
 <script>
-import { pattern } from '~/assets/regex'
+import {
+  types
+} from '~/assets/data'
 export default {
   props: {
     projectInput: Object,
@@ -94,8 +114,9 @@ export default {
   },
   data () {
     return {
+      types,
       name: this.editMode ? this.projectInput.name : '',
-      url: this.editMode ? this.projectInput.url : '',
+      type: this.editMode ? this.projectInput.type : '',
       description: this.editMode ? this.projectInput.description : '',
       nameRules: [
         (value) => !!value || 'Required.',
@@ -107,15 +128,13 @@ export default {
           return true
         }
       ],
-      urlRules: [
-        (value) => {
-          return (
-            !value ||
-            value.length === 0 ||
-            (value.length > 0 && pattern.test(value)) ||
-            'Invalid URL.'
-          )
-        }
+      requiredRules: [
+        (value) => !!value || 'This field is required.',
+        (value) =>
+          value === undefined ||
+          value === true ||
+          !!value.length ||
+          'This field is required.'
       ],
       descriptionRules: [
         (value) => !!value || 'A description is required.',
@@ -125,11 +144,15 @@ export default {
         (value) => value.length <= 2000 || 'Max 2000 characters'
       ]
     }
+  },
+  methods: {
+
   }
 }
 </script>
-<style scoped>
->>>.v-textarea .theme--light.v-counter {
+<style lang="scss" scoped>
+.v-messages.theme--light:not(.error--text) .theme--light.v-counter
+{
   color: white;
 }
 </style>
