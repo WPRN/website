@@ -56,7 +56,7 @@ export const extendedTypes = [
     name: 'Quantitative survey',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -64,7 +64,7 @@ export const extendedTypes = [
     name: 'Qualitative analysis',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -72,7 +72,7 @@ export const extendedTypes = [
     name: 'Case Study',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -80,7 +80,7 @@ export const extendedTypes = [
     name: 'Questionnaire',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -88,7 +88,7 @@ export const extendedTypes = [
     name: 'Simulation / Modeling',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -96,7 +96,7 @@ export const extendedTypes = [
     name: 'Dataset, Data Mining',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -104,7 +104,7 @@ export const extendedTypes = [
     name: 'Action Research',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -112,7 +112,7 @@ export const extendedTypes = [
     name: 'Call for Research Proposals',
     urlMandatory: true,
     dateTime: false,
-    TimeInterval: true,
+    timeInterval: true,
     requireName: false,
     teamMandatory: false
   },
@@ -120,7 +120,7 @@ export const extendedTypes = [
     name: 'Call for Collaboration',
     urlMandatory: true,
     dateTime: false,
-    TimeInterval: true,
+    timeInterval: true,
     requireName: false,
     teamMandatory: false
   },
@@ -128,7 +128,7 @@ export const extendedTypes = [
     name: 'Citizen/Participatory Science',
     urlMandatory: true,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -136,7 +136,7 @@ export const extendedTypes = [
     name: 'Grassroot Action',
     urlMandatory: false,
     dateTime: true,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -144,7 +144,7 @@ export const extendedTypes = [
     name: 'Scientific Paper',
     urlMandatory: true,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -152,7 +152,7 @@ export const extendedTypes = [
     name: 'Report',
     urlMandatory: true,
     dateTime: true,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -160,7 +160,7 @@ export const extendedTypes = [
     name: 'Policy Document',
     urlMandatory: true,
     dateTime: true,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -168,7 +168,7 @@ export const extendedTypes = [
     name: 'Regulation',
     urlMandatory: true,
     dateTime: true,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -176,7 +176,7 @@ export const extendedTypes = [
     name: 'Conference / Webinar',
     urlMandatory: true,
     dateTime: true,
-    TimeInterval: true,
+    timeInterval: true,
     requireName: true,
     teamMandatory: true
   },
@@ -184,7 +184,7 @@ export const extendedTypes = [
     name: 'Video',
     urlMandatory: true,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -192,7 +192,7 @@ export const extendedTypes = [
     name: 'Blog',
     urlMandatory: true,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -200,7 +200,7 @@ export const extendedTypes = [
     name: 'Press article',
     urlMandatory: true,
     dateTime: true,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -208,7 +208,7 @@ export const extendedTypes = [
     name: 'Other Ressource',
     urlMandatory: false,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: true,
     teamMandatory: true
   },
@@ -216,7 +216,7 @@ export const extendedTypes = [
     name: 'Research tracker',
     urlMandatory: true,
     dateTime: false,
-    TimeInterval: false,
+    timeInterval: false,
     requireName: false,
     teamMandatory: true
   }

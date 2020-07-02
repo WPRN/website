@@ -150,8 +150,8 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.v-messages.theme--light:not(.error--text) .theme--light.v-counter
+<style scoped>
+>>>.v-messages.theme--light:not(.error--text) + .theme--light.v-counter
 {
   color: white;
 }

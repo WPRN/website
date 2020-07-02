@@ -99,87 +99,161 @@
               :rules="urlRules"
             />
           </v-col>
-          <!--  <template v-if="project.type.includes('Conference / Webinar')">
-            <v-col cols="12" md="6">
+          <template v-if="isDateTime() && !isTimeInterval()">
+            <v-col
+              cols="12"
+              md="6"
+            >
               <v-menu
-                ref="dateMenu"
-                v-model="showDateMenu"
+                ref="menu"
+                v-model="menu"
                 :close-on-content-click="false"
-                :return-value.sync="project.date"
+                return-value.sync="date"
                 transition="scale-transition"
                 offset-y
                 min-width="290px"
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
-                    v-model="project.date"
-                    label="Date"
+                    ref="date"
+                    v-model="date"
+                    label="Project Date*"
                     prepend-inner-icon="mdi-calendar-check"
                     readonly
-                    v-on="on"
                     solo
-                  ></v-text-field>
+                    :rules="requiredRules"
+                    v-on="on"
+                  />
                 </template>
-                <v-date-picker v-model="project.date" no-title scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
-                  <v-btn text color="primary" @click="$refs.dateMenu.save(project.date)">OK</v-btn>
+                <v-date-picker
+                  v-model="date"
+                  no-title
+                  scrollable
+                >
+                  <v-spacer />
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="menu = false"
+                  >
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.menu.save(date)"
+                  >
+                    OK
+                  </v-btn>
                 </v-date-picker>
               </v-menu>
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                ref="time"
+                v-model="time"
+                label="Project Time Informations"
+                prepend-inner-icon="mdi-clock-outline"
+                solo
+                type="text"
+                counter="150"
+                :rules="timeInformationsRules"
+              />
+            </v-col>
+          </template>
+          <template v-if="isTimeInterval()">
+            <v-col
+              cols="12"
+              md="6"
+            >
               <v-menu
-                ref="timeMenu"
-                v-model="showTimeMenu"
+                ref="menu"
+                v-model="menu"
                 :close-on-content-click="false"
-                :return-value.sync="project.time"
+                return-value.sync="dates"
                 transition="scale-transition"
-                min-width="290px"
                 offset-y
+                min-width="290px"
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
-                    v-model="project.time"
-                    label="Time"
-                    prepend-inner-icon="mdi-clock"
+                    ref="dates"
+                    v-model="dateRangeText"
+                    label="Project Dates*"
+                    prepend-inner-icon="mdi-calendar-check"
                     readonly
                     solo
+                    :rules="requiredRules"
                     v-on="on"
-                  ></v-text-field>
+                  />
                 </template>
-                <v-time-picker
-                  v-if="showDateMenu"
-                  v-model="project.time"
+                <v-date-picker
+                  v-model="dates"
+                  range
                   no-title
                   scrollable
-                  @click:minute="$refs.timeMenu.save(project.time)"
-                ></v-time-picker>
+                >
+                  <v-spacer />
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="menu = false"
+                  >
+                    Cancel
+                  </v-btn>
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.menu.save(dates)"
+                  >
+                    OK
+                  </v-btn>
+                </v-date-picker>
               </v-menu>
             </v-col>
-          </template>-->
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                ref="time"
+                v-model="time"
+                label="Project Time Informations"
+                prepend-inner-icon="mdi-clock-outline"
+                solo
+                type="text"
+                counter="150"
+                :rules="timeInformationsRules"
+              />
+            </v-col>
+          </template>
         </v-row>
       </v-form>
     </v-card>
     <v-btn
       text
-      @click="$store.commit('form/updateProject', {field, state: selectedState, thematics: selectedThematics, type});$emit('nextStep', 1)"
+      @click="$store.commit('form/updateProject', {field, state: selectedState, thematics: selectedThematics, url, date, dates, time});$emit('nextStep', 1)"
     >
       Previous
     </v-btn>
     <v-btn
       color="accent"
-      :disabled="
-        !(
-          $refs.field &&
-          $refs.field.valid &&
-          $refs.state &&
-          $refs.state.valid &&
-          $refs.url &&
-          $refs.url.valid
-        )
-      "
+      :disabled="!(
+        $refs.field &&
+        $refs.field.valid &&
+        $refs.state &&
+        $refs.state.valid &&
+        $refs.url &&
+        $refs.url.valid &&
+        (isDateTime() && !isTimeInterval() ? $refs.date && $refs.date.valid : true) &&
+        (isTimeInterval() ? $refs.dates && $refs.dates.valid : true) &&
+        (isDateTime() || isTimeInterval() ? $refs.time && $refs.time.valid : true)
+      )"
       x-large
-      @click="$store.commit('form/updateProject', {field, state: selectedState, thematics: selectedThematics, url});$emit('nextStep', 3)"
+      @click="$store.commit('form/updateProject', {field, state: selectedState, thematics: selectedThematics, url, date, dates, time});$emit('nextStep', 3)"
     >
       Continue&nbsp;
       <v-icon>mdi-chevron-right</v-icon>
@@ -210,6 +284,10 @@ export default {
       selectedState: this.editMode ? this.projectInput.state : '',
       selectedThematics: this.editMode ? this.projectInput.thematics : '',
       url: this.editMode ? this.projectInput.url : '',
+      menu: false,
+      date: this.editMode ? this.projectInput.date : '',
+      dates: this.editMode ? this.projectInput.dates : [],
+      time: this.editMode ? this.projectInput.time : '',
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>
@@ -233,8 +311,14 @@ export default {
           }
         }
       ],
-      showDateMenu: false,
-      showTimeMenu: false
+      timeInformationsRules: [
+        (value) => value.length <= 150 || 'Max 150 characters'
+      ]
+    }
+  },
+  computed: {
+    dateRangeText () {
+      return this.dates.join(' ~ ')
     }
   },
   methods: {
@@ -244,7 +328,23 @@ export default {
           fields.includes(item)
         ))
       }
+    },
+    isDateTime () {
+      return extendedTypes.some(item => item.dateTime && this.$store.state.form.project.type.includes(item.name))
+    },
+    isTimeInterval () {
+      return extendedTypes.some(item => item.timeInterval && this.$store.state.form.project.type.includes(item.name))
     }
   }
 }
 </script>
+<style>
+.v-application .v-picker__body.theme--dark .v-date-picker-table__current.accent--text {
+  color: inherit !important;
+  caret-color: inherit !important;
+}
+.v-messages.theme--light:not(.error--text) + .theme--light.v-counter
+{
+ color: white;
+}
+</style>

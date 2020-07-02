@@ -1,12 +1,15 @@
 export const state = () => ({
   project: {
     name: '',
-    url: '',
+    type: '',
     description: '',
     field: '',
     state: '',
     thematics: '',
-    type: '',
+    url: '',
+    date: '',
+    dates: '',
+    time: '',
     zone: '',
     continent: '',
     country: '',
