@@ -24,7 +24,6 @@
             clearable
             solo
             dense
-            dark
             outlined
             max-width="400px;"
             @click:clear="
@@ -96,7 +95,7 @@
             <span>Tick this to display only projects featured by the WPRN community</span>
           </v-tooltip>
           <v-spacer />
-          <!-- PIN BUTTON -->
+          <!-- PIN BUTTON
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -113,12 +112,11 @@
             </template>
             <span>{{ pinned?'Unpin the advanced filter menu':'Pin the advanced filter menu' }}</span>
           </v-tooltip>
-
+ -->
           <!-- RESET FILTERS BUTTON -->
           <v-btn
             v-if="filtering&&showFilters"
             outlined
-            color="white"
             class="mr-3 filter"
             :dense="$vuetify.breakpoint.mdAndDown||pinned"
             @click="
@@ -143,7 +141,6 @@
           <v-btn
             v-if="!filtering"
             outlined
-            color="white"
             :class="{ 'mr-4': $vuetify.breakpoint.mdAndUp }"
             :dense="$vuetify.breakpoint.mdAndDown||pinned"
             @click="showFilters = !showFilters"

@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <p>Yes. We respect GDPR/ePR rules and even more.</p>
     <p>We do not track users or store any information outside of the projects definition scope. We do not use cookies. We do not disclose or sell email addresses.</p>
     <p>

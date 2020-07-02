@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <ul>
       <li>
         Provide a short abstract describing your organization

@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <ul>
       <li>Your project becomes visible to the global community via a new webpage on WPRN, with a link to your own.</li>
       <li>

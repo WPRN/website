@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <ul>
       <li>
         Participate to a global effort to solve the crisis

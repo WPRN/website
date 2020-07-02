@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <p>We have three type of members:</p>
     <ul>
       <li>

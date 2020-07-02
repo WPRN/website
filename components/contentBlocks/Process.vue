@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <p>
       WPRN is an edited directory that serves as an infrastructure for scientific communities. It features resources that have been filtered, tagged, and indexed, screened by bots first and validated by human experts second.
     </p>

@@ -2,7 +2,7 @@
   <section
     id="about-us"
     v-intersect="onIntersect"
-    style="background-color:#212121;"
+    :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#F5F5F5;'"
   >
     <div class="py-12" />
     <v-container>

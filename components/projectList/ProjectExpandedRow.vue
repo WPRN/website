@@ -4,10 +4,11 @@
     class="pb-3"
     flat
     :max-width="$vuetify.breakpoint.width - 70"
-    style="background-color:rgb(45, 45, 45);"
+    :style="computeRowColor"
   >
     <v-card-text
-      class="pb-0 white--text px-1"
+      class="pb-0  px-1"
+      :class="$vuetify.theme.isDark?'white--text':'black--text'"
     >
       <v-row no-gutters>
         <!-- CONTACT -->
@@ -138,6 +139,25 @@ export default {
   },
   mounted () {},
   methods: {
+    computeRowColor (item, hover) {
+      if (this.expanded.includes(item) &&
+      hover &&
+      this.$vuetify.theme.isDark
+      ) return 'background-color:#616161'
+      if (this.expanded.includes(item) &&
+      !hover &&
+      this.$vuetify.theme.isDark
+      ) return 'background-color:rgb(45, 45, 45);'
+      if (this.expanded.includes(item) &&
+      hover &&
+      !this.$vuetify.theme.isDark
+      ) return 'background-color:#BDBDBD;'
+      if (this.expanded.includes(item) &&
+      !hover &&
+      !this.$vuetify.theme.isDark
+      ) return 'background-color:#F5F5F5;'
+      return ''
+    }
   }
 }
 </script>

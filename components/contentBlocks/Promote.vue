@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <p>First, thank you very much for your support!</p>
     <p>
       If you want to promote WPRN as an initiative, you can use our social media channels. Their links can be found in the footer of every page. You can also use the resources of our <a href="/press_room">press room</a>.

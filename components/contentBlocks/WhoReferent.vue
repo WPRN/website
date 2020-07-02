@@ -1,5 +1,5 @@
 <template>
-  <v-sheet color="transparent">
+  <v-sheet style="background-color:inherit;">
     <p>
       WPRN referents are senior scientists with vast experience; they operate <i>pro bono</i> for the benefit of the community. A <a href="/referent_list">list of referents</a> is published on the WPRN website. The International <a href="/advisory_board">Scientific Advisory Board</a> validates admission to the WPRN communities of referents.
     </p>

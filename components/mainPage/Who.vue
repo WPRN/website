@@ -1,7 +1,7 @@
 <template>
   <section
     id="who"
-    style="background-color:#212121;"
+    :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#FAFAFA;'"
   >
     <div class="py-12" />
 
@@ -33,13 +33,13 @@
             v-slot:default="{ hover }"
           >
             <v-card
-              class="pa-6 white--text  text-center"
+              class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
               height="100%"
               href="/advisory_board"
               nuxt
-              color="accent"
+              :color="$vuetify.theme.isDark?'accent':'white'"
             >
               <v-avatar
                 color="primary"
@@ -70,12 +70,12 @@
             v-slot:default="{ hover }"
           >
             <v-card
-              class="pa-6 white--text  text-center"
+              class="pa-6 text-center"
               :elevation="hover ? 12 : 2"
               flat
               href="/institutions"
               nuxt
-              color="accent"
+              :color="$vuetify.theme.isDark?'accent':'white'"
               height="100%"
             >
               <v-avatar
@@ -107,13 +107,12 @@
             v-slot:default="{ hover }"
           >
             <v-card
-              class="pa-6 white--text  text-center"
+              class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
-
               href="/referents"
               nuxt
-              color="accent"
+              :color="$vuetify.theme.isDark?'accent':'white'"
               height="100%"
             >
               <v-avatar

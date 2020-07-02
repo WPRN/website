@@ -1,10 +1,13 @@
 <template>
-  <section id="shareProject">
+  <section
+    id="shareProject"
+    :style="$vuetify.theme.isDark?'background-color:#1E1E1E;':'background-color:#424242;'"
+  >
     <div class="py-12" />
 
     <v-container>
       <h2
-        class="display-2 font-weight-bold mb-3 text-uppercase text-center"
+        class="display-2 font-weight-bold mb-3 text-uppercase text-center white--text"
       >
         Share a project or resource
       </h2>
@@ -33,13 +36,17 @@
               class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
+              :color="$vuetify.theme.isDark?'':'#FAFAFA'"
             >
               <div class="text-center">
                 <v-avatar
                   color="primary"
                   size="88"
                 >
-                  <v-icon x-large>
+                  <v-icon
+                    x-large
+                    color="white"
+                  >
                     mdi-bullseye-arrow
                   </v-icon>
                 </v-avatar>
@@ -66,7 +73,8 @@
           >
             <v-card
               :elevation="hover ? 12 : 2"
-              class="pa-6 white--text"
+              class="pa-6 text-center"
+              :color="$vuetify.theme.isDark?'':'#FAFAFA'"
               flat
             >
               <div class="text-center">
@@ -74,7 +82,10 @@
                   color="primary"
                   size="88"
                 >
-                  <v-icon x-large>
+                  <v-icon
+                    color="white"
+                    x-large
+                  >
                     mdi-pencil-circle
                   </v-icon>
                 </v-avatar>
@@ -84,7 +95,6 @@
               </v-card-title>
               <v-card-text
                 class="subtitle-1  white--text title font-weight-regular"
-                color="black"
               >
                 <HowProject @register="$emit('register')" />
               </v-card-text>

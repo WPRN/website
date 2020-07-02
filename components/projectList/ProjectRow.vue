@@ -6,7 +6,7 @@
     <tr
       class="font-weight-medium"
       :class="$vuetify.breakpoint.mdAndUp ? 'body-1' : 'body-2'"
-      :style="expanded.includes(item)?hover?'#616161':'background-color:rgb(45, 45, 45);':'' "
+      :style="computeRowColor(item, hover)"
       @click="$emit('expand', item)"
     >
       <!-- NAME & STATUS-->
@@ -19,6 +19,7 @@
       >
         <a
           :href="'/item/' + item.pubId"
+          :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
           @click.prevent
         >
           <div class="d-flex">
@@ -49,12 +50,11 @@
       <!-- INSTITUTION -->
       <td
         class="px-1"
-        :style="
-          $vuetify.breakpoint.mdAndUp ? 'min-width:15vw;' : 'min-width:20vw;'
-        "
+        :style=" $vuetify.breakpoint.mdAndUp ? 'min-width:15vw;' : 'min-width:20vw;'"
       >
         <a
           :href="'/item/' + item.pubId"
+          :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
           @click.prevent
         >
           <span
@@ -119,6 +119,7 @@
                   <span
                     class="caption"
                     style="white-space: nowrap;"
+                    :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                     v-on="on"
                   >+ {{ item.field.length - 2 }} more</span>
                 </template>
@@ -185,6 +186,7 @@
                     <span
                       class="caption"
                       style="white-space: nowrap;"
+                      :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                       v-on="on"
                     >+ {{ item.thematics.length - 2 }} more</span>
                   </template>
@@ -251,6 +253,7 @@
                     <span
                       class="caption"
                       style="white-space: nowrap;"
+                      :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                       v-on="on"
                     >+ {{ item.type.length - 2 }} more</span>
                   </template>
@@ -279,7 +282,7 @@
                   :key="index"
                   small
                   label
-                  :color="filters.zone.includes(location) ? '#c4c4c4' : 'accent'"
+                  :color="$vuetify.theme.isDark?filters.zone.includes(location) ? '#c4c4c4' : 'accent':filters.zone.includes(location) ? '#c4c4c4' : '#BDBDBD'"
                   light
                   class="ma-1"
                 >
@@ -296,6 +299,7 @@
                       <span
                         class="caption"
                         style="white-space: nowrap;"
+                        :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                         v-on="on"
                       >+ {{ item.zone.length - 2 }} more</span>
                     </template>
@@ -338,6 +342,7 @@
                         <span
                           class="caption"
                           style="white-space: nowrap;"
+                          :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                           v-on="on"
                         >+ {{ item.country.length - 2 }} more</span>
                       </template>
@@ -395,6 +400,8 @@ export default {
       thematics
     }
   },
+  computed: {
+  },
   methods: {
     orderItems (project, item) {
       if (this.filters[item].length && project[item] && project[item].length) {
@@ -416,7 +423,27 @@ export default {
       } else {
         return project[item]
       }
-    } /*
+    },
+    computeRowColor (item, hover) {
+      if (this.expanded.includes(item) &&
+      hover &&
+      this.$vuetify.theme.isDark
+      ) return 'background-color:#616161'
+      if (this.expanded.includes(item) &&
+      !hover &&
+      this.$vuetify.theme.isDark
+      ) return 'background-color:rgb(45, 45, 45);'
+      if (this.expanded.includes(item) &&
+      hover &&
+      !this.$vuetify.theme.isDark
+      ) return 'background-color:#BDBDBD;'
+      if (this.expanded.includes(item) &&
+      !hover &&
+      !this.$vuetify.theme.isDark
+      ) return 'background-color:#F5F5F5;'
+      return ''
+    }
+  /*
     updateSearch (filter, value) {
       /* TODO Refactor to make more legible
       const query = {

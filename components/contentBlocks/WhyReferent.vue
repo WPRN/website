@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <ul>
       <li>
         You are given privileged access to new projects in real time, worldwide, in your choice of keywords.

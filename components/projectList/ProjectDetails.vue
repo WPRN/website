@@ -4,7 +4,7 @@
     :class="{ 'ml-3 mt-3': $vuetify.breakpoint.mdAndUp }"
     flat
     :max-width="$vuetify.breakpoint.width"
-    style="background-color:rgb(45, 45, 45)"
+    :style="$vuetify.theme.isDark?'background-color:rgb(45, 45, 45)':'background-color:#FAFAFA;'"
   >
     <!-- SOCIAL -->
     <SocialWidget :project="project" />
@@ -37,6 +37,7 @@
 
     <v-card-text
       class="pb-0 white--text"
+      :style="$vuetify.theme.isDark?'color:white':'color:black;'"
       :class="{ 'pl-12 ml-4': $vuetify.breakpoint.mdAndUp }"
     >
       <v-row>
