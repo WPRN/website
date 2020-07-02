@@ -74,34 +74,34 @@
     <v-stepper-items align="center">
       <!--  PROJECT GENERAL INFO (NAME, URL, DESCRIPTION) -->
       <general-info
-        :editMode="editMode"
-        :projectInput="projectInput"
+        :edit-mode="editMode"
+        :project-input="projectInput"
         @nextStep="formStep = $event"
       />
       <!--  PROJECT DETAILS (FIELDS, TYPES, THEMATICS, STATE AND POSSIBLY DATE & TIME) -->
       <project-details
-        :editMode="editMode"
-        :projectInput="projectInput"
+        :edit-mode="editMode"
+        :project-input="projectInput"
         :loading="loading"
         @nextStep="formStep = $event"
       />
       <!--  PROJECT LOCATION (ZONES, COUNTRIES, REGION) -->
       <project-location
-        :editMode="editMode"
-        :projectInput="projectInput"
+        :edit-mode="editMode"
+        :project-input="projectInput"
         :loading="loading"
         @nextStep="formStep = $event"
       />
       <!--   CONTACT INFO -->
       <project-contact
-        :editMode="editMode"
-        :projectInput="projectInput"
+        :edit-mode="editMode"
+        :project-input="projectInput"
         @nextStep="formStep = $event"
       />
       <!-- SUMMARY -->
       <project-summary
-        :editMode="editMode"
-        :projectInput="projectInput"
+        :edit-mode="editMode"
+        :project-input="projectInput"
         :loading="loading"
         @nextStep="formStep = $event"
         @feedBackModal="FeedbackModal = true"

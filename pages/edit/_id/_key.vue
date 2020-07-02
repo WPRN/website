@@ -67,8 +67,8 @@
                   <v-col cols="12">
                     <project-form
                       v-if="project && !done"
-                      editMode
-                      :projectInput="project"
+                      edit-mode
+                      :project-input="project"
                       @complete="done = true"
                     />
                     <project-updated-window v-else />
