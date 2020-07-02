@@ -94,16 +94,11 @@ export default {
     async removeThisProject () {
       try {
         this.loading = true
-
-        console.log({
-          UserPoolId: this.$store.state.user.user.pool.userPoolId,
-          Username: this.$store.state.user.user.username
-        })
         const res = await client.mutate({
           mutation: gql(removeProject),
           variables: {
-            UserPoolId: this.$store.state.user.user.pool.userPoolId,
-            Username: this.$store.state.user.user.username
+            id: this.$route.params.id,
+            key: this.$route.params.key
           }
         })
 

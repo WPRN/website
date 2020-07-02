@@ -45,7 +45,10 @@
             <v-card-title class=" headline">
               Edit your project
               <v-spacer />
-              <delete-project-modal :project="project" />
+              <delete-project-modal
+                :project="project"
+                @projectRemoved="deleted = true"
+              />
             </v-card-title>
             <v-divider />
             <v-card-text
@@ -64,7 +67,10 @@
                       :project-input="project"
                       @complete="done = true"
                     />
-                    <ProjectUpdatedWindow v-else />
+                    <template v-else>
+                      <ProjectUpdatedWindow v-if="!deleted" />
+                      <ProjectRemovedWindow v-else />
+                    </template>
                   </v-col>
                 </v-row>
               </v-expand-transition>
@@ -80,6 +86,7 @@
 <script>
 import ProjectForm from '~/components/projectForm/ProjectForm'
 import ProjectUpdatedWindow from '~/components/projectForm/ProjectUpdatedWindow'
+import ProjectRemovedWindow from '~/components/projectForm/ProjectRemovedWindow'
 import DeleteProjectModal from '~/components/projectList/DeleteProjectModal'
 import * as queries from '~/graphql/queries'
 import gql from 'graphql-tag'
@@ -90,6 +97,7 @@ export default {
   components: {
     ProjectForm,
     ProjectUpdatedWindow,
+    ProjectRemovedWindow,
     DeleteProjectModal
   },
   data () {
@@ -99,7 +107,7 @@ export default {
       checking: true,
       error: false,
       done: false,
-      deleting: false
+      deleted: false
     }
   },
   async mounted () {
