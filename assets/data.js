@@ -46,8 +46,179 @@ export const types = [
   'Video',
   'Blog',
   'Press article',
+  'Research tracker',
   { divider: true },
   'Other Ressource'
+]
+export const extendedTypes = [
+  {
+    name: 'Quantitative survey',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Qualitative analysis',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Case Study',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Questionnaire',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Simulation / Modeling',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Dataset, Data Mining',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Action Research',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Call for Research Proposals',
+    urlMandatory: true,
+    dateTime: false,
+    TimeInterval: true,
+    requireName: false,
+    teamMandatory: false
+  },
+  {
+    name: 'Call for Collaboration',
+    urlMandatory: true,
+    dateTime: false,
+    TimeInterval: true,
+    requireName: false,
+    teamMandatory: false
+  },
+  {
+    name: 'Citizen/Participatory Science',
+    urlMandatory: true,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Grassroot Action',
+    urlMandatory: false,
+    dateTime: true,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Scientific Paper',
+    urlMandatory: true,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Report',
+    urlMandatory: true,
+    dateTime: true,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Policy Document',
+    urlMandatory: true,
+    dateTime: true,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Regulation',
+    urlMandatory: true,
+    dateTime: true,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Conference / Webinar',
+    urlMandatory: true,
+    dateTime: true,
+    TimeInterval: true,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Video',
+    urlMandatory: true,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Blog',
+    urlMandatory: true,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Press article',
+    urlMandatory: true,
+    dateTime: true,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Other Ressource',
+    urlMandatory: false,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: true,
+    teamMandatory: true
+  },
+  {
+    name: 'Research tracker',
+    urlMandatory: true,
+    dateTime: false,
+    TimeInterval: false,
+    requireName: false,
+    teamMandatory: true
+  }
 ]
 export const thematics = [
   'Aging, Demography',
