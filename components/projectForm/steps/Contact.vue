@@ -32,6 +32,14 @@
 
           <v-col
             cols="12"
+          >
+            <h3 class="white--text mb-3 text-uppercase text-center">
+              Project Contact
+            </h3>
+          </v-col>
+
+          <v-col
+            cols="12"
             md="6"
           >
             <v-text-field
@@ -94,57 +102,158 @@
             />
           </v-col>
         </v-row>
-        <template v-if="isTeamMandatory()">
-          <v-row
-            v-for="(item, index) in team"
-            :key="index"
-          >
+        <template
+          v-if="isTeamMandatory()"
+        >
+          <v-row>
             <v-col
               cols="12"
-              md="6"
             >
-              <v-text-field
-                :ref="'firstname'+index"
-                v-model="item.team_firstname"
-                label="Team member firstname*"
-                solo
-                :rules="contactNameRules"
-                @blur="capitalize('team_firstname', index)"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-text-field
-                :ref="'lastname'+index"
-                v-model="item.team_lastname"
-                label="Team member lastname*"
-                solo
-                :rules="contactNameRules"
-                @blur="capitalize('team_lastname', index)"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-text-field
-                :ref="'entity'+index"
-                v-model="item.team_entity"
-                label="Team member Institution* (University, Laboratory, freelance...)"
-                solo
-                :rules="requiredRules"
-              />
+              <v-divider />
+              <h3 class="white--text mt-6 text-uppercase text-center">
+                Project Team Members
+              </h3>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                ref="team_firstname"
+                v-model="team_firstname"
+                label="Team member firstname*"
+                solo
+                :rules="teamNameRules"
+                @blur="capitalize('team_firstname')"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                ref="team_lastname"
+                v-model="team_lastname"
+                label="Team member lastname*"
+                solo
+                :rules="teamNameRules"
+                @blur="capitalize('team_lastname')"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                ref="team_entity"
+                v-model="team_entity"
+                label="Team member Institution* (University, Laboratory, freelance...)"
+                solo
+                :rules="requiredTeamRules"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-btn
+                color="accent"
+                x-large
+                block
+                :disabled="
+                  !(
+                    $refs.team_firstname &&
+                    $refs.team_firstname.valid &&
+                    $refs.team_lastname &&
+                    $refs.team_lastname.valid &&
+                    $refs.team_entity &&
+                    $refs.team_entity.valid &&
+                    team_firstname.length > 0 &&
+                    team_lastname.length > 0 &&
+                    team_entity.length > 0
+                  )
+                "
+                @click="addTeamMember({team_firstname, team_lastname, team_entity})"
+              >
+                Add Member
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-list
+            v-if="team && team.length"
+            two-line
+            class="mb-3"
+          >
+            <template v-for="(item, index) in team">
+              <v-list-item
+                :key="index"
+                :ripple="false"
+              >
+                <template>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="text-left"
+                      v-text="item.team_firstname+' '+item.team_lastname"
+                    />
+                    <v-list-item-subtitle
+                      class="text-left"
+                      v-text="item.team_entity"
+                    />
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-btn
+                      icon
+                      @click="team = team.filter((member, i) => index !== i)"
+                    >
+                      <v-icon
+                        color="black"
+                      >
+                        mdi-delete
+                      </v-icon>
+                    </v-btn>
+                  </v-list-item-action>
+
+                  <v-list-item-action>
+                    <v-btn
+                      icon
+                      @click="moveUp(index)"
+                    >
+                      <v-icon
+                        color="black"
+                      >
+                        mdi-chevron-up
+                      </v-icon>
+                    </v-btn>
+                    <v-btn
+                      icon
+                      @click="moveDown(index)"
+                    >
+                      <v-icon
+                        color="black"
+                      >
+                        mdi-chevron-down
+                      </v-icon>
+                    </v-btn>
+                  </v-list-item-action>
+                </template>
+              </v-list-item>
+              <v-divider
+                v-if="index < team.length-1"
+                :key="'divider' + index"
+                inset
+              />
+            </template>
+          </v-list>
         </template>
       </v-form>
     </v-card>
 
     <v-btn
       text
-      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity, team});$emit('nextStep', 3)"
+      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity});$emit('nextStep', 3)"
     >
       Previous
     </v-btn>
@@ -162,7 +271,7 @@
         )
       "
       x-large
-      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity, team});$emit('nextStep', 5)"
+      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity});$emit('nextStep', 5)"
     >
       Continue&nbsp;
       <v-icon>mdi-chevron-right</v-icon>
@@ -186,11 +295,9 @@ export default {
       contact_lastname: this.editMode ? this.projectInput.contact_lastname : '',
       contact_email: this.editMode ? this.projectInput.contact_email : '',
       contact_entity: this.editMode ? this.projectInput.contact_entity : '',
-      team: this.editMode ? this.projectInput.team : [{
-        team_firstname: '',
-        team_lastname: '',
-        team_entity: ''
-      }],
+      team_firstname: '',
+      team_lastname: '',
+      team_entity: '',
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>
@@ -204,10 +311,7 @@ export default {
         (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        (value) => (!!value && value.length <= 80) || 'Max 80 characters',
-        (value) => {
-          return true
-        }
+        (value) => (!!value && value.length <= 80) || 'Max 80 characters'
       ],
       emailRules: [
         (value) => !!value || !this.isRequireName() || 'Email address required.',
@@ -215,7 +319,33 @@ export default {
         (value) => {
           return value.length === 0 || email.test(value) || 'Invalid e-mail.'
         }
+      ],
+      teamNameRules: [
+        (value) => !!value || value.length === 0 || 'Required.',
+        (value) =>
+          alpha.test(value) ||
+          "No digits or special characters (except ' and -) allowed",
+        (value) => (value.length <= 80) || 'Max 80 characters'
+      ],
+      requiredTeamRules: [
+        (value) => !!value || value.length === 0 || 'This field is required.',
+        (value) => (value.length <= 80) || 'Max 80 characters'
       ]
+    }
+  },
+  computed: {
+    team: {
+      get () {
+        return this.$store.state.form.project.team
+      },
+      set (newValue) {
+        return this.$store.commit('form/setTeam', newValue)
+      }
+    }
+  },
+  mounted () {
+    if (this.editMode && this.project.team) {
+      this.team = this.project.team || []
     }
   },
   methods: {
@@ -228,6 +358,24 @@ export default {
     },
     isTeamMandatory () {
       return extendedTypes.some(item => item.teamMandatory && this.$store.state.form.project.type.includes(item.name))
+    },
+    addTeamMember (member) {
+      this.team = this.team ? [...this.team, member] : [member]
+      this.team_firstname = ''
+      this.team_lastname = ''
+      this.team_entity = ''
+    },
+    moveUp (index) {
+      this.moveItem(index, index - 1)
+    },
+    moveDown (index) {
+      this.moveItem(index, index + 1)
+    },
+    moveItem (from, to) {
+      let newTeam = this.team.slice()
+      let f = newTeam.splice(from, 1)[0]
+      newTeam.splice(to, 0, f)
+      this.team = newTeam
     }
   }
 }

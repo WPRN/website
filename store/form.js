@@ -18,7 +18,7 @@ export const state = () => ({
     contact_lastname: '',
     contact_email: '',
     contact_entity: '',
-    team: '',
+    team: [],
     feedback: ''
   }
 })
@@ -28,5 +28,8 @@ export const mutations = {
     Object.keys(args).forEach((key) => {
       state.project[key] = args[key]
     })
+  },
+  setTeam (state, args) {
+    state.project.team = args
   }
 }

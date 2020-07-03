@@ -123,10 +123,7 @@ export default {
         (value) =>
           value.length >= 5 ||
         'The project name  must have at least 4 characters',
-        (value) => value.length <= 140 || 'Max 140 characters',
-        (value) => {
-          return true
-        }
+        (value) => value.length <= 140 || 'Max 140 characters'
       ],
       requiredRules: [
         (value) => !!value || 'This field is required.',
