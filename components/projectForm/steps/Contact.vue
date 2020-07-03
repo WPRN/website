@@ -96,7 +96,7 @@
         </v-row>
         <template v-if="isTeamMandatory()">
           <v-row
-            v-for="(item, index) in team.slice()"
+            v-for="(item, index) in team"
             :key="index"
           >
             <v-col

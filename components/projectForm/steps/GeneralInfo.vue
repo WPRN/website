@@ -64,14 +64,14 @@
                 width="100%"
                 outlined
               >
-                Please be specific in your Project and Team description. E.g. make explicit the project goal, research question, methods, data set, expected outcomes, team. Mention if you are looking for partners.
+                Please be specific in your Project description. E.g. make explicit the project goal, research question, methods, data set, expected outcomes, team. Mention if you are looking for partners.
               </v-alert>
             </v-expand-transition>
             <v-textarea
               ref="description"
               v-model="description"
               required
-              label="Project and Team description*"
+              label="Project description*"
               solo
               type="text"
               :rules="descriptionRules"

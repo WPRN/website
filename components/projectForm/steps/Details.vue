@@ -45,21 +45,6 @@
             md="6"
           >
             <v-select
-              ref="state"
-              v-model="selectedState"
-              :items="state"
-              label="Project Status*"
-              solo
-              :rules="requiredRules"
-              :disabled="loading"
-            />
-          </v-col>
-
-          <v-col
-            cols="12"
-            md="6"
-          >
-            <v-select
               ref="thematics"
               v-model="selectedThematics"
               :items="thematics"
@@ -86,6 +71,21 @@
               </template>
             </v-select>
           </v-col>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-select
+              ref="state"
+              v-model="selectedState"
+              :items="state"
+              label="Project Status*"
+              solo
+              :rules="requiredRules"
+              :disabled="loading"
+            />
+          </v-col>
+
           <v-col
             cols="12"
             md="6"
@@ -129,6 +129,8 @@
                   v-model="date"
                   no-title
                   scrollable
+                  color="primary"
+                  show-current
                 >
                   <v-spacer />
                   <v-btn
@@ -155,7 +157,7 @@
               <v-text-field
                 ref="time"
                 v-model="time"
-                label="Project Time Informations"
+                label="Project Time Info"
                 prepend-inner-icon="mdi-clock-outline"
                 solo
                 type="text"
@@ -195,6 +197,8 @@
                   range
                   no-title
                   scrollable
+                  color="primary"
+                  show-current
                 >
                   <v-spacer />
                   <v-btn
@@ -221,7 +225,7 @@
               <v-text-field
                 ref="time"
                 v-model="time"
-                label="Project Time Informations"
+                label="Project Time Info"
                 prepend-inner-icon="mdi-clock-outline"
                 solo
                 type="text"
@@ -283,11 +287,11 @@ export default {
       field: this.editMode ? this.projectInput.field : '',
       selectedState: this.editMode ? this.projectInput.state : '',
       selectedThematics: this.editMode ? this.projectInput.thematics : '',
-      url: this.editMode ? this.projectInput.url : '',
+      url: this.editMode && this.projectInput.url ? this.projectInput.url : '',
       menu: false,
-      date: this.editMode ? this.projectInput.date : '',
-      dates: this.editMode ? this.projectInput.dates : [],
-      time: this.editMode ? this.projectInput.time : '',
+      date: this.editMode && this.projectInput.date ? this.projectInput.date : '',
+      dates: this.editMode && this.projectInput.dates ? this.projectInput.dates : [],
+      time: this.editMode && this.projectInput.time ? this.projectInput.time : '',
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>
@@ -339,10 +343,6 @@ export default {
 }
 </script>
 <style>
-.v-application .v-picker__body.theme--dark .v-date-picker-table__current.accent--text {
-  color: inherit !important;
-  caret-color: inherit !important;
-}
 .v-messages.theme--light:not(.error--text) + .theme--light.v-counter
 {
  color: white;
