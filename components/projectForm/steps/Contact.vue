@@ -66,7 +66,6 @@
               label="Contact Institution* (University, Laboratory, freelance...)"
               solo
               :rules="requiredRules"
-              @keyup.enter="next()"
             />
           </v-col>
           <v-col
@@ -80,7 +79,7 @@
               :label="isRequireName() ? 'Contact Email*' : 'Contact Email'"
               solo
               :rules="emailRules"
-              @keyup.enter="
+              @keyup.enter="/*
                 $refs.firstname &&
                   $refs.firstname.valid &&
                   $refs.lastname &&
@@ -89,18 +88,63 @@
                   $refs.email.valid &&
                   $refs.entity &&
                   $refs.entity.valid &&
-                  $store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity}) &&
+                  $store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity, team}) &&
                   $emit('nextStep', 5)
-              "
+              */"
             />
           </v-col>
         </v-row>
+        <template v-if="isTeamMandatory()">
+          <v-row
+            v-for="(item, index) in team.slice()"
+            :key="index"
+          >
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                :ref="'firstname'+index"
+                v-model="item.team_firstname"
+                label="Team member firstname*"
+                solo
+                :rules="contactNameRules"
+                @blur="capitalize('team_firstname', index)"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                :ref="'lastname'+index"
+                v-model="item.team_lastname"
+                label="Team member lastname*"
+                solo
+                :rules="contactNameRules"
+                @blur="capitalize('team_lastname', index)"
+              />
+            </v-col>
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-text-field
+                :ref="'entity'+index"
+                v-model="item.team_entity"
+                label="Team member Institution* (University, Laboratory, freelance...)"
+                solo
+                :rules="requiredRules"
+              />
+            </v-col>
+          </v-row>
+        </template>
       </v-form>
     </v-card>
 
     <v-btn
       text
-      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity});$emit('nextStep', 3)"
+      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity, team});$emit('nextStep', 3)"
     >
       Previous
     </v-btn>
@@ -118,7 +162,7 @@
         )
       "
       x-large
-      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity});$emit('nextStep', 5)"
+      @click="$store.commit('form/updateProject', {contact_firstname, contact_lastname, contact_email, contact_entity, team});$emit('nextStep', 5)"
     >
       Continue&nbsp;
       <v-icon>mdi-chevron-right</v-icon>
@@ -142,7 +186,11 @@ export default {
       contact_lastname: this.editMode ? this.projectInput.contact_lastname : '',
       contact_email: this.editMode ? this.projectInput.contact_email : '',
       contact_entity: this.editMode ? this.projectInput.contact_entity : '',
-      team: this.editMode ? this.projectInput.team : '',
+      team: this.editMode ? this.projectInput.team : [{
+        team_firstname: '',
+        team_lastname: '',
+        team_entity: ''
+      }],
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>
@@ -156,7 +204,7 @@ export default {
         (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        (value) => value.length <= 80 || 'Max 80 characters',
+        (value) => (!!value && value.length <= 80) || 'Max 80 characters',
         (value) => {
           return true
         }
@@ -171,11 +219,15 @@ export default {
     }
   },
   methods: {
-    capitalize (input) {
+    capitalize (input, index) {
+      if (index !== undefined) return (this.team[index][input] = this.team[index][input].replace(/(?:^|[\s'-])\S/g, (a) => a.toUpperCase()))
       return (this[input] = this[input].replace(/(?:^|[\s'-])\S/g, (a) => a.toUpperCase()))
     },
     isRequireName () {
       return extendedTypes.some(item => item.requireName && this.$store.state.form.project.type.includes(item.name))
+    },
+    isTeamMandatory () {
+      return extendedTypes.some(item => item.teamMandatory && this.$store.state.form.project.type.includes(item.name))
     }
   }
 }
