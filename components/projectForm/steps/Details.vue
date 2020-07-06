@@ -6,7 +6,10 @@
       light
       color="#333333"
     >
-      <v-form lazy-validation>
+      <v-form
+        ref="detailsForm"
+        lazy-validation
+      >
         <v-row>
           <v-col
             cols="12"
@@ -93,10 +96,10 @@
             <v-text-field
               ref="url"
               v-model="url"
-              :label="extendedTypes.find(item => item.urlMandatory && $store.state.form.project.type.includes(item.name))?'Project URL*':'Project URL'"
+              :label="extendedTypes.some(item => item.urlMandatory && $store.state.form.project.type.includes(item.name))?'Project URL*':'Project URL'"
               solo
               type="url"
-              :rules="urlRules"
+              :rules="extendedTypes.some(item => item.urlMandatory && this.$store.state.form.project.type.includes(item.name))?mandatoryUrlRules:urlRules"
             />
           </v-col>
           <template v-if="isDateTime() && !isTimeInterval()">
@@ -301,24 +304,20 @@ export default {
           'This field is required.'
       ],
       urlRules: [
-        (value) => {
-          if (extendedTypes.find(item => item.urlMandatory && this.$store.state.form.project.type.includes(item.name))) {
-            return ((value.length > 0 && pattern.test(value)) ||
-            'Invalid URL.')
-          } else {
-            return (
-              !value ||
-            value.length === 0 ||
-            (value.length > 0 && pattern.test(value)) ||
-            'Invalid URL.'
-            )
-          }
-        }
+        (value) => !value || value.length === 0 || (value.length > 0 && pattern.test(value)) || 'Invalid URL.'
+      ],
+      mandatoryUrlRules: [
+        (value) =>
+          (value.length > 0 && pattern.test(value)) || 'Invalid URL.',
+        (value) => (value && value.length > 0) || 'URL required.'
       ],
       timeInformationsRules: [
         (value) => value.length <= 150 || 'Max 150 characters'
       ]
     }
+  },
+  mounted () {
+    this.editMode && this.$refs.detailsForm.validate()
   },
   computed: {
     dateRangeText () {

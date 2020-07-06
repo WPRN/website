@@ -295,32 +295,123 @@
               </div>
             </v-col>
           </v-row>
-          <span>
-            <v-checkbox
-              ref="agreedRef"
-              v-model="agreed"
-              :rules="requiredRules"
-            >
-              <template v-slot:label>
-                <span>
-                  I certify that the information given in this form is true,
-                  complete and accurate, and that I agree to
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <a
-                        href="/privacy_policy"
-                        target="_blank"
-                        v-on="on"
-                        @click.stop
-                      >the privacy policy of WPRN</a>
-                    </template>
-                    Opens in new window to WPRN privacy policy
-                  </v-tooltip>
-                </span>
-              </template>
-            </v-checkbox>
-          </span>
         </v-card-text>
+        <template v-if="$store.state.form.project.team && $store.state.form.project.team.length">
+          <v-divider color="white" />
+          <v-card-text class="text-left pt-1 pb-2">
+            <v-row no-gutters>
+              <v-col
+                cols="12"
+                class="overline"
+              >
+                Project Team Members
+                <v-btn
+                  icon
+                  small
+                  @click="$emit('nextStep', 4)"
+                >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+            <v-row
+              no-gutters
+              class="mb-2"
+            >
+              <v-col
+                cols="12"
+                md="4"
+                class="pl-3"
+              >
+                <div class="font-weight-light caption">
+                  Firstname
+                </div>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+                class="pl-3"
+              >
+                <div class="font-weight-light caption">
+                  Lastname
+                </div>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+                class="pl-3"
+              >
+                <div class="font-weight-light caption">
+                  Institution
+                </div>
+              </v-col>
+            </v-row>
+            <v-row
+              v-for="(item, index) in $store.state.form.project.team"
+              :key="'team'+index"
+              no-gutters
+            >
+              <v-col
+                cols="12"
+                md="4"
+                class="pl-3"
+              >
+                <div class="subtitle-1">
+                  {{ item.team_firstname }}
+                </div>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+                :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+              >
+                <div class="subtitle-1">
+                  {{ item.team_lastname }}
+                </div>
+              </v-col>
+              <v-col
+                cols="12"
+                md="4"
+                class="pl-3"
+              >
+                <div class="subtitle-1">
+                  {{ item.team_entity }}
+                </div>
+              </v-col>
+              <v-divider
+                v-if="index < $store.state.form.project.team.length-1"
+                :key="'divider' + index"
+                inset
+                class="mt-1 mb-2"
+              />
+            </v-row>
+          </v-card-text>
+        </template>
+        <span>
+          <v-checkbox
+            ref="agreedRef"
+            v-model="agreed"
+            :rules="requiredRules"
+          >
+            <template v-slot:label>
+              <span>
+                I certify that the information given in this form is true,
+                complete and accurate, and that I agree to
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <a
+                      href="/privacy_policy"
+                      target="_blank"
+                      v-on="on"
+                      @click.stop
+                    >the privacy policy of WPRN</a>
+                  </template>
+                  Opens in new window to WPRN privacy policy
+                </v-tooltip>
+              </span>
+            </template>
+          </v-checkbox>
+        </span>
       </v-form>
     </v-card>
     <div class="my-4">

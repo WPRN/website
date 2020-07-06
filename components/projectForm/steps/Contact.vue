@@ -6,7 +6,10 @@
       light
       color="#333333"
     >
-      <v-form lazy-validation>
+      <v-form
+        ref="formContact"
+        lazy-validation
+      >
         <v-row>
           <v-col
             cols="12"
@@ -102,160 +105,156 @@
             />
           </v-col>
         </v-row>
-        <template
-          v-if="isTeamMandatory()"
-        >
-          <v-row>
-            <v-col
-              cols="12"
-            >
-              <v-divider />
-              <h3 class="white--text mt-6 text-uppercase text-center">
-                Project Team Members
-              </h3>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-text-field
-                ref="team_firstname"
-                v-model="team_firstname"
-                label="Team member firstname*"
-                solo
-                :rules="teamNameRules"
-                @blur="capitalize('team_firstname')"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-text-field
-                ref="team_lastname"
-                v-model="team_lastname"
-                label="Team member lastname*"
-                solo
-                :rules="teamNameRules"
-                @blur="capitalize('team_lastname')"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-text-field
-                ref="team_entity"
-                v-model="team_entity"
-                label="Team member Institution* (University, Laboratory, freelance...)"
-                solo
-                :rules="requiredTeamRules"
-              />
-            </v-col>
-            <v-col
-              cols="12"
-              md="6"
-            >
-              <v-btn
-                color="accent"
-                x-large
-                block
-                :disabled="
-                  !(
-                    $refs.team_firstname &&
-                    $refs.team_firstname.valid &&
-                    $refs.team_lastname &&
-                    $refs.team_lastname.valid &&
-                    $refs.team_entity &&
-                    $refs.team_entity.valid &&
-                    team_firstname.length > 0 &&
-                    team_lastname.length > 0 &&
-                    team_entity.length > 0
-                  )
-                "
-                @click="addTeamMember({team_firstname, team_lastname, team_entity})"
-              >
-                Add Member
-              </v-btn>
-            </v-col>
-          </v-row>
-          <v-list
-            v-if="team && team.length"
-            two-line
-            class="mb-3 py-0"
+        <v-row>
+          <v-col
+            cols="12"
           >
-            <template v-for="(item, index) in team">
-              <v-list-item
-                :key="index"
-                :ripple="false"
-              >
-                <template>
-                  <v-list-item-content class="py-0">
-                    <v-list-item-title
-                      class="text-left"
-                      v-text="item.team_firstname+' '+item.team_lastname"
-                    />
-                    <v-list-item-subtitle
-                      class="text-left"
-                      v-text="item.team_entity"
-                    />
-                  </v-list-item-content>
+            <v-divider />
+            <h3 class="white--text mt-6 text-uppercase text-center">
+              Project Team Members <span v-if="isTeamMandatory()">*</span>
+            </h3>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-text-field
+              ref="team_firstname"
+              v-model="team_firstname"
+              :label="isTeamMandatory()?'Team member firstname*':'Team member firstname'"
+              solo
+              :rules="teamNameRules"
+              @blur="capitalize('team_firstname')"
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-text-field
+              ref="team_lastname"
+              v-model="team_lastname"
+              :label="isTeamMandatory()?'Team member lastname*':'Team member lastname'"
+              solo
+              :rules="teamNameRules"
+              @blur="capitalize('team_lastname')"
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-text-field
+              ref="team_entity"
+              v-model="team_entity"
+              :label="isTeamMandatory()?'Team member Institution* (University, Laboratory, freelance...)':'Team member Institution (University, Laboratory, freelance...)'"
+              solo
+              :rules="requiredTeamRules"
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-btn
+              color="accent"
+              x-large
+              block
+              :disabled="
+                !(
+                  $refs.team_firstname &&
+                  $refs.team_firstname.valid &&
+                  $refs.team_lastname &&
+                  $refs.team_lastname.valid &&
+                  $refs.team_entity &&
+                  $refs.team_entity.valid &&
+                  team_firstname.length > 0 &&
+                  team_lastname.length > 0 &&
+                  team_entity.length > 0
+                )
+              "
+              @click="addTeamMember({team_firstname, team_lastname, team_entity})"
+            >
+              Add Member
+            </v-btn>
+          </v-col>
+        </v-row>
+        <v-list
+          v-if="team && team.length"
+          two-line
+          class="mb-3 py-0"
+        >
+          <template v-for="(item, index) in team">
+            <v-list-item
+              :key="index"
+              :ripple="false"
+            >
+              <template>
+                <v-list-item-content class="py-0">
+                  <v-list-item-title
+                    class="text-left"
+                    v-text="item.team_firstname+' '+item.team_lastname"
+                  />
+                  <v-list-item-subtitle
+                    class="text-left"
+                    v-text="item.team_entity"
+                  />
+                </v-list-item-content>
 
-                  <v-list-item-action>
-                    <v-tooltip bottom>
-                      <template v-slot:activator="{ on }">
-                        <v-btn
-                          icon
-                          @click="team = team.filter((member, i) => index !== i)"
-                          v-on="on"
+                <v-list-item-action>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        icon
+                        @click="team = team.filter((member, i) => index !== i)"
+                        v-on="on"
+                      >
+                        <v-icon
+                          color="black"
                         >
-                          <v-icon
-                            color="black"
-                          >
-                            mdi-delete
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Remove this team member</span>
-                    </v-tooltip>
-                  </v-list-item-action>
+                          mdi-delete
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Remove this team member</span>
+                  </v-tooltip>
+                </v-list-item-action>
 
-                  <v-list-item-action class="my-0">
-                    <v-btn
-                      icon
-                      :disabled="team.length<2||index===0"
-                      @click="moveUp(index)"
+                <v-list-item-action class="my-0">
+                  <v-btn
+                    icon
+                    :disabled="team.length<2||index===0"
+                    @click="moveUp(index)"
+                  >
+                    <v-icon
+                      color="black"
                     >
-                      <v-icon
-                        color="black"
-                      >
-                        mdi-chevron-up
-                      </v-icon>
-                    </v-btn>
-                    <v-btn
-                      icon
-                      :disabled="team.length<2||index===team.length-1"
-                      @click="moveDown(index)"
+                      mdi-chevron-up
+                    </v-icon>
+                  </v-btn>
+                  <v-btn
+                    icon
+                    :disabled="team.length<2||index===team.length-1"
+                    @click="moveDown(index)"
+                  >
+                    <v-icon
+                      color="black"
                     >
-                      <v-icon
-                        color="black"
-                      >
-                        mdi-chevron-down
-                      </v-icon>
-                    </v-btn>
-                  </v-list-item-action>
-                </template>
-              </v-list-item>
-              <v-divider
-                v-if="index < team.length-1"
-                :key="'divider' + index"
-                inset
-              />
-            </template>
-          </v-list>
-        </template>
+                      mdi-chevron-down
+                    </v-icon>
+                  </v-btn>
+                </v-list-item-action>
+              </template>
+            </v-list-item>
+            <v-divider
+              v-if="index < team.length-1"
+              :key="'divider' + index"
+              inset
+            />
+          </template>
+        </v-list>
       </v-form>
     </v-card>
 
@@ -275,7 +274,8 @@
           $refs.lastname.valid &&
           (editMode ? true : $refs.email && $refs.email.valid) &&
           $refs.entity &&
-          $refs.entity.valid
+          $refs.entity.valid &&
+          (isTeamMandatory()? $store.state.form.project.team.length >0:true)
         )
       "
       x-large
@@ -322,7 +322,7 @@ export default {
         (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        (value) => (!!value && value.length <= 80) || 'Max 80 characters'
+        (value) => ((!!value && value.length <= 80) || (!value && !this.isRequireName())) || 'Max 80 characters'
       ],
       emailRules: [
         (value) => !!value || !this.isRequireName() || 'Email address required.',
@@ -365,10 +365,10 @@ export default {
       return (this[input] = this[input].replace(/(?:^|[\s'-])\S/g, (a) => a.toUpperCase()))
     },
     isRequireName () {
-      return extendedTypes.find(item => item.requireName && this.$store.state.form.project.type.includes(item.name))
+      return extendedTypes.some(item => item.requireName && this.$store.state.form.project.type.includes(item.name))
     },
     isTeamMandatory () {
-      return extendedTypes.find(item => item.teamMandatory && this.$store.state.form.project.type.includes(item.name))
+      return extendedTypes.some(item => item.teamMandatory && this.$store.state.form.project.type.includes(item.name))
     },
     addTeamMember (member) {
       this.team = this.team ? [...this.team, member] : [member]

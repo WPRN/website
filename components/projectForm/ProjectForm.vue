@@ -7,13 +7,12 @@
   >
     <v-stepper-header>
       <v-stepper-step
-        :complete="editMode || formStep > 1"
+        :complete="editMode || +formStep > 1"
         step="1"
-        :editable="editMode"
-        :color="editMode && formStep === 1 ? 'light-blue accent-2' : 'primary'"
+        :color="editMode && +formStep === 1 ? 'light-blue accent-2' : 'primary'"
       >
         <span
-          v-if="editMode && formStep === 1"
+          v-if="editMode && +formStep === 1"
           style="text-decoration: underline;"
         >General info</span>
         <template v-else>
@@ -22,13 +21,12 @@
       </v-stepper-step>
       <v-divider />
       <v-stepper-step
-        :complete="editMode || formStep > 2"
+        :complete="editMode || +formStep > 2"
         step="2"
-        :editable="editMode"
-        :color="editMode && formStep === 2 ? 'light-blue accent-2' : 'primary'"
+        :color="editMode && +formStep === 2 ? 'light-blue accent-2' : 'primary'"
       >
         <span
-          v-if="editMode && formStep === 2"
+          v-if="editMode && +formStep === 2"
           style="text-decoration: underline;"
         >Project details</span>
         <template v-else>
@@ -37,13 +35,12 @@
       </v-stepper-step>
       <v-divider />
       <v-stepper-step
-        :complete="editMode || formStep > 3"
+        :complete="editMode || +formStep > 3"
         step="3"
-        :editable="editMode"
-        :color="editMode && formStep === 3 ? 'light-blue accent-2' : 'primary'"
+        :color="editMode && +formStep === 3 ? 'light-blue accent-2' : 'primary'"
       >
         <span
-          v-if="editMode && formStep === 3"
+          v-if="editMode && +formStep === 3"
           style="text-decoration: underline;"
         >Location</span>
         <template v-else>
@@ -52,13 +49,12 @@
       </v-stepper-step>
       <v-divider />
       <v-stepper-step
-        :complete="editMode || formStep > 4"
+        :complete="editMode || +formStep > 4"
         step="4"
-        :editable="editMode"
-        :color="editMode && formStep === 4 ? 'light-blue accent-2' : 'primary'"
+        :color="editMode && +formStep === 4 ? 'light-blue accent-2' : 'primary'"
       >
         <span
-          v-if="editMode && formStep === 4"
+          v-if="editMode && +formStep === 4"
           style="text-decoration: underline;"
         >Contact &amp; Team</span>
         <template v-else>
@@ -205,3 +201,13 @@ export default {
   }
 }
 </script>
+<style scoped>
+>>>.v-stepper__step
+{
+  flex-basis: 150px;
+}
+>>>.v-stepper__header .v-divider
+{
+  margin: 35px -60px 0;
+}
+</style>
