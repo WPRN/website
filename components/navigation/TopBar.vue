@@ -37,42 +37,45 @@
       :optional="!tab"
       slider-size="8"
       active-class="text--blue"
+      s
+      @change="updateStore($event)"
     >
       <v-tab
-        :to="$route.name==='index'?'#about-us':'/#about-us'"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
-        :class="{'v-tab--active': $store.state.tab==='about-us'}"
+        :class="{'v-tab--active': $store.state.tab===0}"
+        @click="$route.name==='index'?scrollTo('#about-us'):$router.push({path:'/', hash:'#about-us'})"
       >
         About WPRN
       </v-tab>
       <v-tab
-        :to="$route.name==='index'?'#register':'/#register'"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
-        :class="{'v-tab--active': $store.state.tab==='register'}"
+        :class="{'v-tab--active': $store.state.tab===1}"
+        @click="$route.name==='index'?scrollTo('#register'):$router.push({path:'/', hash:'#register'})"
       >
         Register your project
       </v-tab>
       <v-tab
-        to="/search"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
+        to="/search"
       >
         Browse projects
       </v-tab>
     </v-tabs>
     <v-btn
       v-show="$vuetify.breakpoint.smAndDown"
+      :class="{'v-tab--active': $store.state.tab===2}"
       light
       tile
       outlined
@@ -97,6 +100,17 @@ export default {
       set (newValue) {
         return this.$store.commit('setTab', newValue)
       }
+    }
+  },
+  methods: {
+    updateStore (value) {
+      console.log('update store value: ', value)
+      this.$store.commit('setTab', value)
+    },
+    scrollTo (value) {
+      this.$store.commit('lockScrolling')
+      this.$vuetify.goTo(value)
+      setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
     }
   }
 }

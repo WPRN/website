@@ -186,6 +186,7 @@ export default {
   },
 
   async mounted () {
+    console.log('MOUTNED')
     this.$nextTick(() => {
       this.mounted = true
     })
@@ -197,11 +198,11 @@ export default {
         setTimeout(() => {
           this.$vuetify.goTo('#register')
         }, 1)
-      } else {
-        this.contactOnly = true
-        this.step = 0
+      }
+      if (this.$route.hash === '#about-us') {
+        this.$store.commit('setTab', 'about-us')
         setTimeout(() => {
-          this.$vuetify.goTo(this.$route.hash, { offset: 100 })
+          this.$vuetify.goTo('#about-us')
         }, 1)
       }
     }
@@ -209,20 +210,16 @@ export default {
   },
   methods: {
     onIntersect (event) {
-      if (this.mounted && this.$store.state.offsetTop) {
+      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling) {
         console.log('onIntersect: ', event)
-        console.log('this.$route.hash: ', this.$route.hash)
-        if (event === 'REGISTER') this.$store.commit('setTab', 'register')
-        if (event === 'ABOUT-US') this.$store.commit('setTab', 'about-us')
-        if (this.$route.hash && this.$route.hash.substring(1) !== event.toLowerCase()) this.$router.replace({hash: this.$route.hash})
+        if (event === 'REGISTER') this.$store.commit('setTab', 1)
+        if (event === 'ABOUT-US') this.$store.commit('setTab', 0)
+        history.pushState(
+          {},
+          null,
+          this.$route.path
+        )
       }
-    },
-    addHashToLocation (params) {
-      history.pushState(
-        {},
-        null,
-        this.$route.path + '#' + encodeURIComponent(params)
-      )
     }
   }
 }

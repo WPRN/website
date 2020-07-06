@@ -1,6 +1,7 @@
 export const state = () => ({
   tab: '',
-  offsetTop: 0
+  offsetTop: 0,
+  scrolling: false
 })
 export const mutations = {
   setTab (state, tab) {
@@ -8,5 +9,13 @@ export const mutations = {
   },
   setOffsetTop (state, offset) {
     state.offsetTop = offset
+  },
+  lockScrolling (state) {
+    state.scrolling = true
+    console.log('LOCK')
+  },
+  unlockScrolling (state) {
+    state.scrolling = false
+    console.log('UNLOCK')
   }
 }
