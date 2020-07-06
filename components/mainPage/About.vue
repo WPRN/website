@@ -1,7 +1,6 @@
 <template>
   <section
     id="about-us"
-    v-intersect="onIntersect"
     style="background-color:#212121;"
   >
     <div class="py-12" />
@@ -22,6 +21,7 @@
           cols="12"
         >
           <v-responsive
+            v-intersect="onIntersect"
             class="d-flex align-center mx-auto title font-weight-regular mb-8 px-3"
             max-width="750"
             height="100%"
@@ -73,9 +73,7 @@
 export default {
   methods: {
     onIntersect (entries, observer, isIntersecting) {
-      this.$emit('intersect', 'ABOUT')
-      // More information about these options
-      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      this.$emit('intersect', 'ABOUT-US')
     }
   }
 }

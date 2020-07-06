@@ -42,7 +42,10 @@
             class="ml-3 mt-3 pb-3"
             flat
           >
-            <v-card-title class=" headline">
+            <v-card-title
+              v-if="!deleted"
+              class=" headline"
+            >
               Edit your project
               <v-spacer />
               <delete-project-modal
@@ -62,7 +65,7 @@
                 >
                   <v-col cols="12">
                     <ProjectForm
-                      v-if="project && !done"
+                      v-if="project && !done && !deleted"
                       edit-mode
                       :project-input="project"
                       @complete="done = true"

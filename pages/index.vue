@@ -130,6 +130,7 @@
                       @reset="
                         step = 0
                         contactOnly = true
+                        step = [...step, {gerger}]
                       "
                     />
                   </template>
@@ -180,14 +181,17 @@ export default {
       valid: false,
       step: 1,
       offsetTop: 0,
-      tabsValue: ''
+      mounted: false
     }
   },
 
   async mounted () {
+    this.$nextTick(() => {
+      this.mounted = true
+    })
     if (this.$route.hash) {
       if (this.$route.hash === '#register') {
-        this.tabsValue = '#register'
+        this.$store.commit('setTab', 'register')
         this.contactOnly = false
         this.step = 1
         setTimeout(() => {
@@ -205,10 +209,20 @@ export default {
   },
   methods: {
     onIntersect (event) {
-      if (event === 'REGISTER') this.tabsValue = '/#register'
-      if (event === 'ABOUT') this.tabsValue = '/#about'
-      // More information about these options
-      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      if (this.mounted && this.$store.state.offsetTop) {
+        console.log('onIntersect: ', event)
+        console.log('this.$route.hash: ', this.$route.hash)
+        if (event === 'REGISTER') this.$store.commit('setTab', 'register')
+        if (event === 'ABOUT-US') this.$store.commit('setTab', 'about-us')
+        if (this.$route.hash && this.$route.hash.substring(1) !== event.toLowerCase()) this.$router.replace({hash: this.$route.hash})
+      }
+    },
+    addHashToLocation (params) {
+      history.pushState(
+        {},
+        null,
+        this.$route.path + '#' + encodeURIComponent(params)
+      )
     }
   }
 }

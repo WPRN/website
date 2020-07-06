@@ -31,29 +31,32 @@
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
       id="main-app-bar"
-      value="value"
+      v-model="tab"
       light
       right
-      :optional="!value"
+      :optional="!tab"
       slider-size="8"
+      active-class="text--blue"
     >
       <v-tab
-        to="/#about-us"
+        :to="$route.name==='index'?'#about-us':'/#about-us'"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
+        :class="{'v-tab--active': $store.state.tab==='about-us'}"
       >
         About WPRN
       </v-tab>
       <v-tab
-        to="/#register"
+        :to="$route.name==='index'?'#register':'/#register'"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
+        :class="{'v-tab--active': $store.state.tab==='register'}"
       >
         Register your project
       </v-tab>
@@ -85,10 +88,15 @@
 <script>
 export default {
   props: {
-    value: {
-      type: [String, Boolean],
-      required: false,
-      default: false
+  },
+  computed: {
+    tab: {
+      get () {
+        return this.$store.state.tab
+      },
+      set (newValue) {
+        return this.$store.commit('setTab', newValue)
+      }
     }
   }
 }

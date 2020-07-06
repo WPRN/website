@@ -26,7 +26,7 @@
     <Footer />
     <v-fab-transition>
       <v-btn
-        v-show="offsetTop > 600"
+        v-show="$store.state.offsetTop > 600"
         color="accent"
         dark
         fixed
@@ -53,8 +53,7 @@ export default {
   components: { Footer, NavigationDrawer, TopBar },
   data () {
     return {
-      drawer: false,
-      offsetTop: 0
+      drawer: false
     }
   },
   mounted () {
@@ -64,7 +63,7 @@ export default {
     onSuccess (token) {},
     onExpired () {},
     onScroll (e) {
-      this.offsetTop = e.target.scrollingElement.scrollTop
+      this.$store.commit('setOffsetTop', e.target.scrollingElement.scrollTop)
     }
   }
 }

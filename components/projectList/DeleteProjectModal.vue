@@ -104,6 +104,8 @@ export default {
 
         this.loading = false
         if (res && !res.errors) {
+          console.log('project removed')
+          this.open = false
           this.$emit('projectRemoved')
         } else {
           this.error = true
