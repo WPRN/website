@@ -60,9 +60,9 @@
         <span
           v-if="editMode && formStep === 4"
           style="text-decoration: underline;"
-        >Contact</span>
+        >Contact &amp; Team</span>
         <template v-else>
-          Contact
+          Contact &amp; Team
         </template>
       </v-stepper-step>
       <v-divider />
@@ -135,7 +135,10 @@ export default {
     FeedbackModal
   },
   props: {
-    projectInput: Object,
+    projectInput: {
+      type: Object,
+      default: () => {}
+    },
     editMode: Boolean
   },
   data () {

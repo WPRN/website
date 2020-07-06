@@ -184,7 +184,7 @@
           <v-list
             v-if="team && team.length"
             two-line
-            class="mb-3"
+            class="mb-3 py-0"
           >
             <template v-for="(item, index) in team">
               <v-list-item
@@ -192,7 +192,7 @@
                 :ripple="false"
               >
                 <template>
-                  <v-list-item-content>
+                  <v-list-item-content class="py-0">
                     <v-list-item-title
                       class="text-left"
                       v-text="item.team_firstname+' '+item.team_lastname"
@@ -204,21 +204,28 @@
                   </v-list-item-content>
 
                   <v-list-item-action>
-                    <v-btn
-                      icon
-                      @click="team = team.filter((member, i) => index !== i)"
-                    >
-                      <v-icon
-                        color="black"
-                      >
-                        mdi-delete
-                      </v-icon>
-                    </v-btn>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-btn
+                          icon
+                          @click="team = team.filter((member, i) => index !== i)"
+                          v-on="on"
+                        >
+                          <v-icon
+                            color="black"
+                          >
+                            mdi-delete
+                          </v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Remove this team member</span>
+                    </v-tooltip>
                   </v-list-item-action>
 
-                  <v-list-item-action>
+                  <v-list-item-action class="my-0">
                     <v-btn
                       icon
+                      :disabled="team.length<2||index===0"
                       @click="moveUp(index)"
                     >
                       <v-icon
@@ -229,6 +236,7 @@
                     </v-btn>
                     <v-btn
                       icon
+                      :disabled="team.length<2||index===team.length-1"
                       @click="moveDown(index)"
                     >
                       <v-icon
@@ -285,7 +293,10 @@ import {
 } from '~/assets/data'
 export default {
   props: {
-    projectInput: Object,
+    projectInput: {
+      type: Object,
+      default: () => {}
+    },
     editMode: Boolean
   },
   data () {
@@ -344,8 +355,8 @@ export default {
     }
   },
   mounted () {
-    if (this.editMode && this.project.team) {
-      this.team = this.project.team || []
+    if (this.editMode && this.projectInput.team) {
+      this.team = this.projectInput.team || []
     }
   },
   methods: {
@@ -354,10 +365,10 @@ export default {
       return (this[input] = this[input].replace(/(?:^|[\s'-])\S/g, (a) => a.toUpperCase()))
     },
     isRequireName () {
-      return extendedTypes.some(item => item.requireName && this.$store.state.form.project.type.includes(item.name))
+      return extendedTypes.find(item => item.requireName && this.$store.state.form.project.type.includes(item.name))
     },
     isTeamMandatory () {
-      return extendedTypes.some(item => item.teamMandatory && this.$store.state.form.project.type.includes(item.name))
+      return extendedTypes.find(item => item.teamMandatory && this.$store.state.form.project.type.includes(item.name))
     },
     addTeamMember (member) {
       this.team = this.team ? [...this.team, member] : [member]
