@@ -20,7 +20,6 @@
       </v-alert>
       <v-form
         lazy-validation
-        ref="summaryForm"
       >
         <v-card-text class="text-left pt-1 pb-2">
           <v-row no-gutters>
@@ -497,12 +496,6 @@ export default {
           'This field is required.'
       ]
     }
-  },
-  mounted () {
-    this.editMode && this.$refs.summaryForm.validate()
-  },
-  updated () {
-    this.editMode && this.$store.commit('form/setStepError', { id: 'summary', value: !this.$refs.summaryForm.validate() })
   }
 }
 </script>

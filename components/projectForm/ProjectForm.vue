@@ -108,7 +108,7 @@
         :loading="loading"
         @nextStep="formStep = $event"
         @feedBackModal="FeedbackModal = true"
-        @onSubmit="onsubmit()"
+        @onSubmit="onSubmit()"
       />
       <feedback-modal
         :open="FeedbackModal"

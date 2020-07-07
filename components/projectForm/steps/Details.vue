@@ -316,16 +316,16 @@ export default {
       ]
     }
   },
+  computed: {
+    dateRangeText () {
+      return this.dates.join(' ~ ')
+    }
+  },
   mounted () {
     this.editMode && this.$refs.detailsForm.validate()
   },
   updated () {
     this.editMode && this.$store.commit('form/setStepError', { id: 'details', value: !this.$refs.detailsForm.validate() })
-  },
-  computed: {
-    dateRangeText () {
-      return this.dates.join(' ~ ')
-    }
   },
   methods: {
     cleanModel (model) {

@@ -356,13 +356,13 @@ export default {
     }
   },
   mounted () {
-    if (this.editMode && this.projectInput.team) {
-      this.team = this.projectInput.team || []
+    if (this.editMode) {
+      this.team = this.projectInput.team || [{team_firstname: this.contact_firstname, team_lastname: this.contact_lastname, team_entity: this.contact_entity}]
     }
     this.editMode && this.$refs.contactForm.validate()
   },
   updated () {
-    this.editMode && this.$store.commit('form/setStepError', { id: 'contact', value: !this.$refs.contactForm.validate() })
+    this.editMode && this.$store.commit('form/setStepError', { id: 'contact', value: !this.$refs.contactForm.validate() || (this.isTeamMandatory() && !this.team.length) })
   },
   methods: {
     capitalize (input, index) {

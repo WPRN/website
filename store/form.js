@@ -25,8 +25,7 @@ export const state = () => ({
     general: false,
     details: false,
     location: false,
-    contact: false,
-    summary: false
+    contact: false
   }
 })
 

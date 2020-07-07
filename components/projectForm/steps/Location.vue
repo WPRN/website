@@ -97,7 +97,7 @@
     </v-btn>
     <v-btn
       color="accent"
-      :disabled="!($refs.locationForm && $refs.locationForm.valid)"
+      :disabled="zone.length === 0"
       x-large
       @click="$store.commit('form/updateProject', {zone, continent, country, location});$emit('nextStep', 4)"
     >
