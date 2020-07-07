@@ -7,7 +7,7 @@
       color="#333333"
     >
       <v-form
-        ref="formContact"
+        ref="contactForm"
         lazy-validation
       >
         <v-row>
@@ -177,6 +177,7 @@
               "
               @click="addTeamMember({team_firstname, team_lastname, team_entity})"
             >
+              <v-icon>mdi-account-plus</v-icon>&nbsp;
               Add Member
             </v-btn>
           </v-col>
@@ -358,6 +359,10 @@ export default {
     if (this.editMode && this.projectInput.team) {
       this.team = this.projectInput.team || []
     }
+    this.editMode && this.$refs.contactForm.validate()
+  },
+  updated () {
+    this.editMode && this.$store.commit('form/setStepError', { id: 'contact', value: !this.$refs.contactForm.validate() })
   },
   methods: {
     capitalize (input, index) {

@@ -18,7 +18,10 @@
         Please note that if your project is already verified or featured,
         you are responsible for the updated content.
       </v-alert>
-      <v-form lazy-validation>
+      <v-form
+        lazy-validation
+        ref="summaryForm"
+      >
         <v-card-text class="text-left pt-1 pb-2">
           <v-row no-gutters>
             <v-col
@@ -387,14 +390,16 @@
             </v-row>
           </v-card-text>
         </template>
-        <span>
+        <div class="ml-3">
           <v-checkbox
             ref="agreedRef"
             v-model="agreed"
             :rules="requiredRules"
           >
             <template v-slot:label>
-              <span>
+              <span
+                class="ml-1"
+              >
                 I certify that the information given in this form is true,
                 complete and accurate, and that I agree to
                 <v-tooltip bottom>
@@ -411,7 +416,7 @@
               </span>
             </template>
           </v-checkbox>
-        </span>
+        </div>
       </v-form>
     </v-card>
     <div class="my-4">
@@ -492,6 +497,12 @@ export default {
           'This field is required.'
       ]
     }
+  },
+  mounted () {
+    this.editMode && this.$refs.summaryForm.validate()
+  },
+  updated () {
+    this.editMode && this.$store.commit('form/setStepError', { id: 'summary', value: !this.$refs.summaryForm.validate() })
   }
 }
 </script>

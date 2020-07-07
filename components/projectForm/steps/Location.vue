@@ -6,7 +6,10 @@
       light
       color="#333333"
     >
-      <v-form lazy-validation>
+      <v-form
+        ref="locationForm"
+        lazy-validation
+      >
         <v-row>
           <v-alert
             type="info"
@@ -94,7 +97,7 @@
     </v-btn>
     <v-btn
       color="accent"
-      :disabled="!($refs.zone && $refs.zone.valid)"
+      :disabled="!($refs.locationForm && $refs.locationForm.valid)"
       x-large
       @click="$store.commit('form/updateProject', {zone, continent, country, location});$emit('nextStep', 4)"
     >
@@ -135,6 +138,12 @@ export default {
           'This field is required.'
       ]
     }
+  },
+  mounted () {
+    this.editMode && this.$refs.locationForm.validate()
+  },
+  updated () {
+    this.editMode && this.$store.commit('form/setStepError', { id: 'location', value: !this.$refs.locationForm.validate() })
   },
   methods: {
     setCountries () {

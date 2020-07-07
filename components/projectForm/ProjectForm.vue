@@ -10,6 +10,7 @@
         :complete="editMode || +formStep > 1"
         step="1"
         :color="editMode && +formStep === 1 ? 'light-blue accent-2' : 'primary'"
+        :rules="[v => !$store.state.form.errors.general || 'Error']"
       >
         <span
           v-if="editMode && +formStep === 1"
@@ -24,6 +25,7 @@
         :complete="editMode || +formStep > 2"
         step="2"
         :color="editMode && +formStep === 2 ? 'light-blue accent-2' : 'primary'"
+        :rules="[v => !$store.state.form.errors.details || 'Error']"
       >
         <span
           v-if="editMode && +formStep === 2"
@@ -38,6 +40,7 @@
         :complete="editMode || +formStep > 3"
         step="3"
         :color="editMode && +formStep === 3 ? 'light-blue accent-2' : 'primary'"
+        :rules="[v => !$store.state.form.errors.location || 'Error']"
       >
         <span
           v-if="editMode && +formStep === 3"
@@ -52,6 +55,7 @@
         :complete="editMode || +formStep > 4"
         step="4"
         :color="editMode && +formStep === 4 ? 'light-blue accent-2' : 'primary'"
+        :rules="[v => !$store.state.form.errors.contact || 'Error']"
       >
         <span
           v-if="editMode && +formStep === 4"
@@ -62,7 +66,10 @@
         </template>
       </v-stepper-step>
       <v-divider />
-      <v-stepper-step step="5">
+      <v-stepper-step
+        step="5"
+        :rules="[v => !$store.state.form.errors.summary || 'Error']"
+      >
         Confirmation
       </v-stepper-step>
     </v-stepper-header>
@@ -204,10 +211,17 @@ export default {
 <style scoped>
 >>>.v-stepper__step
 {
-  flex-basis: 150px;
+  flex-basis: 140px;
 }
 >>>.v-stepper__header .v-divider
 {
-  margin: 35px -60px 0;
+  margin: 35px -65px 0;
+}
+>>>.v-stepper__label {
+  text-align: center !important;
+}
+>>>.error--text .v-stepper__label {
+  color: #dd2c00 !important;
+  text-shadow: none !important;
 }
 </style>

@@ -20,6 +20,13 @@ export const state = () => ({
     contact_entity: '',
     team: [],
     feedback: ''
+  },
+  errors: {
+    general: false,
+    details: false,
+    location: false,
+    contact: false,
+    summary: false
   }
 })
 
@@ -31,5 +38,8 @@ export const mutations = {
   },
   setTeam (state, args) {
     state.project.team = args
+  },
+  setStepError (state, args) {
+    state.errors[args.id] = args.value
   }
 }

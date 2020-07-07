@@ -6,7 +6,7 @@
       light
       color="#333333"
     >
-      <v-form ref="step1">
+      <v-form ref="generalForm">
         <v-row>
           <v-col
             cols="12"
@@ -142,8 +142,11 @@ export default {
       ]
     }
   },
-  methods: {
-
+  mounted () {
+    this.editMode && this.$refs.generalForm.validate()
+  },
+  updated () {
+    this.editMode && this.$store.commit('form/setStepError', { id: 'general', value: !this.$refs.generalForm.validate() })
   }
 }
 </script>
