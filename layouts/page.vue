@@ -40,7 +40,9 @@
       @success="onSuccess"
       @expired="onExpired"
     />
-    <Footer />
+    <Footer
+      @contact="$router.push({ path: '/', hash: 'contact-us' });drawer=false"
+    />
   </v-app>
 </template>
 

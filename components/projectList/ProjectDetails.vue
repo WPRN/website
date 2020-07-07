@@ -409,10 +409,19 @@ export default {
     CiteWidget
   },
   props: {
-    project: Object,
-    pageMode: Boolean,
-    filters: Object,
-    expanded: Array
+    project: {
+      type: Object,
+      default: () => {}
+    },
+    filters: {
+      type: Object,
+      default: () => {}
+    },
+    expanded: {
+      type: Array,
+      default: () => []
+    },
+    pageMode: Boolean
   },
   data () {
     return {

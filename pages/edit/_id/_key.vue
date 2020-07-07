@@ -42,18 +42,17 @@
             class="ml-3 mt-3 pb-3"
             flat
           >
-            <v-card-title class="pl-0 headline">
-              <!--  BackButton takes one col -->
-              <back-button url="/#search" />
-              <v-col cols="11">
-                Edit your project
-              </v-col>
+            <v-card-title
+              v-if="!deleted"
+              class=" headline"
+            >
+              Edit your project
+              <v-spacer />
+              <delete-project-modal
+                :project="project"
+                @projectRemoved="deleted = true"
+              />
             </v-card-title>
-            <v-card-subtitle>
-              The delete feature will be available soon. Meanwhile, you can <nuxt-link to="/#contact">
-                contact us
-              </nuxt-link> to request its removal.
-            </v-card-subtitle>
             <v-divider />
             <v-card-text
               class="pb-0 white--text align-center"
@@ -65,13 +64,16 @@
                   justify="center"
                 >
                   <v-col cols="12">
-                    <project-form
-                      v-if="project && !done"
+                    <ProjectForm
+                      v-if="project && !done && !deleted"
                       edit-mode
                       :project-input="project"
                       @complete="done = true"
                     />
-                    <project-updated-window v-else />
+                    <template v-else>
+                      <ProjectUpdatedWindow v-if="!deleted" />
+                      <ProjectRemovedWindow v-else />
+                    </template>
                   </v-col>
                 </v-row>
               </v-expand-transition>
@@ -87,17 +89,19 @@
 <script>
 import ProjectForm from '~/components/projectForm/ProjectForm'
 import ProjectUpdatedWindow from '~/components/projectForm/ProjectUpdatedWindow'
+import ProjectRemovedWindow from '~/components/projectForm/ProjectRemovedWindow'
+import DeleteProjectModal from '~/components/projectList/DeleteProjectModal'
 import * as queries from '~/graphql/queries'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
-import BackButton from '~/components/navigation/BackButton'
 
 export default {
   layout: 'page',
   components: {
     ProjectForm,
     ProjectUpdatedWindow,
-    BackButton
+    ProjectRemovedWindow,
+    DeleteProjectModal
   },
   data () {
     return {
@@ -105,7 +109,8 @@ export default {
       ready: false,
       checking: true,
       error: false,
-      done: false
+      done: false,
+      deleted: false
     }
   },
   async mounted () {
@@ -120,7 +125,7 @@ export default {
 
       if (res && res.data && res.data.getProjectForEdit && !res.errors) {
         this.project = res.data.getProjectForEdit
-        console.log('this.project: ', this.project)
+
         this.checking = false
         this.ready = true
       } else {

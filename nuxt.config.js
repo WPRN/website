@@ -1,7 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  router: {},
+  router: {
+    mode: 'history'
+  },
   server: {
     port: 3000, // par défaut: 3000
     host: '0.0.0.0' // par défaut: localhost

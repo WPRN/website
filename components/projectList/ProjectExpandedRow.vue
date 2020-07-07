@@ -68,49 +68,31 @@
         >
           <span class="overline">Team and Project description:</span>
           <br>
-          <template v-if="project.description.length > 400">
-            <template v-if="filters.search && filters.search.length">
-              <p
-                class="font-weight-medium body-1 mb-0"
-                v-html="
-                  $options.filters.nl2br(
-                    $options.filters.truncate(
-                      $options.filters.highlight(
-                        project.description,
-                        filters.search.split(' ')
-                      ),
-                      400,
-                      '(read more)',
-                      '/item/' + project.pubId
-                    ),
+          <template v-if="filters.search && filters.search.length">
+            <p
+              class="font-weight-medium body-1 mb-0"
+              v-html="
+                $options.filters.nl2br(
+                  $options.filters.highlightAndTruncate(
+                    project.description,
+                    filters.search.split(' '),
+                    '/item/' + project.pubId,
+                    '(read more)'
                   )
-                "
-              />
-            </template>
-            <template v-else>
-              <p
-                class="font-weight-medium body-1mb-0"
-                v-html="
-                  $options.filters.nl2br(
-                    $options.filters.truncate(
-                      project.description,
-                      400,
-                      '(read more)',
-                      '/item/' + project.pubId
-                    )
-                  )
-                "
-              />
-            </template>
+                )
+              "
+            />
           </template>
           <template v-else>
             <p
-              class="mb-0 font-weight-medium body-1"
+              class="font-weight-medium body-1mb-0"
               v-html="
                 $options.filters.nl2br(
-                  $options.filters.highlight(
+                  $options.filters.truncate(
                     project.description,
-                    filters.search.split(' ')
+                    400,
+                    '(read more)',
+                    '/item/' + project.pubId
                   )
                 )
               "
@@ -138,9 +120,18 @@ export default {
   components: {
   },
   props: {
-    project: Object,
-    filters: Object,
-    expanded: Array
+    project: {
+      type: Object,
+      default: () => {}
+    },
+    filters: {
+      type: Object,
+      default: () => {}
+    },
+    expanded: {
+      type: Array,
+      default: () => []
+    }
   },
   data () {
     return {}

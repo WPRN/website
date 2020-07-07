@@ -1,6 +1,5 @@
 <template>
   <div>
-    <TopBar />
     <Splash />
     <About
       @goToRegister=" $vuetify.goTo('#register', { offset: 100 })
@@ -131,6 +130,7 @@
                       @reset="
                         step = 0
                         contactOnly = true
+                        step = [...step, {gerger}]
                       "
                     />
                   </template>
@@ -158,7 +158,6 @@ import ShareProject from '~/components/mainPage/ShareProject'
 import Who from '~/components/mainPage/Who'
 import ProjectPostedWindow from '~/components/projectForm/ProjectPostedWindow'
 import ContactPostedWindow from '~/components/contact/ContactPostedWindow'
-import TopBar from '~/components/navigation/TopBar'
 
 /* import WorkInProgressDialog from "~/components/navigation/WorkInProgressDialog"; */
 import { zones } from '~/assets/data'
@@ -172,8 +171,7 @@ export default {
     Stats,
     ShareProject,
     Who,
-    Splash,
-    TopBar
+    Splash
   },
   data () {
     return {
@@ -183,24 +181,35 @@ export default {
       valid: false,
       step: 1,
       offsetTop: 0,
-      tabsValue: ''
+      mounted: false
     }
   },
 
   async mounted () {
+    this.$nextTick(() => {
+      this.mounted = true
+    })
+
     if (this.$route.hash) {
       if (this.$route.hash === '#register') {
-        this.tabsValue = '#register'
+        this.$store.commit('setTab', 'register')
         this.contactOnly = false
         this.step = 1
         setTimeout(() => {
           this.$vuetify.goTo('#register')
         }, 1)
-      } else {
-        this.contactOnly = true
-        this.step = 0
+      }
+      if (this.$route.hash === '#about-us') {
+        this.$store.commit('setTab', 'about-us')
         setTimeout(() => {
-          this.$vuetify.goTo(this.$route.hash, { offset: 100 })
+          this.$vuetify.goTo('#about-us')
+        }, 1)
+      }
+      if (this.$route.hash === '#contact-us') {
+        this.step = 0
+        this.contactOnly = true
+        setTimeout(() => {
+          this.$vuetify.goTo('#register')
         }, 1)
       }
     }
@@ -208,10 +217,15 @@ export default {
   },
   methods: {
     onIntersect (event) {
-      /*       if (event === 'REGISTER') this.tabsValue = 'register'
-      if (event === 'ABOUT') this.tabsValue = 'about' */
-      // More information about these options
-      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling) {
+        if (event === 'REGISTER') this.$store.commit('setTab', 1)
+        if (event === 'ABOUT-US') this.$store.commit('setTab', 0)
+        history.pushState(
+          {},
+          null,
+          this.$route.path
+        )
+      }
     }
   }
 }
@@ -222,7 +236,7 @@ export default {
 border: 0.5px solid white;
     .main_title {
     font-size: 3em;
-    font-family: 'Poiret One', sans-serif;
+    font-family: 'Poiret One', 'sans-serif'!important;
     text-align: center;
     }
      .main_subtitle {

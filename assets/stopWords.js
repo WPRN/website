@@ -1002,8 +1002,6 @@ export default [
   'tell',
   'ten',
   'tends',
-  'test',
-  'text',
   'tf',
   'tg',
   'th',

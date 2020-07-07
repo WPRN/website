@@ -1,6 +1,7 @@
 <template>
   <v-card
     flat
+    :class="{'mt-6': !pinned||vuetify.breakpoint.smAndDown}"
   >
     <!-- DEFAULT FILTERS -->
     <v-row no-gutters>
@@ -95,7 +96,7 @@
             <span>Tick this to display only projects featured by the WPRN community</span>
           </v-tooltip>
           <v-spacer />
-          <!-- PIN BUTTON -->
+          <!-- PIN BUTTON
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -111,7 +112,7 @@
               </v-btn>
             </template>
             <span>{{ pinned?'Unpin the advanced filter menu':'Pin the advanced filter menu' }}</span>
-          </v-tooltip>
+          </v-tooltip>-->
 
           <!-- RESET FILTERS BUTTON -->
           <v-btn

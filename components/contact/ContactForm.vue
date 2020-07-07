@@ -88,7 +88,10 @@ import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
 export default {
   props: {
-    id: String
+    id: {
+      type: String,
+      default: ''
+    }
   },
   data () {
     return {

@@ -31,45 +31,51 @@
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
       id="main-app-bar"
+      v-model="tab"
       light
       right
-      :optional="!value"
+      :optional="!tab"
       slider-size="8"
-      nuxt
+      active-class="text--blue"
+      s
+      @change="updateStore($event)"
     >
       <v-tab
-        to="/#about-us"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
+        :class="{'v-tab--active': $store.state.tab===0}"
+        @click="$route.name==='index'?scrollTo('#about-us'):$router.push({path:'/', hash:'#about-us'})"
       >
         About WPRN
       </v-tab>
       <v-tab
-        to="/#register"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
+        :class="{'v-tab--active': $store.state.tab===1}"
+        @click="$route.name==='index'?scrollTo('#register'):$router.push({path:'/', hash:'#register'})"
       >
         Register your project
       </v-tab>
       <v-tab
-        to="/search"
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
         min-width="96"
         text
+        to="/search"
       >
         Browse projects
       </v-tab>
     </v-tabs>
     <v-btn
       v-show="$vuetify.breakpoint.smAndDown"
+      :class="{'v-tab--active': $store.state.tab===2}"
       light
       tile
       outlined
@@ -85,10 +91,25 @@
 <script>
 export default {
   props: {
-    value: {
-      type: [String, Boolean],
-      required: false,
-      default: false
+  },
+  computed: {
+    tab: {
+      get () {
+        return this.$store.state.tab
+      },
+      set (newValue) {
+        return this.$store.commit('setTab', newValue)
+      }
+    }
+  },
+  methods: {
+    updateStore (value) {
+      this.$store.commit('setTab', value)
+    },
+    scrollTo (value) {
+      this.$store.commit('lockScrolling')
+      this.$vuetify.goTo(value)
+      setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
     }
   }
 }

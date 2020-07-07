@@ -21,3 +21,8 @@ export const verifyEmail = /* GraphQL */ `
     verifyEmail(id: $id, key: $key)
   }
 `;
+export const removeProject = /* GraphQL */ `
+  mutation RemoveProject($id: String!, $key: String!) {
+    removeProject(id: $id, key: $key)
+  }
+`;

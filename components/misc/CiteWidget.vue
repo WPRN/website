@@ -76,7 +76,10 @@
 <script>
 export default {
   props: {
-    project: Object
+    project: {
+      type: Object,
+      default: () => {}
+    }
   },
   methods: {
     copyToClipBoard () {
