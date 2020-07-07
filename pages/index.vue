@@ -192,7 +192,7 @@ export default {
 
     if (this.$route.hash) {
       if (this.$route.hash === '#register') {
-        this.$store.commit('setTab', 'register')
+        this.$store.commit('setTab', 1)
         this.contactOnly = false
         this.step = 1
         setTimeout(() => {
@@ -200,7 +200,7 @@ export default {
         }, 1)
       }
       if (this.$route.hash === '#about-us') {
-        this.$store.commit('setTab', 'about-us')
+        this.$store.commit('setTab', 0)
         setTimeout(() => {
           this.$vuetify.goTo('#about-us')
         }, 1)
