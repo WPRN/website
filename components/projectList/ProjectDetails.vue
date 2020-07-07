@@ -9,14 +9,16 @@
     <!-- SOCIAL -->
     <SocialWidget :project="project" />
     <v-card-title
-      class="pl-0 pb-1 justify-space-between d-flex"
+      class="pb-1 justify-space-between d-flex"
       :class="{ 'pl-3': $vuetify.breakpoint.smAndDown }"
     >
       <v-row>
         <!--  BackButton takes one col -->
         <BackButton url="/search" />
         <v-col
-          cols="11"
+          cols="12"
+          sm="10"
+          xs="12"
           class=" d-flex align-center"
         >
           <!-- NAME -->
@@ -37,7 +39,7 @@
 
     <v-card-text
       class="pb-0 white--text"
-      :class="{ 'pl-12 ml-4': $vuetify.breakpoint.mdAndUp }"
+      :class="{ 'pl-12 pr-12': $vuetify.breakpoint.mdAndUp }"
     >
       <v-row>
         <!-- CONTACT -->
@@ -78,7 +80,7 @@
         <!-- DESCRIPTION -->
         <v-col
           cols="12"
-          class="subtitle-1 pr-12"
+          class="subtitle-1"
         >
           <span class="overline">Team and Project description</span>
           <br>
@@ -342,21 +344,22 @@
           @copied="snackbar = true"
         />
 
-        <v-col align="right">
+        <v-col
+          align="center"
+          :class="{'justify-space-between d-flex': !$vuetify.breakpoint.xsOnly}"
+        >
           <!--  ACTION BUTTONS -->
           <v-btn
             color="primary"
-            :class="{ 'mr-3': !project.url , 'mt-3': $vuetify.breakpoint.smAndDown }"
-            class="mr-6"
+            :class="{'mt-3': $vuetify.breakpoint.xsOnly}"
             @click="$emit('contact')"
           >
-            <v-icon>mdi-email-edit</v-icon>&nbsp; Email this project contact
+            <v-icon>mdi-email-edit</v-icon><span style="white-space: normal;">&nbsp;Email this project contact</span>
           </v-btn>
           <v-btn
             v-if="project.url"
             color="primary"
-            class="mr-6"
-            :class="{ 'mt-3': $vuetify.breakpoint.smAndDown }"
+            :class="{ 'mt-3': $vuetify.breakpoint.xsOnly }"
           >
             <a
               :href="

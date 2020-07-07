@@ -26,6 +26,7 @@
     "@tweenjs/tween.js": "^18",
     "array-flat-polyfill": "^1.0.1",
     "aws-appsync": "^3.0.2",
+    "eslint-plugin-nuxt": "^1.0.0",
     "intersection-observer": "^0.9.0",
     "nuxt": "^2.4.2",
     "nuxt-jsonld": "^1.4.5"

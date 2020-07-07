@@ -57,6 +57,7 @@
           </small>
         </div>
         <v-btn
+          dark
           color="success"
           x-large
           :loading="sending"

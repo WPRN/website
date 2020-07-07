@@ -16,7 +16,7 @@
         <v-card
           flat
           color="#333333"
-          class="pa-6"
+          :class="{'pa-0': $vuetify.breakpoint.xsOnly, 'pa-6': $vuetify.breakpoint.smAndUp}"
         >
           <v-card-title class="white--text">
             {{
@@ -78,3 +78,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+>>>.v-textarea.theme--light:not(.error--text) .theme--light.v-counter
+{
+  color: white;
+}
+</style>

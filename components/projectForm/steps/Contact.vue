@@ -379,10 +379,16 @@ export default {
       return extendedTypes.some(item => item.teamMandatory && this.$store.state.form.project.type.includes(item.name))
     },
     addTeamMember (member) {
-      this.team = this.team ? [...this.team, member] : [member]
-      this.firstname = ''
-      this.lastname = ''
-      this.entity = ''
+      if (!this.team.some((memb) => {
+        return memb.firstname === member.firstname &&
+          memb.lastname === member.lastname &&
+          memb.entity === member.entity
+      })) {
+        this.team = this.team ? [...this.team, member] : [member]
+        this.firstname = ''
+        this.lastname = ''
+        this.entity = ''
+      }
     },
     moveUp (index) {
       this.moveItem(index, index - 1)
