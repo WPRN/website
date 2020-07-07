@@ -164,12 +164,6 @@ export default {
         args.recaptcha = await this.$recaptcha.getResponse()
         let res = {}
         if (this.editMode) {
-          console.log('EDIT MODE', {
-            ...args,
-            pubId: this.$route.params.id,
-            key: this.$route.params.key
-          })
-
           res = await client.mutate({
             mutation: gql(editProject),
             variables: {
@@ -181,6 +175,8 @@ export default {
             }
           })
         } else {
+          console.log('args: ', args)
+          delete args.feedback
           res = await client.mutate({
             mutation: gql(newProject),
             variables: { input: args }

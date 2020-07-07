@@ -121,12 +121,12 @@
             md="6"
           >
             <v-text-field
-              ref="team_firstname"
-              v-model="team_firstname"
+              ref="firstname"
+              v-model="firstname"
               :label="isTeamMandatory()?'Team member firstname*':'Team member firstname'"
               solo
               :rules="teamNameRules"
-              @blur="capitalize('team_firstname')"
+              @blur="capitalize('firstname')"
             />
           </v-col>
           <v-col
@@ -134,12 +134,12 @@
             md="6"
           >
             <v-text-field
-              ref="team_lastname"
-              v-model="team_lastname"
+              ref="lastname"
+              v-model="lastname"
               :label="isTeamMandatory()?'Team member lastname*':'Team member lastname'"
               solo
               :rules="teamNameRules"
-              @blur="capitalize('team_lastname')"
+              @blur="capitalize('lastname')"
             />
           </v-col>
           <v-col
@@ -147,8 +147,8 @@
             md="6"
           >
             <v-text-field
-              ref="team_entity"
-              v-model="team_entity"
+              ref="entity"
+              v-model="entity"
               :label="isTeamMandatory()?'Team member Institution* (University, Laboratory, freelance...)':'Team member Institution (University, Laboratory, freelance...)'"
               solo
               :rules="requiredTeamRules"
@@ -165,18 +165,18 @@
               dark
               :disabled="
                 !(
-                  $refs.team_firstname &&
-                  $refs.team_firstname.valid &&
-                  $refs.team_lastname &&
-                  $refs.team_lastname.valid &&
-                  $refs.team_entity &&
-                  $refs.team_entity.valid &&
-                  team_firstname.length > 0 &&
-                  team_lastname.length > 0 &&
-                  team_entity.length > 0
+                  $refs.firstname &&
+                  $refs.firstname.valid &&
+                  $refs.lastname &&
+                  $refs.lastname.valid &&
+                  $refs.entity &&
+                  $refs.entity.valid &&
+                  firstname.length > 0 &&
+                  lastname.length > 0 &&
+                  entity.length > 0
                 )
               "
-              @click="addTeamMember({team_firstname, team_lastname, team_entity})"
+              @click="addTeamMember({firstname, lastname, entity})"
             >
               <v-icon>mdi-account-plus</v-icon>&nbsp;
               Add Member
@@ -197,11 +197,11 @@
                 <v-list-item-content class="py-0">
                   <v-list-item-title
                     class="text-left"
-                    v-text="item.team_firstname+' '+item.team_lastname"
+                    v-text="item.firstname+' '+item.lastname"
                   />
                   <v-list-item-subtitle
                     class="text-left"
-                    v-text="item.team_entity"
+                    v-text="item.entity"
                   />
                 </v-list-item-content>
 
@@ -308,9 +308,9 @@ export default {
       contact_lastname: this.editMode ? this.projectInput.contact_lastname : '',
       contact_email: this.editMode ? this.projectInput.contact_email : '',
       contact_entity: this.editMode ? this.projectInput.contact_entity : '',
-      team_firstname: '',
-      team_lastname: '',
-      team_entity: '',
+      firstname: '',
+      lastname: '',
+      entity: '',
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>
@@ -358,7 +358,7 @@ export default {
   },
   mounted () {
     if (this.editMode) {
-      this.team = this.projectInput.team || [{team_firstname: this.contact_firstname, team_lastname: this.contact_lastname, team_entity: this.contact_entity}]
+      this.team = this.projectInput.team || [{firstname: this.contact_firstname, lastname: this.contact_lastname, entity: this.contact_entity}]
     } else {
       this.team = []
     }
@@ -380,14 +380,14 @@ export default {
     },
     addTeamMember (member) {
       if (!this.team.some((memb) => {
-        return memb.team_firstname === member.team_firstname &&
-          memb.team_lastname === member.team_lastname &&
-          memb.team_entity === member.team_entity
+        return memb.firstname === member.firstname &&
+          memb.lastname === member.lastname &&
+          memb.entity === member.entity
       })) {
         this.team = this.team ? [...this.team, member] : [member]
-        this.team_firstname = ''
-        this.team_lastname = ''
-        this.team_entity = ''
+        this.firstname = ''
+        this.lastname = ''
+        this.entity = ''
       }
     },
     moveUp (index) {

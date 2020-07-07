@@ -18,11 +18,18 @@ export const getProjectForEdit = /* GraphQL */ `
       contact_entity
       url
       date
+      dates
       time
       pubId
       createdAt
       state
       thematics
+      continent
+      team {
+        firstname
+        lastname
+        entity
+      }
     }
   }
 `;
@@ -43,11 +50,18 @@ export const getProject = /* GraphQL */ `
       contact_entity
       url
       date
+      dates
       time
       pubId
       createdAt
       state
       thematics
+      continent
+      team {
+        firstname
+        lastname
+        entity
+      }
       updatedAt
     }
   }
@@ -82,11 +96,13 @@ export const listProjects = /* GraphQL */ `
         contact_entity
         url
         date
+        dates
         time
         pubId
         createdAt
         state
         thematics
+        continent
         updatedAt
       }
       nextToken
@@ -121,11 +137,13 @@ export const searchProjects = /* GraphQL */ `
         contact_entity
         url
         date
+        dates
         time
         pubId
         createdAt
         state
         thematics
+        continent
         updatedAt
       }
       nextToken
