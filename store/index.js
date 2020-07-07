@@ -12,10 +12,8 @@ export const mutations = {
   },
   lockScrolling (state) {
     state.scrolling = true
-    console.log('LOCK')
   },
   unlockScrolling (state) {
     state.scrolling = false
-    console.log('UNLOCK')
   }
 }

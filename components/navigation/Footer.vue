@@ -74,7 +74,7 @@
         <a
           style="text-decoration: underline;"
           class="blue--text"
-          @click="$router.go({path:'/#contact'})"
+          @click="$emit('contact')"
         >Contact us</a>
       </span>
 

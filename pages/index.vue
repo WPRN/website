@@ -186,10 +186,10 @@ export default {
   },
 
   async mounted () {
-    console.log('MOUTNED')
     this.$nextTick(() => {
       this.mounted = true
     })
+
     if (this.$route.hash) {
       if (this.$route.hash === '#register') {
         this.$store.commit('setTab', 'register')
@@ -205,13 +205,19 @@ export default {
           this.$vuetify.goTo('#about-us')
         }, 1)
       }
+      if (this.$route.hash === '#contact-us') {
+        this.step = 0
+        this.contactOnly = true
+        setTimeout(() => {
+          this.$vuetify.goTo('#register')
+        }, 1)
+      }
     }
     await this.$recaptcha.init()
   },
   methods: {
     onIntersect (event) {
       if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling) {
-        console.log('onIntersect: ', event)
         if (event === 'REGISTER') this.$store.commit('setTab', 1)
         if (event === 'ABOUT-US') this.$store.commit('setTab', 0)
         history.pushState(

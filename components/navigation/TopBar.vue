@@ -104,7 +104,6 @@ export default {
   },
   methods: {
     updateStore (value) {
-      console.log('update store value: ', value)
       this.$store.commit('setTab', value)
     },
     scrollTo (value) {
