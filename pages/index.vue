@@ -241,7 +241,7 @@ border: 0.5px solid white;
     }
      .main_subtitle {
     font-size: 2em;
-    font-family: 'Poiret One', cursive!important;
+    font-family: 'Poiret One', sans-serif;
     font-weight: 800;
 
     }

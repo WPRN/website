@@ -107,10 +107,7 @@ export default {
         (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        (value) => value.length <= 40 || 'Max 40 characters',
-        (value) => {
-          return true
-        }
+        (value) => value.length <= 40 || 'Max 40 characters'
       ],
       emailRules: [
         (value) => !!value || 'Email address required.',
@@ -124,10 +121,7 @@ export default {
         (value) =>
           value.length >= 5 ||
           'Your message subjects must have at least 4 characters',
-        (value) => value.length <= 40 || 'Max 40 characters',
-        (value) => {
-          return true
-        }
+        (value) => value.length <= 40 || 'Max 40 characters'
       ],
 
       messageRules: [
