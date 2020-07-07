@@ -195,22 +195,22 @@ export default {
         this.$store.commit('setTab', 1)
         this.contactOnly = false
         this.step = 1
-        setTimeout(() => {
-          this.$vuetify.goTo('#register')
-        }, 1)
+        this.$store.commit('lockScrolling')
+        this.$vuetify.goTo('#register')
+        setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
       }
       if (this.$route.hash === '#about-us') {
         this.$store.commit('setTab', 0)
-        setTimeout(() => {
-          this.$vuetify.goTo('#about-us')
-        }, 1)
+        this.$store.commit('lockScrolling')
+        this.$vuetify.goTo('#about-us')
+        setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
       }
       if (this.$route.hash === '#contact-us') {
         this.step = 0
         this.contactOnly = true
-        setTimeout(() => {
-          this.$vuetify.goTo('#register')
-        }, 1)
+        this.$store.commit('lockScrolling')
+        this.$vuetify.goTo('#register')
+        setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
       }
     }
     await this.$recaptcha.init()
