@@ -358,7 +358,7 @@
                 class="pl-3"
               >
                 <div class="subtitle-1">
-                  {{ item.team_firstname }}
+                  {{ item.firstname }}
                 </div>
               </v-col>
               <v-col
@@ -367,7 +367,7 @@
                 :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
               >
                 <div class="subtitle-1">
-                  {{ item.team_lastname }}
+                  {{ item.lastname }}
                 </div>
               </v-col>
               <v-col
@@ -376,7 +376,7 @@
                 class="pl-3"
               >
                 <div class="subtitle-1">
-                  {{ item.team_entity }}
+                  {{ item.entity }}
                 </div>
               </v-col>
               <v-divider
