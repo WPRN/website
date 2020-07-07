@@ -8,7 +8,7 @@
     <v-sheet
       light
       elevation="3"
-      class="mr-6 py-3 pl-5 mt-3"
+      class="pa-3 mt-3"
     >
       <v-row no-gutters>
         <v-col class="align-self-center">
@@ -49,7 +49,7 @@
         </v-col>
         <v-col
           cols="auto"
-          class="align-self-center"
+          class="align-self-center mx-auto text-centered"
         >
           <v-tooltip top>
             <template v-slot:activator="{ on }">
@@ -57,7 +57,6 @@
                 icon
                 large
                 tile
-                class="mr-2"
                 v-on="on"
                 @click="copyToClipBoard()"
               >
