@@ -4,7 +4,7 @@
       flat
       min-height="320px"
       light
-      color="#333333"
+      color="transparent"
     >
       <v-form
         ref="detailsForm"
@@ -247,7 +247,7 @@
       Previous
     </v-btn>
     <v-btn
-      color="accent"
+      color="primary"
       :disabled="!(
         $refs.field &&
         $refs.field.valid &&

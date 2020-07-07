@@ -4,7 +4,7 @@
       flat
       min-height="320px"
       light
-      color="#333333"
+      color="transparent"
     >
       <v-form ref="generalForm">
         <v-row>
@@ -82,7 +82,7 @@
       </v-form>
     </v-card>
     <v-btn
-      color="accent"
+      color="primary"
       :disabled="
         editMode
           ? false

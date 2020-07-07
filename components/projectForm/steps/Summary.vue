@@ -3,8 +3,7 @@
     <v-card
       min-height="320px"
       flat
-      dark
-      color="#333333"
+      color="transparent"
     >
       <v-card-title primary-title>
         Review your project
@@ -465,7 +464,7 @@
           $refs.agreedRef.valid
         )
       "
-      @click="withRequest ? $emit('feedbackModal') : $emit('onSubmit')"
+      @click="editMode ? $emit('feedbackModal') : $emit('onSubmit')"
     >
       Submit&nbsp;
       <v-icon>mdi-send</v-icon>
@@ -486,7 +485,6 @@ export default {
     return {
       zones,
       agreed: false,
-      withRequest: this.editMode ? this.projectInput.withRequest : false,
       requiredRules: [
         (value) => !!value || 'This field is required.',
         (value) =>

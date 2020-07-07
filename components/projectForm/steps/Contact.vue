@@ -4,7 +4,7 @@
       min-height="320px"
       flat
       light
-      color="#333333"
+      color="transparent"
     >
       <v-form
         ref="contactForm"
@@ -162,6 +162,7 @@
               color="accent"
               x-large
               block
+              dark
               :disabled="
                 !(
                   $refs.team_firstname &&
@@ -266,7 +267,7 @@
       Previous
     </v-btn>
     <v-btn
-      color="accent"
+      color="primary"
       :disabled="
         !(
           $refs.firstname &&
@@ -358,6 +359,8 @@ export default {
   mounted () {
     if (this.editMode) {
       this.team = this.projectInput.team || [{team_firstname: this.contact_firstname, team_lastname: this.contact_lastname, team_entity: this.contact_entity}]
+    } else {
+      this.team = []
     }
     this.editMode && this.$refs.contactForm.validate()
   },

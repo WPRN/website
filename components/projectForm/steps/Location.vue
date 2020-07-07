@@ -4,7 +4,7 @@
       min-height="320px"
       flat
       light
-      color="#333333"
+      color="transparent"
     >
       <v-form
         ref="locationForm"
@@ -96,7 +96,7 @@
       Previous
     </v-btn>
     <v-btn
-      color="accent"
+      color="primary"
       :disabled="zone.length === 0"
       x-large
       @click="$store.commit('form/updateProject', {zone, continent, country, location});$emit('nextStep', 4)"

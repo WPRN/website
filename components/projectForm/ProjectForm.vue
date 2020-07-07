@@ -107,7 +107,7 @@
         :project-input="projectInput"
         :loading="loading"
         @nextStep="formStep = $event"
-        @feedBackModal="FeedbackModal = true"
+        @feedbackModal="FeedbackModal = true"
         @onSubmit="onSubmit()"
       />
       <feedback-modal
