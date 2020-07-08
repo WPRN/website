@@ -182,11 +182,6 @@
               Add Member
             </v-btn>
           </v-col>
-          <v-col
-            cols="12"
-          >
-            <span>Erreur</span>
-          </v-col>
         </v-row>
         <v-list
           v-if="team && team.length"
