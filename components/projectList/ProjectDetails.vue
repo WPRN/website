@@ -345,21 +345,23 @@
         />
 
         <v-col
-          align="center"
-          :class="{'justify-space-between d-flex': !$vuetify.breakpoint.xsOnly}"
+          :align="$vuetify.breakpoint.xsOnly ? 'center' : 'right'"
         >
           <!--  ACTION BUTTONS -->
           <v-btn
             color="primary"
-            :class="{'mt-3': $vuetify.breakpoint.xsOnly}"
+            class="mt-3"
+            :small="$vuetify.breakpoint.xsOnly"
             @click="$emit('contact')"
           >
-            <v-icon>mdi-email-edit</v-icon><span style="white-space: normal;">&nbsp;Email this project contact</span>
+            <v-icon>mdi-email-edit</v-icon>&nbsp;Email this project contact
           </v-btn>
           <v-btn
             v-if="project.url"
             color="primary"
-            :class="{ 'mt-3': $vuetify.breakpoint.xsOnly }"
+            class="mt-3"
+            :small="$vuetify.breakpoint.xsOnly"
+            :class="{ 'ml-6': !$vuetify.breakpoint.xsOnly }"
           >
             <a
               :href="
