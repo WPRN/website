@@ -58,7 +58,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Qualitative analysis',
@@ -66,7 +68,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Case Study',
@@ -74,7 +78,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Questionnaire',
@@ -82,7 +88,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Simulation / Modeling',
@@ -90,7 +98,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Dataset, Data Mining',
@@ -98,7 +108,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Action Research',
@@ -106,7 +118,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Call for Research Proposals',
@@ -114,7 +128,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: true,
     requireName: false,
-    teamMandatory: false
+    teamMandatory: false,
+    isContactable: false,
+    citeWidget: false
   },
   {
     name: 'Call for Collaboration',
@@ -122,7 +138,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: true,
     requireName: false,
-    teamMandatory: false
+    teamMandatory: false,
+    isContactable: false,
+    citeWidget: false
   },
   {
     name: 'Citizen/Participatory Science',
@@ -130,7 +148,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Grassroot Action',
@@ -138,7 +158,9 @@ export const extendedTypes = [
     dateTime: true,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Scientific Paper',
@@ -146,7 +168,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Report',
@@ -154,7 +178,9 @@ export const extendedTypes = [
     dateTime: true,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Policy Document',
@@ -162,7 +188,9 @@ export const extendedTypes = [
     dateTime: true,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Regulation',
@@ -170,7 +198,9 @@ export const extendedTypes = [
     dateTime: true,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Conference / Webinar',
@@ -178,7 +208,9 @@ export const extendedTypes = [
     dateTime: true,
     timeInterval: true,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Video',
@@ -186,7 +218,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Blog',
@@ -194,7 +228,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Press article',
@@ -202,7 +238,9 @@ export const extendedTypes = [
     dateTime: true,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Other Ressource',
@@ -210,7 +248,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: true,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
   },
   {
     name: 'Research tracker',
@@ -218,7 +258,9 @@ export const extendedTypes = [
     dateTime: false,
     timeInterval: false,
     requireName: false,
-    teamMandatory: true
+    teamMandatory: true,
+    isContactable: false,
+    citeWidget: false
   }
 ]
 

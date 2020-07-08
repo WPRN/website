@@ -49,7 +49,10 @@
         >
           <span class="overline">CONTACT :</span>
           <br>
-          <v-tooltip bottom>
+          <v-tooltip
+            v-if="!isNotContactable()"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 color="primary"
@@ -62,19 +65,30 @@
             </template>
             <span>Email this project contact</span>
           </v-tooltip>
-          <span
-            v-html="
-              $options.filters.highlight(
-                project.contact_lastname,
-                filters.search.split(' ')
-              )
-            "
-          />
-          {{ ", " + project.contact_firstname }}
           <template
-            v-if="project.contact_entity"
+            v-if="!isNotContactable()"
           >
-            ({{ project.contact_entity }})
+            <span
+              v-html="
+                $options.filters.highlight(
+                  project.contact_lastname,
+                  filters.search.split(' ')
+                )
+              "
+            />
+            {{ ", " + project.contact_firstname }}
+            <template
+              v-if="project.contact_entity"
+            >
+              ({{ project.contact_entity }})
+            </template>
+          </template>
+          <template v-else>
+            <template
+              v-if="project.contact_entity"
+            >
+              {{ project.contact_entity }}
+            </template>
           </template>
         </v-col>
         <!-- DESCRIPTION -->
@@ -252,8 +266,65 @@
             >(Show less)</span>
           </template>
         </v-col>
-        <!-- ZONE -->
+        <!-- LOCATION -->
         <v-col
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
+          <span class="overline">
+            {{ project.zone.length > 1 || project.country.length > 1
+              ? "LOCATIONS"
+              : "LOCATION"
+            }} :
+          </span>
+          <br>
+          <v-chip
+            v-for="(zone, index) in zoneFiltered"
+            :key="index"
+            class="ma-1"
+            label
+          >
+            {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
+          </v-chip>
+          <template v-if="project.country.length > 10 && !showCountry">
+            <template v-for="(country, index) in project.country">
+              <v-chip
+                v-if="index < 11"
+                :key="index"
+                class="ma-1"
+              >
+                {{ country }}
+              </v-chip>
+              <span
+                v-if="index === 11"
+                :key="index"
+                style="cursor: pointer;"
+                class="caption"
+                @click="showCountry = true"
+              >(show {{ project.country.length - 11 }} more)</span>
+            </template>
+          </template>
+          <template v-else>
+            <template v-for="(country, index) in project.country">
+              <v-chip
+                :key="index"
+                class="ma-1"
+              >
+                {{ country }}
+              </v-chip>
+            </template>
+            <span
+              v-if="project.country.length > 10 && showCountry"
+              style="cursor: pointer;"
+              class="caption"
+              @click="showCountry = false"
+            >(Show less)</span>
+          </template>
+        </v-col>
+        <!-- ZONE -->
+        <!-- <v-col
           cols="12"
           md="6"
           xl="4"
@@ -269,9 +340,9 @@
           >
             {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
           </v-chip>
-        </v-col>
+        </v-col> -->
         <!-- COUNTRY -->
-        <v-col
+        <!-- <v-col
           v-if="project.country"
           cols="12"
           md="6"
@@ -321,7 +392,7 @@
               @click="showCountry = false"
             >(Show less)</span>
           </template>
-        </v-col>
+        </v-col> -->
         <!--  CREATION DATE -->
         <v-col
           cols="12"
@@ -347,9 +418,9 @@
         >
           <span class="overline">
             {{
-            project.date
-              ? 'PROJECT DATE'
-              : 'PROJECT DATES'
+              project.date
+                ? 'PROJECT DATE'
+                : 'PROJECT DATES'
             }}
             :
           </span>
@@ -476,6 +547,7 @@
         </v-col>
         <!--  CITE WIDGET -->
         <CiteWidget
+          v-if="!hasNoCiteWidget()"
           :project="project"
           @copied="snackbar = true"
         />
@@ -485,6 +557,7 @@
         >
           <!--  ACTION BUTTONS -->
           <v-btn
+            v-if="!isNotContactable()"
             color="primary"
             class="mt-3"
             :small="$vuetify.breakpoint.xsOnly"
@@ -535,7 +608,8 @@ import {
   types,
   fields,
   state,
-  thematics
+  thematics,
+  extendedTypes
 } from '~/assets/data'
 import ProjectStatusBadge from '~/components/projectList/ProjectStatusBadge'
 import SocialWidget from '~/components/misc/SocialWidget'
@@ -572,12 +646,24 @@ export default {
       fields,
       state,
       thematics,
+      extendedTypes,
       snackbar: false,
       showThematics: false,
       showCountry: false,
       showFields: false,
       showType: false
 
+    }
+  },
+  computed: {
+    zoneFiltered () {
+      let continents = this.project.zone.slice()
+      continents = continents.filter((continent) => {
+        return !(countries[continent] && countries[continent].some((country) => {
+          return this.project.country.some(selectedCountry => selectedCountry === country)
+        }))
+      })
+      return continents
     }
   },
   mounted () {
@@ -588,6 +674,12 @@ export default {
         return new Date(a) - new Date(b)
       })
       return 'From ' + dates[0] + ' to ' + dates[1]
+    },
+    isNotContactable () {
+      return this.project.type.length === 1 && extendedTypes.some(item => !item.isContactable && this.project.type.includes(item.name))
+    },
+    hasNoCiteWidget () {
+      return this.project.type.length === 1 && extendedTypes.some(item => !item.citeWidget && this.project.type.includes(item.name))
     }
   }
 }
