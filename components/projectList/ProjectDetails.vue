@@ -143,7 +143,7 @@
               </v-chip>
             </template>
             <span
-              v-if="project.type.length > 10 && showFields"
+              v-if="project.field.length > 10 && showFields"
               style="cursor: pointer;"
               class="caption"
               @click="showFields = false"
