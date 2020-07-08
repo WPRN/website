@@ -157,12 +157,16 @@ export default {
   methods: {
     async onSubmit () {
       /*       this.$emit("WorkInProgressDialogToggle"); */
+      // TODO move this into a store action
       try {
         this.loading = true
         const args = this.$store.state.form.project
 
         args.recaptcha = await this.$recaptcha.getResponse()
         let res = {}
+        if (args.date && args.date.length === 0) delete args.date
+        if (args.dates && args.dates.length === 0) delete args.dates
+        if (args.time && args.time.length === 0) delete args.time
         if (this.editMode) {
           res = await client.mutate({
             mutation: gql(editProject),
