@@ -338,6 +338,142 @@
             (GMT)
           </span>
         </v-col>
+        <!--  PROJECT DATE(S) -->
+        <v-col
+          v-if="(project.date && project.date.length > 0) || (project.dates && project.dates.length > 0)"
+          cols="12"
+          md="6"
+          xl="4"
+        >
+          <span class="overline">
+            {{
+            project.date
+              ? 'PROJECT DATE'
+              : 'PROJECT DATES'
+            }}
+            :
+          </span>
+          <br>
+          <span class="subtitle-1">
+            {{ project.date ? project.date : '' }}
+            {{ project.dates && project.dates.length
+              ? project.dates.length === 1
+                ? project.dates[0]
+                : getDateRange(project.dates.slice())
+              : ''
+            }}
+          </span>
+        </v-col>
+        <!--  PROJECT TIME INFO -->
+        <v-col
+          v-if="project.time && project.time.length"
+          cols="12"
+          md="6"
+          xl="4"
+        >
+          <span class="overline">
+            PROJECT TIME INFO :
+          </span>
+          <br>
+          <span class="subtitle-1">
+            {{ project.time }}
+          </span>
+        </v-col>
+        <!-- PROJECT TEAM MEMBERS -->
+        <v-col
+          v-if="project.team && project.team.length"
+          cols="12"
+          class="subtitle-1"
+        >
+          <span class="overline">
+            PROJECT TEAM MEMBERS :
+          </span>
+          <br>
+          <v-row
+            v-if="!$vuetify.breakpoint.smAndDown"
+            no-gutters
+            class="mb-2"
+          >
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <div class="font-weight-light caption">
+                Firstname
+              </div>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <div class="font-weight-light caption">
+                Lastname
+              </div>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <div class="font-weight-light caption">
+                Institution
+              </div>
+            </v-col>
+          </v-row>
+          <v-row
+            v-for="(item, index) in project.team"
+            :key="'team'+index"
+            no-gutters
+          >
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <span
+                v-if="$vuetify.breakpoint.smAndDown"
+                class="font-weight-light caption"
+              >
+                Firstname
+              </span>
+              <span class="subtitle-1">
+                {{ item.firstname }}
+              </span>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <span
+                v-if="$vuetify.breakpoint.smAndDown"
+                class="font-weight-light caption"
+              >
+                Lastname
+              </span>
+              <span class="subtitle-1">
+                {{ item.lastname }}
+              </span>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <span
+                v-if="$vuetify.breakpoint.smAndDown"
+                class="font-weight-light caption"
+              >
+                Institution
+              </span>
+              <span class="subtitle-1">
+                {{ item.entity }}
+              </span>
+            </v-col>
+            <v-divider
+              v-if="index < project.team.length-1"
+              :key="'divider' + index"
+              inset
+              class="mt-1 mb-2"
+            />
+          </v-row>
+        </v-col>
         <!--  CITE WIDGET -->
         <CiteWidget
           :project="project"
@@ -444,9 +580,15 @@ export default {
 
     }
   },
-  mounted () {},
+  mounted () {
+  },
   methods: {
-
+    getDateRange (dates) {
+      dates.sort(function (a, b) {
+        return new Date(a) - new Date(b)
+      })
+      return 'From ' + dates[0] + ' to ' + dates[1]
+    }
   }
 }
 </script>
