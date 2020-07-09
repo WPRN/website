@@ -12,7 +12,7 @@
     >
       <v-row no-gutters>
         <v-col class="align-self-center">
-          {{ project.contact_lastname }}, {{ project.contact_firstname }}.
+          {{ getMembersOrContact() }}
           <b>&ldquo;{{ project.name }}&rdquo;</b>.
           <em>World Pandemic Research Network</em>
           . WPRN-{{ project.pubId }},
@@ -30,10 +30,8 @@
             id="cite"
             type="hidden"
             :value="
-              project.contact_lastname +
-                ', ' +
-                project.contact_firstname +
-                '.“' +
+              getMembersOrContact() +
+                ' ”' +
                 project.name +
                 '”. World Pandemic Research Network. WPRN-' +
                 project.pubId +
@@ -94,6 +92,28 @@ export default {
       /* unselect the range */
       copyNode.setAttribute('type', 'hidden')
       window.getSelection().removeAllRanges()
+    },
+    getMembersOrContact () {
+      let res = ''
+      if (this.project.team && this.project.team.length) {
+        Object.keys(this.project.team).forEach((member, index) => {
+          if (index <= 2) {
+            res += this.project.team[member].lastname +
+              ', ' +
+              this.project.team[member].firstname
+          }
+          if (Object.keys(this.project.team).length > 1 &&
+            index < Object.keys(this.project.team).length - 1 &&
+            index < 2) {
+            res += '; '
+          }
+          if (Object.keys(this.project.team).length > 3 && index === 2) {
+            res += ' & Al'
+          }
+        })
+        res += '.'
+      }
+      return res
     }
   }
 

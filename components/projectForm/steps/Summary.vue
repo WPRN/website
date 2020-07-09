@@ -248,6 +248,7 @@
               </v-btn>
             </v-col>
             <v-col
+              v-if="$store.state.form.project.contact_firstname && $store.state.form.project.contact_firstname.length"
               cols="12"
               md="6"
               class="pl-3"
@@ -260,6 +261,7 @@
               </div>
             </v-col>
             <v-col
+              v-if="$store.state.form.project.contact_lastname && $store.state.form.project.contact_lastname.length"
               cols="12"
               md="6"
               :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
@@ -272,6 +274,7 @@
               </div>
             </v-col>
             <v-col
+              v-if="$store.state.form.project.contact_entity && $store.state.form.project.contact_entity.length"
               cols="12"
               md="6"
               class="pl-3"
@@ -284,6 +287,7 @@
               </div>
             </v-col>
             <v-col
+              v-if="$store.state.form.project.contact_email && $store.state.form.project.contact_email.length"
               cols="12"
               md="6"
               :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
