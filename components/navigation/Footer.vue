@@ -74,7 +74,7 @@
         <a
           style="text-decoration: underline;"
           class="blue--text"
-          @click="$emit('contact')"
+          @click="$store.commit('setContact', true)"
         >Contact us</a>
       </span>
 

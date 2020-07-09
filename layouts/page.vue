@@ -14,9 +14,9 @@
         @about="$router.push({ path: '/', hash: 'about-us' })"
         @list="$router.push({ path: '/search' })"
       />
-      <v-content v-scroll="onScroll">
+      <v-main v-scroll="onScroll">
         <nuxt />
-      </v-content>
+      </v-main>
       <v-fab-transition>
         <v-btn
           v-show="offsetTop > 600"

@@ -277,7 +277,10 @@ import {
 import { pattern } from '~/assets/regex'
 export default {
   props: {
-    projectInput: Object,
+    projectInput: {
+      type: Object,
+      default: () => {}
+    },
     editMode: Boolean,
     loading: Boolean
   },

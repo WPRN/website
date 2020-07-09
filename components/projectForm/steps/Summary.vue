@@ -477,7 +477,10 @@ import {
 } from '~/assets/data'
 export default {
   props: {
-    projectInput: Object,
+    projectInput: {
+      type: Object,
+      default: () => {}
+    },
     editMode: Boolean,
     loading: Boolean
   },

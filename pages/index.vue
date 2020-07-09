@@ -4,14 +4,14 @@
     <About
       @goToRegister=" $vuetify.goTo('#register', { offset: 100 })
                       tabsValue ='#register';
-                      contactOnly = false
+                      this.$store.commit('setContact', false)
                       step = 1"
       @intersect="onIntersect($event)"
     />
     <ShareProject
       @register=" $vuetify.goTo('#register', { offset: 100 })
                   tabsValue='#register';
-                  contactOnly = false
+                  this.$store.commit('setContact', false)
                   step = 1"
     />
     <Stats />
@@ -177,11 +177,20 @@ export default {
     return {
       zones,
       drawer: false,
-      contactOnly: false,
       valid: false,
       step: 1,
       offsetTop: 0,
       mounted: false
+    }
+  },
+  computed: {
+    contactOnly: {
+      get () {
+        return this.$store.state.tab
+      },
+      set (newValue) {
+        return this.$store.commit('setTab', newValue)
+      }
     }
   },
 
@@ -193,7 +202,7 @@ export default {
     if (this.$route.hash) {
       if (this.$route.hash === '#register') {
         this.$store.commit('setTab', 1)
-        this.contactOnly = false
+        this.$store.commit('setContact', false)
         this.step = 1
         this.$store.commit('lockScrolling')
         this.$vuetify.goTo('#register')
@@ -207,7 +216,7 @@ export default {
       }
       if (this.$route.hash === '#contact-us') {
         this.step = 0
-        this.contactOnly = true
+        this.$store.commit('setContact', true)
         this.$store.commit('lockScrolling')
         this.$vuetify.goTo('#register')
         setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
@@ -217,14 +226,9 @@ export default {
   },
   methods: {
     onIntersect (event) {
-      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling) {
+      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling && !(event === 'REGISTER' && this.$store.state.contactOnly)) {
         if (event === 'REGISTER') this.$store.commit('setTab', 1)
         if (event === 'ABOUT-US') this.$store.commit('setTab', 0)
-        history.pushState(
-          {},
-          null,
-          this.$route.path
-        )
       }
     }
   }

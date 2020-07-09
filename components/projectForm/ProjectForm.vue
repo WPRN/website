@@ -113,7 +113,7 @@
       <feedback-modal
         :open="FeedbackModal"
         @cancel="FeedbackModal= false"
-        @update="FeedbackModal= false;$store.commit('form/updateProject', {feedback: $event}); onSubmit()"
+        @update="FeedbackModal= false;$store.commit('form/updateProject', {feedback: $event || ''}); onSubmit()"
       />
     </v-stepper-items>
   </v-stepper>
@@ -156,18 +156,28 @@ export default {
   },
   methods: {
     async onSubmit () {
+      console.log('onSubmit: ')
       /*       this.$emit("WorkInProgressDialogToggle"); */
       // TODO move this into a store action
       try {
         this.loading = true
         const args = this.$store.state.form.project
+        console.log('args: ', args)
 
         args.recaptcha = await this.$recaptcha.getResponse()
         let res = {}
         if (args.date && args.date.length === 0) delete args.date
         if (args.dates && args.dates.length === 0) delete args.dates
         if (args.time && args.time.length === 0) delete args.time
+        if (args.team && args.team.length) {
+          args.team.forEach(item => delete item.__typename)
+        }
         if (this.editMode) {
+          console.log('args: ', JSON.stringify({
+            ...args,
+            pubId: this.$route.params.id,
+            key: this.$route.params.key
+          }))
           res = await client.mutate({
             mutation: gql(editProject),
             variables: {
@@ -179,7 +189,6 @@ export default {
             }
           })
         } else {
-          console.log('args: ', args)
           delete args.feedback
           res = await client.mutate({
             mutation: gql(newProject),
@@ -195,6 +204,7 @@ export default {
         this.loading = false
         await this.$recaptcha.reset()
       } catch (error) {
+        console.log('error: ', error)
         this.error = true
         this.loading = false
         await this.$recaptcha.reset()

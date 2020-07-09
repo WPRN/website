@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-form
+      id="contact-us"
       lazy-validation
       color="#333333"
     >
@@ -144,6 +145,7 @@ export default {
     },
     async onSubmit () {
       /*  this.$emit("WorkInProgressDialogToggle"); */
+      // TODO move this in the store
       try {
         this.sending = true
         const args = this.contact
@@ -154,11 +156,11 @@ export default {
         })
 
         args.recaptcha = await this.$recaptcha.getResponse()
+        console.log(JSON.stringify({ input: args }))
         const res = await client.mutate({
           mutation: gql(newContact),
           variables: { input: args }
         })
-
         if (res && !res.errors) {
           this.$emit('complete')
         } else {

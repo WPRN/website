@@ -113,7 +113,10 @@ import {
 } from '~/assets/data'
 export default {
   props: {
-    projectInput: Object,
+    projectInput: {
+      type: Object,
+      default: () => {}
+    },
     editMode: Boolean,
     loading: Boolean
   },
@@ -122,7 +125,7 @@ export default {
       zones,
       countries,
       zone: this.editMode ? this.projectInput.zone : '',
-      continent: this.editMode ? this.projectInput.continent : '',
+      continent: this.editMode ? this.projectInput.continent || [] : [],
       country: this.editMode ? this.projectInput.country : '',
       location: this.editMode ? this.projectInput.location : '',
       countrySet: Object.keys(countries)
