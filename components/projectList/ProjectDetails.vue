@@ -274,7 +274,7 @@
           class="subtitle-1"
         >
           <span class="overline">
-            {{ project.zone.length > 1 || project.country.length > 1
+            {{ project.zone.length > 1 || project.country&&project.country.length > 1
               ? "LOCATIONS"
               : "LOCATION"
             }} :
@@ -288,7 +288,7 @@
           >
             {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
           </v-chip>
-          <template v-if="project.country.length > 10 && !showCountry">
+          <template v-if="project.country&&project.country.length > 10 && !showCountry">
             <template v-for="(country, index) in project.country">
               <v-chip
                 v-if="index < 11"
@@ -306,7 +306,7 @@
               >(show {{ project.country.length - 11 }} more)</span>
             </template>
           </template>
-          <template v-else>
+          <template v-else-if="project.country">
             <template v-for="(country, index) in project.country">
               <v-chip
                 :key="index"
@@ -660,7 +660,7 @@ export default {
       let continents = this.project.zone.slice()
       continents = continents.filter((continent) => {
         return !(countries[continent] && countries[continent].some((country) => {
-          return this.project.country.some(selectedCountry => selectedCountry === country)
+          return this.project.country && this.project.country.some(selectedCountry => selectedCountry === country)
         }))
       })
       return continents

@@ -30,7 +30,7 @@
               <b>The World Pandemic Research Network (WPRN)</b> is a platform serving research communities. It maintains a searchable global directory of the scientific resources available on the societal and human impacts of the Covid-19 pandemic. It shows <a href="/search">who works on what, where</a>, in real time, at global level.
             </p>
             <p class="text-justify">
-              Designed and maintained by researchers, WPRN is free, non-profit, public-funded, open (creative commons, open-source), GDPR compliant. It is steered by an international  <a
+              Designed and maintained by researchers, WPRN is free, non-profit, public-funded, open (creative commons, open-source) and GDPR compliant. It is steered by an international  <a
                 href="/advisory_board"
                 nuxt
               >

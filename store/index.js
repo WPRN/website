@@ -1,15 +1,11 @@
 export const state = () => ({
   tab: '',
   offsetTop: 0,
-  scrolling: false,
-  contactOnly: false
+  scrolling: false
 })
 export const mutations = {
   setTab (state, tab) {
     state.tab = tab
-  },
-  setContact (state, contact) {
-    state.contact = contact
   },
   setOffsetTop (state, offset) {
     state.offsetTop = offset

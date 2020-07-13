@@ -115,6 +115,9 @@ export default {
       referents: []
     }
   },
+  mounted () {
+
+  },
   methods: {
 
   }

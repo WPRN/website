@@ -47,7 +47,7 @@
         min-width="96"
         text
         :class="{'v-tab--active': $store.state.tab===0}"
-        @click="$route.name==='index'?scrollTo('#about-us'):$router.push({path:'/', hash:'#about-us'})"
+        @click="$router.push({path:'/', hash:'#about-us'})"
       >
         About WPRN
       </v-tab>
@@ -58,7 +58,7 @@
         min-width="96"
         text
         :class="{'v-tab--active': $store.state.tab===1}"
-        @click="$route.name==='index'?scrollTo('#register'):$router.push({path:'/', hash:'#register'})"
+        @click="$router.push({path:'/', hash:'#register'})"
       >
         Register your project
       </v-tab>

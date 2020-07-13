@@ -4,14 +4,14 @@
     <About
       @goToRegister=" $vuetify.goTo('#register', { offset: 100 })
                       tabsValue ='#register';
-                      this.$store.commit('setContact', false)
+                      contactOnly = false
                       step = 1"
       @intersect="onIntersect($event)"
     />
     <ShareProject
       @register=" $vuetify.goTo('#register', { offset: 100 })
                   tabsValue='#register';
-                  this.$store.commit('setContact', false)
+                  contactOnly = false
                   step = 1"
     />
     <Stats />
@@ -180,53 +180,53 @@ export default {
       valid: false,
       step: 1,
       offsetTop: 0,
-      mounted: false
-    }
-  },
-  computed: {
-    contactOnly: {
-      get () {
-        return this.$store.state.tab
-      },
-      set (newValue) {
-        return this.$store.commit('setTab', newValue)
-      }
+      mounted: false,
+      contactOnly: false
     }
   },
 
   async mounted () {
+    this.processHashes()
     this.$nextTick(() => {
       this.mounted = true
     })
-
-    if (this.$route.hash) {
-      if (this.$route.hash === '#register') {
-        this.$store.commit('setTab', 1)
-        this.$store.commit('setContact', false)
-        this.step = 1
-        this.$store.commit('lockScrolling')
-        this.$vuetify.goTo('#register')
-        setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
-      }
-      if (this.$route.hash === '#about-us') {
-        this.$store.commit('setTab', 0)
-        this.$store.commit('lockScrolling')
-        this.$vuetify.goTo('#about-us')
-        setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
-      }
-      if (this.$route.hash === '#contact-us') {
-        this.step = 0
-        this.$store.commit('setContact', true)
-        this.$store.commit('lockScrolling')
-        this.$vuetify.goTo('#register')
-        setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
-      }
-    }
     await this.$recaptcha.init()
   },
+  updated () {
+    this.processHashes()
+  },
   methods: {
+    processHashes () {
+      console.log('UPDATED', this.$route.hash)
+      if (this.$route.hash) {
+        if (this.$route.hash === '#register') {
+          this.$store.commit('setTab', 1)
+          this.contactOnly = false
+          this.step = 1
+          this.$store.commit('lockScrolling')
+          this.$vuetify.goTo('#register')
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+        }
+        if (this.$route.hash === '#about-us') {
+          this.$store.commit('setTab', 0)
+          this.$store.commit('lockScrolling')
+          this.$vuetify.goTo('#about-us')
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+        }
+        if (this.$route.hash === '#contact-us') {
+          this.$store.commit('setTab', null)
+          this.step = 0
+          this.contactOnly = true
+          this.$store.commit('lockScrolling')
+          this.$vuetify.goTo('#register')
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+        }
+      }
+    },
     onIntersect (event) {
-      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling && !(event === 'REGISTER' && this.$store.state.contactOnly)) {
+      console.log('event: ', event)
+      this.processHashes()
+      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling) {
         if (event === 'REGISTER') this.$store.commit('setTab', 1)
         if (event === 'ABOUT-US') this.$store.commit('setTab', 0)
       }
