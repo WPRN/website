@@ -71,6 +71,10 @@
           to="/press_room"
           class="blue--text"
         >Press Room</nuxt-link>&nbsp;-&nbsp;
+        <nuxt-link
+          to="/resources"
+          class="blue--text"
+        >Resources</nuxt-link>&nbsp;-&nbsp;
         <a
           style="text-decoration: underline;"
           class="blue--text"
