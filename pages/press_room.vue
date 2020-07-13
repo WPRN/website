@@ -95,13 +95,15 @@
         md="6"
       >
         <v-card
-          class="pa-6 mb-6"
+          :class="{'pa-6 mb-6':$vuetify.breakpoint.mdAndUp}"
           flat
         >
           <v-card-title class="justify-center font-weight-black text-uppercase">
             Press releases
           </v-card-title>
-          <v-card-text>
+          <v-card-text
+            :class="{'pa-2':$vuetify.breakpoint.smAndDown}"
+          >
             <v-list
               two-line
               subheader
@@ -109,6 +111,7 @@
               <v-list-item
                 href="/press_releases/launch_en.pdf"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-avatar>
                   <v-icon>mdi-file-pdf</v-icon>
@@ -126,6 +129,7 @@
               <v-list-item
                 href="/press_releases/launch_fr.pdf"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-avatar>
                   <v-icon>mdi-file-pdf</v-icon>
@@ -144,13 +148,15 @@
           </v-card-text>
         </v-card>
         <v-card
-          class="pa-6"
+          :class="{'pa-6 mb-6':$vuetify.breakpoint.mdAndUp}"
           flat
         >
           <v-card-title class="justify-center font-weight-black text-uppercase">
             Contacts
           </v-card-title>
           <v-card-text
+            :class="{'pa-2':$vuetify.breakpoint.smAndDown}"
+
             class="subtitle-1"
             color="black"
           >
@@ -159,7 +165,9 @@
               subheader
               align="left"
             >
-              <v-list-item>
+              <v-list-item
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
+              >
                 <v-list-item-avatar>
                   <v-icon large>
                     mdi-account-circle
@@ -172,6 +180,8 @@
                       small
                       label
                       class="ml-2"
+                      href="http://mediathena.fr/"
+                      target="_blank"
                     >
                       Mediathena
                     </v-chip>
@@ -193,7 +203,9 @@
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-              <v-list-item>
+              <v-list-item
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
+              >
                 <v-list-item-avatar>
                   <v-icon large>
                     mdi-account-circle
@@ -223,13 +235,15 @@
         md="6"
       >
         <v-card
-          class="pa-6 mb-6"
+          :class="{'pa-6 mb-6':$vuetify.breakpoint.mdAndUp}"
           flat
         >
           <v-card-title class="justify-center font-weight-black text-uppercase">
             Press Reviews
           </v-card-title>
-          <v-card-text>
+          <v-card-text
+            :class="{'pa-2':$vuetify.breakpoint.smAndDown}"
+          >
             <v-list
               two-line
               subheader
@@ -237,6 +251,7 @@
               <v-list-item
                 href="https://www.eurekalert.org/pub_releases/2020-05/idad-low050420.php"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>Eurekalert</v-list-item-title>
@@ -251,6 +266,7 @@
               <v-list-item
                 href="https://www.researchprofessionalnews.com/rr-news-world-2020-5-social-researchers-push-global-collaboration-amidst-covid-19/"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>Research Professional News</v-list-item-title>
@@ -265,6 +281,7 @@
               <v-list-item
                 href="https://www.gazettelabo.fr/breves/9755Lancement-wprn-org-Covid19.html"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>La Gazette du Labo</v-list-item-title>
@@ -279,6 +296,7 @@
               <v-list-item
                 href="https://www.aefinfo.fr/acces-depeche/626458"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>AEF Info</v-list-item-title>
@@ -294,6 +312,7 @@
               <v-list-item
                 href="http://www.scienceeurope.org/our-priorities/covid-19/other-resources/"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>Science Europe.org</v-list-item-title>
@@ -308,6 +327,7 @@
               <v-list-item
                 href="https://ec.europa.eu/jrc/communities/en/community/city-science-initiative/news/world-pandemic-research-network-wprn-global-real-time"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>JCR Science Hub Communities - The European Commission’s science and Knowledge Newsletter</v-list-item-title>
@@ -322,6 +342,7 @@
               <v-list-item
                 href="http://www.cnrs.fr/fr/cnrsinfo/les-shs-doivent-eclairer-la-decision-publique-en-cette-periode-de-crise"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>CNRS</v-list-item-title>
@@ -336,6 +357,7 @@
               <v-list-item
                 href="https://education.newstank.fr/fr/tour/news/184099/comment-iea-paris-suscite-premier-reseau-collaboration-mondiale-shs.html"
                 target="_blank"
+                :class="{'pl-2':$vuetify.breakpoint.smAndDown}"
               >
                 <v-list-item-content>
                   <v-list-item-title>Newstank</v-list-item-title>
