@@ -59,12 +59,35 @@ export default {
       offsetTop: 0
     }
   },
+  watch: {
+    '$store.state.tab': function () {
+      if (this.$store.state.tab !== null) this.updateScroll()
+    }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
+  },
   methods: {
     onError (error) { console.log(error) },
     onSuccess (token) {},
     onExpired () {},
     onScroll (e) {
       this.offsetTop = e.target.scrollingElement.scrollTop
+    },
+    updateScroll () {
+      console.log('UPDATE SCROLL FROM PAG LAYOUT')
+      switch (this.$store.state.tab) {
+        case 0:
+          this.$router.push('/#about-us')
+          break
+        case 1:
+          this.$router.push('/#register')
+          break
+        case 2:
+          this.$router.push('/search')
+          break
+      }
+      console.log('tab', this.$store.state.tab)
     }
   }
 }

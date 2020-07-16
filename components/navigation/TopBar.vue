@@ -37,8 +37,6 @@
       :optional="!tab"
       slider-size="8"
       active-class="text--blue"
-      s
-      @change="updateStore($event)"
     >
       <v-tab
         nuxt
@@ -47,7 +45,6 @@
         min-width="96"
         text
         :class="{'v-tab--active': $store.state.tab===0}"
-        @click="$router.push({path:'/', hash:'#about-us'})"
       >
         About WPRN
       </v-tab>
@@ -58,7 +55,6 @@
         min-width="96"
         text
         :class="{'v-tab--active': $store.state.tab===1}"
-        @click="$router.push({path:'/', hash:'#register'})"
       >
         Register your project
       </v-tab>
@@ -68,7 +64,6 @@
         class="font-weight-bold"
         min-width="96"
         text
-        to="/search"
       >
         Browse projects
       </v-tab>

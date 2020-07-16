@@ -181,23 +181,48 @@ export default {
       step: 1,
       offsetTop: 0,
       mounted: false,
-      contactOnly: false
+      isIntersecting: false
     }
   },
-
+  computed: {
+    contactOnly: {
+      get () {
+        return this.$store.state.contactOnly
+      },
+      set (newValue) {
+        return this.$store.commit('setContactOnly', newValue)
+      }
+    }
+  },
+  watch: {
+    '$store.state.tab': function () {
+      if (this.$store.state.tab !== null && !this.isIntersecting) this.updateScroll()
+      this.isIntersecting = false
+    },
+    '$store.state.contactOnly': function () {
+      console.log('contactOnly', this.$store.state.contactOnly)
+    }
+  },
   async mounted () {
-    this.processHashes()
+    console.log('mounted')
     this.$nextTick(() => {
       this.mounted = true
     })
+    if (this.$route.hash) this.processHashes()
+    if (this.$store.state.tab !== null && !this.isIntersecting) this.updateScroll()
     await this.$recaptcha.init()
   },
   updated () {
-    this.processHashes()
+    console.log('updated', this.$store.state.tab)
+    if (this.isIntersecting) {
+      if (this.$route.hash) this.processHashes()
+      if (this.$store.state.tab !== null && !this.isIntersecting) this.updateScroll()
+    }
+    this.isIntersecting = false
   },
   methods: {
     processHashes () {
-      console.log('UPDATED', this.$route.hash)
+      console.log('processHashes: ', this.$route.hash)
       if (this.$route.hash) {
         if (this.$route.hash === '#register') {
           this.$store.commit('setTab', 1)
@@ -214,19 +239,52 @@ export default {
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
         }
         if (this.$route.hash === '#contact-us') {
-          this.$store.commit('setTab', null)
+          this.$store.commit('setTab', 3)
           this.step = 0
           this.contactOnly = true
           this.$store.commit('lockScrolling')
           this.$vuetify.goTo('#register')
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
         }
+        history.pushState(
+          {},
+          null,
+          this.$route.path
+        )
       }
     },
+    updateScroll () {
+      console.log('UPDATE SCROLL')
+      switch (this.$store.state.tab) {
+        case 0:
+          this.$store.commit('lockScrolling')
+          this.$vuetify.goTo('#about-us')
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+
+          break
+        case 1:
+          this.$store.commit('lockScrolling')
+          this.$vuetify.goTo('#register')
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+          break
+        case 2:
+          this.$router.push('/search')
+          break
+        case 3:
+          this.$store.commit('lockScrolling')
+          this.step = 0
+          this.contactOnly = true
+          this.$vuetify.goTo('#register')
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+
+          break
+      }
+      console.log('tab', this.$store.state.tab)
+    },
     onIntersect (event) {
-      console.log('event: ', event)
-      this.processHashes()
       if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling) {
+        console.log('INTERSECT event: ', event)
+        this.isIntersecting = true
         if (event === 'REGISTER') this.$store.commit('setTab', 1)
         if (event === 'ABOUT-US') this.$store.commit('setTab', 0)
       }

@@ -27,9 +27,8 @@
         just not be an existing project.
         <br>You can try again and refresh
         this page or
-        <nuxt-link to="/#contact">
-          contact WPRN
-        </nuxt-link>.
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+        <nuxt-link to="/#contact">contact WPRN</nuxt-link>.
       </v-overlay>
     </template>
     <template v-else>

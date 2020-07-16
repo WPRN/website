@@ -12,7 +12,8 @@
     </p>
     <p>
       We welcome every suggestion or advices, so please do not hesitate to
-      <a href="/#contact">contact us</a> if you have any.
+      <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+      <nuxt-link to="/#contact">contact us</nuxt-link> if you have any.
     </p>
   </v-sheet>
 </template>

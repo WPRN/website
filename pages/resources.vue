@@ -27,67 +27,6 @@
     </v-col>
     <v-col
       cols="12"
-      class="text-center"
-    >
-      <v-tooltip
-        v-for="(item, index) in socialIcons"
-        :key="index"
-        top
-      >
-        <template
-          v-if="index>0"
-          v-slot:activator="{ on }"
-        >
-          <v-btn
-            text
-            icon
-            v-on="on"
-          >
-            <a
-              :href="item.url"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="text-decoration: none;"
-            >
-              <v-icon color="white">mdi-{{ item.icon }}</v-icon>
-            </a>
-          </v-btn>
-        </template>
-        <span>{{ item.text }}</span>
-      </v-tooltip>
-    </v-col>
-    <v-col
-      cols="12"
-      sm="12"
-      md="8"
-    >
-      <v-responsive
-        class="mx-auto"
-        width="56"
-      >
-        <v-divider class="mb-1" />
-        <v-divider />
-      </v-responsive>
-    </v-col>
-    <v-col
-      cols="12"
-      align="center"
-    >
-      <nuxt-link to="/advisory_board">
-        Advisory Board
-      </nuxt-link>&nbsp;-&nbsp;
-      <nuxt-link to="/referents">
-        Referents
-      </nuxt-link>&nbsp;-&nbsp;
-      <nuxt-link to="/institutions">
-        Contributors' Institutions
-      </nuxt-link>&nbsp;-&nbsp;
-      <nuxt-link to="/press_room">
-        Press Room
-      </nuxt-link>
-    </v-col>
-    <v-col
-      cols="12"
       sm="12"
       md="6"
     >
@@ -252,6 +191,9 @@ export default {
       contact: false,
       socialIcons
     }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
   }
 
 }

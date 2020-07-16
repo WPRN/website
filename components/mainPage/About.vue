@@ -27,26 +27,19 @@
             height="100%"
           >
             <p class="text-justify">
-              <b>The World Pandemic Research Network (WPRN)</b> is a platform serving research communities. It maintains a searchable global directory of the scientific resources available on the societal and human impacts of the Covid-19 pandemic. It shows <a href="/search">who works on what, where</a>, in real time, at global level.
+              <b>The World Pandemic Research Network (WPRN)</b> is a platform serving research communities. It maintains a searchable global directory of the scientific resources available on the societal and human impacts of the Covid-19 pandemic. It shows
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/search">who works on what, where</nuxt-link>, in real time, at global level.
             </p>
             <p class="text-justify">
-              Designed and maintained by researchers, WPRN is free, non-profit, public-funded, open (creative commons, open-source) and GDPR compliant. It is steered by an international  <a
-                href="/advisory_board"
-                nuxt
-              >
-                Advisory Board</a>
-              and supported by major <a
-                nuxt
-                href="/institutions"
-              > scientific institutions and scientific networks</a> worldwide.
+              Designed and maintained by researchers, WPRN is free, non-profit, public-funded, open (creative commons, open-source) and GDPR compliant. It is steered by an international
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/advisory_board">Advisory Board</nuxt-link> and supported by major <nuxt-link to="/institutions"> scientific institutions and scientific networks</nuxt-link> worldwide.
             </p>
             <p class="text-justify">
-              WPRN is the product of a collective scientific intelligence, with validation by senior scholars who act as <a
-                href="/referents"
-                nuxt
-              >
-                referents</a>
-              in their fields.
+              WPRN is the product of a collective scientific intelligence, with validation by senior scholars who act as
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/referents">referents</nuxt-link> in their fields.
             </p>
             <p class="text-justify">
               <span
@@ -66,12 +59,8 @@
             </v-responsive>
             <div class="text-center">
               You need more details?<br> Have a look at our
-              <nuxt-link
-                class="blue--text"
-                to="/FAQ"
-              >
-                Frequently Asked Questions
-              </nuxt-link>.
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/FAQ">Frequently Asked Questions</nuxt-link>.
             </div>
           </v-responsive>
         </v-col>

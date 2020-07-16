@@ -19,7 +19,9 @@
             Upload of a project
           </v-card-title>
           <v-card-text class="white--text">
-            Contributors upload the information about their project themselves with a <a href="/#register">very simple form</a> on the WPRN website. They should be straight to the point of what they are doing and what is the added value of their project. The abstract should be brief, informative and self-explanatory,  very explicit about the problem addressed, the research question, the method, the data set, the team, or the expected outcome.  A link can be provided to a webpage containing a more detailed description and material.
+            Contributors upload the information about their project themselves with a
+            <!-- eslint-disable-next-line vue/singleline-html-element-content-newline-->
+            <nuxt-link to="/#register">very simple form</nuxt-link> on the WPRN website. They should be straight to the point of what they are doing and what is the added value of their project. The abstract should be brief, informative and self-explanatory,  very explicit about the problem addressed, the research question, the method, the data set, the team, or the expected outcome.  A link can be provided to a webpage containing a more detailed description and material.
           </v-card-text>
         </v-card>
       </v-timeline-item>

@@ -172,6 +172,9 @@ export default {
     return {
       institutions
     }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
   }
 }
 </script>
