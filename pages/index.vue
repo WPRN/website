@@ -246,11 +246,7 @@ export default {
           this.$vuetify.goTo('#register')
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
         }
-        history.pushState(
-          {},
-          null,
-          this.$route.path
-        )
+        this.$router.replace({hash: null})
       }
     },
     updateScroll () {
@@ -265,6 +261,7 @@ export default {
         case 1:
           this.$store.commit('lockScrolling')
           this.$vuetify.goTo('#register')
+          this.step = 1
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
           break
         case 2:
@@ -282,7 +279,7 @@ export default {
       console.log('tab', this.$store.state.tab)
     },
     onIntersect (event) {
-      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling) {
+      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling && !this.$store.state.contactOnly) {
         console.log('INTERSECT event: ', event)
         this.isIntersecting = true
         if (event === 'REGISTER') this.$store.commit('setTab', 1)

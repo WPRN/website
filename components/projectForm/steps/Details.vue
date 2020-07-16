@@ -248,17 +248,7 @@
     </v-btn>
     <v-btn
       color="primary"
-      :disabled="!(
-        $refs.field &&
-        $refs.field.valid &&
-        $refs.state &&
-        $refs.state.valid &&
-        $refs.url &&
-        $refs.url.valid &&
-        (isDateTime() && !isTimeInterval() ? $refs.date && $refs.date.valid : true) &&
-        (isTimeInterval() ? $refs.dates && $refs.dates.valid : true) &&
-        (isDateTime() || isTimeInterval() ? $refs.time && $refs.time.valid : true)
-      )"
+      :disabled="isDisabled()"
       x-large
       @click="$store.commit('form/updateProject', {field, state: selectedState, thematics: selectedThematics, url, date, dates, time});$emit('nextStep', 3)"
     >
@@ -315,7 +305,8 @@ export default {
         (value) => (value && value.length > 0) || 'URL required.'
       ],
       timeInformationsRules: [
-        (value) => value.length <= 150 || 'Max 150 characters'
+
+        (value) => value.length === 0 || value.length <= 150 || 'Max 150 characters'
       ]
     }
   },
@@ -325,10 +316,11 @@ export default {
     }
   },
   mounted () {
-    this.editMode && this.$refs.detailsForm.validate()
+    if (this.editMode) this.$refs.detailsForm.validate()
   },
   updated () {
-    this.editMode && this.$store.commit('form/setStepError', { id: 'details', value: !this.$refs.detailsForm.validate() })
+    this.$nextTick(() => { if (this.editMode) this.$store.commit('form/setStepError', { id: 'details', value: !this.$refs.detailsForm.validate() }) })
+    console.log('updated', this.editMode && this.$store.commit('form/setStepError', { id: 'details', value: !this.$refs.detailsForm.validate() }))
   },
   methods: {
     cleanModel (model) {
@@ -343,6 +335,26 @@ export default {
     },
     isTimeInterval () {
       return extendedTypes.some(item => item.timeInterval && this.$store.state.form.project.type.includes(item.name))
+    },
+    isDisabled () {
+      console.log('this.$refs.field.valid: ', this.$refs.field && this.$refs.field.valid)
+      console.log('this.$refs.state.valid: ', this.$refs.state && this.$refs.state.valid)
+      console.log('this.$refs.url.valid: ', this.$refs.url && this.$refs.url.valid)
+      console.log('this.date.length: ', this.isDateTime() && !this.isTimeInterval() ? this.date.length : true)
+      console.log('this.isTimeInterval() ? this.dates.length : true: ', this.isTimeInterval() ? this.dates.length : true)
+      console.log('this.isDateTime() || this.isTimeInterval() ? this.$refs.time && this.$refs.time.valid : true: ', this.isDateTime() || this.isTimeInterval() ? this.$refs.time && this.$refs.time.valid : true)
+      console.log('this.$refs.time: ', this.$refs.time)
+      return !(
+        this.$refs.field &&
+        this.$refs.field.valid &&
+        this.$refs.state &&
+        this.$refs.state.valid &&
+        this.$refs.url &&
+        this.$refs.url.valid &&
+        (this.isDateTime() && !this.isTimeInterval() ? this.date.length : true) &&
+        (this.isTimeInterval() ? this.dates.length : true) &&
+        (this.isDateTime() || this.isTimeInterval() ? (this.time.length === 0 || this.time.length < 150) : true)
+      )
     }
   }
 }
