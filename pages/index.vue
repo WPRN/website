@@ -229,8 +229,8 @@ export default {
           this.contactOnly = false
           this.step = 1
           this.$store.commit('lockScrolling')
-          this.$vuetify.goTo('#register')
-          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+          setTimeout(() => { this.$vuetify.goTo('#register') }, 200)
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 700)
         }
         if (this.$route.hash === '#about-us') {
           this.$store.commit('setTab', 0)
@@ -243,8 +243,9 @@ export default {
           this.step = 0
           this.contactOnly = true
           this.$store.commit('lockScrolling')
-          this.$vuetify.goTo('#register')
-          setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+          setTimeout(() => { this.$vuetify.goTo('#register') }, 200)
+
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 700)
         }
         this.$router.replace({hash: null})
       }

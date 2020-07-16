@@ -28,7 +28,7 @@
         <br>You can try again and refresh
         this page or
         <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-        <nuxt-link to="/#contact">contact WPRN</nuxt-link>.
+        <nuxt-link to="/#contact-us">contact WPRN</nuxt-link>.
       </v-overlay>
     </template>
     <template v-else>

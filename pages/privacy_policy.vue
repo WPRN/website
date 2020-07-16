@@ -48,7 +48,7 @@
 <script>
 
 export default {
-  layout: 'public',
+  layout: 'page',
   components: {
   },
   data () {

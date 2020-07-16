@@ -41,7 +41,7 @@
       <template v-else>
         An error happened while loading this page. <br>You can try again and refresh
         this page or
-        <nuxt-link to="/#contact">
+        <nuxt-link to="/#contact-us">
           contact WPRN
         </nuxt-link> to report this error.
       </template>
