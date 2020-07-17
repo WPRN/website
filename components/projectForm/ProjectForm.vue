@@ -162,9 +162,9 @@ export default {
       try {
         this.loading = true
         const args = this.$store.state.form.project
-        console.log('args: ', args)
 
         args.recaptcha = await this.$recaptcha.getResponse()
+        console.log('args: ', args)
         let res = {}
         if (args.date && args.date.length === 0) delete args.date
         if (args.dates && args.dates.length === 0) delete args.dates
