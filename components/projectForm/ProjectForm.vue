@@ -190,11 +190,13 @@ export default {
           })
         } else {
           delete args.feedback
+          console.log('args: ', JSON.stringify(args))
           res = await client.mutate({
             mutation: gql(newProject),
             variables: { input: args }
           })
         }
+        console.log(res)
 
         if (res && !res.errors) {
           this.$emit('complete')
