@@ -178,7 +178,7 @@
           flat
         >
           <v-card-title class="justify-center font-weight-black text-uppercase">
-            Press Reviews
+            Press Review
           </v-card-title>
           <v-card-text
             :class="{'pa-2':$vuetify.breakpoint.smAndDown}"

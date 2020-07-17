@@ -229,6 +229,7 @@ export default {
           this.contactOnly = false
           this.step = 1
           this.$store.commit('lockScrolling')
+          this.isIntersecting = true
           setTimeout(() => { this.$vuetify.goTo('#register') }, 200)
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 700)
         }
@@ -244,6 +245,7 @@ export default {
           this.contactOnly = true
           this.$store.commit('lockScrolling')
           setTimeout(() => { this.$vuetify.goTo('#register') }, 200)
+          this.isIntersecting = true
 
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 700)
         }
@@ -280,7 +282,7 @@ export default {
       console.log('tab', this.$store.state.tab)
     },
     onIntersect (event) {
-      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling && !this.$store.state.contactOnly) {
+      if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling && !this.$store.state.contactOnly && !this.$route.hash) {
         console.log('INTERSECT event: ', event)
         this.isIntersecting = true
         if (event === 'REGISTER') this.$store.commit('setTab', 1)

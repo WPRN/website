@@ -72,7 +72,7 @@
         <span
           class="blue--text"
           style="text-decoration: underline;cursor:pointer;"
-          @click="$store.commit('setTab', 3)"
+          @click="$store.commit('setTab', 3),$router.push({path:'/', hash:'contact-us'})"
         >Contact us</span>
       </span>
 

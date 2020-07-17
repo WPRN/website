@@ -320,7 +320,6 @@ export default {
   },
   updated () {
     this.$nextTick(() => { if (this.editMode) this.$store.commit('form/setStepError', { id: 'details', value: !this.$refs.detailsForm.validate() }) })
-    console.log('updated', this.editMode && this.$store.commit('form/setStepError', { id: 'details', value: !this.$refs.detailsForm.validate() }))
   },
   methods: {
     cleanModel (model) {
@@ -337,13 +336,6 @@ export default {
       return extendedTypes.some(item => item.timeInterval && this.$store.state.form.project.type.includes(item.name))
     },
     isDisabled () {
-      console.log('this.$refs.field.valid: ', this.$refs.field && this.$refs.field.valid)
-      console.log('this.$refs.state.valid: ', this.$refs.state && this.$refs.state.valid)
-      console.log('this.$refs.url.valid: ', this.$refs.url && this.$refs.url.valid)
-      console.log('this.date.length: ', this.isDateTime() && !this.isTimeInterval() ? this.date.length : true)
-      console.log('this.isTimeInterval() ? this.dates.length : true: ', this.isTimeInterval() ? this.dates.length : true)
-      console.log('this.isDateTime() || this.isTimeInterval() ? this.$refs.time && this.$refs.time.valid : true: ', this.isDateTime() || this.isTimeInterval() ? this.$refs.time && this.$refs.time.valid : true)
-      console.log('this.$refs.time: ', this.$refs.time)
       return !(
         this.$refs.field &&
         this.$refs.field.valid &&
