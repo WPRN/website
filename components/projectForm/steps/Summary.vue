@@ -48,17 +48,22 @@
               </div>
             </v-col>
             <v-col
-              v-if="$store.state.form.project.url"
               cols="12"
               md="6"
               :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
-                Url
+                {{
+                  $store.state.form.project.type.length > 1 ? "Project Types" : "Project Type"
+                }}
               </div>
-              <div class="subtitle-1">
-                {{ $store.state.form.project.url }}
-              </div>
+              <v-chip
+                v-for="(item, index) in $store.state.form.project.type"
+                :key="index"
+                class="subtitle-1 ma-1"
+              >
+                {{ item }}
+              </v-chip>
             </v-col>
             <v-col
               cols="12"
@@ -108,23 +113,19 @@
               </v-chip>
             </v-col>
             <v-col
+              v-if="$store.state.form.project.url"
               cols="12"
               md="6"
               :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
-                {{
-                  $store.state.form.project.type.length > 1 ? "Project Types" : "Project Type"
-                }}
+                Url
               </div>
-              <v-chip
-                v-for="(item, index) in $store.state.form.project.type"
-                :key="index"
-                class="subtitle-1 ma-1"
-              >
-                {{ item }}
-              </v-chip>
+              <div class="subtitle-1">
+                {{ $store.state.form.project.url }}
+              </div>
             </v-col>
+
             <v-col
               cols="12"
               md="6"
@@ -155,6 +156,45 @@
               </div>
               <div class="subtitle-1">
                 {{ $store.state.form.project.state }}
+              </div>
+            </v-col>
+            <v-col
+              v-if="$store.state.form.project.date&&$store.state.form.project.date.length"
+              cols="12"
+              md="6"
+              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+            >
+              <div class="font-weight-light caption">
+                Project Date
+              </div>
+              <div class="subtitle-1">
+                {{ $store.state.form.project.date }}
+              </div>
+            </v-col>
+            <v-col
+              v-if="$store.state.form.project.dates&&$store.state.form.project.dates.length"
+              cols="12"
+              md="6"
+              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+            >
+              <div class="font-weight-light caption">
+                Project Dates
+              </div>
+              <div class="subtitle-1">
+                {{ $store.state.form.project.dates }}
+              </div>
+            </v-col>
+            <v-col
+              v-if="$store.state.form.project.time&&$store.state.form.project.time.length"
+              cols="12"
+              md="6"
+              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
+            >
+              <div class="font-weight-light caption">
+                Project Time
+              </div>
+              <div class="subtitle-1">
+                {{ $store.state.form.project.time }}
               </div>
             </v-col>
           </v-row>

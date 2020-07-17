@@ -20,9 +20,8 @@
       <b>with a link to ensure that your email address is valid</b>.
       <br>Once
       your email is validated, your project will be displayed in the
-      <nuxt-link to="/search">
-        project list
-      </nuxt-link>&nbsp;as "not verified"
+      <!-- eslint-disable-next-line vue/singleline-html-element-content-newline-->
+      <nuxt-link to="/search">project list</nuxt-link>&nbsp;as "not verified"
       until it is checked by a WPRN Referent.
       <br>You may be contacted by the
       referent to correct some of your project information.
