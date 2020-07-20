@@ -401,7 +401,6 @@ export default {
       this.offsetTop = e.target.scrollingElement.scrollTop
     },
     setTab (name) {
-      console.log('setting tab to ', name)
       this.tabsValue = '/#' + name
     }
 

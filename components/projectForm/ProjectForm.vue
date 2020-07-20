@@ -1092,7 +1092,6 @@ export default {
       try {
         this.loading = true
         let args = this.project
-        console.log('args: ', args)
 
         Object.keys(this.project).forEach((key) => {
           if (!args[key] || args[key].length === 0) delete args[key]
@@ -1132,7 +1131,6 @@ export default {
         this.loading = false
         await this.$recaptcha.reset()
       } catch (error) {
-        console.log('error: ', error)
         this.error = true
         this.loading = false
         await this.$recaptcha.reset()
