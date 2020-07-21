@@ -14,8 +14,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "prod": "nuxt generate && aws s3 cp dist s3://wprn.org --recursive",
-    "test": "nuxt generate && aws s3 cp dist s3://test.wprn.org --recursive",
+    "prod": "nuxt build && nuxt export && aws s3 cp dist s3://wprn.org --recursive",
+    "test": "nuxt build && nuxt export && aws s3 cp dist s3://test.wprn.org --recursive",
     "analyze": "nuxt build --analyze",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . ",
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
