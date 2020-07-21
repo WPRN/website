@@ -112,8 +112,12 @@ export default {
           }
         })
         res += '.'
+        return res
+      } else {
+        return this.project.contact_lastname +
+                ', ' +
+                this.project.contact_firstname
       }
-      return res
     }
   }
 
