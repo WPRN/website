@@ -115,6 +115,9 @@ export default {
       referents: []
     }
   },
+  mounted () {
+    this.$store.commit('setTab', null)
+  },
   methods: {
 
   }

@@ -32,7 +32,7 @@
         <br>An error happened during the verification.
         <br>You can try
         again and refresh this page or
-        <nuxt-link to="/#contact">
+        <nuxt-link to="/#contact-us">
           contact WPRN
         </nuxt-link>.
       </v-overlay>
@@ -202,10 +202,15 @@ export default {
         this.error = true
       }
     } catch (error) {
+      console.log('error: ', error)
       this.error = true
       this.checking = false
     }
   },
-  methods: {}
+  methods: {
+    subscribe () {
+      console.log('SUBSCRIBE')
+    }
+  }
 }
 </script>

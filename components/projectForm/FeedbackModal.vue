@@ -6,7 +6,7 @@
   >
     <v-card>
       <v-card-title>
-        Add a feedback for the WPRN referent (Optional)
+        Add a feedback for the WPRN referents (Optional)
       </v-card-title>
 
       <v-card-text class="white--text body-1">

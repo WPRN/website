@@ -10,23 +10,13 @@
       color="success"
       class="py-6"
     >
-      mdi-check-outline
+      mdi-delete
     </v-icon>
     <h3 class="headline font-weight-heavy mb-2">
-      YOUR PROJECT HAS BEEN SUCCESSFULLY REGISTERED!
+      YOUR PROJECT HAS BEEN SUCCESSFULLY REMOVED FROM WPRN
     </h3>
     <div class="subtitle-1">
-      You will receive a confirmation email shortly
-      <b>with a link to ensure that your email address is valid</b>.
-      <br>Once
-      your email is validated, your project will be displayed in the
-      <!-- eslint-disable-next-line vue/singleline-html-element-content-newline-->
-      <nuxt-link to="/search">project list</nuxt-link>&nbsp;as "not verified"
-      until it is checked by a WPRN Referent.
-      <br>You may be contacted by the
-      referent to correct some of your project information.
-      <br>Thank you
-      again for your contribution.
+      You will receive a confirmation email shortly.
     </div>
     <br>
     <!--     <v-card-actions>

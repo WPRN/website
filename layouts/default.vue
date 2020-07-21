@@ -6,27 +6,27 @@
     <NavigationDrawer
       :drawer="drawer"
       @close="drawer = false"
-      @register="$router.push({ path: '/', hash: 'register' })"
-      @about="$router.push({ path: '/', hash: 'about-us' })"
-      @list="$router.push({ path: '/search' })"
+      @register="$router.push({ path: '/', hash: 'register' });drawer=false"
+      @about="$router.push({ path: '/', hash: 'about-us' });drawer=false"
+      @list="$router.push({ path: '/search' });drawer=false"
     />
-    <v-content>
+    <v-main>
       <nuxt />
       <recaptcha
         @error="onError"
         @success="onSuccess"
         @expired="onExpired"
       />
-    </v-content>
+    </v-main>
     <recaptcha
       @error="onError"
       @success="onSuccess"
       @expired="onExpired"
     />
-    <Footer />
+    <Footer @contact="$router.push({ path: '/', hash: 'contact-us' });drawer=false" />
     <v-fab-transition>
       <v-btn
-        v-show="offsetTop > 600"
+        v-show="$store.state.offsetTop > 600"
         color="accent"
         dark
         fixed
@@ -53,8 +53,7 @@ export default {
   components: { Footer, NavigationDrawer, TopBar },
   data () {
     return {
-      drawer: false,
-      offsetTop: 0
+      drawer: false
     }
   },
   mounted () {
@@ -64,7 +63,7 @@ export default {
     onSuccess (token) {},
     onExpired () {},
     onScroll (e) {
-      this.offsetTop = e.target.scrollingElement.scrollTop
+      this.$store.commit('setOffsetTop', e.target.scrollingElement.scrollTop)
     }
   }
 }

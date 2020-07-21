@@ -3,10 +3,9 @@
     <ul>
       <li>Your project becomes visible to the global community via a new webpage on WPRN, with a link to your own.</li>
       <li>
-        You are given access to projects in real time, worldwide, that are close to yours (by browsing the <a
-          href="/search"
-          color="primary"
-        >project list</a>, getting contact requests or via update alerts - <i>coming soon</i> ).
+        You are given access to projects in real time, worldwide, that are close to yours (by browsing the
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline, vue/max-attributes-per-line-->
+        <nuxt-link to="/search">project list</nuxt-link>, getting contact requests or via update alerts - <i>coming soon</i> ).
       </li>
       <li>You get a time stamped WPRN-ID that enables others to cite you even before you publish.</li>
       <li>

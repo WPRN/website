@@ -37,7 +37,7 @@
               flat
               :elevation="hover ? 12 : 2"
               height="100%"
-              href="/advisory_board"
+              to="/advisory_board"
               nuxt
               :color="$vuetify.theme.isDark?'accent':'white'"
             >
@@ -73,7 +73,7 @@
               class="pa-6 text-center"
               :elevation="hover ? 12 : 2"
               flat
-              href="/institutions"
+              to="/institutions"
               nuxt
               :color="$vuetify.theme.isDark?'accent':'white'"
               height="100%"
@@ -110,7 +110,11 @@
               class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
+<<<<<<< HEAD
               href="/referents"
+=======
+              to="/referents"
+>>>>>>> dev
               nuxt
               :color="$vuetify.theme.isDark?'accent':'white'"
               height="100%"

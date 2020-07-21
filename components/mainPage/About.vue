@@ -1,8 +1,12 @@
 <template>
   <section
     id="about-us"
+<<<<<<< HEAD
     v-intersect="onIntersect"
     :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#F5F5F5;'"
+=======
+    style="background-color:#212121;"
+>>>>>>> dev
   >
     <div class="py-12" />
     <v-container>
@@ -22,28 +26,25 @@
           cols="12"
         >
           <v-responsive
+            v-intersect="onIntersect"
             class="d-flex align-center mx-auto title font-weight-regular mb-8 px-3"
             max-width="750"
             height="100%"
           >
             <p class="text-justify">
-              <b>The World Pandemic Research Network (WPRN)</b> is a platform serving research communities. It maintains a searchable global directory of the scientific resources available on the societal and human impacts of the Covid-19 pandemic. It shows <a href="/search">who works on what, where</a>, in real time, at global level.
+              <b>The World Pandemic Research Network (WPRN)</b> is a platform serving research communities. It maintains a searchable global directory of the scientific resources available on the societal and human impacts of the Covid-19 pandemic. It shows
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/search">who works on what, where</nuxt-link>, in real time, at global level.
             </p>
             <p class="text-justify">
-              Designed and maintained by researchers, WPRN is free, non-profit, public-funded, open (creative commons, open-source), GDPR compliant. It is steered by an international  <a
-                href="/advisory_board"
-              >
-                Advisory Board</a>
-              and supported by major <a
-                href="/institutions"
-              > scientific institutions and scientific networks</a> worldwide.
+              Designed and maintained by researchers, WPRN is free, non-profit, public-funded, open (creative commons, open-source) and GDPR compliant. It is steered by an international
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/advisory_board">Advisory Board</nuxt-link> and supported by major <nuxt-link to="/institutions"> scientific institutions and scientific networks</nuxt-link> worldwide.
             </p>
             <p class="text-justify">
-              WPRN is the product of a collective scientific intelligence, with validation by senior scholars who act as <a
-                href="/referents"
-              >
-                referents</a>
-              in their fields.
+              WPRN is the product of a collective scientific intelligence, with validation by senior scholars who act as
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/referents">referents</nuxt-link> in their fields.
             </p>
             <p class="text-justify">
               <span
@@ -54,13 +55,17 @@
                 Register your project</span>
               on the WPRN platform to get a time-stamped ID that will facilitate scientific collaboration and citation, even before publication.
             </p>
+            <v-responsive
+              class="mx-auto my-6"
+              width="56"
+            >
+              <v-divider class="mb-1" />
+              <v-divider />
+            </v-responsive>
             <div class="text-center">
-              <nuxt-link
-                class="blue--text"
-                to="/FAQ"
-              >
-                Frequently Asked Questions
-              </nuxt-link>
+              You need more details?<br> Have a look at our
+              <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+              <nuxt-link to="/FAQ">Frequently Asked Questions</nuxt-link>.
             </div>
           </v-responsive>
         </v-col>
@@ -73,9 +78,7 @@
 export default {
   methods: {
     onIntersect (entries, observer, isIntersecting) {
-      this.$emit('intersect', 'ABOUT')
-      // More information about these options
-      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      this.$emit('intersect', 'ABOUT-US')
     }
   }
 }

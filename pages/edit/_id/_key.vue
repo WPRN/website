@@ -28,9 +28,8 @@
         </v-icon>
         <br>An error happened during the verification. <br>You can try
         again and refresh this page or
-        <nuxt-link to="/#contact">
-          contact WPRN
-        </nuxt-link>.
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+        <nuxt-link to="/#contact-us">contact WPRN</nuxt-link>.
       </v-overlay>
       <v-fade-transition mode="out-in">
         <v-card
@@ -42,10 +41,16 @@
             class="ml-3 mt-3 pb-3"
             flat
           >
-            <v-card-title class=" headline">
+            <v-card-title
+              v-if="!deleted"
+              class=" headline"
+            >
               Edit your project
               <v-spacer />
-              <delete-project-modal :project="project" />
+              <delete-project-modal
+                :project="project"
+                @projectRemoved="deleted = true"
+              />
             </v-card-title>
             <v-divider />
             <v-card-text
@@ -59,12 +64,15 @@
                 >
                   <v-col cols="12">
                     <ProjectForm
-                      v-if="project && !done"
+                      v-if="project && !done && !deleted"
                       edit-mode
                       :project-input="project"
                       @complete="done = true"
                     />
-                    <ProjectUpdatedWindow v-else />
+                    <template v-else>
+                      <ProjectUpdatedWindow v-if="!deleted" />
+                      <ProjectRemovedWindow v-else />
+                    </template>
                   </v-col>
                 </v-row>
               </v-expand-transition>
@@ -80,6 +88,7 @@
 <script>
 import ProjectForm from '~/components/projectForm/ProjectForm'
 import ProjectUpdatedWindow from '~/components/projectForm/ProjectUpdatedWindow'
+import ProjectRemovedWindow from '~/components/projectForm/ProjectRemovedWindow'
 import DeleteProjectModal from '~/components/projectList/DeleteProjectModal'
 import * as queries from '~/graphql/queries'
 import gql from 'graphql-tag'
@@ -90,6 +99,7 @@ export default {
   components: {
     ProjectForm,
     ProjectUpdatedWindow,
+    ProjectRemovedWindow,
     DeleteProjectModal
   },
   data () {
@@ -99,7 +109,7 @@ export default {
       checking: true,
       error: false,
       done: false,
-      deleting: false
+      deleted: false
     }
   },
   async mounted () {
@@ -115,12 +125,14 @@ export default {
       if (res && res.data && res.data.getProjectForEdit && !res.errors) {
         this.project = res.data.getProjectForEdit
         console.log('this.project: ', this.project)
+
         this.checking = false
         this.ready = true
       } else {
         this.ready = true
       }
     } catch (error) {
+      console.log('error: ', error)
       this.error = true
       this.ready = true
     }

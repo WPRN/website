@@ -7,8 +7,12 @@
     :style="computeRowColor"
   >
     <v-card-text
+<<<<<<< HEAD
       class="pb-0  px-1"
       :class="$vuetify.theme.isDark?'white--text':'black--text'"
+=======
+      class="pb-0 white--text px-3"
+>>>>>>> dev
     >
       <v-row no-gutters>
         <!-- CONTACT -->
@@ -18,7 +22,10 @@
         >
           <span class="overline">CONTACT :</span>
           <br>
-          <v-tooltip bottom>
+          <v-tooltip
+            v-if="!isNotContactable()"
+            bottom
+          >
             <template v-slot:activator="{ on }">
               <v-btn
                 color="primary"
@@ -31,34 +38,59 @@
             </template>
             <span>Email this project contact</span>
           </v-tooltip>
-          <span
-            v-html="
-              $options.filters.highlight(
-                project.contact_lastname,
-                filters.search.split(' ')
-              )
-            "
-          />
-          {{ ", " + project.contact_firstname }}
           <template
-            v-if="project.contact_entity"
+            v-if="!isNotContactable()"
           >
-            <template v-if="filters.search && filters.search.length">
-              <span
-                v-html="
-                  '(' +
+            <span
+              v-html="
+                $options.filters.highlight(
+                  project.contact_lastname,
+                  filters.search.split(' ')
+                )
+              "
+            />
+            {{ ", " + project.contact_firstname }}
+            <template
+              v-if="project.contact_entity"
+            >
+              <template v-if="filters.search && filters.search.length">
+                <span
+                  v-html="
+                    '(' +
+                      $options.filters.highlight(
+                        project.contact_entity,
+                        filters.search.split(' ')
+                      ) +
+                      ')'
+                  "
+                />
+              </template>
+              <template
+                v-else
+              >
+                ({{ project.contact_entity }})
+              </template>
+            </template>
+          </template>
+          <template v-else>
+            <template
+              v-if="project.contact_entity"
+            >
+              <template v-if="filters.search && filters.search.length">
+                <span
+                  v-html="
                     $options.filters.highlight(
                       project.contact_entity,
                       filters.search.split(' ')
-                    ) +
-                    ')'
-                "
-              />
-            </template>
-            <template
-              v-else
-            >
-              ({{ project.contact_entity }})
+                    )
+                  "
+                />
+              </template>
+              <template
+                v-else
+              >
+                {{ project.contact_entity }}
+              </template>
             </template>
           </template>
         </v-col>
@@ -116,7 +148,9 @@
   </v-card>
 </template>
 <script>
-
+import {
+  extendedTypes
+} from '~/assets/data'
 export default {
   components: {
   },
@@ -135,10 +169,13 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      extendedTypes
+    }
   },
   mounted () {},
   methods: {
+<<<<<<< HEAD
     computeRowColor (item, hover) {
       if (this.expanded.includes(item) &&
       hover &&
@@ -157,6 +194,10 @@ export default {
       !this.$vuetify.theme.isDark
       ) return 'background-color:#F5F5F5;'
       return ''
+=======
+    isNotContactable () {
+      return this.project.type.length === 1 && extendedTypes.some(item => !item.isContactable && this.project.type.includes(item.name))
+>>>>>>> dev
     }
   }
 }

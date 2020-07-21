@@ -94,21 +94,18 @@ export default {
     async removeThisProject () {
       try {
         this.loading = true
-
-        console.log({
-          UserPoolId: this.$store.state.user.user.pool.userPoolId,
-          Username: this.$store.state.user.user.username
-        })
         const res = await client.mutate({
           mutation: gql(removeProject),
           variables: {
-            UserPoolId: this.$store.state.user.user.pool.userPoolId,
-            Username: this.$store.state.user.user.username
+            id: this.$route.params.id,
+            key: this.$route.params.key
           }
         })
 
         this.loading = false
         if (res && !res.errors) {
+          console.log('project removed')
+          this.open = false
           this.$emit('projectRemoved')
         } else {
           this.error = true

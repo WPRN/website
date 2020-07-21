@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-form
+      id="contact-us"
       lazy-validation
       color="#333333"
     >
@@ -57,6 +58,7 @@
           </small>
         </div>
         <v-btn
+          dark
           color="success"
           x-large
           :loading="sending"
@@ -107,10 +109,7 @@ export default {
         (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        (value) => value.length <= 40 || 'Max 40 characters',
-        (value) => {
-          return true
-        }
+        (value) => value.length <= 40 || 'Max 40 characters'
       ],
       emailRules: [
         (value) => !!value || 'Email address required.',
@@ -124,10 +123,7 @@ export default {
         (value) =>
           value.length >= 5 ||
           'Your message subjects must have at least 4 characters',
-        (value) => value.length <= 40 || 'Max 40 characters',
-        (value) => {
-          return true
-        }
+        (value) => value.length <= 40 || 'Max 40 characters'
       ],
 
       messageRules: [
@@ -149,6 +145,7 @@ export default {
     },
     async onSubmit () {
       /*  this.$emit("WorkInProgressDialogToggle"); */
+      // TODO move this in the store
       try {
         this.sending = true
         const args = this.contact
@@ -159,11 +156,11 @@ export default {
         })
 
         args.recaptcha = await this.$recaptcha.getResponse()
+        console.log(JSON.stringify({ input: args }))
         const res = await client.mutate({
           mutation: gql(newContact),
           variables: { input: args }
         })
-
         if (res && !res.errors) {
           this.$emit('complete')
         } else {

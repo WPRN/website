@@ -1,13 +1,15 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  router: {},
+  router: {
+    mode: 'history'
+  },
   server: {
     port: 3000, // par défaut: 3000
     host: '0.0.0.0' // par défaut: localhost
   },
   mode: 'spa',
-  target:'static',
+  target: 'static',
   /*
    ** Headers of the page
    */
@@ -24,6 +26,10 @@ export default {
       }
     ],
     link: [
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Poiret+One'
+      },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'apple-touch-icon',
@@ -102,7 +108,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#2196f3' },
   /*
    ** Global CSS
    */

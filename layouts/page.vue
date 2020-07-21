@@ -14,9 +14,9 @@
         @about="$router.push({ path: '/', hash: 'about-us' })"
         @list="$router.push({ path: '/search' })"
       />
-      <v-content v-scroll="onScroll">
+      <v-main v-scroll="onScroll">
         <nuxt />
-      </v-content>
+      </v-main>
       <v-fab-transition>
         <v-btn
           v-show="offsetTop > 600"
@@ -40,7 +40,9 @@
       @success="onSuccess"
       @expired="onExpired"
     />
-    <Footer />
+    <Footer
+      @contact="$router.push({ path: '/', hash: 'contact-us' });drawer=false"
+    />
   </v-app>
 </template>
 
@@ -57,12 +59,35 @@ export default {
       offsetTop: 0
     }
   },
+  watch: {
+    '$store.state.tab': function () {
+      if (this.$store.state.tab !== null) this.updateScroll()
+    }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
+  },
   methods: {
     onError (error) { console.log(error) },
     onSuccess (token) {},
     onExpired () {},
     onScroll (e) {
       this.offsetTop = e.target.scrollingElement.scrollTop
+    },
+    updateScroll () {
+      console.log('UPDATE SCROLL FROM PAG LAYOUT')
+      switch (this.$store.state.tab) {
+        case 0:
+          this.$router.push('/#about-us')
+          break
+        case 1:
+          this.$router.push('/#register')
+          break
+        case 2:
+          this.$router.push('/search')
+          break
+      }
+      console.log('tab', this.$store.state.tab)
     }
   }
 }

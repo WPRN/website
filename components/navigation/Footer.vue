@@ -63,19 +63,17 @@
           @click="showCredits = true"
         >See full credits</a>
         &nbsp;-&nbsp;
-        <nuxt-link
-          to="/privacy_policy"
+        <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+        <nuxt-link to="/privacy_policy" class="blue--text">Privacy Policy</nuxt-link>&nbsp;-&nbsp;
+        <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+        <nuxt-link to="/press_room" class="blue--text">Press Room</nuxt-link>&nbsp;-&nbsp;
+        <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+        <nuxt-link to="/resources">Resources</nuxt-link>&nbsp;-&nbsp;
+        <span
           class="blue--text"
-        >Privacy Policy</nuxt-link>&nbsp;-&nbsp;
-        <nuxt-link
-          to="/press_room"
-          class="blue--text"
-        >Press Room</nuxt-link>&nbsp;-&nbsp;
-        <a
-          style="text-decoration: underline;"
-          class="blue--text"
-          @click="$router.go({path:'/#contact'})"
-        >Contact us</a>
+          style="text-decoration: underline;cursor:pointer;"
+          @click="$store.commit('setTab', 3),$router.push({path:'/', hash:'contact-us'})"
+        >Contact us</span>
       </span>
 
       <Credits

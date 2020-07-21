@@ -46,9 +46,224 @@ export const types = [
   'Video',
   'Blog',
   'Press article',
+  'Research tracker',
   { divider: true },
   'Other Ressource'
 ]
+
+export const extendedTypes = [
+  {
+    name: 'Quantitative survey',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Qualitative analysis',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Case Study',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Questionnaire',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Simulation / Modeling',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Dataset, Data Mining',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Action Research',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Call for Research Proposals',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: true,
+    requireName: false,
+    teamMandatory: false,
+    isContactable: false,
+    citeWidget: false
+  },
+  {
+    name: 'Call for Collaboration',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: true,
+    requireName: false,
+    teamMandatory: false,
+    isContactable: false,
+    citeWidget: false
+  },
+  {
+    name: 'Citizen/Participatory Science',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Grassroot Action',
+    urlMandatory: false,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Scientific Paper',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Report',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Policy Document',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Regulation',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Conference / Webinar',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: true,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Video',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Blog',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Press article',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Other Ressource',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Research tracker',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: false,
+    teamMandatory: true,
+    isContactable: false,
+    citeWidget: false
+  }
+]
+
 export const thematics = [
   'Aging, Demography',
   'Agriculture, Alimentation',

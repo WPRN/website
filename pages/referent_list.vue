@@ -49,6 +49,9 @@ export default {
     return {
     }
   },
+  mounted () {
+    this.$store.commit('setTab', null)
+  },
   methods: {
   }
 }

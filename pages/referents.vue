@@ -39,7 +39,8 @@
     >
       <div class="white--text text-justify title">
         <WhoReferent /> <br>
-        <a href="/referent_list">See the list of WPRN referents.</a>
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+        <nuxt-link to="/referent_list">See the list of WPRN referents.</nuxt-link>
       </div>
     </v-col>
 
@@ -126,6 +127,9 @@ export default {
     return {
       institutions
     }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
   }
 }
 </script>
