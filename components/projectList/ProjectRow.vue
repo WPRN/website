@@ -271,7 +271,7 @@
           :href="'/item/' + item.pubId"
           @click.prevent
         >
-          <template v-for="(location, index) in [...item.zone, ...item.country]">
+          <template v-for="(location, index) in [...zoneFiltered, ...item.country]">
             <template v-if="zones.map(item => item.value).includes(location)">
 
               <template v-if="index < 2">
@@ -395,6 +395,19 @@ export default {
       thematics
     }
   },
+  computed: {
+    zoneFiltered () {
+      let continents = this.item.zone.slice()
+      continents = continents.filter((continent) => {
+        return !(countries[continent] && ((this.filter && this.filter.zone && this.filter.zone.includes(continent)) || countries[continent].some((country) => {
+          return this.item.country && this.item.country.some(selectedCountry => selectedCountry === country)
+        })))
+      })
+      console.log('this.item.country: ', this.item.country)
+      console.log('continents: ', continents)
+      return continents
+    }
+  },
   methods: {
     orderItems (project, item) {
       if (this.filters[item].length && project[item] && project[item].length) {
@@ -405,6 +418,18 @@ export default {
             items.find(dat => dat === this.filters[item]),
             ...items.filter((dat) => dat !== this.filters[item])
           ]
+        }
+        if (item === 'country') {
+          this.filters[item].forEach((element) => {
+            if (items.includes(element) || (this.filter && this.filter.zone && this.filter.zone.some(zone => {
+              if (this.item.pubId === '411152') {
+                console.log('INCLUDED', countries[zone].includes(element))
+              }
+              return countries[zone].includes(element)
+            }))) {
+              items = [element, ...items.filter((dat) => dat !== element)]
+            }
+          })
         } else {
           this.filters[item].forEach((element) => {
             if (items.includes(element)) {
