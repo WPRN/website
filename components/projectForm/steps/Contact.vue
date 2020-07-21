@@ -52,6 +52,7 @@
               solo
               :rules="contactNameRules"
               @blur="capitalize('contact_firstname')"
+              :outlined="!$vuetify.theme.isDark"
             />
           </v-col>
           <v-col
@@ -65,6 +66,7 @@
               solo
               :rules="contactNameRules"
               @blur="capitalize('contact_lastname')"
+              :outlined="!$vuetify.theme.isDark"
             />
           </v-col>
           <v-col
@@ -77,6 +79,7 @@
               label="Contact Institution* (University, Laboratory, freelance...)"
               solo
               :rules="requiredRules"
+              :outlined="!$vuetify.theme.isDark"
             />
           </v-col>
           <v-col
@@ -88,6 +91,7 @@
               ref="email"
               v-model="contact_email"
               :label="isRequireName() ? 'Contact Email*' : 'Contact Email'"
+              :outlined="!$vuetify.theme.isDark"
               solo
               :rules="emailRules"
               @keyup.enter="/*
@@ -124,6 +128,7 @@
               ref="firstname"
               v-model="firstname"
               :label="isTeamMandatory()?'Team member firstname*':'Team member firstname'"
+              :outlined="!$vuetify.theme.isDark"
               solo
               :rules="teamNameRules"
               @blur="capitalize('firstname')"
@@ -137,6 +142,7 @@
               ref="lastname"
               v-model="lastname"
               :label="isTeamMandatory()?'Team member lastname*':'Team member lastname'"
+              :outlined="!$vuetify.theme.isDark"
               solo
               :rules="teamNameRules"
               @blur="capitalize('lastname')"
@@ -150,6 +156,7 @@
               ref="entity"
               v-model="entity"
               :label="isTeamMandatory()?'Team member Institution* (University, Laboratory, freelance...)':'Team member Institution (University, Laboratory, freelance...)'"
+              :outlined="!$vuetify.theme.isDark"
               solo
               :rules="requiredTeamRules"
             />
@@ -162,7 +169,7 @@
               color="accent"
               x-large
               block
-              dark
+              :dark="$vuetify.theme.isDark"
               :disabled="
                 !(
                   $refs.firstname &&

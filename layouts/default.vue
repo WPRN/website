@@ -27,7 +27,7 @@
     <v-fab-transition>
       <v-btn
         v-show="$store.state.offsetTop > 600"
-        color="accent"
+        color="secondary"
         dark
         fixed
         bottom
@@ -36,7 +36,9 @@
         fab
         @click="$vuetify.goTo(0)"
       >
-        <v-icon color="primary">
+        <v-icon
+        :color="$vuetify.theme.isDark?'primary':'white'"
+        >
           mdi-arrow-up
         </v-icon>
       </v-btn>

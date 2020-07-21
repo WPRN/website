@@ -35,7 +35,7 @@
       >
         <v-card
           :class="{'pa-6 mb-6':$vuetify.breakpoint.mdAndUp}"
-          flat
+                  :flat="$vuetify.theme.isDark"
         >
           <v-card-title class="justify-center font-weight-black text-uppercase">
             Press releases
@@ -88,7 +88,8 @@
         </v-card>
         <v-card
           :class="{'pa-6 mb-6':$vuetify.breakpoint.mdAndUp}"
-          flat
+                 :flat="$vuetify.theme.isDark"
+
         >
           <v-card-title class="justify-center font-weight-black text-uppercase">
             Contact
@@ -175,7 +176,8 @@
       >
         <v-card
           :class="{'pa-6 mb-6':$vuetify.breakpoint.mdAndUp}"
-          flat
+                  :flat="$vuetify.theme.isDark"
+
         >
           <v-card-title class="justify-center font-weight-black text-uppercase">
             Press Review

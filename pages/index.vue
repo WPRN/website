@@ -20,13 +20,16 @@
       id="register"
     >
       <v-sheet
-        color="#333333"
+        :color="$vuetify.theme.isDark?'#333333':'white'"
         tile
       >
         <div class="py-12" />
 
         <v-container>
-          <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">
+          <h2
+          class="display-2 font-weight-bold mb-3 text-uppercase text-center"
+          :class="$vuetify.theme.isDark?'text--white':'text--black'"
+          >
             {{
               ["CONTACT WPRN", "REGISTER YOUR PROJECT", "THANK YOU!"][step]
             }}
@@ -54,7 +57,6 @@
                 v-model="contactOnly"
                 class="pl-6 mt-0"
                 label="I want to contact WPRN"
-                dark
                 hide-details
                 @change="contactOnly ? (step = 0) : (step = 1)"
               />

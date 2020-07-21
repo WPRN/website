@@ -1,13 +1,13 @@
 <template>
   <section
     id="shareProject"
-    :style="$vuetify.theme.isDark?'background-color:#1E1E1E;':'background-color:#424242;'"
+    :style="$vuetify.theme.isDark?'background-color:#121212;':'background-color:#dfdfdf;'"
   >
     <div class="py-12" />
 
     <v-container>
       <h2
-        class="display-2 font-weight-bold mb-3 text-uppercase text-center white--text"
+        class="display-2 font-weight-bold mb-3 text-uppercase text-center"
       >
         Share a project or resource
       </h2>

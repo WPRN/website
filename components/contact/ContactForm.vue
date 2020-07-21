@@ -13,6 +13,7 @@
           solo
           :rules="contactNameRules"
           @blur="capitalize('name')"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -23,6 +24,7 @@
           label="Email*"
           solo
           :rules="emailRules"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -33,6 +35,7 @@
           label="Subject*"
           solo
           :rules="subjectRules"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -44,6 +47,7 @@
           label="Message*"
           solo
           :rules="messageRules"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
       <div class="text-center white--text">

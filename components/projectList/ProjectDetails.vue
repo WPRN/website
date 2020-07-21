@@ -5,6 +5,7 @@
     flat
     :max-width="$vuetify.breakpoint.width"
     :style="$vuetify.theme.isDark?'background-color:rgb(45, 45, 45)':'background-color:#FAFAFA;'"
+      color="transparent"
   >
     <!-- SOCIAL -->
     <SocialWidget :project="project" />
@@ -38,9 +39,8 @@
     </v-card-title>
 
     <v-card-text
-      class="pb-0 white--text"
-      :style="$vuetify.theme.isDark?'color:white':'color:black;'"
-      :class="{ 'pl-12 ml-4': $vuetify.breakpoint.mdAndUp }"
+      class="pb-0"
+      :class="{ 'pl-12 ml-4': $vuetify.breakpoint.mdAndUp , 'white--text': $vuetify.theme.isDark } "
     >
       <v-row>
         <!-- CONTACT -->

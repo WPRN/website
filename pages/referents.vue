@@ -65,12 +65,10 @@
       >
         <v-card
           class="pa-6 "
-          flat
+          :flat="$vuetify.theme.isDark"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
-            style="cursor:pointer;"
-            @click="$router.push({path:'/worldwide'})"
           >
             Why Should I Become a Referent for WPRN?
           </v-card-title>
@@ -88,13 +86,11 @@
         class="pa-3"
       >
         <v-card
-          class="pa-6 white--text"
-          flat
+          class="pa-6"
+          :flat="$vuetify.theme.isDark"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
-            style="cursor:pointer;"
-            @click="$router.push({path:'/worldwide'})"
           >
             How Do I Become a WPRN Referent?
           </v-card-title>

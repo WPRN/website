@@ -2,7 +2,7 @@
   <v-stepper
     v-model="formStep"
     v-intersect="onIntersect"
-    dark
+  :dark="$vuetify.theme.isDark"
     alt-labels
   >
     <v-stepper-header>

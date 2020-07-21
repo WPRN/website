@@ -1,10 +1,29 @@
 <template>
   <v-footer
     class="justify-center"
-    color="#292929"
     :class="{ 'pb-4': $vuetify.breakpoint.smAndDown }"
   >
-    <div class="title font-weight-light grey--text text--lighten-1 text-center">
+    <div
+    class="title font-weight-light text-center align-end"
+    :class="{ 'grey--text text--lighten-1': $vuetify.theme.isDark }"
+    >
+    <div class="d-flex align-center justify-center">
+        <v-tooltip top>
+      <template v-slot:activator="{ on }">
+        <v-switch
+          class="mt-0 pa-0 inline-flex"
+          v-model="$vuetify.theme.isDark"
+          :false-value="true" :true-value="false"
+          append-icon="mdi-brightness-5"
+          prepend-icon="mdi-moon-waning-crescent"
+          hide-details
+          v-on="on"
+          style="max-width:104px;line-height:36px;"
+        ></v-switch>
+      </template>
+      <span>Toggle the dark mode</span>
+    </v-tooltip>
+    <v-divider vertical class="ml-2"></v-divider>
       <v-tooltip
         v-for="(item, index) in socialIcons"
         :key="index"
@@ -15,6 +34,7 @@
             text
             icon
             v-on="on"
+            class=" d-inline-flex"
           >
             <a
               :href="item.url"
@@ -22,13 +42,13 @@
               rel="noopener noreferrer"
               style="text-decoration: none;"
             >
-              <v-icon color="white">mdi-{{ item.icon }}</v-icon>
+              <v-icon
+              :color="$vuetify.theme.isDark?'white':'secondary'">mdi-{{ item.icon }}</v-icon>
             </a>
           </v-btn>
         </template>
         <span>{{ item.text }}</span>
       </v-tooltip>
-      <br>
       <v-tooltip top>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -48,6 +68,7 @@
         </template>
         <span>This website is licenced under Creative Commons</span>
       </v-tooltip>
+    </div>
       <span class="body-2">
         {{ new Date().getFullYear() }} - This website is maintained by
         <a

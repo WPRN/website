@@ -25,6 +25,7 @@
               multiple
               :rules="requiredRules"
               @change="cleanModel('field')"
+              :outlined="!$vuetify.theme.isDark"
             >
               <template v-slot:selection="{ item, index }">
                 <div
@@ -56,6 +57,7 @@
               clearable
               multiple
               @change="cleanModel('selectedThematics')"
+              :outlined="!$vuetify.theme.isDark"
             >
               <template v-slot:selection="{ item, index }">
                 <div
@@ -86,6 +88,7 @@
               solo
               :rules="requiredRules"
               :disabled="loading"
+              :outlined="!$vuetify.theme.isDark"
             />
           </v-col>
 
@@ -100,6 +103,7 @@
               solo
               type="url"
               :rules="extendedTypes.some(item => item.urlMandatory && this.$store.state.form.project.type.includes(item.name))?mandatoryUrlRules:urlRules"
+              :outlined="!$vuetify.theme.isDark"
             />
           </v-col>
           <template v-if="isDateTime() && !isTimeInterval()">
@@ -126,6 +130,7 @@
                     solo
                     :rules="requiredRules"
                     v-on="on"
+                    :outlined="!$vuetify.theme.isDark"
                   />
                 </template>
                 <v-date-picker
@@ -166,6 +171,7 @@
                 type="text"
                 counter="150"
                 :rules="timeInformationsRules"
+              :outlined="!$vuetify.theme.isDark"
               />
             </v-col>
           </template>
@@ -193,6 +199,7 @@
                     solo
                     :rules="requiredRules"
                     v-on="on"
+              :outlined="!$vuetify.theme.isDark"
                   />
                 </template>
                 <v-date-picker
@@ -234,6 +241,7 @@
                 type="text"
                 counter="150"
                 :rules="timeInformationsRules"
+              :outlined="!$vuetify.theme.isDark"
               />
             </v-col>
           </template>

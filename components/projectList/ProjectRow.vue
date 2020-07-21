@@ -282,7 +282,7 @@
                   :key="index"
                   small
                   label
-                  :color="$vuetify.theme.isDark?filters.zone.includes(location) ? '#c4c4c4' : 'accent':filters.zone.includes(location) ? '#c4c4c4' : '#BDBDBD'"
+                  :color="$vuetify.theme.isDark?filters.zone.includes(location) ? '#c4c4c4' : 'secondary':filters.zone.includes(location) ? '#c4c4c4' : '#BDBDBD'"
                   light
                   class="ma-1"
                 >

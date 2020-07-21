@@ -14,7 +14,7 @@
           <v-alert
             type="info"
             align="left"
-            color="gray lighten-4"
+            :color="$vuetify.theme.isDark?'gray lighten-4': ''"
             width="100%"
           >
             The location of the project refers to where it takes place and
@@ -30,6 +30,7 @@
               :items="zones"
               label="Continent*"
               solo
+              :outlined="!$vuetify.theme.isDark"
               multiple
               :rules="requiredRules"
               :clearable="
@@ -56,6 +57,7 @@
               :items="countrySet"
               label="Country"
               solo
+              :outlined="!$vuetify.theme.isDark"
               multiple
               no-data-text="No country matching your search"
               clearable
@@ -84,6 +86,7 @@
               label="Region, State or location"
               solo
               :disabled="loading"
+              :outlined="!$vuetify.theme.isDark"
             />
           </v-col>
         </v-row>

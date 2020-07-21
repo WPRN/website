@@ -1,7 +1,7 @@
 <template>
   <section
     id="who"
-    :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#FAFAFA;'"
+    :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#dfdfdf;'"
   >
     <div class="py-12" />
 
@@ -39,7 +39,7 @@
               height="100%"
               to="/advisory_board"
               nuxt
-              :color="$vuetify.theme.isDark?'accent':'white'"
+              :color="$vuetify.theme.isDark?'secondary':'white'"
             >
               <v-avatar
                 color="primary"
@@ -75,7 +75,7 @@
               flat
               to="/institutions"
               nuxt
-              :color="$vuetify.theme.isDark?'accent':'white'"
+              :color="$vuetify.theme.isDark?'secondary':'white'"
               height="100%"
             >
               <v-avatar
@@ -112,7 +112,7 @@
               :elevation="hover ? 12 : 2"
               to="/referents"
               nuxt
-              :color="$vuetify.theme.isDark?'accent':'white'"
+              :color="$vuetify.theme.isDark?'secondary':'white'"
               height="100%"
             >
               <v-avatar

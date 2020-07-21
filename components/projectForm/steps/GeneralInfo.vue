@@ -18,6 +18,7 @@
               required
               label="Project Name*"
               solo
+              :outlined="!$vuetify.theme.isDark"
               type="text"
               :rules="nameRules"
             />
@@ -32,6 +33,7 @@
               :items="types"
               label="Project type(s)*"
               solo
+              :outlined="!$vuetify.theme.isDark"
               clearable
               multiple
               :rules="requiredRules"
@@ -70,6 +72,7 @@
             <v-textarea
               ref="description"
               v-model="description"
+              :outlined="!$vuetify.theme.isDark"
               required
               label="Project description*"
               solo
