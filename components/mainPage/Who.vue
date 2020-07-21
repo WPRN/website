@@ -110,11 +110,7 @@
               class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
-<<<<<<< HEAD
-              href="/referents"
-=======
               to="/referents"
->>>>>>> dev
               nuxt
               :color="$vuetify.theme.isDark?'accent':'white'"
               height="100%"

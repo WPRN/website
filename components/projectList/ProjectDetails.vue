@@ -39,12 +39,8 @@
 
     <v-card-text
       class="pb-0 white--text"
-<<<<<<< HEAD
       :style="$vuetify.theme.isDark?'color:white':'color:black;'"
       :class="{ 'pl-12 ml-4': $vuetify.breakpoint.mdAndUp }"
-=======
-      :class="{ 'pl-12 pr-12': $vuetify.breakpoint.mdAndUp }"
->>>>>>> dev
     >
       <v-row>
         <!-- CONTACT -->

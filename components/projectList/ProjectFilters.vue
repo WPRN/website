@@ -111,13 +111,8 @@
               </v-btn>
             </template>
             <span>{{ pinned?'Unpin the advanced filter menu':'Pin the advanced filter menu' }}</span>
-<<<<<<< HEAD
           </v-tooltip>
  -->
-=======
-          </v-tooltip>-->
-
->>>>>>> dev
           <!-- RESET FILTERS BUTTON -->
           <v-btn
             v-if="filtering&&showFilters"
