@@ -26,7 +26,6 @@
     "@tweenjs/tween.js": "^18",
     "array-flat-polyfill": "^1.0.1",
     "aws-appsync": "^3.0.2",
-    "eslint-plugin-nuxt": "^1.0.0",
     "intersection-observer": "^0.9.0",
     "nuxt": "^2.4.2",
     "nuxt-jsonld": "^1.4.5"
@@ -42,6 +41,7 @@
     "eslint": "^6.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
+    "@nuxtjs/eslint-plugin-nuxt": "^1.0.0",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.20.2",
