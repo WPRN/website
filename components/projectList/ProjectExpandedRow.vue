@@ -7,12 +7,8 @@
     :style="computeRowColor"
   >
     <v-card-text
-<<<<<<< HEAD
-      class="pb-0  px-1"
+      class="pb-0  px-3"
       :class="$vuetify.theme.isDark?'white--text':'black--text'"
-=======
-      class="pb-0 white--text px-3"
->>>>>>> dev
     >
       <v-row no-gutters>
         <!-- CONTACT -->
@@ -175,7 +171,6 @@ export default {
   },
   mounted () {},
   methods: {
-<<<<<<< HEAD
     computeRowColor (item, hover) {
       if (this.expanded.includes(item) &&
       hover &&
@@ -194,10 +189,9 @@ export default {
       !this.$vuetify.theme.isDark
       ) return 'background-color:#F5F5F5;'
       return ''
-=======
+    },
     isNotContactable () {
       return this.project.type.length === 1 && extendedTypes.some(item => !item.isContactable && this.project.type.includes(item.name))
->>>>>>> dev
     }
   }
 }

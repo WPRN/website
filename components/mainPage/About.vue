@@ -1,12 +1,8 @@
 <template>
   <section
     id="about-us"
-<<<<<<< HEAD
     v-intersect="onIntersect"
     :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#F5F5F5;'"
-=======
-    style="background-color:#212121;"
->>>>>>> dev
   >
     <div class="py-12" />
     <v-container>
