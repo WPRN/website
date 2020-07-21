@@ -7,6 +7,7 @@ export default {
     host: '0.0.0.0' // par défaut: localhost
   },
   mode: 'spa',
+  target:'static',
   /*
    ** Headers of the page
    */
