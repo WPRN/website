@@ -251,6 +251,13 @@ export default {
 
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 700)
         }
+        if (this.$route.hash === '#who') {
+          this.$store.commit('lockScrolling')
+          setTimeout(() => { this.$vuetify.goTo('#who') }, 200)
+          this.isIntersecting = true
+
+          setTimeout(() => { this.$store.commit('unlockScrolling') }, 700)
+        }
         this.$router.replace({hash: null})
       }
     },

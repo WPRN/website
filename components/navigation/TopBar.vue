@@ -7,24 +7,28 @@
     elevation-3
     :inverted-scroll="$route.name==='index'"
   >
-    <v-btn
-      text
+  <nuxt-link
       class="mx-0 px-0"
-      height="auto"
-      @click="$router.push({ path: '/' })"
-    >
-      <v-avatar
+  to="/"
+  ><v-avatar
         class="mr-3"
         tile
         color="grey lighten-5"
         size="72"
+  @click="$vuetify.goTo(0)"
       >
         <v-img
           contain
           max-height="100%"
           src="/logo.png"
         />
-      </v-avatar>
+      </v-avatar></nuxt-link>
+    <v-btn
+      text
+      height="auto"
+      @click="$router.push({ path: '/' })"
+    >
+
     </v-btn>
 
     <v-spacer />
@@ -106,6 +110,9 @@ export default {
       this.$vuetify.goTo(value)
       setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
     }
+  },
+  mounted () {
+    console.log(this.$route.name)
   }
 }
 </script>

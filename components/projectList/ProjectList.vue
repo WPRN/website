@@ -25,8 +25,8 @@
         </div>
       </template>
       <!-- HEADERS -->
-      <template v-slot:header>
-        <tr>
+      <template v-slot:header="{mobile}">
+        <tr v-show="mobile">
           <th class="pl-8">
             Name
           </th>
