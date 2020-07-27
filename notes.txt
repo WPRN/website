@@ -1,0 +1,5 @@
+- Update date label in project form to replace it by "deadline" if it is a project call (only)
+- Move general contact in a modal & restore contact us footer with modal
+- Make a form overview on edit, as first step
+- blur filter text search
+- Investiguate logo size outlook

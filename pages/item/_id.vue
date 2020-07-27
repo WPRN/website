@@ -80,6 +80,11 @@ export default {
       contact: false
     }
   },
+  computed: {
+    title () {
+      return this.ready ? 'WPRN - ' + this.project.name.length > 100 ? this.project.name.substring(0, 100) : this.project.name : 'World Pandemic Research Network'
+    }
+  },
   async mounted () {
     try {
       const res = await client.query({
@@ -103,7 +108,9 @@ export default {
   methods: {},
   head () {
     return {
+      title: this.title,
       meta: [
+        { hid: 'description', name: 'description', content: this.project.description },
         {
           property: 'og:url',
           content: 'https://WPRN.org/item/' + this.project.pubId

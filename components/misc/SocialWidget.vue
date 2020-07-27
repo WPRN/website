@@ -27,6 +27,7 @@
         v-for="(social, index) in socialChannels"
         :key="index"
         bottom
+        open-delay="300"
       >
         <template v-slot:activator="{ on }">
           <v-btn

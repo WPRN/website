@@ -4,52 +4,61 @@
     :class="{ 'pb-4': $vuetify.breakpoint.smAndDown }"
   >
     <div
-    class="title font-weight-light text-center align-end"
-    :class="{ 'grey--text text--lighten-1': $vuetify.theme.isDark }"
+      class="title font-weight-light text-center align-end"
+      :class="{ 'grey--text text--lighten-1': $vuetify.theme.isDark }"
     >
-    <div class="d-flex align-center justify-center">
-    <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">mdi-moon-waning-crescent</v-icon>
+      <div class="d-flex align-center justify-center">
+        <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">
+          mdi-moon-waning-crescent
+        </v-icon>
         <v-tooltip top>
-      <template v-slot:activator="{ on }">
-        <v-switch
-          class="mt-0 pa-0 inline-flex"
-          v-model="$vuetify.theme.isDark"
-          :false-value="true" :true-value="false"
-          hide-details
-          v-on="on"
-          style="max-width:104px;line-height:36px;"
-        ></v-switch>
-              </template>
-      <span>Toggle the dark mode</span>
-    </v-tooltip>
-    <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">mdi-brightness-5</v-icon>
-    <v-divider vertical class="ml-2"></v-divider>
-      <v-tooltip
-        v-for="(item, index) in socialIcons"
-        :key="index"
-        top
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            text
-            icon
-            v-on="on"
-            class=" d-inline-flex"
-          >
-            <a
-              :href="item.url"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="text-decoration: none;"
+          <template v-slot:activator="{ on }">
+            <v-switch
+              v-model="$vuetify.theme.isDark"
+              class="mt-0 pa-0 inline-flex"
+              :false-value="true"
+              :true-value="false"
+              hide-details
+              style="max-width:104px;line-height:36px;"
+              v-on="on"
+            />
+          </template>
+          <span>Toggle the dark mode</span>
+        </v-tooltip>
+        <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">
+          mdi-brightness-5
+        </v-icon>
+        <v-divider
+          vertical
+          class="ml-2"
+        />
+        <v-tooltip
+          v-for="(item, index) in socialIcons"
+          :key="index"
+          top
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              text
+              icon
+              class=" d-inline-flex"
+              v-on="on"
             >
-              <v-icon
-              :color="$vuetify.theme.isDark?'white':'secondary'">mdi-{{ item.icon }}</v-icon>
-            </a>
-          </v-btn>
-        </template>
-        <span>{{ item.text }}</span>
-      </v-tooltip>
-    </div>
+              <a
+                :href="item.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="text-decoration: none;"
+              >
+                <v-icon
+                  :color="$vuetify.theme.isDark?'white':'secondary'"
+                >mdi-{{ item.icon }}</v-icon>
+              </a>
+            </v-btn>
+          </template>
+          <span>{{ item.text }}</span>
+        </v-tooltip>
+      </div>
       <v-tooltip top>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -89,7 +98,7 @@
         <!-- eslint-disable-next-line vue/max-attributes-per-line -->
         <nuxt-link to="/press_room" class="blue--text">Press Room</nuxt-link>&nbsp;-&nbsp;
         <!-- eslint-disable-next-line vue/max-attributes-per-line -->
-        <nuxt-link to="/resources">Resources</nuxt-link>&nbsp;-&nbsp;
+        <nuxt-link to="/resources" class="blue--text">Resources</nuxt-link>&nbsp;-&nbsp;
         <span
           class="blue--text"
           style="text-decoration: underline;cursor:pointer;"

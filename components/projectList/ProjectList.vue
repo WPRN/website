@@ -25,8 +25,8 @@
         </div>
       </template>
       <!-- HEADERS -->
-      <template v-slot:header="{mobile}">
-        <tr v-show="mobile">
+      <template v-slot:header="{ mobile }">
+        <tr v-show="!mobile">
           <th class="pl-8">
             Name
           </th>
@@ -100,7 +100,7 @@
       </template>
       <template v-slot:expanded-item="{ item }">
         <td
-          colspan="6"
+          colspan="7"
           class="px-0"
         >
           <ProjectExpandedRow

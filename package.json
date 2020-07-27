@@ -65,5 +65,10 @@
     "hooks": {
       "pre-commit": "yarn lintfix"
     }
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
 }

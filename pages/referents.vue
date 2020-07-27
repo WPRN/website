@@ -37,26 +37,13 @@
       sm="12"
       md="8"
     >
-      <div class="white--text text-justify title">
-        <WhoReferent /> <br>
+      <div class="text-justify title">
+        <WhoReferent />
         <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
         <nuxt-link to="/referent_list">See the list of WPRN referents.</nuxt-link>
       </div>
     </v-col>
 
-    <v-col
-      cols="12"
-      sm="12"
-      md="8"
-    >
-      <v-responsive
-        class="mx-auto"
-        width="56"
-      >
-        <v-divider class="mb-1 mt-6" />
-        <v-divider class="mb-6" />
-      </v-responsive>
-    </v-col>
     <v-row>
       <v-col
         cols="12"
@@ -66,6 +53,7 @@
         <v-card
           class="pa-6 "
           :flat="$vuetify.theme.isDark"
+          height="100%"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
@@ -75,6 +63,7 @@
           <v-card-text
             class="subtitle-1 white--text title font-weight-regular"
             color="black"
+            height="100%"
           >
             <WhyReferent />
           </v-card-text>
@@ -88,6 +77,7 @@
         <v-card
           class="pa-6"
           :flat="$vuetify.theme.isDark"
+          height="100%"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
@@ -97,6 +87,7 @@
           <v-card-text
             class="subtitle-1  white--text title font-weight-regular"
             color="black"
+            height="100%"
           >
             <HowReferent />
           </v-card-text>

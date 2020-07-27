@@ -1,6 +1,6 @@
 <template>
   <v-card
-    flat
+    :flat="$vuetify.theme.isDark"
     min-height="320px"
     class="pa-4 text-center"
     align="center"

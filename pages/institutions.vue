@@ -52,7 +52,7 @@
                 :title="item.name"
                 :style="'background-color:' + item.color"
                 style="flex: 0 1 auto;"
-                class="pa-2"
+                class="pa-2 ma-1"
                 width="100"
               >
                 <v-img
@@ -80,20 +80,18 @@
       </v-expansion-panels>
     </v-col>
 
-    <v-col
-      cols="12"
-      sm="12"
-      md="8"
-    >
-      <v-responsive
-        class="mx-auto"
-        width="56"
-      >
-        <v-divider class="mb-1 mt-6" />
-        <v-divider class="mb-6" />
-      </v-responsive>
-    </v-col>
     <v-row>
+      <v-col
+        cols="12"
+        sm="12"
+        md="10"
+        offset-md="1"
+      >
+        <div class="text-center body-1">
+          Becoming a partner institution is subject to the validation of the Scientific Advisory Board. <br>
+          Contact <a href="mailto:partners@wprn.org">partners@wprn.org</a>
+        </div>
+      </v-col>
       <v-col
         cols="12"
         md="6"
@@ -101,8 +99,8 @@
       >
         <v-card
           class="pa-6 "
-                  :flat="$vuetify.theme.isDark"
-
+          :flat="$vuetify.theme.isDark"
+          height="100%"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
@@ -126,8 +124,8 @@
       >
         <v-card
           class="pa-6"
-                  :flat="$vuetify.theme.isDark"
-
+          :flat="$vuetify.theme.isDark"
+          height="100%"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
@@ -143,17 +141,6 @@
             <HowInstitution />
           </v-card-text>
         </v-card>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="12"
-        md="6"
-        offset-md="3"
-      >
-        <div class="text-center body-1">
-          Becoming a partner institution is subject to the validation of the Scientific Advisory Board. <br>
-          Contact <a href="mailto:partners@wprn.org">partners@wprn.org</a>
-        </div>
       </v-col>
     </v-row>
   </v-row>
