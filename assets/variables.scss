@@ -3,7 +3,6 @@
 // The variables you want to modify
 // $font-size-root: 20px;
 $primary: #2196F3;
-@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
-.d-flex {
+.d-flex, .v-card__title {
    word-break: normal;
 }

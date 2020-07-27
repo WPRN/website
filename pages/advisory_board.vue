@@ -35,6 +35,8 @@
         three-line
         subheader
         align="left"
+       :dark="$vuetify.theme.isDark"
+       :flat="$vuetify.theme.isDark"
       >
         <v-list-item
           v-for="(person, index) in board"
@@ -62,7 +64,8 @@
                   :href="person.url"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style="text-decoration: none; color: white;"
+                  style="text-decoration: none; "
+                  :style="$vuetify.theme.isDark?'color: white;':'color:black;'"
                 >
                   <v-icon small>mdi-link</v-icon>
                         &nbsp;
@@ -72,6 +75,7 @@
               <template v-else>
                 {{ person.name }}
               </template>
+              <br v-if="$vuetify.breakpoint.smAndDown">
               <v-chip
                 v-if="person.role"
                 small
@@ -113,6 +117,9 @@ export default {
       institutions,
       referents: []
     }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
   },
   methods: {
 

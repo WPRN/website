@@ -4,7 +4,7 @@
       cols="12"
       md="6"
       class="d-flex justify-end"
-      style="background-color:#1E1E1E;"
+      :style="$vuetify.theme.isDark?'background-color:#1E1E1E;':''"
     >
       <v-card
         class="pa-6 mb-6 white--text"
@@ -47,7 +47,7 @@
           How Do I Register My Project?
         </v-card-title>
         <v-card-text
-          class="title white--text"
+          class="title"
           color="black"
         >
           <ul>

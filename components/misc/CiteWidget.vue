@@ -8,11 +8,11 @@
     <v-sheet
       light
       elevation="3"
-      class="mr-6 py-3 pl-5 mt-3"
+      class="pa-3 mt-3"
     >
       <v-row no-gutters>
         <v-col class="align-self-center">
-          {{ project.contact_lastname }}, {{ project.contact_firstname }}.
+          {{ getMembersOrContact() }}
           <b>&ldquo;{{ project.name }}&rdquo;</b>.
           <em>World Pandemic Research Network</em>
           . WPRN-{{ project.pubId }},
@@ -30,10 +30,8 @@
             id="cite"
             type="hidden"
             :value="
-              project.contact_lastname +
-                ', ' +
-                project.contact_firstname +
-                '.“' +
+              getMembersOrContact() +
+                ' ”' +
                 project.name +
                 '”. World Pandemic Research Network. WPRN-' +
                 project.pubId +
@@ -49,7 +47,7 @@
         </v-col>
         <v-col
           cols="auto"
-          class="align-self-center"
+          class="align-self-center mx-auto text-centered"
         >
           <v-tooltip top>
             <template v-slot:activator="{ on }">
@@ -57,7 +55,6 @@
                 icon
                 large
                 tile
-                class="mr-2"
                 v-on="on"
                 @click="copyToClipBoard()"
               >
@@ -76,7 +73,10 @@
 <script>
 export default {
   props: {
-    project: Object
+    project: {
+      type: Object,
+      default: () => {}
+    }
   },
   methods: {
     copyToClipBoard () {
@@ -92,6 +92,32 @@ export default {
       /* unselect the range */
       copyNode.setAttribute('type', 'hidden')
       window.getSelection().removeAllRanges()
+    },
+    getMembersOrContact () {
+      let res = ''
+      if (this.project.team && this.project.team.length) {
+        Object.keys(this.project.team).forEach((member, index) => {
+          if (index <= 2) {
+            res += this.project.team[member].lastname +
+              ', ' +
+              this.project.team[member].firstname
+          }
+          if (Object.keys(this.project.team).length > 1 &&
+            index < Object.keys(this.project.team).length - 1 &&
+            index < 2) {
+            res += '; '
+          }
+          if (Object.keys(this.project.team).length > 3 && index === 2) {
+            res += ' & Al'
+          }
+        })
+        res += '.'
+        return res
+      } else {
+        return this.project.contact_lastname +
+                ', ' +
+                this.project.contact_firstname
+      }
     }
   }
 

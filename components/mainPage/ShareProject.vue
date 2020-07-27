@@ -1,5 +1,8 @@
 <template>
-  <section id="shareProject">
+  <section
+    id="shareProject"
+    :style="$vuetify.theme.isDark?'background-color:#121212;':'background-color:#dfdfdf;'"
+  >
     <div class="py-12" />
 
     <v-container>
@@ -33,17 +36,24 @@
               class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
+              :color="$vuetify.theme.isDark?'':'#FAFAFA'"
             >
               <div class="text-center">
                 <v-avatar
                   color="primary"
                   size="88"
                 >
-                  <v-icon x-large>
+                  <v-icon
+                    x-large
+                    color="white"
+                  >
                     mdi-bullseye-arrow
                   </v-icon>
                 </v-avatar>
               </div>
+              <v-card-title class="justify-center font-weight-black text-uppercase headline">
+                Why?
+              </v-card-title>
               <v-card-text
                 class="subtitle-1 white--text title font-weight-regular text-left"
                 color="black"
@@ -63,26 +73,30 @@
           >
             <v-card
               :elevation="hover ? 12 : 2"
-              class="pa-6 white--text"
+              class="pa-6 text-center"
+              :color="$vuetify.theme.isDark?'':'#FAFAFA'"
               flat
             >
               <div class="text-center">
                 <v-avatar
                   color="primary"
                   size="88"
-                  class="headline font-weight-bold"
                 >
-                  <v-icon x-large>
+                  <v-icon
+                    color="white"
+                    x-large
+                  >
                     mdi-pencil-circle
                   </v-icon>
                 </v-avatar>
               </div>
-
+              <v-card-title class="justify-center font-weight-black text-uppercase headline">
+                How?
+              </v-card-title>
               <v-card-text
                 class="subtitle-1  white--text title font-weight-regular"
-                color="black"
               >
-                <HowProject />
+                <HowProject @register="$emit('register')" />
               </v-card-text>
             </v-card>
           </v-hover>

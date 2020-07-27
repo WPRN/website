@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <p>
       WPRN is an edited directory that serves as an infrastructure for scientific communities. It features resources that have been filtered, tagged, and indexed, screened by bots first and validated by human experts second.
     </p>
@@ -19,7 +19,9 @@
             Upload of a project
           </v-card-title>
           <v-card-text class="white--text">
-            Contributors upload the information about their project themselves with a <a href="/#register">very simple form</a> on the WPRN website. They should be straight to the point of what they are doing and what is the added value of their project. The abstract should be brief, informative and self-explanatory,  very explicit about the problem addressed, the research question, the method, the data set, the team, or the expected outcome.  A link can be provided to a webpage containing a more detailed description and material.
+            Contributors upload the information about their project themselves with a
+            <!-- eslint-disable-next-line vue/singleline-html-element-content-newline-->
+            <nuxt-link to="/#register">very simple form</nuxt-link> on the WPRN website. They should be straight to the point of what they are doing and what is the added value of their project. The abstract should be brief, informative and self-explanatory,  very explicit about the problem addressed, the research question, the method, the data set, the team, or the expected outcome.  A link can be provided to a webpage containing a more detailed description and material.
           </v-card-text>
         </v-card>
       </v-timeline-item>
@@ -90,7 +92,7 @@
       >
         <v-card class="elevation-20">
           <v-card-title class="title pt-0">
-            Blazons (upcoming feature)
+            Blazons <i>(upcoming feature)</i>
           </v-card-title>
           <v-card-text class="white--text">
             Partnering institutions can signal projects that have undergone a full-fledged validation, e.g. with scientific expertise in research calls selection committees. They can stamp these projects on WPRN with their blazon, which is a label that vets the project with the institution’s cognitive authority.
@@ -103,7 +105,7 @@
       >
         <v-card class="elevation-20">
           <v-card-title class="title pt-0">
-            Alerts (upcoming feature)
+            Alerts <i>(upcoming feature)</i>
           </v-card-title>
           <v-card-text class="white--text">
             After a project is uploaded, the project contact person will receive an email from Ainisydo, our AI agent for Notification of Interesting Stuff in Your Domain, which compares the key-word profile and full-text content of the upload with other items in WPRN. WPRN will send further alerts, if the project contact person wishes so. The project contact person can set a profile of alerts with a special button in the search menu of the “browse projects” page.”

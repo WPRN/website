@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-form
+      id="contact-us"
       lazy-validation
       color="#333333"
     >
@@ -12,6 +13,7 @@
           solo
           :rules="contactNameRules"
           @blur="capitalize('name')"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -22,6 +24,7 @@
           label="Email*"
           solo
           :rules="emailRules"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -32,6 +35,7 @@
           label="Subject*"
           solo
           :rules="subjectRules"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -43,6 +47,7 @@
           label="Message*"
           solo
           :rules="messageRules"
+              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
       <div class="text-center white--text">
@@ -57,6 +62,7 @@
           </small>
         </div>
         <v-btn
+          dark
           color="success"
           x-large
           :loading="sending"
@@ -88,7 +94,10 @@ import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
 export default {
   props: {
-    id: String
+    id: {
+      type: String,
+      default: ''
+    }
   },
   data () {
     return {
@@ -104,10 +113,7 @@ export default {
         (value) =>
           alpha.test(value) ||
           "No digits or special characters (except ' and -) allowed",
-        (value) => value.length <= 40 || 'Max 40 characters',
-        (value) => {
-          return true
-        }
+        (value) => value.length <= 40 || 'Max 40 characters'
       ],
       emailRules: [
         (value) => !!value || 'Email address required.',
@@ -121,10 +127,7 @@ export default {
         (value) =>
           value.length >= 5 ||
           'Your message subjects must have at least 4 characters',
-        (value) => value.length <= 40 || 'Max 40 characters',
-        (value) => {
-          return true
-        }
+        (value) => value.length <= 40 || 'Max 40 characters'
       ],
 
       messageRules: [
@@ -146,9 +149,10 @@ export default {
     },
     async onSubmit () {
       /*  this.$emit("WorkInProgressDialogToggle"); */
+      // TODO move this in the store
       try {
         this.sending = true
-        let args = this.contact
+        const args = this.contact
 
         if (this.id) args.relatedProjectId = this.id
         Object.keys(this.contact).forEach((key) => {
@@ -156,11 +160,11 @@ export default {
         })
 
         args.recaptcha = await this.$recaptcha.getResponse()
+        console.log(JSON.stringify({ input: args }))
         const res = await client.mutate({
           mutation: gql(newContact),
           variables: { input: args }
         })
-
         if (res && !res.errors) {
           this.$emit('complete')
         } else {

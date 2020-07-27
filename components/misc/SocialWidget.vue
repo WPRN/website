@@ -2,11 +2,10 @@
   <v-fab-transition>
     <v-speed-dial
       v-model="fab"
-      :top="$vuetify.breakpoint.mdAndUp"
-      :bottom="$vuetify.breakpoint.smAndDown"
       right
+      top
       absolute
-      :direction="$vuetify.breakpoint.mdAndUp?'bottom':'top'"
+      direction="bottom"
       transition="slide-y-reverse-transition"
     >
       <template v-slot:activator>
@@ -53,7 +52,10 @@
 <script>
 export default {
   props: {
-    project: Object
+    project: {
+      type: Object,
+      default: () => {}
+    }
   },
   data () {
     return {

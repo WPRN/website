@@ -81,7 +81,7 @@
         <v-expansion-panel>
           <v-expansion-panel-header class="pa-6">
             <h3 class="font-weight-regular headline">
-              Why Should I Become a Referent for WPRN?
+              Why should I become a Referent for WPRN?
             </h3>
           </v-expansion-panel-header>
           <v-expansion-panel-content :class="$vuetify.breakpoint.mdAndDown?'py-3':'pa-3'">
@@ -91,7 +91,7 @@
         <v-expansion-panel>
           <v-expansion-panel-header class="pa-6">
             <h3 class="font-weight-regular headline">
-              How Do I Become a WPRN Referent?
+              How do I become a WPRN Referent?
             </h3>
           </v-expansion-panel-header>
           <v-expansion-panel-content :class="$vuetify.breakpoint.mdAndDown?'py-3':'pa-3'">
@@ -111,7 +111,7 @@
         <v-expansion-panel>
           <v-expansion-panel-header class="pa-6">
             <h3 class="font-weight-regular headline">
-              How do I Become a Partner Institution?
+              How can my institution become a partner?
             </h3>
           </v-expansion-panel-header>
           <v-expansion-panel-content :class="$vuetify.breakpoint.mdAndDown?'py-3':'pa-3'">
@@ -175,6 +175,9 @@ export default {
   data () {
     return {
     }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
   },
   methods: {
 

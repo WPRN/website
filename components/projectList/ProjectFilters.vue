@@ -1,7 +1,7 @@
 <template>
   <v-card
     flat
-    class="mt-6"
+    :class="{'mt-6': !pinned||vuetify.breakpoint.smAndDown}"
   >
     <!-- DEFAULT FILTERS -->
     <v-row no-gutters>
@@ -24,7 +24,6 @@
             clearable
             solo
             dense
-            dark
             outlined
             max-width="400px;"
             @click:clear="
@@ -60,7 +59,7 @@
                 v-model="filters.verified"
                 label="Verified"
                 class="mx-3 filter"
-                :dense="$vuetify.breakpoint.mdAndDown"
+                :dense="$vuetify.breakpoint.mdAndDown||pinned"
                 :disabled="filters.featured === true"
                 @change="
                   $router.push({
@@ -88,7 +87,7 @@
                 v-model="filters.featured"
                 label="Featured"
                 class="ml-3 filter"
-                :dense="$vuetify.breakpoint.mdAndDown"
+                :dense="$vuetify.breakpoint.mdAndDown||pinned"
                 @change="updateCheckBox()"
                 v-on="on"
               />
@@ -96,13 +95,30 @@
             <span>Tick this to display only projects featured by the WPRN community</span>
           </v-tooltip>
           <v-spacer />
+          <!-- PIN BUTTON
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                v-show="showFilters&&$vuetify.breakpoint.mdAndUp"
+                outlined
+                color="white"
+                class="mr-3"
+                :dense="$vuetify.breakpoint.mdAndDown||pinned"
+                @click="pinned = !pinned"
+                v-on="on"
+              >
+                <v-icon>{{ pinned?'mdi-pin':'mdi-pin-off' }}</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ pinned?'Unpin the advanced filter menu':'Pin the advanced filter menu' }}</span>
+          </v-tooltip>
+ -->
           <!-- RESET FILTERS BUTTON -->
           <v-btn
             v-if="filtering&&showFilters"
             outlined
-            color="white"
             class="mr-3 filter"
-            :dense="$vuetify.breakpoint.mdAndDown"
+            :dense="$vuetify.breakpoint.mdAndDown||pinned"
             @click="
               filters = {
                 search: '',
@@ -125,9 +141,8 @@
           <v-btn
             v-if="!filtering"
             outlined
-            color="white"
             :class="{ 'mr-4': $vuetify.breakpoint.mdAndUp }"
-            :dense="$vuetify.breakpoint.mdAndDown"
+            :dense="$vuetify.breakpoint.mdAndDown||pinned"
             @click="showFilters = !showFilters"
           >
             <template v-if="showFilters">
@@ -159,7 +174,7 @@
             ref="field"
             v-model="filters.field"
             :items="fields"
-            label="Project discipline(s)"
+            label="Discipline(s)"
             outlined
             clearable
             class="filter"
@@ -194,7 +209,7 @@
             ref="thematics"
             v-model="filters.thematics"
             :items="thematics"
-            label="Project Thematic(s)"
+            label="Thematic(s)"
             outlined
             clearable
             multiple
@@ -229,7 +244,7 @@
             ref="type"
             v-model="filters.type"
             :items="types"
-            label="Project type"
+            label="Type(s)"
             outlined
             hide-details
             dense
@@ -263,7 +278,7 @@
             ref="status"
             v-model="filters.status"
             :items="state"
-            label="Project status"
+            label="Status"
             outlined
             :disabled="loading"
             hide-details
@@ -296,7 +311,7 @@
             ref="zone"
             v-model="filters.zone"
             :items="zones"
-            label="Continent"
+            label="Continent(s)"
             outlined
             :disabled="loading"
             clearable
@@ -335,7 +350,7 @@
                   .sort()
             "
             no-data-text="No country matching your search"
-            label="Country"
+            label="Countries"
             outlined
             multiple
             clearable
@@ -385,6 +400,7 @@ export default {
       state,
       thematics,
       showFilters: this.$route.query && !!Object.keys(this.$route.query).length,
+      pinned: false,
       filtering: (this.$route.query && !!Object.keys(this.$route.query).length),
       filters: {
         field:
@@ -434,7 +450,7 @@ export default {
     focusSearch () {
       this.filters.searching = !this.filters.searching
       setTimeout(() => {
-        this.$refs['search_field'].focus()
+        this.$refs.search_field.focus()
       }, 1000)
     },
     updateCheckBox () {

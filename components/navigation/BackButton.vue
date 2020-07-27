@@ -1,7 +1,8 @@
 <template>
   <v-col
-    cols="1"
-    align="center"
+    sm="1"
+    xs="12"
+    align="left"
   >
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
@@ -12,8 +13,7 @@
           <v-btn
             fab
             icon
-            large
-            class="mr-2"
+            small
             v-on="on"
           >
             <v-icon large>

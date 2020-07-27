@@ -21,9 +21,10 @@ The frontend is static/lambda-generated and is powered by [Nuxt](https://nuxtjs.
 - vue.js
 - css
 
-## Author
+## Author and contributors
 WPRN (Word Pandemic Research Network) is a collective effort that originated from [IAS Paris - IEA de Paris](https://www.paris-iea.fr/en/).
 This website and logo as well as its infrastructure have been designed by [Antoine Cordelois](https://www.linkedin.com/in/antoine-cordelois/?locale=en_US).
 
 ## License
 Licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+

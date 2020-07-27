@@ -6,7 +6,7 @@
     <tr
       class="font-weight-medium"
       :class="$vuetify.breakpoint.mdAndUp ? 'body-1' : 'body-2'"
-      :style="expanded.includes(item)?hover?'#616161':'background-color:rgb(45, 45, 45);':'' "
+      :style="computeRowColor(item, hover)"
       @click="$emit('expand', item)"
     >
       <!-- NAME & STATUS-->
@@ -19,6 +19,7 @@
       >
         <a
           :href="'/item/' + item.pubId"
+          :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
           @click.prevent
         >
           <div class="d-flex">
@@ -49,12 +50,11 @@
       <!-- INSTITUTION -->
       <td
         class="px-1"
-        :style="
-          $vuetify.breakpoint.mdAndUp ? 'min-width:15vw;' : 'min-width:20vw;'
-        "
+        :style=" $vuetify.breakpoint.mdAndUp ? 'min-width:15vw;' : 'min-width:20vw;'"
       >
         <a
           :href="'/item/' + item.pubId"
+          :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
           @click.prevent
         >
           <span
@@ -119,6 +119,7 @@
                   <span
                     class="caption"
                     style="white-space: nowrap;"
+                    :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                     v-on="on"
                   >+ {{ item.field.length - 2 }} more</span>
                 </template>
@@ -185,6 +186,7 @@
                     <span
                       class="caption"
                       style="white-space: nowrap;"
+                      :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                       v-on="on"
                     >+ {{ item.thematics.length - 2 }} more</span>
                   </template>
@@ -251,6 +253,7 @@
                     <span
                       class="caption"
                       style="white-space: nowrap;"
+                      :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                       v-on="on"
                     >+ {{ item.type.length - 2 }} more</span>
                   </template>
@@ -271,7 +274,7 @@
           :href="'/item/' + item.pubId"
           @click.prevent
         >
-          <template v-for="(location, index) in [...item.zone, ...item.country]">
+          <template v-for="(location, index) in [...zoneFiltered, ...item.country]">
             <template v-if="zones.map(item => item.value).includes(location)">
 
               <template v-if="index < 2">
@@ -279,7 +282,7 @@
                   :key="index"
                   small
                   label
-                  :color="filters.zone.includes(location) ? '#c4c4c4' : 'accent'"
+                  :color="$vuetify.theme.isDark?filters.zone.includes(location) ? '#c4c4c4' : 'secondary':filters.zone.includes(location) ? '#c4c4c4' : '#BDBDBD'"
                   light
                   class="ma-1"
                 >
@@ -296,6 +299,7 @@
                       <span
                         class="caption"
                         style="white-space: nowrap;"
+                        :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                         v-on="on"
                       >+ {{ item.zone.length - 2 }} more</span>
                     </template>
@@ -338,6 +342,7 @@
                         <span
                           class="caption"
                           style="white-space: nowrap;"
+                          :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
                           v-on="on"
                         >+ {{ item.country.length - 2 }} more</span>
                       </template>
@@ -395,6 +400,19 @@ export default {
       thematics
     }
   },
+  computed: {
+    zoneFiltered () {
+      let continents = this.item.zone.slice()
+      continents = continents.filter((continent) => {
+        return !(countries[continent] && ((this.filter && this.filter.zone && this.filter.zone.includes(continent)) || countries[continent].some((country) => {
+          return this.item.country && this.item.country.some(selectedCountry => selectedCountry === country)
+        })))
+      })
+      console.log('this.item.country: ', this.item.country)
+      console.log('continents: ', continents)
+      return continents
+    }
+  },
   methods: {
     orderItems (project, item) {
       if (this.filters[item].length && project[item] && project[item].length) {
@@ -405,6 +423,18 @@ export default {
             items.find(dat => dat === this.filters[item]),
             ...items.filter((dat) => dat !== this.filters[item])
           ]
+        }
+        if (item === 'country') {
+          this.filters[item].forEach((element) => {
+            if (items.includes(element) || (this.filter && this.filter.zone && this.filter.zone.some(zone => {
+              if (this.item.pubId === '411152') {
+                console.log('INCLUDED', countries[zone].includes(element))
+              }
+              return countries[zone].includes(element)
+            }))) {
+              items = [element, ...items.filter((dat) => dat !== element)]
+            }
+          })
         } else {
           this.filters[item].forEach((element) => {
             if (items.includes(element)) {
@@ -416,7 +446,27 @@ export default {
       } else {
         return project[item]
       }
-    } /*
+    },
+    computeRowColor (item, hover) {
+      if (this.expanded.includes(item) &&
+      hover &&
+      this.$vuetify.theme.isDark
+      ) return 'background-color:#616161'
+      if (this.expanded.includes(item) &&
+      !hover &&
+      this.$vuetify.theme.isDark
+      ) return 'background-color:rgb(45, 45, 45);'
+      if (this.expanded.includes(item) &&
+      hover &&
+      !this.$vuetify.theme.isDark
+      ) return 'background-color:#BDBDBD;'
+      if (this.expanded.includes(item) &&
+      !hover &&
+      !this.$vuetify.theme.isDark
+      ) return 'background-color:#F5F5F5;'
+      return ''
+    }
+  /*
     updateSearch (filter, value) {
       /* TODO Refactor to make more legible
       const query = {

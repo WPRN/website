@@ -2,6 +2,7 @@
   <v-row
     align="center"
     justify="center"
+    class=" px-3"
   >
     <!--  BackButton takes one col -->
     <BackButton url="/#who" />
@@ -38,7 +39,8 @@
     >
       <div class="white--text text-justify title">
         <WhoReferent /> <br>
-        <a href="/referent_list">See the list of WPRN referents.</a>
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+        <nuxt-link to="/referent_list">See the list of WPRN referents.</nuxt-link>
       </div>
     </v-col>
 
@@ -63,12 +65,10 @@
       >
         <v-card
           class="pa-6 "
-          flat
+          :flat="$vuetify.theme.isDark"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
-            style="cursor:pointer;"
-            @click="$router.push({path:'/worldwide'})"
           >
             Why Should I Become a Referent for WPRN?
           </v-card-title>
@@ -86,13 +86,11 @@
         class="pa-3"
       >
         <v-card
-          class="pa-6 white--text"
-          flat
+          class="pa-6"
+          :flat="$vuetify.theme.isDark"
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
-            style="cursor:pointer;"
-            @click="$router.push({path:'/worldwide'})"
           >
             How Do I Become a WPRN Referent?
           </v-card-title>
@@ -125,6 +123,9 @@ export default {
     return {
       institutions
     }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
   }
 }
 </script>

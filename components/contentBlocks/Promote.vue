@@ -1,8 +1,10 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <p>First, thank you very much for your support!</p>
     <p>
-      If you want to promote WPRN as an initiative, you can use our social media channels. Their links can be found in the footer of every page. You can also use the resources of our <a href="/press_room">press room</a>.
+      If you want to promote WPRN as an initiative, you can use our social media channels. Their links can be found in the footer of every page. You can also use the resources of our
+      <!-- eslint-disable-next-line vue/singleline-html-element-content-newline, vue/max-attributes-per-line-->
+      <nuxt-link to="/press_room">press room</nuxt-link>.
     </p>
     <p>
       If you want to promote a particular project of WPRN, you can use the social share widgets of the share button <v-avatar

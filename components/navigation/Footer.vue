@@ -1,10 +1,29 @@
 <template>
   <v-footer
     class="justify-center"
-    color="#292929"
     :class="{ 'pb-4': $vuetify.breakpoint.smAndDown }"
   >
-    <div class="title font-weight-light grey--text text--lighten-1 text-center">
+    <div
+    class="title font-weight-light text-center align-end"
+    :class="{ 'grey--text text--lighten-1': $vuetify.theme.isDark }"
+    >
+    <div class="d-flex align-center justify-center">
+    <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">mdi-moon-waning-crescent</v-icon>
+        <v-tooltip top>
+      <template v-slot:activator="{ on }">
+        <v-switch
+          class="mt-0 pa-0 inline-flex"
+          v-model="$vuetify.theme.isDark"
+          :false-value="true" :true-value="false"
+          hide-details
+          v-on="on"
+          style="max-width:104px;line-height:36px;"
+        ></v-switch>
+              </template>
+      <span>Toggle the dark mode</span>
+    </v-tooltip>
+    <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">mdi-brightness-5</v-icon>
+    <v-divider vertical class="ml-2"></v-divider>
       <v-tooltip
         v-for="(item, index) in socialIcons"
         :key="index"
@@ -15,6 +34,7 @@
             text
             icon
             v-on="on"
+            class=" d-inline-flex"
           >
             <a
               :href="item.url"
@@ -22,13 +42,14 @@
               rel="noopener noreferrer"
               style="text-decoration: none;"
             >
-              <v-icon color="white">mdi-{{ item.icon }}</v-icon>
+              <v-icon
+              :color="$vuetify.theme.isDark?'white':'secondary'">mdi-{{ item.icon }}</v-icon>
             </a>
           </v-btn>
         </template>
         <span>{{ item.text }}</span>
       </v-tooltip>
-      <br>
+    </div>
       <v-tooltip top>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -42,7 +63,7 @@
               rel="noopener noreferrer"
               style="text-decoration: none;"
             >
-              <v-icon color="white">mdi-creative-commons</v-icon>
+              <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">mdi-creative-commons</v-icon>
             </a>
           </v-btn>
         </template>
@@ -63,19 +84,17 @@
           @click="showCredits = true"
         >See full credits</a>
         &nbsp;-&nbsp;
-        <nuxt-link
-          to="/privacy_policy"
+        <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+        <nuxt-link to="/privacy_policy" class="blue--text">Privacy Policy</nuxt-link>&nbsp;-&nbsp;
+        <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+        <nuxt-link to="/press_room" class="blue--text">Press Room</nuxt-link>&nbsp;-&nbsp;
+        <!-- eslint-disable-next-line vue/max-attributes-per-line -->
+        <nuxt-link to="/resources">Resources</nuxt-link>&nbsp;-&nbsp;
+        <span
           class="blue--text"
-        >Privacy Policy</nuxt-link>&nbsp;-&nbsp;
-        <nuxt-link
-          to="/press_room"
-          class="blue--text"
-        >Press Room</nuxt-link>&nbsp;-&nbsp;
-        <a
-          style="text-decoration: underline;"
-          class="blue--text"
-          @click="$router.go({path:'/#contact'})"
-        >Contact us</a>
+          style="text-decoration: underline;cursor:pointer;"
+          @click="$store.commit('setTab', 3),$router.push({path:'/', hash:'contact-us'})"
+        >Contact us</span>
       </span>
 
       <Credits
@@ -88,7 +107,7 @@
 
 <script>
 import Credits from '~/components/navigation/Credits'
-import {socialIcons} from '~/assets/data'
+import { socialIcons } from '~/assets/data'
 export default {
   components: { Credits },
   data () {

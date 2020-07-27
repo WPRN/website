@@ -1,5 +1,5 @@
 <template>
-  <v-sheet>
+  <v-sheet style="background-color:inherit;">
     <p>Yes. We respect GDPR/ePR rules and even more.</p>
     <p>We do not track users or store any information outside of the projects definition scope. We do not use cookies. We do not disclose or sell email addresses.</p>
     <p>
@@ -12,7 +12,8 @@
     </p>
     <p>
       We welcome every suggestion or advices, so please do not hesitate to
-      <a href="/#contact">contact us</a> if you have any.
+      <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+      <nuxt-link to="/#contact-us">contact us</nuxt-link> if you have any.
     </p>
   </v-sheet>
 </template>

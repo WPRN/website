@@ -1,7 +1,7 @@
 <template>
   <section
     id="who"
-    style="background-color:#212121;"
+    :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#dfdfdf;'"
   >
     <div class="py-12" />
 
@@ -33,13 +33,13 @@
             v-slot:default="{ hover }"
           >
             <v-card
-              class="pa-6 white--text  text-center"
+              class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
-
-              href="/advisory_board"
+              height="100%"
+              to="/advisory_board"
               nuxt
-              color="accent"
+              :color="$vuetify.theme.isDark?'secondary':'white'"
             >
               <v-avatar
                 color="primary"
@@ -54,6 +54,7 @@
               </v-avatar>
               <v-card-title
                 class="justify-center font-weight-black text-uppercase"
+                style="word-break:normal;"
               >
                 Scientific Advisory Board
               </v-card-title>
@@ -69,12 +70,13 @@
             v-slot:default="{ hover }"
           >
             <v-card
-              class="pa-6 white--text  text-center"
+              class="pa-6 text-center"
               :elevation="hover ? 12 : 2"
               flat
-              href="/institutions"
+              to="/institutions"
               nuxt
-              color="accent"
+              :color="$vuetify.theme.isDark?'secondary':'white'"
+              height="100%"
             >
               <v-avatar
                 color="primary"
@@ -89,7 +91,7 @@
               </v-avatar>
               <v-card-title
                 class="justify-center font-weight-black text-uppercase"
-                style="cursor:pointer;"
+                style="word-break:normal;"
               >
                 Partner Institutions
               </v-card-title>
@@ -105,13 +107,13 @@
             v-slot:default="{ hover }"
           >
             <v-card
-              class="pa-6 white--text  text-center"
+              class="pa-6 text-center"
               flat
               :elevation="hover ? 12 : 2"
-
-              href="/referents"
+              to="/referents"
               nuxt
-              color="accent"
+              :color="$vuetify.theme.isDark?'secondary':'white'"
+              height="100%"
             >
               <v-avatar
                 color="primary"
@@ -126,7 +128,10 @@
               </v-avatar>
               <v-card-title
                 class="justify-center font-weight-black text-uppercase"
-                style="cursor:pointer;"
+                style="word-break:normal;"
+                height="100%"
+                justify="center"
+                align="center"
               >
                 Referents
               </v-card-title>

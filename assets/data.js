@@ -46,25 +46,241 @@ export const types = [
   'Video',
   'Blog',
   'Press article',
+  'Research tracker',
   { divider: true },
   'Other Ressource'
 ]
+
+export const extendedTypes = [
+  {
+    name: 'Quantitative survey',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Qualitative analysis',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Case Study',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Questionnaire',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Simulation / Modeling',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Dataset, Data Mining',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Action Research',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Call for Research Proposals',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: true,
+    requireName: false,
+    teamMandatory: false,
+    isContactable: false,
+    citeWidget: false
+  },
+  {
+    name: 'Call for Collaboration',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: true,
+    requireName: false,
+    teamMandatory: false,
+    isContactable: false,
+    citeWidget: false
+  },
+  {
+    name: 'Citizen/Participatory Science',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Grassroot Action',
+    urlMandatory: false,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Scientific Paper',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Report',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Policy Document',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Regulation',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Conference / Webinar',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: true,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Video',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Blog',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Press article',
+    urlMandatory: true,
+    dateTime: true,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Other Ressource',
+    urlMandatory: false,
+    dateTime: false,
+    timeInterval: false,
+    requireName: true,
+    teamMandatory: true,
+    isContactable: true,
+    citeWidget: true
+  },
+  {
+    name: 'Research tracker',
+    urlMandatory: true,
+    dateTime: false,
+    timeInterval: false,
+    requireName: false,
+    teamMandatory: true,
+    isContactable: false,
+    citeWidget: false
+  }
+]
+
 export const thematics = [
   'Aging, Demography',
   'Agriculture, Alimentation',
   'Big Data, Artificial Intelligence',
-  'Cities, Mobility, Logistics',
+  'Cities, Mobility, Urban Planning',
   'Consumption and Production Patterns',
   'Culture and The Arts',
   'Democracy, Civil Society, Governance',
+  'Digital Humanities',
   'Education',
   'Environmental change, Ecology',
+  'Equality & Diversity Studies',
   'Firms, Markets, Finance',
-  'Gender',
   'Human Behaviours, Social Relations',
   'Inequalities, Poverty, Development',
-  'Innovation, R & D',
-  'International Relations and Co - operation',
+  'Innovation, R&D',
+  'International Relations and Co-operation',
   'Leisure, Tourism',
   'Migrations and Diasporas',
   'Public Discourse, Rhetorics, Communication',
@@ -76,6 +292,44 @@ export const thematics = [
   'Work, Welfare, Social protection'
 ]
 
+export const fields = [
+  { header: ' Social Sciences and Humanities' },
+  { divider: true },
+  'Anthropology',
+  'Arts, Architecture and Museology',
+  'Communication and Media studies',
+  'Demography',
+  'Design',
+  'Economics & Statistics',
+  'Education Sciences',
+  'Gender Studies',
+  'Geography',
+  'History',
+  'Literature and Languages',
+  'Law',
+  'Linguistics',
+  'Management & Public Administration',
+  'Philosophy incl. Ethics',
+  'Political Science',
+  'Psychology, Behavioural and Cognitive Sciences',
+  'Religion and Theology',
+  'Sociology',
+  'Other social sciences and humanities',
+  { header: ' Other sciences' },
+  { divider: true },
+  'Biology',
+  'Chemistry & Physics',
+  'Computer Sciences',
+  'Earth Sciences',
+  'Ecology & Environmental Sciences',
+  'Engineering and Technology',
+  'Epidemiology',
+  'Information Technology',
+  'Mathematics',
+  'Medicine',
+  'Systems Science'
+
+]
 export const state = ['Planned project', 'Ongoing project', 'Completed project']
 export const contributors = [
   /*   "Simon Luck",
@@ -298,46 +552,6 @@ export const zones = [
     text: 'Worldwide / Intercontinental',
     value: 'worldwide'
   }
-]
-export const fields = [
-  { header: ' Social Sciences and Humanities' },
-  { divider: true },
-  'Anthropology',
-  'Art & Museology',
-  'Communication and Media studies',
-  'Demography',
-  'Design',
-  'Economics & Statistics',
-  'Education Sciences',
-  'Equality & Diversity studies',
-  'Geography',
-  'History',
-  'Literature & Digital Humanities',
-  'International Relations',
-  'Law',
-  'Literature Linguistics and Semiotics',
-  'Management and Public Administration',
-  'Methodology',
-  'Philosophy incl.Ethics',
-  'Political Science',
-  'Psychology, Behavioural and Cognitive Sciences',
-  'Religion and Theology',
-  'Sociology',
-  'Systems Science incl.Simulation',
-  'Urban Planning and Architecture',
-  'Other social sciences and humanities',
-  { header: ' Other sciences' },
-  { divider: true },
-  'Biology',
-  'Chemistry & Physics',
-  'Computer Sciences',
-  'Earth Sciences',
-  'Ecology & Environmental Sciences',
-  'Engineering and Technology',
-  'Epidemiology',
-  'Information Technology',
-  'Mathematics',
-  'Medicine'
 ]
 export const countries = {
   asia: [

@@ -27,16 +27,16 @@
     <v-divider />
     <v-list nav>
       <v-list-item-group active-class="text--accent-4">
-        <v-list-item @click="$emit('list')">
-          <v-list-item-title>
-            Browse projects
-          </v-list-item-title>
+        <v-list-item @click="$emit('about')">
+          <v-list-item-title>About WPRN</v-list-item-title>
         </v-list-item>
         <v-list-item @click="$emit('register')">
           <v-list-item-title>Register your project</v-list-item-title>
         </v-list-item>
-        <v-list-item @click="$emit('about')">
-          <v-list-item-title>About WPRN</v-list-item-title>
+        <v-list-item @click="$emit('list')">
+          <v-list-item-title>
+            Browse projects
+          </v-list-item-title>
         </v-list-item>
         <v-divider />
       </v-list-item-group>
@@ -46,7 +46,10 @@
 <script>
 export default {
   props: {
-    drawer: Boolean
+    drawer: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>

@@ -1,12 +1,15 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  router: {},
+  router: {
+    mode: 'history'
+  },
   server: {
     port: 3000, // par défaut: 3000
     host: '0.0.0.0' // par défaut: localhost
   },
   mode: 'spa',
+  target: 'static',
   /*
    ** Headers of the page
    */
@@ -23,6 +26,10 @@ export default {
       }
     ],
     link: [
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Poiret+One'
+      },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'apple-touch-icon',
@@ -101,7 +108,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#2196f3' },
   /*
    ** Global CSS
    */
@@ -110,7 +117,6 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/timeago',
     '~plugins/filters',
     '~plugins/amplify',
     '~/plugins/jsonld',
@@ -153,8 +159,17 @@ export default {
     customVariables: ['~/assets/variables.scss'],
     treeShake: true,
     theme: {
-      dark: true,
+      dark: false,
       themes: {
+        light: {
+          primary: '#1976D2',
+          secondary: '#424242',
+          accent: '#82B1FF',
+          error: '#FF5252',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FB8C00'
+        },
         dark: {
           primary: colors.blue,
           accent: colors.grey.darken3,

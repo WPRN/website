@@ -1,61 +1,60 @@
 <template>
-  <v-content>
-    <v-row>
-      <template
-        v-if="
-          ready &&
-            (!project.status ||
-              ['NEW', 'PENDING', 'REMOVED', 'BLOCKED'].includes(project.status))
-        "
+  <v-row>
+    <template
+      v-if="
+        ready &&
+          (!project.status ||
+            ['NEW', 'PENDING', 'REMOVED', 'BLOCKED'].includes(project.status))
+      "
+    >
+      <v-overlay
+        :value="error"
+        class="text-center headline"
       >
-        <v-overlay
-          :value="error"
-          class="text-center headline"
+        <div class="display-1">
+          Sorry for the inconvenience!
+        </div>
+        <br>
+        <v-icon
+          x-large
+          class="mb-3"
         >
-          <div class="display-1">
-            Sorry for the inconvenience!
-          </div>
-          <br>
-          <v-icon
-            x-large
-            class="mb-3"
-          >
-            mdi-ladybug
-          </v-icon>
-          <br>This project is not available because its contact point email
-          is not verified or because it has been removed.
-          <br>Or it could
-          just not be an existing project.
-          <br>You can try again and refresh
-          this page or
-          <nuxt-link to="/#contact">
-            contact WPRN
-          </nuxt-link>.
-        </v-overlay>
-      </template>
-      <template v-else>
-        <v-col
-          v-if="ready && project"
-          cols="12"
-        >
-          <v-fade-transition mode="out-in">
-            <ProjectDetails
-              v-show="ready"
-              :project="project"
-              page-mode
-              :filters="{ search: '' }"
-              @contact="contact = true"
-            />
-          </v-fade-transition>
-        </v-col>
-      </template>
-      <ContactDialog
-        :id="project.pubId"
-        :open="contact"
-        @close="contact = false"
-      />
-    </v-row>
-  </v-content>
+          mdi-ladybug
+        </v-icon>
+        <br>This project is not available because its contact point email
+        is not verified or because it has been removed.
+        <br>Or it could
+        just not be an existing project.
+        <br>You can try again and refresh
+        this page or
+        <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
+        <nuxt-link to="/#contact-us">contact WPRN</nuxt-link>.
+      </v-overlay>
+    </template>
+    <template v-else>
+      <v-col
+        v-if="ready && project"
+        cols="12"
+        lg="10"
+        offset-lg="1"
+      >
+        <v-fade-transition mode="out-in">
+          <ProjectDetails
+            v-show="ready"
+            :project="project"
+            page-mode
+            :filters="{ search: '' }"
+            @contact="contact = true"
+          />
+        </v-fade-transition>
+      </v-col>
+    </template>
+    <ContactDialog
+      :id="project.pubId"
+      :open="contact"
+      @close="contact = false"
+    />
+  </v-row>
 </template>
 <script>
 import * as queries from '~/graphql/queries'

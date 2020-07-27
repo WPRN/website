@@ -7,11 +7,12 @@
       item-key="id"
       :server-items-length="total"
       :class="{ ' elevation-1 ' : $vuetify.breakpoint.mdAndUp}"
-      class="px-1 mt-6"
+      class="px-1"
       :options.sync="options"
       :footer-props="{ itemsPerPageOptions: [5, 10, 20, 50, 100] }"
       :headers-length="6"
       :dense="$vuetify.breakpoint.mdAndDown"
+      @update:page="$vuetify.goTo(0)"
     >
       <!-- FILTERS -->
       <template v-slot:top>
@@ -24,8 +25,8 @@
         </div>
       </template>
       <!-- HEADERS -->
-      <template v-slot:header>
-        <tr>
+      <template v-slot:header="{mobile}">
+        <tr v-show="mobile">
           <th class="pl-8">
             Name
           </th>
@@ -126,6 +127,8 @@ import ProjectExpandedRow from '~/components/projectList/ProjectExpandedRow'
 import ContactDialog from '~/components/contact/ContactDialog'
 import gql from 'graphql-tag'
 import client from '~/plugins/amplify'
+import stopWords from '~/assets/stopWords'
+
 import {
   zones,
   countries,
@@ -159,7 +162,7 @@ export default {
       nextToken: false,
       total: 0,
       options: {
-        itemsPerPage: 10,
+        itemsPerPage: 20,
         page: 1,
         sortBy: [],
         sortDesc: [true]
@@ -206,7 +209,7 @@ export default {
     },
     '$route.query' () {
       this.filtering = false
-      let previousFilters = JSON.parse(JSON.stringify(this.filters))
+      const previousFilters = JSON.parse(JSON.stringify(this.filters))
       Object.keys(this.filters).forEach((key) => {
         if (typeof this.$route.query[key] !== 'undefined') {
           this.filters[key] = JSON.parse(this.$route.query[key])
@@ -280,7 +283,7 @@ export default {
           }
         }
 
-        let filter = { and: [] }
+        const filter = { and: [] }
         if (this.filters.featured) {
           filter.status = {
             eq: 'xFEATURED'
@@ -301,7 +304,7 @@ export default {
           if (this.filters.zone.length === 1) {
             filter.zone = { matchPhrase: this.filters.zone }
           } else {
-            let or = []
+            const or = []
             this.filters.zone.forEach((zone) => {
               or.push({ zone: { matchPhrase: zone } })
             })
@@ -313,7 +316,7 @@ export default {
           if (this.filters.type.length === 1) {
             filter.type = { matchPhrase: this.filters.type }
           } else {
-            let or = []
+            const or = []
             this.filters.type.forEach((type) => {
               or.push({ type: { matchPhrase: type } })
             })
@@ -325,7 +328,7 @@ export default {
           if (this.filters.country.length === 1) {
             filter.country = { matchPhrase: this.filters.country }
           } else {
-            let or = []
+            const or = []
             this.filters.country.forEach((country) => {
               or.push({ country: { matchPhrase: country } })
             })
@@ -336,7 +339,7 @@ export default {
           if (this.filters.field.length === 1) {
             filter.field = { matchPhrase: this.filters.field }
           } else {
-            let or = []
+            const or = []
             this.filters.field.forEach((field) => {
               or.push({ field: { matchPhrase: field } })
             })
@@ -352,7 +355,7 @@ export default {
           if (this.filters.thematics.length === 1) {
             filter.thematics = { matchPhrase: this.filters.thematics }
           } else {
-            let or = []
+            const or = []
             this.filters.thematics.forEach((thematics) => {
               or.push({ thematics: { matchPhrase: thematics } })
             })
@@ -362,105 +365,116 @@ export default {
         if (this.filters.search && this.filters.search.length) {
           let or = []
           if (this.filters.search.includes(' ')) {
-            this.filters.search.split(' ').forEach((element) => {
-              or.push(
+            const splitted = this.filters.search.split(' ')
+
+            // remove stop words and words with less that 3 chars
+            const filtered = splitted.filter(item => !stopWords.includes(item) && item.length > 2)
+
+            if (filtered.length) {
+              filtered.forEach((element) => {
+                or.push(
+                  {
+                    pubId: {
+                      eq: element
+                    }
+                  },
+                  {
+                    name: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    description: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    contact_lastname: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    contact_entity: {
+                      wildcard: '*' + element + '*'
+                    }
+                  },
+                  {
+                    name: {
+                      match: element
+                    }
+                  },
+                  {
+                    description: {
+                      match: element
+                    }
+                  },
+                  {
+                    contact_lastname: {
+                      match: element
+                    }
+                  },
+                  {
+                    contact_entity: {
+                      match: element
+                    }
+                  }
+                )
+              })
+
+              filter.and.push({ or })
+            }
+          } else {
+            if (!stopWords.includes(this.filters.search)) {
+              or = [
                 {
                   pubId: {
-                    eq: element
+                    eq: this.filters.search
                   }
                 },
                 {
                   name: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   description: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   contact_lastname: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   contact_entity: {
-                    wildcard: '*' + element + '*'
+                    wildcard: '*' + this.filters.search + '*'
                   }
                 },
                 {
                   name: {
-                    match: element
+                    match: this.filters.search
                   }
                 },
                 {
                   description: {
-                    match: element
+                    match: this.filters.search
                   }
                 },
                 {
                   contact_lastname: {
-                    match: element
+                    match: this.filters.search
                   }
                 },
                 {
                   contact_entity: {
-                    match: element
+                    match: this.filters.search
                   }
                 }
-              )
-            })
-          } else {
-            or = [
-              {
-                pubId: {
-                  eq: this.filters.search
-                }
-              },
-              {
-                name: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                description: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                contact_lastname: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                contact_entity: {
-                  wildcard: '*' + this.filters.search + '*'
-                }
-              },
-              {
-                name: {
-                  match: this.filters.search
-                }
-              },
-              {
-                description: {
-                  match: this.filters.search
-                }
-              },
-              {
-                contact_lastname: {
-                  match: this.filters.search
-                }
-              },
-              {
-                contact_entity: {
-                  match: this.filters.search
-                }
-              }
-            ]
+              ]
+            }
+            filter.and.push({ or })
           }
-          filter.and.push({ or })
         }
         this.loading = true
         if (!filter.and.length) delete filter.and
@@ -472,7 +486,7 @@ export default {
           (this.options.page - 1) *
           this.options.itemsPerPage
         ).toString()
-        options['sort'] = { field: 'status', direction: 'desc' }
+        options.sort = { field: 'status', direction: 'desc' }
 
         const projects = await client.query({
           query: gql(queries.searchProjects),

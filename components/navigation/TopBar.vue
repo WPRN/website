@@ -5,62 +5,80 @@
     height="80"
     elevate-on-scroll
     elevation-3
+    :inverted-scroll="$route.name==='index'"
   >
-    <v-btn
-      text
+  <nuxt-link
       class="mx-0 px-0"
-      height="auto"
-      @click="$router.push({ path: '/' })"
-    >
-      <v-avatar
+  to="/"
+  ><v-avatar
         class="mr-3"
         tile
         color="grey lighten-5"
         size="72"
+  @click="$vuetify.goTo(0)"
       >
         <v-img
           contain
           max-height="100%"
           src="/logo.png"
         />
-      </v-avatar>
+      </v-avatar></nuxt-link>
+    <v-btn
+      text
+      height="auto"
+      @click="$router.push({ path: '/' })"
+    >
+
     </v-btn>
 
     <v-spacer />
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
+      id="main-app-bar"
+      v-model="tab"
       light
       right
-      :optional="!value"
-      value
+      :optional="!tab"
       slider-size="8"
+      active-class="text--blue"
     >
       <v-tab
-        to="/#about-us"
         nuxt
+        active-class="text--blue"
+        class="font-weight-bold"
+        min-width="96"
+        text
+        :class="{'v-tab--active': $store.state.tab===0}"
       >
         About WPRN
       </v-tab>
       <v-tab
-        to="/#register"
         nuxt
+        active-class="text--blue"
+        class="font-weight-bold"
+        min-width="96"
+        text
+        :class="{'v-tab--active': $store.state.tab===1}"
       >
         Register your project
       </v-tab>
       <v-tab
-        active
-        to="/search"
         nuxt
+        active-class="text--blue"
+        class="font-weight-bold"
+        min-width="96"
+        text
       >
         Browse projects
       </v-tab>
     </v-tabs>
     <v-btn
       v-show="$vuetify.breakpoint.smAndDown"
+      :class="{'v-tab--active': $store.state.tab===2}"
       light
       tile
       outlined
-      class="pa-0 mb-0 ml-0 mt-1 mr-1"
+      class="pa-0 mb-0 ml-0 mt-0 mr-1"
       width="72"
       height="72"
       @click.stop="$emit('closeDrawer')"
@@ -72,11 +90,29 @@
 <script>
 export default {
   props: {
-    value: {
-      type: [String, Boolean],
-      required: false,
-      default: false
+  },
+  computed: {
+    tab: {
+      get () {
+        return this.$store.state.tab
+      },
+      set (newValue) {
+        return this.$store.commit('setTab', newValue)
+      }
     }
+  },
+  methods: {
+    updateStore (value) {
+      this.$store.commit('setTab', value)
+    },
+    scrollTo (value) {
+      this.$store.commit('lockScrolling')
+      this.$vuetify.goTo(value)
+      setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+    }
+  },
+  mounted () {
+    console.log(this.$route.name)
   }
 }
 </script>

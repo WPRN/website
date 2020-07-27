@@ -101,7 +101,8 @@
       >
         <v-card
           class="pa-6 "
-          flat
+                  :flat="$vuetify.theme.isDark"
+
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
@@ -124,8 +125,9 @@
         class="pa-3"
       >
         <v-card
-          class="pa-6 white--text"
-          flat
+          class="pa-6"
+                  :flat="$vuetify.theme.isDark"
+
         >
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
@@ -148,7 +150,7 @@
         md="6"
         offset-md="3"
       >
-        <div class="text-center white--text body-1">
+        <div class="text-center body-1">
           Becoming a partner institution is subject to the validation of the Scientific Advisory Board. <br>
           Contact <a href="mailto:partners@wprn.org">partners@wprn.org</a>
         </div>
@@ -172,6 +174,9 @@ export default {
     return {
       institutions
     }
+  },
+  mounted () {
+    this.$store.commit('setTab', null)
   }
 }
 </script>

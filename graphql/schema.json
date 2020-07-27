@@ -297,7 +297,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -601,7 +601,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -877,7 +877,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1570,7 +1570,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1966,7 +1966,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "isDeprecated" : false,
           "deprecationReason" : null
@@ -2342,7 +2342,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -2568,7 +2568,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -2880,7 +2880,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -3102,7 +3102,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "city",
+          "name" : "location",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
