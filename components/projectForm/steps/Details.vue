@@ -24,8 +24,8 @@
               clearable
               multiple
               :rules="requiredRules"
-              @change="cleanModel('field')"
               :outlined="!$vuetify.theme.isDark"
+              @change="cleanModel('field')"
             >
               <template v-slot:selection="{ item, index }">
                 <div
@@ -56,8 +56,8 @@
               solo
               clearable
               multiple
-              @change="cleanModel('selectedThematics')"
               :outlined="!$vuetify.theme.isDark"
+              @change="cleanModel('selectedThematics')"
             >
               <template v-slot:selection="{ item, index }">
                 <div
@@ -129,8 +129,8 @@
                     readonly
                     solo
                     :rules="requiredRules"
-                    v-on="on"
                     :outlined="!$vuetify.theme.isDark"
+                    v-on="on"
                   />
                 </template>
                 <v-date-picker
@@ -171,7 +171,7 @@
                 type="text"
                 counter="150"
                 :rules="timeInformationsRules"
-              :outlined="!$vuetify.theme.isDark"
+                :outlined="!$vuetify.theme.isDark"
               />
             </v-col>
           </template>
@@ -198,8 +198,8 @@
                     readonly
                     solo
                     :rules="requiredRules"
+                    :outlined="!$vuetify.theme.isDark"
                     v-on="on"
-              :outlined="!$vuetify.theme.isDark"
                   />
                 </template>
                 <v-date-picker
@@ -241,7 +241,7 @@
                 type="text"
                 counter="150"
                 :rules="timeInformationsRules"
-              :outlined="!$vuetify.theme.isDark"
+                :outlined="!$vuetify.theme.isDark"
               />
             </v-col>
           </template>

@@ -3,3 +3,11 @@
 - Make a form overview on edit, as first step
 - blur filter text search
 - Investiguate logo size outlook
+- date not mandatory if not completed for:
+    - report
+    - policy
+    - regulation
+    - press article
+    - scientific paper
+- CRON job to switch to completed after deadline for:
+    - 

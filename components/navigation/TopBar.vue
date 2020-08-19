@@ -2,35 +2,29 @@
   <v-app-bar
     app
     color="white"
-    height="80"
     elevate-on-scroll
     elevation-3
-    :inverted-scroll="$route.name==='index'"
+    min-height="80"
+    height="80"
   >
-  <nuxt-link
+    <nuxt-link
       class="mx-0 px-0"
-  to="/"
-  ><v-avatar
+      to="/"
+    >
+      <v-avatar
         class="mr-3"
         tile
         color="grey lighten-5"
         size="72"
-  @click="$vuetify.goTo(0)"
+        @click="$vuetify.goTo(0)"
       >
         <v-img
           contain
           max-height="100%"
-          src="/logo.png"
+          src="/icon.png"
         />
-      </v-avatar></nuxt-link>
-    <v-btn
-      text
-      height="auto"
-      @click="$router.push({ path: '/' })"
-    >
-
-    </v-btn>
-
+      </v-avatar>
+    </nuxt-link>
     <v-spacer />
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
@@ -46,7 +40,6 @@
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
-        min-width="96"
         text
         :class="{'v-tab--active': $store.state.tab===0}"
       >
@@ -56,7 +49,6 @@
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
-        min-width="96"
         text
         :class="{'v-tab--active': $store.state.tab===1}"
       >
@@ -66,7 +58,6 @@
         nuxt
         active-class="text--blue"
         class="font-weight-bold"
-        min-width="96"
         text
       >
         Browse projects
@@ -101,6 +92,9 @@ export default {
       }
     }
   },
+  mounted () {
+    console.log(this.$route.name)
+  },
   methods: {
     updateStore (value) {
       this.$store.commit('setTab', value)
@@ -110,9 +104,6 @@ export default {
       this.$vuetify.goTo(value)
       setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
     }
-  },
-  mounted () {
-    console.log(this.$route.name)
   }
 }
 </script>

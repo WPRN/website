@@ -105,7 +105,6 @@
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
             style="cursor:pointer;"
-            @click="$router.push({path:'/worldwide'})"
           >
             Why should my institution become partner?
           </v-card-title>
@@ -130,7 +129,6 @@
           <v-card-title
             class="justify-center font-weight-black text-uppercase text-center"
             style="cursor:pointer;"
-            @click="$router.push({path:'/worldwide'})"
           >
             How do my institution become partner?
           </v-card-title>

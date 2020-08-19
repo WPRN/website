@@ -23,7 +23,7 @@
               v-on="on"
             />
           </template>
-          <span>Toggle the dark mode</span>
+          <span v-html="$vuetify.theme.isDark?'Toggle the light mode':'Toggle the dark mode'" />
         </v-tooltip>
         <v-icon :color="$vuetify.theme.isDark?'white':'secondary'">
           mdi-brightness-5

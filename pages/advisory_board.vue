@@ -35,8 +35,8 @@
         three-line
         subheader
         align="left"
-       :dark="$vuetify.theme.isDark"
-       :flat="$vuetify.theme.isDark"
+        :dark="$vuetify.theme.isDark"
+        :flat="$vuetify.theme.isDark"
       >
         <v-list-item
           v-for="(person, index) in board"

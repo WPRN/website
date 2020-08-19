@@ -108,7 +108,6 @@
       <v-card
         class="pa-6 mb-6"
         :flat="$vuetify.theme.isDark"
-
       >
         <v-card-title class="justify-center font-weight-black text-uppercase">
           Memorandums (English)

@@ -159,7 +159,7 @@ export default {
     customVariables: ['~/assets/variables.scss'],
     treeShake: true,
     theme: {
-      dark: false,
+      dark: true,
       themes: {
         light: {
           primary: '#1976D2',

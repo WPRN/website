@@ -27,8 +27,8 @@
 
         <v-container>
           <h2
-          class="display-2 font-weight-bold mb-3 text-uppercase text-center"
-          :class="$vuetify.theme.isDark?'text--white':'text--black'"
+            class="display-2 font-weight-bold mb-3 text-uppercase text-center"
+            :class="$vuetify.theme.isDark?'text--white':'text--black'"
           >
             {{
               ["CONTACT WPRN", "REGISTER YOUR PROJECT", "THANK YOU!"][step]
