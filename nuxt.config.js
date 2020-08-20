@@ -168,15 +168,15 @@ export default {
           error: '#FF5252',
           info: '#2196F3',
           success: '#4CAF50',
-          warning: '#FB8C00'
+          warning: '#FFC107'
         },
         dark: {
           primary: colors.blue,
           accent: colors.grey.darken3,
-          secondary: colors.blue.lighten3,
+          secondary: colors.grey.darken3,
           info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
+          warning: colors.amber.darken3,
+          error: colors.deepOrange.darken3,
           success: colors.green.accent3
         }
       }
