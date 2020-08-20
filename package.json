@@ -13,7 +13,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "nuxt build && nuxt export",
     "prod": "nuxt build && nuxt export && aws s3 cp dist s3://wprn.org --recursive",
     "test": "nuxt build && nuxt export && aws s3 cp dist s3://test.wprn.org --recursive",
     "analyze": "nuxt build --analyze",
