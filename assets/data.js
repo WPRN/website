@@ -48,7 +48,7 @@ export const types = [
   'Press article',
   'Research tracker',
   { divider: true },
-  'Other Ressource'
+  'Other Resource'
 ]
 
 export const extendedTypes = [
@@ -243,7 +243,7 @@ export const extendedTypes = [
     citeWidget: true
   },
   {
-    name: 'Other Ressource',
+    name: 'Other Resource',
     urlMandatory: false,
     dateTime: false,
     timeInterval: false,

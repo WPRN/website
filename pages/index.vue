@@ -238,9 +238,10 @@ export default {
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 700)
         }
         if (this.$route.hash === '#about-us') {
+          console.log('scroll with offset')
           this.$store.commit('setTab', 0)
           this.$store.commit('lockScrolling')
-          this.$vuetify.goTo('#about-us')
+          this.$vuetify.goTo('#about-us', {offset: 100})
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
         }
         if (this.$route.hash === '#contact-us') {
@@ -267,7 +268,7 @@ export default {
       switch (this.$store.state.tab) {
         case 0:
           this.$store.commit('lockScrolling')
-          this.$vuetify.goTo('#about-us')
+          this.$vuetify.goTo('#about-us', {offset: 100})
           setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
 
           break

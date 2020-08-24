@@ -408,8 +408,7 @@ export default {
           return this.item.country && this.item.country.some(selectedCountry => selectedCountry === country)
         })))
       })
-      console.log('this.item.country: ', this.item.country)
-      console.log('continents: ', continents)
+
       return continents
     }
   },
@@ -428,7 +427,7 @@ export default {
           this.filters[item].forEach((element) => {
             if (items.includes(element) || (this.filter && this.filter.zone && this.filter.zone.some(zone => {
               if (this.item.pubId === '411152') {
-                console.log('INCLUDED', countries[zone].includes(element))
+
               }
               return countries[zone].includes(element)
             }))) {

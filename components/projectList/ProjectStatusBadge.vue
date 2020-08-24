@@ -11,6 +11,7 @@
               style="height: 16px; width: 16px; border-radius: 12px;"
               color="grey"
               class="ml-1"
+              :class="{'mt-1':details}"
               v-on="on"
             />
           </template>
@@ -24,6 +25,7 @@
               style="height: 16px; width: 16px; border-radius: 12px;"
               color="green"
               class="ml-1"
+              :class="{'mt-1':details}"
               v-on="on"
             />
           </template>

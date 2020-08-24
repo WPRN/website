@@ -35,7 +35,6 @@ export default {
       if ([0, 1].includes(this.$store.state.tab)) {
         this.$router.push('/')
       }
-      console.log('tab', this.$store.state.tab)
     }
   },
   mounted () {},
