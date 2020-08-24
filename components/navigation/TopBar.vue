@@ -110,3 +110,12 @@ export default {
   }
 }
 </script>
+<style >
+.v-sheet.v-app-bar.v-toolbar
+{
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out!important;
+  -o-transition: background-color 0.3s ease-out!important;
+  transition: background-color 0.3s ease-out!important;
+}
+</style>
