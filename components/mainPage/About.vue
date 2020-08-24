@@ -1,7 +1,6 @@
 <template>
   <section
     id="about-us"
-    v-intersect="onIntersect"
     :style="$vuetify.theme.isDark?'background-color:#212121;':'background-color:#F5F5F5;'"
   >
     <div class="py-12" />
@@ -27,7 +26,10 @@
             max-width="750"
             height="100%"
           >
-            <p class="text-justify">
+            <p
+              v-intersect="onIntersect"
+              class="text-justify"
+            >
               <b>The World Pandemic Research Network (WPRN)</b> is a platform serving research communities. It maintains a searchable global directory of the scientific resources available on the societal and human impacts of the Covid-19 pandemic. It shows
               <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
               <nuxt-link to="/search">who works on what, where</nuxt-link>, in real time, at global level.

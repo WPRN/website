@@ -1,11 +1,12 @@
 <template>
   <v-app-bar
-    app
-    color="white"
+    fixed
+    :color="$route.name==='index'&&$store.state.offsetTop === 0?'transparent':'white'"
     elevate-on-scroll
     elevation-3
     min-height="80"
     height="80"
+    :app="$route.name!=='index'"
   >
     <nuxt-link
       class="mx-0 px-0"
@@ -14,11 +15,11 @@
       <v-avatar
         class="mr-3"
         tile
-        color="grey lighten-5"
         size="72"
-        @click="$vuetify.goTo(0)"
+        @click="scrollTo()"
       >
         <v-img
+          v-show="!($route.name==='index'&& $store.state.offsetTop === 0)"
           contain
           max-height="100%"
           src="/icon.png"
@@ -30,42 +31,39 @@
       v-if="$vuetify.breakpoint.mdAndUp"
       id="main-app-bar"
       v-model="tab"
-      light
+      :light="!($route.name==='index'&& $store.state.offsetTop === 0)"
       right
       :optional="!tab"
       slider-size="8"
       active-class="text--blue"
+      class="text--white"
+      :color="$route.name==='index'&& $store.state.offsetTop === 0?'white':'primary'"
     >
       <v-tab
         nuxt
-        active-class="text--blue"
         class="font-weight-bold"
-        text
-        :class="{'v-tab--active': $store.state.tab===0}"
+        :class="[{'v-tab--active': $store.state.tab===0}, {'white--text':$route.name==='index'&& $store.state.offsetTop === 0}]"
       >
         About WPRN
       </v-tab>
       <v-tab
         nuxt
-        active-class="text--blue"
         class="font-weight-bold"
-        text
-        :class="{'v-tab--active': $store.state.tab===1}"
+        :class="[{'v-tab--active': $store.state.tab===1}, {'white--text':$route.name==='index'&& $store.state.offsetTop === 0}]"
       >
         Register your project
       </v-tab>
       <v-tab
         nuxt
-        active-class="text--blue"
         class="font-weight-bold"
-        text
+        :class="[{'v-tab--active': $store.state.tab===2}, {'white--text':$route.name==='index'&& $store.state.offsetTop === 0}]"
       >
         Browse projects
       </v-tab>
     </v-tabs>
     <v-btn
       v-show="$vuetify.breakpoint.smAndDown"
-      :class="{'v-tab--active': $store.state.tab===2}"
+      :class="{'white--text':$route.name==='index'&& $store.state.offsetTop === 0}"
       light
       tile
       outlined
@@ -99,10 +97,16 @@ export default {
     updateStore (value) {
       this.$store.commit('setTab', value)
     },
-    scrollTo (value) {
+    scrollTo (value = 0) {
+      console.log('value: ', value)
       this.$store.commit('lockScrolling')
       this.$vuetify.goTo(value)
-      setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+      setTimeout(() => {
+        this.$store.commit('unlockScrolling')
+        if (value === 0) this.$store.commit('setTab', null)
+      }, 500
+
+      )
     }
   }
 }

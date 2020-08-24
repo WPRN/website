@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Splash />
+    <Splash
+      @intersect="onIntersect($event)"
+    />
     <About
       @goToRegister=" $vuetify.goTo('#register', { offset: 100 })
                       tabsValue ='#register';
@@ -183,7 +185,8 @@ export default {
       step: 1,
       offsetTop: 0,
       mounted: false,
-      isIntersecting: false
+      isIntersecting: null,
+      tab: null
     }
   },
   computed: {
@@ -198,7 +201,13 @@ export default {
   },
   watch: {
     '$store.state.tab': function () {
-      if (this.$store.state.tab !== null && !this.isIntersecting) this.updateScroll()
+      console.log('update tab from index', this.$store.state.tab)
+      console.log('this.tab: ', this.tab)
+      if (this.$store.state.tab !== null && this.$store.state.tab !== this.tab) this.updateScroll()
+      console.log('this.$store.state.tab !== this.tab: ', this.$store.state.tab !== this.tab)
+      console.log('!this.isIntersecting: ', !this.isIntersecting)
+      console.log('this.$store.state.tab !== null: ', this.$store.state.tab !== null)
+      this.tab = this.$store.state.tab
       this.isIntersecting = false
     },
     '$store.state.contactOnly': function () {
@@ -294,8 +303,18 @@ export default {
       if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling && !this.$store.state.contactOnly && !this.$route.hash) {
         console.log('INTERSECT event: ', event)
         this.isIntersecting = true
-        if (event === 'REGISTER') this.$store.commit('setTab', 1)
-        if (event === 'ABOUT-US') this.$store.commit('setTab', 0)
+        if (event === 'REGISTER') {
+          this.$store.commit('setTab', 1)
+          this.tab = 1
+        }
+        if (event === 'ABOUT-US') {
+          this.$store.commit('setTab', 0)
+          this.tab = 0
+        }
+        if (event === 'TOP') {
+          this.$store.commit('setTab', null)
+          this.tab = null
+        }
       }
     }
   }

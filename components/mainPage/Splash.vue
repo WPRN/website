@@ -2,6 +2,9 @@
   <section
     id="hero"
   >
+    <span
+      v-intersect="onIntersect"
+    />
     <v-row no-gutters>
       <!-- TODO make a better responsive version -->
       <v-img
@@ -64,3 +67,12 @@
     </v-row>
   </section>
 </template>
+<script>
+export default {
+  methods: {
+    onIntersect (entries, observer, isIntersecting) {
+      this.$emit('intersect', 'TOP')
+    }
+  }
+}
+</script>

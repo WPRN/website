@@ -67,8 +67,8 @@ export default {
   data () {
     return {
       stats: [
-        [500, '+', 'Projects', '/search'],
-        [382, '', 'Contributing Institutions', '/institutions'],
+        [530, '+', 'Projects', '/search'],
+        [384, '', 'Contributing Institutions', '/institutions'],
         [116, '', 'Referents', '/referents']
       ],
       tweened: false
