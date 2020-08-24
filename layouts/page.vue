@@ -68,14 +68,15 @@ export default {
     this.$store.commit('setTab', null)
   },
   methods: {
-    onError (error) { console.log(error) },
+    onError (error) {
+      console.log('error: ', error)
+    },
     onSuccess (token) {},
     onExpired () {},
     onScroll (e) {
       this.offsetTop = e.target.scrollingElement.scrollTop
     },
     updateScroll () {
-      console.log('UPDATE SCROLL FROM PAG LAYOUT')
       switch (this.$store.state.tab) {
         case 0:
           this.$router.push('/#about-us')
@@ -87,7 +88,6 @@ export default {
           this.$router.push('/search')
           break
       }
-      console.log('tab', this.$store.state.tab)
     }
   }
 }
