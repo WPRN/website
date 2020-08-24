@@ -12,8 +12,8 @@
           label="Name*"
           solo
           :rules="contactNameRules"
+          :outlined="!$vuetify.theme.isDark"
           @blur="capitalize('name')"
-              :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -24,7 +24,7 @@
           label="Email*"
           solo
           :rules="emailRules"
-              :outlined="!$vuetify.theme.isDark"
+          :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -35,7 +35,7 @@
           label="Subject*"
           solo
           :rules="subjectRules"
-              :outlined="!$vuetify.theme.isDark"
+          :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
 
@@ -47,10 +47,13 @@
           label="Message*"
           solo
           :rules="messageRules"
-              :outlined="!$vuetify.theme.isDark"
+          :outlined="!$vuetify.theme.isDark"
         />
       </v-col>
-      <div class="text-center white--text">
+      <div
+        class="text-center"
+        :class="$vuetify.theme.isDark?'white--text': 'black--text'"
+      >
         <div class="mb-8">
           <small>
             This site is protected by reCAPTCHA and the Google
@@ -62,7 +65,7 @@
           </small>
         </div>
         <v-btn
-          dark
+          :dark="$vuetify.theme.isDark"
           color="success"
           x-large
           :loading="sending"

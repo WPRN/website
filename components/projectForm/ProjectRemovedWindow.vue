@@ -1,6 +1,6 @@
 <template>
   <v-card
-    flat
+    :flat="$vuetify.theme.isDark"
     min-height="320px"
     class="pa-4 text-center"
     align="center"
@@ -10,7 +10,7 @@
       color="success"
       class="py-6"
     >
-      mdi-delete
+      mdi-check-outline
     </v-icon>
     <h3 class="headline font-weight-heavy mb-2">
       YOUR PROJECT HAS BEEN SUCCESSFULLY REMOVED FROM WPRN

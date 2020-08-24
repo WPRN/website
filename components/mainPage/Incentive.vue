@@ -10,6 +10,7 @@
         class="pa-6 mb-6 white--text"
         flat
         max-width="700"
+        height="100%"
       >
         <v-card-title class="justify-center font-weight-black text-uppercase headline">
           Why Should I Register My Project?
@@ -42,6 +43,7 @@
         flat
         max-width="700"
         style="background-color:#424242"
+        height="100%"
       >
         <v-card-title class="justify-center font-weight-black text-uppercase headline">
           How Do I Register My Project?

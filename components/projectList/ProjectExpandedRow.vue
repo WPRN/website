@@ -4,7 +4,7 @@
     class="pb-3"
     flat
     :max-width="$vuetify.breakpoint.width - 70"
-    :style="computeRowColor"
+    :style="$vuetify.theme.isDark?'background-color:rgb(45, 45, 45);':'background-color:#F5F5F5'"
   >
     <v-card-text
       class="pb-0  px-3"

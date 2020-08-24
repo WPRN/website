@@ -37,6 +37,7 @@
               flat
               :elevation="hover ? 12 : 2"
               :color="$vuetify.theme.isDark?'':'#FAFAFA'"
+              height="100%"
             >
               <div class="text-center">
                 <v-avatar
@@ -76,6 +77,7 @@
               class="pa-6 text-center"
               :color="$vuetify.theme.isDark?'':'#FAFAFA'"
               flat
+              height="100%"
             >
               <div class="text-center">
                 <v-avatar

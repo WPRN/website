@@ -13,7 +13,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "nuxt build && nuxt export",
     "prod": "nuxt build && nuxt export && aws s3 cp dist s3://wprn.org --recursive",
     "test": "nuxt build && nuxt export && aws s3 cp dist s3://test.wprn.org --recursive",
     "analyze": "nuxt build --analyze",
@@ -22,16 +22,19 @@
   },
   "dependencies": {
     "@nuxtjs/recaptcha": "^0.6.2",
+    "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sitemap": "^2.1.0",
     "@tweenjs/tween.js": "^18",
     "array-flat-polyfill": "^1.0.1",
     "aws-appsync": "^3.0.2",
-    "eslint-plugin-nuxt": "^1.0.0",
     "intersection-observer": "^0.9.0",
     "nuxt": "^2.4.2",
-    "nuxt-jsonld": "^1.4.5"
+    "nuxt-imagemin": "^1.0.0",
+    "nuxt-jsonld": "^1.4.5",
+    "nuxt-webfontloader": "^1.1.0"
   },
   "devDependencies": {
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@nuxtjs/vuetify": "^1.0.0",
     "babel-core": "^6.22.1",
     "babel-eslint": "^10.1.0",
@@ -50,6 +53,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-nuxt": "^1.0.0",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "graphql-tag": "^2.10.3",
     "gulp": "^4.0.2",
@@ -65,5 +69,10 @@
     "hooks": {
       "pre-commit": "yarn lintfix"
     }
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
 }

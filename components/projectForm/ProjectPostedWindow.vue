@@ -1,6 +1,6 @@
 <template>
   <v-card
-    flat
+    :flat="$vuetify.theme.isDark"
     min-height="320px"
     class="pa-4 text-center"
     align="center"
@@ -15,7 +15,14 @@
     <h3 class="headline font-weight-heavy mb-2">
       YOUR PROJECT HAS BEEN SUCCESSFULLY REGISTERED!
     </h3>
-    <div class="subtitle-1">
+    <v-responsive
+      class="mx-auto mb-6"
+      width="56"
+    >
+      <v-divider class="mb-1" />
+      <v-divider />
+    </v-responsive>
+    <div class="subtitle-1 text-left mx-3">
       You will receive a confirmation email shortly
       <b>with a link to ensure that your email address is valid</b>.
       <br>Once

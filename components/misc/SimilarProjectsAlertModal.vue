@@ -25,7 +25,7 @@
         >
           Project similarity email alerts are always related to a reference project and can be edited or disabled on that project edit page.
         </v-alert>
-        <p>
+        <p :class="$vuetify.theme.isDark?'white--text': 'black--text'">
           What are the <b>similarities</b> with your project that we should consider when generating your email alerts?
         </p>
         <v-row no-gutters>

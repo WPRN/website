@@ -22,7 +22,7 @@
           </v-btn>
         </nuxt-link>
       </template>
-      <span>Back to the main page</span>
+      <span>{{ $route.name==='item-id'?'Back to the project list':'Back to the main page' }}</span>
     </v-tooltip>
   </v-col>
 </template>

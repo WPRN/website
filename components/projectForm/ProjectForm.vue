@@ -2,7 +2,7 @@
   <v-stepper
     v-model="formStep"
     v-intersect="onIntersect"
-  :dark="$vuetify.theme.isDark"
+    :dark="$vuetify.theme.isDark"
     alt-labels
   >
     <v-stepper-header>
@@ -156,7 +156,6 @@ export default {
   },
   methods: {
     async onSubmit () {
-      console.log('onSubmit: ')
       /*       this.$emit("WorkInProgressDialogToggle"); */
       // TODO move this into a store action
       try {
@@ -164,7 +163,7 @@ export default {
         const args = this.$store.state.form.project
 
         args.recaptcha = await this.$recaptcha.getResponse()
-        console.log('args: ', args)
+
         let res = {}
         if (args.date && args.date.length === 0) delete args.date
         if (args.dates && args.dates.length === 0) delete args.dates
@@ -190,13 +189,12 @@ export default {
           })
         } else {
           delete args.feedback
-          console.log('args: ', JSON.stringify(args))
+
           res = await client.mutate({
             mutation: gql(newProject),
             variables: { input: args }
           })
         }
-        console.log(res)
 
         if (res && !res.errors) {
           this.$emit('complete')
@@ -206,7 +204,6 @@ export default {
         this.loading = false
         await this.$recaptcha.reset()
       } catch (error) {
-        console.log('error: ', error)
         this.error = true
         this.loading = false
         await this.$recaptcha.reset()

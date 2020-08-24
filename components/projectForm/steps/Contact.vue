@@ -36,7 +36,10 @@
           <v-col
             cols="12"
           >
-            <h3 class="white--text mb-3 text-uppercase text-center">
+            <h3
+              class="mb-3 text-uppercase text-center"
+              :class="$vuetify.theme.isDark?'white--text': 'black--text'"
+            >
               Project Contact
             </h3>
           </v-col>
@@ -51,8 +54,8 @@
               :label="isRequireName() ? 'Contact firstname*' : 'Contact firstname'"
               solo
               :rules="contactNameRules"
-              @blur="capitalize('contact_firstname')"
               :outlined="!$vuetify.theme.isDark"
+              @blur="capitalize('contact_firstname')"
             />
           </v-col>
           <v-col
@@ -65,8 +68,8 @@
               :label="isRequireName() ? 'Contact lastname*' : 'Contact lastname'"
               solo
               :rules="contactNameRules"
-              @blur="capitalize('contact_lastname')"
               :outlined="!$vuetify.theme.isDark"
+              @blur="capitalize('contact_lastname')"
             />
           </v-col>
           <v-col
@@ -114,7 +117,10 @@
             cols="12"
           >
             <v-divider />
-            <h3 class="white--text mt-6 text-uppercase text-center">
+            <h3
+              class="mt-6 text-uppercase text-center"
+              :class="$vuetify.theme.isDark?'white--text': 'black--text'"
+            >
               Project Team Members <span v-if="isTeamMandatory()">*</span>
             </h3>
           </v-col>
@@ -166,7 +172,7 @@
             md="6"
           >
             <v-btn
-              color="accent"
+              color="primary"
               x-large
               block
               :dark="$vuetify.theme.isDark"

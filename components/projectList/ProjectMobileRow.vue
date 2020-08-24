@@ -3,20 +3,19 @@
     v-slot:default="{ hover }"
     open-delay="200"
   >
-        <tr
+    <tr
       class="font-weight-medium body-2"
       :style="computeRowColor(item, hover)"
       @click="$emit('expand', item)"
     >
-
       <td colspan="6">
         <nuxt-link
           :to="'/item/' + item.pubId"
           :style="$vuetify.theme.isDark?'color:white;':'color:black;'"
         >
           <div class="d-flex">
-                <!-- NAME & STATUS-->
-      <!-- TODO migrate all style tags to a scoped style block-->
+            <!-- NAME & STATUS-->
+            <!-- TODO migrate all style tags to a scoped style block-->
             <template v-if="item.status === 'xFEATURED'">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
@@ -39,15 +38,17 @@
               v-else
             >{{ item.name }}</span>
           </div>
-      <!-- INSTITUTION -->
+          <!-- INSTITUTION -->
           <div
             v-if="filters.search.length>0"
             v-html="$options.filters.highlight(item.contact_entity, filters.search.split(' '))"
           />
           <div
             v-else
-          >{{ item.contact_entity }}</div>
-      <!-- FIELD -->
+          >
+            {{ item.contact_entity }}
+          </div>
+          <!-- FIELD -->
           <template v-for="(field, index) in orderItems(item, 'field')">
             <template v-if="index < 2">
               <template v-if="field.length > 16">
@@ -107,7 +108,7 @@
               </v-tooltip>
             </template>
           </template>
-      <!-- THEMATICS -->
+          <!-- THEMATICS -->
 
           <template v-for="(thematic, index) in orderItems(item, 'thematics')">
             <template v-if="index < 2">
@@ -169,8 +170,8 @@
               </template>
             </template>
           </template>
-      <!-- TYPE -->
-              <template v-for="(type, index) in orderItems(item, 'type')">
+          <!-- TYPE -->
+          <template v-for="(type, index) in orderItems(item, 'type')">
             <template v-if="index < 2">
               <template v-if="type.length > 19 && item.type.length > 1">
                 <v-tooltip
@@ -228,10 +229,9 @@
               </template>
             </template>
           </template>
-      <!-- ZONE (CONTINENT) -->
+          <!-- ZONE (CONTINENT) -->
           <template v-for="(location, index) in [...zoneFiltered, ...item.country]">
             <template v-if="zones.map(item => item.value).includes(location)">
-
               <template v-if="index < 2">
                 <v-chip
                   :key="index"

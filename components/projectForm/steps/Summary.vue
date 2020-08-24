@@ -38,7 +38,6 @@
             <v-col
               cols="12"
               :md="$store.state.form.project.url ? '6' : '12'"
-              class="pl-3"
             >
               <div class="font-weight-light caption">
                 Name
@@ -50,7 +49,6 @@
             <v-col
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 {{
@@ -61,13 +59,13 @@
                 v-for="(item, index) in $store.state.form.project.type"
                 :key="index"
                 class="subtitle-1 ma-1"
+                :class="{'ml-0':index===0}"
               >
                 {{ item }}
               </v-chip>
             </v-col>
             <v-col
               cols="12"
-              class="pl-3"
             >
               <div class="font-weight-light caption">
                 Project and Team description
@@ -97,7 +95,6 @@
             <v-col
               cols="12"
               md="6"
-              class="pl-3"
             >
               <div class="font-weight-light caption">
                 {{
@@ -108,6 +105,7 @@
                 v-for="(item, index) in $store.state.form.project.field"
                 :key="index"
                 class="subtitle-1 ma-1"
+                :class="{'ml-0':index===0}"
               >
                 {{ item }}
               </v-chip>
@@ -116,7 +114,6 @@
               v-if="$store.state.form.project.url"
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 Url
@@ -129,7 +126,6 @@
             <v-col
               cols="12"
               md="6"
-              class="pl-3"
             >
               <div class="font-weight-light caption">
                 {{
@@ -142,6 +138,7 @@
                 v-for="(item, index) in $store.state.form.project.thematics"
                 :key="index"
                 class="subtitle-1 ma-1"
+                :class="{'ml-0':index===0}"
               >
                 {{ item }}
               </v-chip>
@@ -149,7 +146,6 @@
             <v-col
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 Project Status
@@ -162,7 +158,6 @@
               v-if="$store.state.form.project.date&&$store.state.form.project.date.length"
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 Project Date
@@ -175,7 +170,6 @@
               v-if="$store.state.form.project.dates&&$store.state.form.project.dates.length"
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 Project Dates
@@ -188,7 +182,6 @@
               v-if="$store.state.form.project.time&&$store.state.form.project.time.length"
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 Project Time
@@ -218,7 +211,6 @@
             <v-col
               cols="12"
               md="6"
-              class="pl-3"
             >
               <div
                 class="font-weight-light caption"
@@ -230,6 +222,7 @@
                 :key="index"
                 class="subtitle-1 ma-1"
                 label
+                :class="{'ml-0':index===0}"
               >
                 {{ zones.find((zoneItem) => item === zoneItem.value).text }}
               </v-chip>
@@ -238,7 +231,6 @@
               v-if="$store.state.form.project.country && $store.state.form.project.country.length"
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 {{
@@ -251,6 +243,7 @@
                 v-for="(item, index) in $store.state.form.project.country"
                 :key="index"
                 class="subtitle-1 ma-1"
+                :class="{'ml-0':index===0}"
                 label
               >
                 {{ item }}
@@ -260,7 +253,6 @@
               v-if="$store.state.form.project.location"
               cols="12"
               md="6"
-              class="pl-3"
             >
               <div class="font-weight-light caption">
                 Region, state or location
@@ -291,7 +283,6 @@
               v-if="$store.state.form.project.contact_firstname && $store.state.form.project.contact_firstname.length"
               cols="12"
               md="6"
-              class="pl-3"
             >
               <div class="font-weight-light caption">
                 Firstname
@@ -304,7 +295,6 @@
               v-if="$store.state.form.project.contact_lastname && $store.state.form.project.contact_lastname.length"
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 Lastname
@@ -317,7 +307,6 @@
               v-if="$store.state.form.project.contact_entity && $store.state.form.project.contact_entity.length"
               cols="12"
               md="6"
-              class="pl-3"
             >
               <div class="font-weight-light caption">
                 Institution
@@ -330,7 +319,6 @@
               v-if="$store.state.form.project.contact_email && $store.state.form.project.contact_email.length"
               cols="12"
               md="6"
-              :class="{ 'pl-3': $vuetify.breakpoint.mdAndDown }"
             >
               <div class="font-weight-light caption">
                 Email
@@ -366,7 +354,6 @@
               <v-col
                 cols="12"
                 md="4"
-                class="pl-3"
               >
                 <div class="font-weight-light caption">
                   Firstname
@@ -375,7 +362,6 @@
               <v-col
                 cols="12"
                 md="4"
-                class="pl-3"
               >
                 <div class="font-weight-light caption">
                   Lastname
@@ -384,7 +370,6 @@
               <v-col
                 cols="12"
                 md="4"
-                class="pl-3"
               >
                 <div class="font-weight-light caption">
                   Institution
@@ -399,7 +384,6 @@
               <v-col
                 cols="12"
                 md="4"
-                class="pl-3"
               >
                 <div class="subtitle-1">
                   {{ item.firstname }}
@@ -417,18 +401,11 @@
               <v-col
                 cols="12"
                 md="4"
-                class="pl-3"
               >
                 <div class="subtitle-1">
                   {{ item.entity }}
                 </div>
               </v-col>
-              <v-divider
-                v-if="index < $store.state.form.project.team.length-1"
-                :key="'divider' + index"
-                inset
-                class="mt-1 mb-2"
-              />
             </v-row>
           </v-card-text>
         </template>

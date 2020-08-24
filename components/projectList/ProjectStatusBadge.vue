@@ -1,7 +1,7 @@
 <template>
   <span :class="{'pt-1 pr-3':!details}">
     <template v-if="status === 'xFEATURED'">
-      <v-icon>mdi-star</v-icon>
+      <v-icon color="yellow darken-1">mdi-star</v-icon>
     </template>
     <template v-else>
       <template v-if="status === 'PUBLISHED'">
@@ -10,6 +10,7 @@
             <v-sheet
               style="height: 16px; width: 16px; border-radius: 12px;"
               color="grey"
+              class="ml-1"
               v-on="on"
             />
           </template>
@@ -22,6 +23,7 @@
             <v-sheet
               style="height: 16px; width: 16px; border-radius: 12px;"
               color="green"
+              class="ml-1"
               v-on="on"
             />
           </template>

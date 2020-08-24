@@ -12,7 +12,7 @@
         no-gutters
       >
         <v-col cols="12">
-              <ProjectList />
+          <ProjectList />
         </v-col>
       </v-row>
     </v-content>

@@ -1,80 +1,69 @@
 <template>
   <v-app-bar
-    app
-    color="white"
-    height="80"
+    fixed
+    :color="$route.name==='index'&&$store.state.offsetTop === 0?'transparent':'white'"
     elevate-on-scroll
     elevation-3
-    :inverted-scroll="$route.name==='index'"
+    min-height="80"
+    height="80"
+    :app="$route.name!=='index'"
   >
-  <nuxt-link
+    <nuxt-link
       class="mx-0 px-0"
-  to="/"
-  ><v-avatar
+      to="/"
+    >
+      <v-avatar
         class="mr-3"
         tile
-        color="grey lighten-5"
         size="72"
-  @click="$vuetify.goTo(0)"
+        @click="scrollTo()"
       >
         <v-img
+          v-show="!($route.name==='index'&& $store.state.offsetTop === 0)"
           contain
           max-height="100%"
-          src="/logo.png"
+          src="/icon.png"
         />
-      </v-avatar></nuxt-link>
-    <v-btn
-      text
-      height="auto"
-      @click="$router.push({ path: '/' })"
-    >
-
-    </v-btn>
-
+      </v-avatar>
+    </nuxt-link>
     <v-spacer />
     <v-tabs
       v-if="$vuetify.breakpoint.mdAndUp"
       id="main-app-bar"
       v-model="tab"
-      light
+      :light="!($route.name==='index'&& $store.state.offsetTop === 0)"
       right
       :optional="!tab"
       slider-size="8"
       active-class="text--blue"
+      class="text--white"
+      :color="$route.name==='index'&& $store.state.offsetTop === 0?'white':'primary'"
     >
       <v-tab
         nuxt
-        active-class="text--blue"
         class="font-weight-bold"
-        min-width="96"
-        text
-        :class="{'v-tab--active': $store.state.tab===0}"
+        :class="[{'v-tab--active': $store.state.tab===0}, {'white--text':$route.name==='index'&& $store.state.offsetTop === 0}]"
       >
         About WPRN
       </v-tab>
       <v-tab
         nuxt
-        active-class="text--blue"
         class="font-weight-bold"
-        min-width="96"
-        text
-        :class="{'v-tab--active': $store.state.tab===1}"
+        :class="[{'v-tab--active': $store.state.tab===1}, {'white--text':$route.name==='index'&& $store.state.offsetTop === 0}]"
       >
         Register your project
       </v-tab>
       <v-tab
         nuxt
-        active-class="text--blue"
         class="font-weight-bold"
-        min-width="96"
-        text
+        :class="[{'v-tab--active': $store.state.tab===2}, {'white--text':$route.name==='index'&& $store.state.offsetTop === 0}]"
       >
         Browse projects
       </v-tab>
     </v-tabs>
     <v-btn
       v-show="$vuetify.breakpoint.smAndDown"
-      :class="{'v-tab--active': $store.state.tab===2}"
+      :class="{'white--text':$route.name==='index'&& $store.state.offsetTop === 0}"
       light
       tile
       outlined
@@ -101,18 +90,32 @@ export default {
       }
     }
   },
+  mounted () {
+
+  },
   methods: {
     updateStore (value) {
       this.$store.commit('setTab', value)
     },
-    scrollTo (value) {
+    scrollTo (value = 0) {
       this.$store.commit('lockScrolling')
       this.$vuetify.goTo(value)
-      setTimeout(() => { this.$store.commit('unlockScrolling') }, 500)
+      setTimeout(() => {
+        this.$store.commit('unlockScrolling')
+        if (value === 0) this.$store.commit('setTab', null)
+      }, 500
+
+      )
     }
-  },
-  mounted () {
-    console.log(this.$route.name)
   }
 }
 </script>
+<style >
+.v-sheet.v-app-bar.v-toolbar
+{
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out!important;
+  -o-transition: background-color 0.3s ease-out!important;
+  transition: background-color 0.3s ease-out!important;
+}
+</style>

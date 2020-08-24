@@ -363,7 +363,7 @@
   </v-hover>
 </template>
 <script>
-import ProjectStatusBadge from '~/components/projectList/ProjectStatusBadge'
+import ProjectStatusBadge from './ProjectStatusBadge'
 import {
   zones,
   countries,
@@ -371,7 +371,7 @@ import {
   fields,
   state,
   thematics
-} from '~/assets/data'
+} from '../../assets/data'
 export default {
   components: {
     ProjectStatusBadge

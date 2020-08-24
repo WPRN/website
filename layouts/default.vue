@@ -37,7 +37,7 @@
         @click="$vuetify.goTo(0)"
       >
         <v-icon
-        :color="$vuetify.theme.isDark?'primary':'white'"
+          :color="$vuetify.theme.isDark?'primary':'white'"
         >
           mdi-arrow-up
         </v-icon>

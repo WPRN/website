@@ -60,11 +60,10 @@
             <v-expand-transition>
               <v-alert
                 v-show="description.length > 0"
-                type="error"
+                type="info"
                 align="left"
-                color="white"
+                :color="$vuetify.theme.isDark?'gray lighten-4': ''"
                 width="100%"
-                outlined
               >
                 Please be specific in your Project description. E.g. make explicit the project goal, research question, methods, data set, expected outcomes, team. Mention if you are looking for partners.
               </v-alert>

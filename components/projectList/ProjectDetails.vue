@@ -1,11 +1,10 @@
 <template>
   <v-card
-    class="pb-3"
+    class="pb-3 pr-6"
     :class="{ 'ml-3 mt-3': $vuetify.breakpoint.mdAndUp }"
-    flat
+    :flat="$vuetify.theme.isDark"
     :max-width="$vuetify.breakpoint.width"
-    :style="$vuetify.theme.isDark?'background-color:rgb(45, 45, 45)':'background-color:#FAFAFA;'"
-      color="transparent"
+    :style="$vuetify.theme.isDark?'background-color:rgb(45, 45, 45)':'background-color:white;'"
   >
     <!-- SOCIAL -->
     <SocialWidget :project="project" />
@@ -97,359 +96,9 @@
           cols="12"
           class="subtitle-1"
         >
-          <span class="overline">Team and Project description</span>
+          <span class="overline">Project description</span>
           <br>
           <p v-html="$options.filters.nl2br(project.description)" />
-        </v-col>
-        <!-- STATE (private key) STATUS (public key) -->
-        <v-col
-          cols="12"
-          md="6"
-          xl="4"
-        >
-          <span class="overline">STATUS :</span>
-          <br>
-          <span class="subtitle-1">{{ project.state }}</span>
-        </v-col>
-
-        <!-- FIELD -->
-        <v-col
-          cols="12"
-          md="6"
-          xl="4"
-          class="subtitle-1"
-        >
-          <span class="overline">
-            {{
-              project.field.length > 1 ? "DISCIPLINES" : "DISCIPLINE"
-            }}
-            :
-          </span>
-          <br>
-          <template v-if="project.field.length > 10 && !showFields">
-            <template v-for="(field, index) in project.field">
-              <v-chip
-                v-if="index < 11"
-                :key="index"
-                class="ma-1"
-                label
-                outlined
-              >
-                {{ field }}
-              </v-chip>
-              <span
-                v-if="index === 11"
-                :key="index"
-                style="cursor: pointer;"
-                class="caption"
-                @click="showFields = true"
-              >(show {{ project.field.length - 11 }} more)</span>
-            </template>
-          </template>
-          <template v-else>
-            <template v-for="(field, index) in project.field">
-              <v-chip
-                :key="index"
-                class="ma-1"
-                label
-                outlined
-              >
-                {{ field }}
-              </v-chip>
-            </template>
-            <span
-              v-if="project.field.length > 10 && showFields"
-              style="cursor: pointer;"
-              class="caption"
-              @click="showFields = false"
-            >(Show less)</span>
-          </template>
-        </v-col>
-        <!-- TYPE -->
-        <v-col
-          cols="12"
-          md="6"
-          xl="4"
-          class="subtitle-1"
-        >
-          <span class="overline">{{ project.type.length > 1 ? "TYPES" : "TYPE" }} :</span>
-          <br>
-          <template v-if="project.type.length > 10 && !showType">
-            <template v-for="(type, index) in project.type">
-              <v-chip
-                v-if="index < 11"
-                :key="index"
-                class="ma-1"
-                outlined
-              >
-                {{ type }}
-              </v-chip>
-              <span
-                v-if="index === 11"
-                :key="index"
-                style="cursor: pointer;"
-                class="caption"
-                @click="showType = true"
-              >(show {{ project.type.length - 11 }} more)</span>
-            </template>
-          </template>
-          <template v-else>
-            <template v-for="(type, index) in project.type">
-              <v-chip
-                :key="index"
-                class="ma-1"
-                outlined
-              >
-                {{ type }}
-              </v-chip>
-            </template>
-            <span
-              v-if="project.type.length > 10 && showType"
-              style="cursor: pointer;"
-              class="caption"
-              @click="showType = false"
-            >(Show less)</span>
-          </template>
-        </v-col>
-        <!-- THEMATICS -->
-        <v-col
-          v-if="project.thematics"
-          cols="12"
-          md="6"
-          xl="4"
-          class="subtitle-1"
-        >
-          <span class="overline">
-            {{
-              project.thematics && project.thematics.length > 1
-                ? "THEMATICS"
-                : "THEMATIC"
-            }}
-            :
-          </span>
-          <br>
-          <template v-if="project.thematics.length > 10 && !showThematics">
-            <template v-for="(thematic, index) in project.thematics">
-              <v-chip
-                v-if="index < 11"
-                :key="index"
-                class="ma-1"
-                label
-                outlined
-              >
-                {{ thematic }}
-              </v-chip>
-              <span
-                v-if="index === 11"
-                :key="index"
-                style="cursor: pointer;"
-                class="caption"
-                @click="showThematics = true"
-              >(show {{ project.thematics.length - 11 }} more)</span>
-            </template>
-          </template>
-          <template v-else>
-            <template v-for="(thematic, index) in project.thematics">
-              <v-chip
-                :key="index"
-                class="ma-1"
-                label
-                outlined
-              >
-                {{ thematic }}
-              </v-chip>
-            </template>
-            <span
-              v-if="project.thematics.length > 10 && showThematics"
-              style="cursor: pointer;"
-              class="caption"
-              @click="showThematics = false"
-            >(Show less)</span>
-          </template>
-        </v-col>
-        <!-- LOCATION -->
-        <v-col
-          cols="12"
-          md="6"
-          xl="4"
-          class="subtitle-1"
-        >
-          <span class="overline">
-            {{ project.zone.length > 1 || project.country&&project.country.length > 1
-              ? "LOCATIONS"
-              : "LOCATION"
-            }} :
-          </span>
-          <br>
-          <v-chip
-            v-for="(zone, index) in zoneFiltered"
-            :key="index"
-            class="ma-1"
-            label
-          >
-            {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
-          </v-chip>
-          <template v-if="project.country&&project.country.length > 10 && !showCountry">
-            <template v-for="(country, index) in project.country">
-              <v-chip
-                v-if="index < 11"
-                :key="index"
-                class="ma-1"
-              >
-                {{ country }}
-              </v-chip>
-              <span
-                v-if="index === 11"
-                :key="index"
-                style="cursor: pointer;"
-                class="caption"
-                @click="showCountry = true"
-              >(show {{ project.country.length - 11 }} more)</span>
-            </template>
-          </template>
-          <template v-else-if="project.country">
-            <template v-for="(country, index) in project.country">
-              <v-chip
-                :key="index"
-                class="ma-1"
-              >
-                {{ country }}
-              </v-chip>
-            </template>
-            <span
-              v-if="project.country.length > 10 && showCountry"
-              style="cursor: pointer;"
-              class="caption"
-              @click="showCountry = false"
-            >(Show less)</span>
-          </template>
-        </v-col>
-        <!-- ZONE -->
-        <!-- <v-col
-          cols="12"
-          md="6"
-          xl="4"
-          class="subtitle-1"
-        >
-          <span class="overline">{{ project.zone.length > 1 ? "CONTINENTS" : "CONTINENT" }} :</span>
-          <br>
-          <v-chip
-            v-for="(zone, index) in project.zone"
-            :key="index"
-            class="ma-1"
-            label
-          >
-            {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
-          </v-chip>
-        </v-col> -->
-        <!-- COUNTRY -->
-        <!-- <v-col
-          v-if="project.country"
-          cols="12"
-          md="6"
-          xl="4"
-          class="subtitle-1"
-        >
-          <span class="overline">
-            {{
-              project.country && project.country.length > 1
-                ? "COUNTRIES"
-                : "COUNTRY"
-            }}
-            :
-          </span>
-          <br>
-          <template v-if="project.country.length > 10 && !showCountry">
-            <template v-for="(country, index) in project.country">
-              <v-chip
-                v-if="index < 11"
-                :key="index"
-                class="ma-1"
-              >
-                {{ country }}
-              </v-chip>
-              <span
-                v-if="index === 11"
-                :key="index"
-                style="cursor: pointer;"
-                class="caption"
-                @click="showCountry = true"
-              >(show {{ project.country.length - 11 }} more)</span>
-            </template>
-          </template>
-          <template v-else>
-            <template v-for="(country, index) in project.country">
-              <v-chip
-                :key="index"
-                class="ma-1"
-              >
-                {{ country }}
-              </v-chip>
-            </template>
-            <span
-              v-if="project.country.length > 10 && showCountry"
-              style="cursor: pointer;"
-              class="caption"
-              @click="showCountry = false"
-            >(Show less)</span>
-          </template>
-        </v-col> -->
-        <!--  CREATION DATE -->
-        <v-col
-          cols="12"
-          md="6"
-          xl="4"
-        >
-          <span class="overline">CREATION DATE :</span>
-          <br>
-          <span class="subtitle-1">
-            {{ project.createdAt.split("T")[0] }} at
-            {{ project.createdAt.split("T")[1].split(":")[0] }}h{{
-              project.createdAt.split("T")[1].split(":")[1]
-            }}
-            (GMT)
-          </span>
-        </v-col>
-        <!--  PROJECT DATE(S) -->
-        <v-col
-          v-if="(project.date && project.date.length > 0) || (project.dates && project.dates.length > 0)"
-          cols="12"
-          md="6"
-          xl="4"
-        >
-          <span class="overline">
-            {{
-              project.date
-                ? 'PROJECT DATE'
-                : 'PROJECT DATES'
-            }}
-            :
-          </span>
-          <br>
-          <span class="subtitle-1">
-            {{ project.date ? project.date : '' }}
-            {{ project.dates && project.dates.length
-              ? project.dates.length === 1
-                ? project.dates[0]
-                : getDateRange(project.dates.slice())
-              : ''
-            }}
-          </span>
-        </v-col>
-        <!--  PROJECT TIME INFO -->
-        <v-col
-          v-if="project.time && project.time.length"
-          cols="12"
-          md="6"
-          xl="4"
-        >
-          <span class="overline">
-            PROJECT TIME INFO :
-          </span>
-          <br>
-          <span class="subtitle-1">
-            {{ project.time }}
-          </span>
         </v-col>
         <!-- PROJECT TEAM MEMBERS -->
         <v-col
@@ -458,12 +107,12 @@
           class="subtitle-1"
         >
           <span class="overline">
-            PROJECT TEAM MEMBERS :
+            {{ project.team.length>1 ? 'TEAM MEMBERS'
+              : 'TEAM MEMBER' }}
           </span>
           <br>
           <v-row
             v-if="!$vuetify.breakpoint.smAndDown"
-            no-gutters
             class="mb-2"
           >
             <v-col
@@ -538,12 +187,366 @@
                 {{ item.entity }}
               </span>
             </v-col>
-            <v-divider
-              v-if="index < project.team.length-1"
-              :key="'divider' + index"
-              inset
-              class="mt-1 mb-2"
-            />
+            <v-col
+              cols="12"
+            >
+              <v-divider
+                :key="'divider' + index"
+                class="mt-1 mb-2"
+              />
+            </v-col>
+          </v-row>
+          <v-row>
+            <!--  PROJECT DATE(S) -->
+            <v-col
+              v-if="(project.date && project.date.length > 0) || (project.dates && project.dates.length > 0)"
+              cols="12"
+              md="6"
+              xl="4"
+            >
+              <span class="overline">
+                {{
+                  project.date
+                    ? 'DATE'
+                    : 'DATES'
+                }}
+                :
+              </span>
+              <br>
+              <span class="subtitle-1">
+                {{ project.date ? project.date : '' }}
+                {{ project.dates && project.dates.length
+                  ? project.dates.length === 1
+                    ? project.dates[0]
+                    : getDateRange(project.dates.slice())
+                  : ''
+                }}
+              </span>
+            </v-col>
+            <!--  PROJECT TIME INFO -->
+            <v-col
+              v-if="project.time && project.time.length"
+              cols="12"
+              md="6"
+              xl="4"
+            >
+              <span class="overline">
+                TIME INFO :
+              </span>
+              <br>
+              <span class="subtitle-1">
+                {{ project.time }}
+              </span>
+            </v-col>
+            <!-- STATE (private key) STATUS (public key) -->
+            <v-col
+              cols="12"
+              md="6"
+              xl="4"
+            >
+              <span class="overline">STATUS :</span>
+              <br>
+              <span class="subtitle-1">{{ project.state }}</span>
+            </v-col>
+
+            <!-- FIELD -->
+            <v-col
+              cols="12"
+              md="6"
+              xl="4"
+              class="subtitle-1"
+            >
+              <span class="overline">
+                {{
+                  project.field.length > 1 ? "DISCIPLINES" : "DISCIPLINE"
+                }}
+                :
+              </span>
+              <br>
+              <template v-if="project.field.length > 10 && !showFields">
+                <template v-for="(field, index) in project.field">
+                  <v-chip
+                    v-if="index < 11"
+                    :key="index"
+                    class="ma-1"
+                    label
+                    outlined
+                  >
+                    {{ field }}
+                  </v-chip>
+                  <span
+                    v-if="index === 11"
+                    :key="index"
+                    style="cursor: pointer;"
+                    class="caption"
+                    @click="showFields = true"
+                  >(show {{ project.field.length - 11 }} more)</span>
+                </template>
+              </template>
+              <template v-else>
+                <template v-for="(field, index) in project.field">
+                  <v-chip
+                    :key="index"
+                    class="ma-1"
+                    label
+                    outlined
+                  >
+                    {{ field }}
+                  </v-chip>
+                </template>
+                <span
+                  v-if="project.field.length > 10 && showFields"
+                  style="cursor: pointer;"
+                  class="caption"
+                  @click="showFields = false"
+                >(Show less)</span>
+              </template>
+            </v-col>
+            <!-- TYPE -->
+            <v-col
+              cols="12"
+              md="6"
+              xl="4"
+              class="subtitle-1"
+            >
+              <span class="overline">{{ project.type.length > 1 ? "TYPES" : "TYPE" }} :</span>
+              <br>
+              <template v-if="project.type.length > 10 && !showType">
+                <template v-for="(type, index) in project.type">
+                  <v-chip
+                    v-if="index < 11"
+                    :key="index"
+                    class="ma-1"
+                    outlined
+                  >
+                    {{ type }}
+                  </v-chip>
+                  <span
+                    v-if="index === 11"
+                    :key="index"
+                    style="cursor: pointer;"
+                    class="caption"
+                    @click="showType = true"
+                  >(show {{ project.type.length - 11 }} more)</span>
+                </template>
+              </template>
+              <template v-else>
+                <template v-for="(type, index) in project.type">
+                  <v-chip
+                    :key="index"
+                    class="ma-1"
+                    outlined
+                  >
+                    {{ type }}
+                  </v-chip>
+                </template>
+                <span
+                  v-if="project.type.length > 10 && showType"
+                  style="cursor: pointer;"
+                  class="caption"
+                  @click="showType = false"
+                >(Show less)</span>
+              </template>
+            </v-col>
+            <!-- THEMATICS -->
+            <v-col
+              v-if="project.thematics"
+              cols="12"
+              md="6"
+              xl="4"
+              class="subtitle-1"
+            >
+              <span class="overline">
+                {{
+                  project.thematics && project.thematics.length > 1
+                    ? "THEMATICS"
+                    : "THEMATIC"
+                }}
+                :
+              </span>
+              <br>
+              <template v-if="project.thematics.length > 10 && !showThematics">
+                <template v-for="(thematic, index) in project.thematics">
+                  <v-chip
+                    v-if="index < 11"
+                    :key="index"
+                    class="ma-1"
+                    label
+                    outlined
+                  >
+                    {{ thematic }}
+                  </v-chip>
+                  <span
+                    v-if="index === 11"
+                    :key="index"
+                    style="cursor: pointer;"
+                    class="caption"
+                    @click="showThematics = true"
+                  >(show {{ project.thematics.length - 11 }} more)</span>
+                </template>
+              </template>
+              <template v-else>
+                <template v-for="(thematic, index) in project.thematics">
+                  <v-chip
+                    :key="index"
+                    class="ma-1"
+                    label
+                    outlined
+                  >
+                    {{ thematic }}
+                  </v-chip>
+                </template>
+                <span
+                  v-if="project.thematics.length > 10 && showThematics"
+                  style="cursor: pointer;"
+                  class="caption"
+                  @click="showThematics = false"
+                >(Show less)</span>
+              </template>
+            </v-col>
+            <!-- LOCATION -->
+            <v-col
+              cols="12"
+              md="6"
+              xl="4"
+              class="subtitle-1"
+            >
+              <span class="overline">
+                {{ project.zone.length > 1 || project.country&&project.country.length > 1
+                  ? "LOCATIONS"
+                  : "LOCATION"
+                }} :
+              </span>
+              <br>
+              <v-chip
+                v-for="(zone, index) in zoneFiltered"
+                :key="index"
+                class="ma-1"
+                label
+              >
+                {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
+              </v-chip>
+              <template v-if="project.country&&project.country.length > 10 && !showCountry">
+                <template v-for="(country, index) in project.country">
+                  <v-chip
+                    v-if="index < 11"
+                    :key="index"
+                    class="ma-1"
+                  >
+                    {{ country }}
+                  </v-chip>
+                  <span
+                    v-if="index === 11"
+                    :key="index"
+                    style="cursor: pointer;"
+                    class="caption"
+                    @click="showCountry = true"
+                  >(show {{ project.country.length - 11 }} more)</span>
+                </template>
+              </template>
+              <template v-else-if="project.country">
+                <template v-for="(country, index) in project.country">
+                  <v-chip
+                    :key="index"
+                    class="ma-1"
+                  >
+                    {{ country }}
+                  </v-chip>
+                </template>
+                <span
+                  v-if="project.country.length > 10 && showCountry"
+                  style="cursor: pointer;"
+                  class="caption"
+                  @click="showCountry = false"
+                >(Show less)</span>
+              </template>
+            </v-col>
+            <!-- ZONE -->
+            <!-- <v-col
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
+          <span class="overline">{{ project.zone.length > 1 ? "CONTINENTS" : "CONTINENT" }} :</span>
+          <br>
+          <v-chip
+            v-for="(zone, index) in project.zone"
+            :key="index"
+            class="ma-1"
+            label
+          >
+            {{ zones.find((zoneItem) => zone === zoneItem.value).text }}
+          </v-chip>
+        </v-col> -->
+            <!-- COUNTRY -->
+            <!-- <v-col
+          v-if="project.country"
+          cols="12"
+          md="6"
+          xl="4"
+          class="subtitle-1"
+        >
+          <span class="overline">
+            {{
+              project.country && project.country.length > 1
+                ? "COUNTRIES"
+                : "COUNTRY"
+            }}
+            :
+          </span>
+          <br>
+          <template v-if="project.country.length > 10 && !showCountry">
+            <template v-for="(country, index) in project.country">
+              <v-chip
+                v-if="index < 11"
+                :key="index"
+                class="ma-1"
+              >
+                {{ country }}
+              </v-chip>
+              <span
+                v-if="index === 11"
+                :key="index"
+                style="cursor: pointer;"
+                class="caption"
+                @click="showCountry = true"
+              >(show {{ project.country.length - 11 }} more)</span>
+            </template>
+          </template>
+          <template v-else>
+            <template v-for="(country, index) in project.country">
+              <v-chip
+                :key="index"
+                class="ma-1"
+              >
+                {{ country }}
+              </v-chip>
+            </template>
+            <span
+              v-if="project.country.length > 10 && showCountry"
+              style="cursor: pointer;"
+              class="caption"
+              @click="showCountry = false"
+            >(Show less)</span>
+          </template>
+        </v-col> -->
+            <!--  CREATION DATE -->
+            <v-col
+              cols="12"
+              md="6"
+              xl="4"
+            >
+              <span class="overline">CREATION DATE :</span>
+              <br>
+              <span class="subtitle-1">
+                {{ project.createdAt.split("T")[0] }} at
+                {{ project.createdAt.split("T")[1].split(":")[0] }}h{{
+                  project.createdAt.split("T")[1].split(":")[1]
+                }}
+                (GMT)
+              </span>
+            </v-col>
           </v-row>
         </v-col>
         <!--  CITE WIDGET -->

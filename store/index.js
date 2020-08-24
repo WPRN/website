@@ -10,9 +10,6 @@ export const mutations = {
       state.tab = tab
       if (tab === 1)state.contactOnly = false
       if (tab === 3)state.contactOnly = true
-      if ([0, 1].includes(tab)) {
-        console.log('FROM INDEX')
-      }
     }
   },
   setContactOnly (state, val) {

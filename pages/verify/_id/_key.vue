@@ -73,7 +73,7 @@
             <nuxt-link :to="'/edit/' + $route.params.id + '/' + $route.params.key">
               here
             </nuxt-link>.
-          </div>
+          </div><!-- ALERTS UI
           <v-responsive
             class="mx-auto my-6"
             width="56"
@@ -91,7 +91,7 @@
             @click="similarModalOpen = true"
           >
             Create a custom email alert
-          </v-btn>
+          </v-btn>-->
           <v-responsive
             class="mx-auto my-6"
             width="56"

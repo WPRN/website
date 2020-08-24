@@ -210,7 +210,7 @@ export const extendedTypes = [
     requireName: true,
     teamMandatory: true,
     isContactable: true,
-    citeWidget: true
+    citeWidget: false
   },
   {
     name: 'Video',
@@ -492,7 +492,7 @@ export const institutions = [
     url: 'https://council.science/',
     image: 'ISC.jpg',
     color: 'white',
-    text: 'The International Science Council (ISC) is a non-governmental organization with a unique global membership that brings together 40 international scientific Unions and Associations and over 140 national and regional scientific organizations including Academies and Research Councils. The ISC was created in 2018 as the result of a merger between the International Council for Science (ICSU, founded in 1931) and the International Social Science Council (ISSC, founded in 1952).It is the only international non-governmental organization bringing together the natural and social sciences and the largest global science organization of its type. More'
+    text: 'The International Science Council (ISC) is a non-governmental organization with a unique global membership that brings together 40 international scientific Unions and Associations and over 140 national and regional scientific organizations including Academies and Research Councils. The ISC was created in 2018 as the result of a merger between the International Council for Science (ICSU, founded in 1931) and the International Social Science Council (ISSC, founded in 1952).It is the only international non-governmental organization bringing together the natural and social sciences and the largest global science organization of its type.'
   },
   {
     name: 'Network of European Institutes for Advanced Studies (NETIAS)',
