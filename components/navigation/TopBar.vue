@@ -91,14 +91,13 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.name)
+
   },
   methods: {
     updateStore (value) {
       this.$store.commit('setTab', value)
     },
     scrollTo (value = 0) {
-      console.log('value: ', value)
       this.$store.commit('lockScrolling')
       this.$vuetify.goTo(value)
       setTimeout(() => {

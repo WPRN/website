@@ -201,21 +201,16 @@ export default {
   },
   watch: {
     '$store.state.tab': function () {
-      console.log('update tab from index', this.$store.state.tab)
-      console.log('this.tab: ', this.tab)
       if (this.$store.state.tab !== null && this.$store.state.tab !== this.tab) this.updateScroll()
-      console.log('this.$store.state.tab !== this.tab: ', this.$store.state.tab !== this.tab)
-      console.log('!this.isIntersecting: ', !this.isIntersecting)
-      console.log('this.$store.state.tab !== null: ', this.$store.state.tab !== null)
+
       this.tab = this.$store.state.tab
       this.isIntersecting = false
     },
     '$store.state.contactOnly': function () {
-      console.log('contactOnly', this.$store.state.contactOnly)
+
     }
   },
   async mounted () {
-    console.log('mounted')
     this.$nextTick(() => {
       this.mounted = true
     })
@@ -224,7 +219,6 @@ export default {
     await this.$recaptcha.init()
   },
   updated () {
-    console.log('updated', this.$store.state.tab)
     if (this.isIntersecting) {
       if (this.$route.hash) this.processHashes()
       if (this.$store.state.tab !== null && !this.isIntersecting) this.updateScroll()
@@ -233,7 +227,6 @@ export default {
   },
   methods: {
     processHashes () {
-      console.log('processHashes: ', this.$route.hash)
       if (this.$route.hash) {
         if (this.$route.hash === '#register') {
           this.$store.commit('setTab', 1)
@@ -271,7 +264,6 @@ export default {
       }
     },
     updateScroll () {
-      console.log('UPDATE SCROLL')
       switch (this.$store.state.tab) {
         case 0:
           this.$store.commit('lockScrolling')
@@ -297,11 +289,9 @@ export default {
 
           break
       }
-      console.log('tab', this.$store.state.tab)
     },
     onIntersect (event) {
       if (this.mounted && this.$store.state.offsetTop && !this.$store.state.scrolling && !this.$store.state.contactOnly && !this.$route.hash) {
-        console.log('INTERSECT event: ', event)
         this.isIntersecting = true
         if (event === 'REGISTER') {
           this.$store.commit('setTab', 1)
