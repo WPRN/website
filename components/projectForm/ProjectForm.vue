@@ -168,6 +168,7 @@ export default {
         if (args.date && args.date.length === 0) delete args.date
         if (args.dates && args.dates.length === 0) delete args.dates
         if (args.time && args.time.length === 0) delete args.time
+        if (!args.feedback || args.feedback.length === 0) delete args.feedback
         if (args.team && args.team.length) {
           args.team.forEach(item => delete item.__typename)
         }

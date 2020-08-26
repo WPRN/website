@@ -124,7 +124,6 @@ export default {
 
       if (res && res.data && res.data.getProjectForEdit && !res.errors) {
         this.project = res.data.getProjectForEdit
-        console.log('this.project: ', this.project)
 
         this.checking = false
         this.ready = true
@@ -132,7 +131,6 @@ export default {
         this.ready = true
       }
     } catch (error) {
-      console.log('error: ', error)
       this.error = true
       this.ready = true
     }
