@@ -34,7 +34,7 @@
               <!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
               <nuxt-link
                 to="/search"
-                @click="$store.commit('setTab', 2)"
+                @click="$store.commit('setTab', 1)"
               >
                 who works on what, where
               </nuxt-link>, in real time, at global level.

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-col>
     <v-data-table
       :expanded.sync="expanded"
       :items="projects"
@@ -117,7 +117,7 @@
         />
       </template>
     </v-data-table>
-  </div>
+  </v-col>
 </template>
 <script>
 import * as queries from '~/graphql/queries'

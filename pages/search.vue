@@ -1,22 +1,5 @@
 <template>
-  <v-container
-    app
-    fluid
-    fill-height
-    style="align-items: start;"
-  >
-    <v-content
-      class="pt-3"
-    >
-      <v-row
-        no-gutters
-      >
-        <v-col cols="12">
-          <ProjectList />
-        </v-col>
-      </v-row>
-    </v-content>
-  </v-container>
+  <ProjectList />
 </template>
 <script>
 import { zones } from '~/assets/data'
