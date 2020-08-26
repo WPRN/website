@@ -20,7 +20,9 @@ export default {
       }
     }
   },
-  mounted () {},
+  mounted () {
+    this.$store.commit('setTab', 2)
+  },
   methods: {
   }
 }
